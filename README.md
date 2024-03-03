@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<a href="https://github.com/CallMeEchoCodes/Hollow"><img src="src/main/resources/assets/hollow/icon.png" alt="Logo"></a>
+<a href="https://github.com/CallMeEchoCodes/Hollow"><img src="src/main/resources/assets/hollow/icon.png" alt="Logo" height="250"></a>
 
 ### Hollow
 
