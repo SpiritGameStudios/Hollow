@@ -11,7 +11,7 @@ base {
 
 repositories {
     mavenCentral()
-    maven { url 'https://maven.wispforest.io' }
+    maven { url 'https://jitpack.io' }
     mavenLocal()
 }
 
@@ -27,7 +27,7 @@ loom {
             runDir("build/datagen")
         }
     }
-    
+
     accessWidenerPath = file("src/main/resources/hollow.accesswidener")
 }
 
@@ -50,10 +50,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "io.wispforest:owo-lib:${project.owo_version}"
-    
-    include "dev.callmeecho:cabinetapi:0.0.3-SNAPSHOT"
-    modImplementation "dev.callmeecho:cabinetapi:0.0.3-SNAPSHOT"
+
+    include "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
+    modImplementation "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
 }
 
 processResources {
