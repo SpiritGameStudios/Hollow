@@ -1,0 +1,3 @@
+accessWidener v2 named
+accessible field net/minecraft/block/AbstractBlock settings Lnet/minecraft/block/AbstractBlock$Settings;
+accessible method net/minecraft/world/gen/feature/TreeConfiguredFeatures builder (Lnet/minecraft/block/Block;Lnet/minecraft/block/Block;IIII)Lnet/minecraft/world/gen/feature/TreeFeatureConfig$Builder;

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "hollow",
+  "version": "${version}",
+  "name": "Hollow",
+  "description": "Hey Mojang! I did your job for you!",
+  "authors": [
+    "CallMeEcho"
+  ],
+  "contact": {
+    "repo": "https://github.com/CallMeEchoCodes/hollow"
+  },
+  "license": "MPL-2.0",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "dev.callmeecho.hollow.client.HollowClient"
+    ],
+    "main": [
+      "dev.callmeecho.hollow.main.Hollow"
+    ],
+    "fabric-datagen": [
+      "dev.callmeecho.hollow.datagen.HollowDatagen"
+    ]
+  },
+  "mixins": [
+    "hollow.mixins.json"
+  ],
+  "accessWidener": "hollow.accesswidener",
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "cabinetapi": "*"
+  }
+}

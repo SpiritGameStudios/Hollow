@@ -1,0 +1,8 @@
+{
+  "parent": "hollow:block/hollow_log_template",
+  "textures": {
+    "end": "minecraft:block/stripped_acacia_log_top",
+    "inside": "minecraft:block/stripped_acacia_log",
+    "side": "minecraft:block/stripped_acacia_log"
+  }
+}
