@@ -11,6 +11,7 @@
     "repo": "https://github.com/CallMeEchoCodes/hollow"
   },
   "license": "MPL-2.0",
+  "icon": "assets/hollow/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -29,8 +30,9 @@
   "accessWidener": "hollow.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}",
+    "minecraft": "~${minecraft_version}",
+    "fabric-api": "*",
+    "java": ">=17",
     "cabinetapi": "*"
   }
 }
