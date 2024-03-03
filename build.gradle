@@ -18,7 +18,7 @@ repositories {
 loom {
     runs {
         create("datagen") {
-            inherit(runConfigs["server"])
+            server()
             name("Minecraft Data")
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
