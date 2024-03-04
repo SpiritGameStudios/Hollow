@@ -53,7 +53,6 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
 
     @Override
     protected int getBlockLight(FireflyEntity entity, BlockPos pos) {
-        // fake emmissive light
         return 15;
     }
 

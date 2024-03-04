@@ -4,6 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
@@ -23,6 +24,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.LightType;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 
 import java.util.EnumSet;
@@ -90,7 +94,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
     public void tick() {
         super.tick();
         
-        if (this.age % 2 == 0 && this.random.nextInt(5) == 0) {
+        if (this.age % 5 == 0 && this.random.nextInt(5) == 0) {
             this.setLightTicks(this.getLightTicks() - this.random.nextBetween(10, 15));
         } else {
             this.setLightTicks(this.getLightTicks() + 1);
@@ -100,7 +104,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
             this.setLightTicks(15);
         }
         
-        if (this.getLightTicks() < 0) {
+        if (this.getLightTicks() < 0 || this.isWet()) {
             this.setLightTicks(0);
         }
     }
@@ -128,6 +132,12 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
         
     }
 
+    public static boolean canSpawn(EntityType<FireflyEntity> entityType, ServerWorldAccess worldAccess, SpawnReason spawnReason, BlockPos pos, Random random) {
+        if (pos.getY() < 63) return false;
+        if (worldAccess.getLightLevel(LightType.BLOCK, pos) > 9)  return false;
+        return FireflyEntity.canMobSpawn(entityType, worldAccess, spawnReason, pos, random);
+    }
+
     static class FlyRandomlyGoal extends Goal {
         private final FireflyEntity firefly;
         
@@ -138,10 +148,10 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
         
         protected Vec3d getWanderTarget() {
             Vec3d rotation = firefly.getRotationVec(0.0F);
-            Vec3d target = AboveGroundTargeting.find(firefly, 8, 7, rotation.x, rotation.z, MathHelper.HALF_PI, 3, 1);
+            Vec3d target = AboveGroundTargeting.find(firefly, 8, 2, rotation.x, rotation.z, MathHelper.HALF_PI, 3, 1);
             if (target != null) return target;
             
-            return NoPenaltySolidTargeting.find(firefly, 8, 4, 1, rotation.x, rotation.z, MathHelper.HALF_PI);
+            return NoPenaltySolidTargeting.find(firefly, 8, 2, -2, rotation.x, rotation.z, MathHelper.HALF_PI);
         }
         
         @Override
