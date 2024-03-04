@@ -12,6 +12,17 @@ base {
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
     mavenLocal()
 }
 
@@ -53,6 +64,8 @@ dependencies {
 
     include "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
     modImplementation "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
+    
+    modCompileOnly "maven.modrinth:lambdynamiclights:2.3.2+1.20.1"
 }
 
 processResources {

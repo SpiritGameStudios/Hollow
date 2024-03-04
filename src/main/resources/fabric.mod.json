@@ -22,6 +22,9 @@
     ],
     "fabric-datagen": [
       "dev.callmeecho.hollow.datagen.HollowDatagen"
+    ],
+    "dynamiclights": [
+      "dev.callmeecho.hollow.client.HollowDynamicLights"
     ]
   },
   "mixins": [
