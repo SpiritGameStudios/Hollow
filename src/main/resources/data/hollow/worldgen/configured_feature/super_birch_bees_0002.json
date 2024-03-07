@@ -10,6 +10,15 @@
             "Name": "minecraft:birch_log"
           }
         }
+      },
+      {
+        "type": "hollow:polypore_tree_decorator",
+        "state_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "hollow:polypore"
+          }
+        }
       }
     ],
     "dirt_provider": {

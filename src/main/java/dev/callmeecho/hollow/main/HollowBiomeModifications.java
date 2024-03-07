@@ -55,8 +55,11 @@ public class HollowBiomeModifications {
             if (generationSettings.removeFeature(VegetationPlacedFeatures.BIRCH_TALL))
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("birch_tall"));
 
-            if (generationSettings.removeFeature(VegetationPlacedFeatures.FLOWER_DEFAULT) && generationSettings.removeFeature(VegetationPlacedFeatures.FOREST_FLOWERS))
-                generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_lilac_birch"));
+            if (generationSettings.removeFeature(VegetationPlacedFeatures.FLOWER_DEFAULT) && generationSettings.removeFeature(VegetationPlacedFeatures.FOREST_FLOWERS)) {
+                generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_lilac"));
+                generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_campion"));
+                generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("birch_forest_flowers"));
+            }
         });
 
         BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_remove")).add(ModificationPhase.REMOVALS, BiomeSelectors.includeByKey(

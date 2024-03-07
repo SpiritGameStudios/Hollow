@@ -3,6 +3,8 @@ package dev.callmeecho.hollow.main.worldgen;
 import com.mojang.serialization.Codec;
 import dev.callmeecho.hollow.main.Hollow;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
+import dev.callmeecho.hollow.main.block.PolyporeBlock;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.tag.BlockTags;
@@ -50,7 +52,22 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
             
             if (context.getWorld().isAir(pos.up()) && random.nextInt(2) == 0) {
                 context.getWorld().setBlockState(pos.up(), Blocks.MOSS_CARPET.getDefaultState(), 2);
+                context.getWorld().setBlockState(pos, state.with(HollowLogBlock.MOSSY, true), 2);
             }
+            
+            Direction direction = switch (axis) {
+                case X -> random.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
+                case Z -> random.nextBoolean() ? Direction.EAST : Direction.WEST;
+                default -> Direction.fromHorizontal(random.nextInt(4));
+            };
+            BlockPos polyporePos = pos.offset(direction);
+            
+            if (random.nextInt(2) != 0 || !context.getWorld().isAir(polyporePos)) continue;
+            
+            BlockState polyporeState = HollowBlockRegistry.POLYPORE.getDefaultState()
+                    .with(Properties.HORIZONTAL_FACING, direction)
+                    .with(PolyporeBlock.POLYPORE_AMOUNT, random.nextBetween(1, 3));
+            context.getWorld().setBlockState(polyporePos, polyporeState, 2);
         }
         
         return true;

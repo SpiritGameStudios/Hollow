@@ -6,10 +6,12 @@ import dev.callmeecho.cabinetapi.block.CabinetBlockSettings;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.BlockRegistrar;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
+import dev.callmeecho.hollow.main.block.PolyporeBlock;
 import dev.callmeecho.hollow.main.block.TwigBlock;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -18,6 +20,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 
 import java.lang.reflect.Field;
 
@@ -65,18 +70,6 @@ public class HollowBlockRegistry implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CHERRY_LOG.settings).flammable(), "stripped_cherry_log", "stripped_cherry_log", "stripped_cherry_log_top");
     public static final HollowLogBlock CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.CHERRY_LOG.settings).strippedBlock(STRIPPED_CHERRY_HOLLOW_LOG).flammable(), "cherry_log", "stripped_cherry_log", "cherry_log_top");
 
-    public static final FlowerBlock PINK_DAISY = new FlowerBlock(
-                    StatusEffects.REGENERATION,
-            8,
-                    AbstractBlock.Settings.create()
-                            .mapColor(MapColor.DARK_GREEN)
-                            .noCollision()
-                            .breakInstantly()
-                            .sounds(BlockSoundGroup.GRASS)
-                            .offset(AbstractBlock.OffsetType.XZ)
-                            .pistonBehavior(PistonBehavior.DESTROY)
-    );
-
     public static final FlowerBlock PAEONIA = new FlowerBlock(
             StatusEffects.GLOWING,
             5,
@@ -88,6 +81,25 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .offset(AbstractBlock.OffsetType.XZ)
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
+    
+    public static final TallFlowerBlock CAMPION = new TallFlowerBlock(
+            CabinetBlockSettings.create()
+                    .mapColor(MapColor.DARK_GREEN)
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.GRASS)
+                    .offset(AbstractBlock.OffsetType.XZ)
+                    .burnable()
+                    .flammable()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    ) {
+        @SuppressWarnings("deprecation")
+        @Override
+        public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+            if (state.get(HALF) == DoubleBlockHalf.UPPER) return Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
+            return super.getOutlineShape(state, world, pos, context);
+        }
+    };
     
     public static final TwigBlock TWIG = new TwigBlock(
             AbstractBlock.Settings.create()
@@ -109,6 +121,19 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .nonOpaque()
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
+    
+    public static final PolyporeBlock POLYPORE = new PolyporeBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.OAK_TAN)
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.GRASS)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .solidBlock(Blocks::never)
+    );
+    
+    @NoBlockItem
+    public static final FlowerPotBlock POTTED_PAEONIA = Blocks.createFlowerPotBlock(PAEONIA);
 
     @Override
     public void registerBlockItem(Block block, String namespace, String name) {

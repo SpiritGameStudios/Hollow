@@ -37,6 +37,7 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     );
     
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final BooleanProperty MOSSY = BooleanProperty.of("mossy");
     
     public String insideTexture;
     public String sideTexture;
@@ -49,12 +50,13 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
         this.endTexture = endTexture;
         setDefaultState(getDefaultState()
                 .with(AXIS, Direction.Axis.Y)
-                .with(WATERLOGGED, false));
+                .with(WATERLOGGED, false)
+                .with(MOSSY, false));
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(Properties.AXIS, WATERLOGGED);
+        builder.add(Properties.AXIS, WATERLOGGED, MOSSY);
     }
 
     @SuppressWarnings("deprecation")
@@ -70,9 +72,11 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
+        Block above = ctx.getWorld().getBlockState(ctx.getBlockPos().up()).getBlock();
         return this.getDefaultState()
                 .with(Properties.AXIS, ctx.getSide().getAxis())
-                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).isOf(Fluids.WATER));
+                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).isOf(Fluids.WATER))
+                .with(MOSSY, (above == Blocks.MOSS_CARPET) || (above == Blocks.MOSS_BLOCK));
     }
 
     @SuppressWarnings("deprecation")
@@ -86,6 +90,11 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+        
+        if (direction == Direction.UP) {
+            Block above = neighborState.getBlock();
+            return state.with(MOSSY, (above == Blocks.MOSS_CARPET) || (above == Blocks.MOSS_BLOCK));
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);

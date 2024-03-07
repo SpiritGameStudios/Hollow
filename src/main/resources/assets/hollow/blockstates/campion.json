@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "hollow:block/campion_bottom"
+    },
+    "half=upper": {
+      "model": "hollow:block/campion_top"
+    }
+  }
+}
