@@ -15,6 +15,27 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
 public class HollowLogBlock extends PillarBlock implements Waterloggable {
+    public static final VoxelShape SHAPE_X = VoxelShapes.union(
+            createCuboidShape(0, 14, 0, 16, 16, 16),
+            createCuboidShape(0, 0, 2, 16, 2, 14),
+            createCuboidShape(0, 0, 0, 16, 14, 2),
+            createCuboidShape(0, 0, 14, 16, 14, 16)
+    );
+    
+    public static final VoxelShape SHAPE_Y = VoxelShapes.union(
+            createCuboidShape(0, 0, 0, 2, 16, 16),
+            createCuboidShape(14, 0, 2, 16, 16, 14),
+            createCuboidShape(2, 0, 0, 16, 16, 2),
+            createCuboidShape(2, 0, 14, 16, 16, 16)
+    );
+    
+    public static final VoxelShape SHAPE_Z = VoxelShapes.union(
+            createCuboidShape(0, 14, 0, 16, 16, 16),
+            createCuboidShape(2, 0, 0, 14, 2, 16),
+            createCuboidShape(0, 0, 0, 2, 14, 16),
+            createCuboidShape(14, 0, 0, 16, 14, 16)
+    );
+    
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     
     public String insideTexture;
@@ -74,24 +95,9 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(AXIS)) {
-            case X -> VoxelShapes.union(
-                    createCuboidShape(0, 14, 0, 16, 16, 16),
-                    createCuboidShape(0, 0, 2, 16, 2, 14),
-                    createCuboidShape(0, 0, 0, 16, 14, 2),
-                    createCuboidShape(0, 0, 14, 16, 14, 16)
-            );
-            case Z -> VoxelShapes.union(
-                    createCuboidShape(0, 14, 0, 16, 16, 16),
-                    createCuboidShape(2, 0, 0, 14, 2, 16),
-                    createCuboidShape(0, 0, 0, 2, 14, 16),
-                    createCuboidShape(14, 0, 0, 16, 14, 16)
-            );
-            default -> VoxelShapes.union(
-                    createCuboidShape(0, 0, 0, 2, 16, 16),
-                    createCuboidShape(14, 0, 2, 16, 16, 14),
-                    createCuboidShape(2, 0, 0, 16, 16, 2),
-                    createCuboidShape(2, 0, 14, 16, 16, 16)
-            );
+            case X -> SHAPE_X;
+            case Y -> SHAPE_Y;
+            default -> SHAPE_Z;
         };
     }
 }

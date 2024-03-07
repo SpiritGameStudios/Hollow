@@ -24,11 +24,6 @@ public class HollowBiomeModifications {
                 BiomeKeys.MANGROVE_SWAMP
         ), SpawnGroup.AMBIENT, HollowEntityTypeRegistry.FIREFLY, 5, 10, 15);
         SpawnRestriction.register(HollowEntityTypeRegistry.FIREFLY, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.WORLD_SURFACE, FireflyEntity::canSpawn);
-
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(
-                BiomeKeys.BIRCH_FOREST,
-                BiomeKeys.OLD_GROWTH_BIRCH_FOREST
-        ), GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("fallen_birch"));
         
         BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamps_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP,
@@ -38,6 +33,15 @@ public class HollowBiomeModifications {
             
             if (generationSettings.removeFeature(VegetationPlacedFeatures.PATCH_WATERLILY))
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_waterlily"));
+        });
+
+        BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
+                BiomeKeys.BIRCH_FOREST,
+                BiomeKeys.OLD_GROWTH_BIRCH_FOREST
+        ), context -> {
+            BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
+            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("fallen_birch"));
+            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_twig"));
         });
 
         BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(

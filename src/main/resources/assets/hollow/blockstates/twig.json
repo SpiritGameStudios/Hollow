@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hollow:block/twig"
+      },
+      {
+        "model": "hollow:block/twig",
+        "y": 90
+      },
+      {
+        "model": "hollow:block/twig",
+        "y": 180
+      },
+      {
+        "model": "hollow:block/twig",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -6,6 +6,7 @@ import dev.callmeecho.cabinetapi.block.CabinetBlockSettings;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.BlockRegistrar;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
+import dev.callmeecho.hollow.main.block.TwigBlock;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
@@ -85,6 +86,17 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .breakInstantly()
                     .sounds(BlockSoundGroup.GRASS)
                     .offset(AbstractBlock.OffsetType.XZ)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
+    
+    public static final TwigBlock TWIG = new TwigBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.OAK_TAN)
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.GRASS)
+                    .burnable()
+                    .nonOpaque()
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
     

@@ -9,5 +9,6 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         
         pack.addProvider(ModelProvider::new);
+        pack.addProvider(LootTableProvider::new);
     }
 }

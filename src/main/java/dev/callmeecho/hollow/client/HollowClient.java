@@ -26,6 +26,8 @@ public class HollowClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.PINK_DAISY, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.PAEONIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.LOTUS_LILYPAD, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.TWIG, RenderLayer.getCutout());
+        
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistry.LOTUS_LILYPAD);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistry.LOTUS_LILYPAD);
     }
