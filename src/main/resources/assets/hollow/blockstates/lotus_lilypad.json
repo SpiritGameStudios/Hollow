@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hollow:block/lotus_lilypad"
+      },
+      {
+        "model": "hollow:block/lotus_lilypad",
+        "y": 90
+      },
+      {
+        "model": "hollow:block/lotus_lilypad",
+        "y": 180
+      },
+      {
+        "model": "hollow:block/lotus_lilypad",
+        "y": 270
+      }
+    ]
+  }
+}

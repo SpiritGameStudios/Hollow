@@ -10,7 +10,10 @@ import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 
+import static dev.callmeecho.hollow.main.Hollow.MODID;
+import static dev.callmeecho.hollow.main.registry.HollowBlockRegistry.LOTUS_LILYPAD;
 import static net.minecraft.data.client.BlockStateModelGenerator.createAxisRotatedBlockState;
+import static net.minecraft.data.client.BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations;
 
 public class ModelProvider extends FabricModelProvider {
     public static final Model HOLLOW_LOG =  new Model(Optional.of(new Identifier("hollow", "block/" + "hollow_log_template")), Optional.empty(), TextureKey.SIDE, TextureKey.INSIDE, TextureKey.END);
