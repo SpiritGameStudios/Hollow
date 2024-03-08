@@ -53,6 +53,8 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
         return this.dataTracker.get(LIGHT_TICKS);
     }
     
+    
+    
 
     @Override
     protected void initDataTracker() {
@@ -153,7 +155,13 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
         return dimensions.height * 0.5F;
     }
 
+    @Override
+    public boolean collidesWith(Entity other) {
+        return false;
+    }
 
+    @Override
+    protected void tickCramming() { }
 
     static class FlyRandomlyGoal extends Goal {
         private final FireflyEntity firefly;
