@@ -58,11 +58,11 @@ public class HollowBlockRegistry implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_DARK_OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_DARK_OAK_LOG.settings).flammable(), "stripped_dark_oak_log", "stripped_dark_oak_log", "stripped_dark_oak_log_top");
     public static final HollowLogBlock DARK_OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.DARK_OAK_LOG.settings).strippedBlock(STRIPPED_DARK_OAK_HOLLOW_LOG).flammable(), "dark_oak_log", "stripped_dark_oak_log", "dark_oak_log_top");
 
-    public static final HollowLogBlock STRIPPED_CRIMSON_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CRIMSON_STEM.settings).flammable(), "stripped_crimson_stem", "stripped_crimson_stem", "stripped_crimson_stem_top");
-    public static final HollowLogBlock CRIMSON_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.CRIMSON_STEM.settings).strippedBlock(STRIPPED_CRIMSON_HOLLOW_STEM).flammable(), "crimson_stem", "stripped_crimson_stem", "crimson_stem_top");
+    public static final HollowLogBlock STRIPPED_CRIMSON_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CRIMSON_STEM.settings), "stripped_crimson_stem", "stripped_crimson_stem", "stripped_crimson_stem_top");
+    public static final HollowLogBlock CRIMSON_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.CRIMSON_STEM.settings).strippedBlock(STRIPPED_CRIMSON_HOLLOW_STEM), "crimson_stem", "stripped_crimson_stem", "crimson_stem_top");
 
-    public static final HollowLogBlock STRIPPED_WARPED_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_WARPED_STEM.settings).flammable(), "stripped_warped_stem", "stripped_warped_stem", "stripped_warped_stem_top");
-    public static final HollowLogBlock WARPED_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.WARPED_STEM.settings).strippedBlock(STRIPPED_WARPED_HOLLOW_STEM).flammable(), "warped_stem", "stripped_warped_stem", "warped_stem_top");
+    public static final HollowLogBlock STRIPPED_WARPED_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_WARPED_STEM.settings), "stripped_warped_stem", "stripped_warped_stem", "stripped_warped_stem_top");
+    public static final HollowLogBlock WARPED_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.WARPED_STEM.settings).strippedBlock(STRIPPED_WARPED_HOLLOW_STEM), "warped_stem", "stripped_warped_stem", "warped_stem_top");
 
     public static final HollowLogBlock STRIPPED_MANGROVE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_MANGROVE_LOG.settings).flammable(), "stripped_mangrove_log", "stripped_mangrove_log", "stripped_mangrove_log_top");
     public static final HollowLogBlock MANGROVE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.MANGROVE_LOG.settings).strippedBlock(STRIPPED_MANGROVE_HOLLOW_LOG).flammable(), "mangrove_log", "stripped_mangrove_log", "mangrove_log_top");
