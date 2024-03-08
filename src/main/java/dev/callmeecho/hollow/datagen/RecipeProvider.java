@@ -1,11 +1,9 @@
 package dev.callmeecho.hollow.datagen;
 
-import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;

@@ -16,7 +16,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
-import org.jetbrains.annotations.Nullable;
 
 public class PolyporeBlock extends PlantBlock implements Fertilizable {
     public static final IntProperty POLYPORE_AMOUNT = IntProperty.of("amount", 1, 3);

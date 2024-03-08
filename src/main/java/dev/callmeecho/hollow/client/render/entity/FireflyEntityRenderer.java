@@ -1,6 +1,5 @@
 package dev.callmeecho.hollow.client.render.entity;
 
-import dev.callmeecho.hollow.main.Hollow;
 import dev.callmeecho.hollow.main.entity.FireflyEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;

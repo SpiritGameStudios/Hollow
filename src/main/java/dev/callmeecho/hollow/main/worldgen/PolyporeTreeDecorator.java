@@ -5,11 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.callmeecho.hollow.main.block.PolyporeBlock;
 import dev.callmeecho.hollow.main.registry.HollowTreeDecoratorRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -41,8 +37,6 @@ public class PolyporeTreeDecorator extends TreeDecorator {
         ObjectArrayList<BlockPos> logs = generator.getLogPositions();
         
         for (BlockPos pos : logs) {
-//            if (random.nextInt(10) <= 0) continue;
-            
             Direction direction = Direction.fromHorizontal(random.nextInt(4));
             BlockPos polyporePos = pos.offset(direction);
             

@@ -6,17 +6,12 @@ import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 
 import java.util.Optional;
-
-import static dev.callmeecho.hollow.main.Hollow.MODID;
-import static dev.callmeecho.hollow.main.registry.HollowBlockRegistry.LOTUS_LILYPAD;
-import static net.minecraft.data.client.BlockStateModelGenerator.*;
 
 public class ModelProvider extends FabricModelProvider {
     public static final Model HOLLOW_LOG =  new Model(Optional.of(new Identifier("hollow", "block/" + "hollow_log_template")), Optional.empty(), TextureKey.SIDE, TextureKey.INSIDE, TextureKey.END);

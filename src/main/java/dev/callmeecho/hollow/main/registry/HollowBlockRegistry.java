@@ -1,7 +1,5 @@
 package dev.callmeecho.hollow.main.registry;
 
-import static dev.callmeecho.hollow.main.Hollow.GROUP;
-
 import dev.callmeecho.cabinetapi.block.CabinetBlockSettings;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.BlockRegistrar;
@@ -25,6 +23,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 import java.lang.reflect.Field;
+
+import static dev.callmeecho.hollow.main.Hollow.GROUP;
 
 @SuppressWarnings("unused")
 public class HollowBlockRegistry implements BlockRegistrar {

@@ -1,13 +1,11 @@
 package dev.callmeecho.hollow.main.worldgen;
 
 import com.mojang.serialization.Codec;
-import dev.callmeecho.hollow.main.Hollow;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.block.PolyporeBlock;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
