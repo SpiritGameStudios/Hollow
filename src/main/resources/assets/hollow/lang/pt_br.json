@@ -1,0 +1,32 @@
+{
+  "itemGroup.hollow.item_group": "Hollow",
+  
+  "block.hollow.oak_hollow_log": "Tronco de carvalho oco",
+  "block.hollow.stripped_oak_hollow_log": "Tronco de carvalho oco descascado",
+  "block.hollow.spruce_hollow_log": "Tronco de pinheiro oco",
+  "block.hollow.stripped_spruce_hollow_log": "Tronco de pinheiro oco descascado",
+  "block.hollow.birch_hollow_log": "Tronco de bétula oco",
+  "block.hollow.stripped_birch_hollow_log": "Tronco de bétula oco descascado",
+  "block.hollow.jungle_hollow_log": "Tronco de árvore da selva oco",
+  "block.hollow.stripped_jungle_hollow_log": "Tronco de árvore da selva oco descascado",
+  "block.hollow.acacia_hollow_log": "Tronco de acácia oco",
+  "block.hollow.stripped_acacia_hollow_log": "Tronco de acácia oco descascado",
+  "block.hollow.dark_oak_hollow_log": "Tronco de carvalho escuro oco",
+  "block.hollow.stripped_dark_oak_hollow_log": "Tronco de carvalho escuro oco descascado",
+  "block.hollow.crimson_hollow_stem": "Caule carmesim oco",
+  "block.hollow.stripped_crimson_hollow_stem": "Caule carmesim oco descascado",
+  "block.hollow.warped_hollow_stem": "Caule destorcido oco",
+  "block.hollow.stripped_warped_hollow_stem": "Caule destorcido oco descascado",
+  "block.hollow.mangrove_hollow_log": "Tronco de mangue oco",
+  "block.hollow.stripped_mangrove_hollow_log": "Tronco de mangue oco descascado",
+  "block.hollow.cherry_hollow_log": "Tronco de cerejeira oco",
+  "block.hollow.stripped_cherry_hollow_log": "Tronco de cerejeira oco descascado",
+  
+  "block.hollow.paeonia": "Peônia",
+  "block.hollow.campion": "Silene latifolia",
+  "block.hollow.polypore": "Poliporo",
+  "block.hollow.lotus_lilypad": "Vitória-régia florida",
+  "block.hollow.twig": "Galho",
+  
+  "item.hollow.firefly_spawn_egg": "Ovo gerador de vagalume"
+}
