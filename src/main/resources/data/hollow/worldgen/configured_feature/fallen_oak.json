@@ -4,10 +4,8 @@
     "state_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "hollow:birch_hollow_log"
+        "Name": "hollow:oak_hollow_log"
       }
-    },
-    "polypore": true,
-    "mossy": true
+    }
   }
 }

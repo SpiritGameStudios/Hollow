@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_top",
+  "textures": {
+    "top": "hollow:block/sculk_jaw_active",
+    "side": "minecraft:block/sculk"
+  }
+}

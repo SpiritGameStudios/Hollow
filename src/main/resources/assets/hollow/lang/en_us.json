@@ -27,6 +27,10 @@
   "block.hollow.polypore": "Polypore",
   "block.hollow.lotus_lilypad": "Flowering Lily Pad",
   "block.hollow.twig": "Twig",
-  
+  "block.hollow.sculk_jaw": "Sculk Jaw",
+
+  "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
+  "death.attack.sculk_jaw": "%1$s was ripped to shreds",
+
   "item.hollow.firefly_spawn_egg": "Firefly Spawn Egg"
 }

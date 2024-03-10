@@ -3,9 +3,7 @@ package dev.callmeecho.hollow.main.registry;
 import dev.callmeecho.cabinetapi.block.CabinetBlockSettings;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.BlockRegistrar;
-import dev.callmeecho.hollow.main.block.HollowLogBlock;
-import dev.callmeecho.hollow.main.block.PolyporeBlock;
-import dev.callmeecho.hollow.main.block.TwigBlock;
+import dev.callmeecho.hollow.main.block.*;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
@@ -130,6 +128,32 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .sounds(BlockSoundGroup.GRASS)
                     .pistonBehavior(PistonBehavior.DESTROY)
                     .solidBlock(Blocks::never)
+    );
+    
+    public static final Block SCULK_JAW = new SculkJawBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.BLACK)
+                    .strength(0.2F)
+                    .sounds(BlockSoundGroup.SCULK)
+    );
+    
+    public static final Block JAR = new JarBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.OAK_TAN)
+                    .strength(0.2F)
+                    .sounds(BlockSoundGroup.GLASS)
+                    .nonOpaque()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
+
+    public static final Block FIREFLY_JAR = new FireflyJarBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.OAK_TAN)
+                    .strength(0.2F)
+                    .sounds(BlockSoundGroup.GLASS)
+                    .nonOpaque()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .luminance(state -> 15)
     );
     
     @NoBlockItem

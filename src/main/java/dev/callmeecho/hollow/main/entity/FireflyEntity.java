@@ -107,13 +107,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
             }
         }
 
-        if (this.getLightTicks() > 15) {
-            this.setLightTicks(15);
-        }
-
-        if (this.getLightTicks() < 0 || this.isWet()) {
-            this.setLightTicks(0);
-        }
+        this.setLightTicks(MathHelper.clamp(getLightTicks(), 0, 15));
     }
 
     @Override

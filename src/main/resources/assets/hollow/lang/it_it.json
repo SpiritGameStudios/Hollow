@@ -1,0 +1,36 @@
+{
+  "itemGroup.hollow.item_group": "Vuoto",
+
+  "block.hollow.oak_hollow_log": "Tronco cavo di quercia",
+  "block.hollow.stripped_oak_hollow_log": "Tronco cavo di quercia scortecciato",
+  "block.hollow.spruce_hollow_log": "Tronco cavo di abete",
+  "block.hollow.stripped_spruce_hollow_log": "Tronco cavo di abete scortecciato",
+  "block.hollow.birch_hollow_log": "Tronco cavo di betulla",
+  "block.hollow.stripped_birch_hollow_log": "Tronco cavo di betulla scortecciato",
+  "block.hollow.jungle_hollow_log": "Tronco cavo della giungla",
+  "block.hollow.stripped_jungle_hollow_log": "Tronco cavo della giungla scortecciato",
+  "block.hollow.acacia_hollow_log": "Tronco cavo di acacia",
+  "block.hollow.stripped_acacia_hollow_log": "Tronco cavo di acacia scortecciato",
+  "block.hollow.dark_oak_hollow_log": "Tronco cavo di quercia scura",
+  "block.hollow.stripped_dark_oak_hollow_log": "Tronco cavo di quercia scura scortecciato",
+  "block.hollow.crimson_hollow_stem": "Gambo cavo cremisi",
+  "block.hollow.stripped_crimson_hollow_stem": "Gambo cavo cremisi scortecciato",
+  "block.hollow.warped_hollow_stem": "Gambo cavo distorto",
+  "block.hollow.stripped_warped_hollow_stem": "Gambo cavo distorto scortecciato",
+  "block.hollow.mangrove_hollow_log": "Tronco cavo di mangrovia",
+  "block.hollow.stripped_mangrove_hollow_log": "Tronco cavo di mangrovia scortecciato",
+  "block.hollow.cherry_hollow_log": "Tronco cavo di ciliego",
+  "block.hollow.stripped_cherry_hollow_log": "Tronco cavo di ciliego scortecciato",
+
+  "block.hollow.paeonia": "Paeonia",
+  "block.hollow.campion": "Campion",
+  "block.hollow.polypore": "Poliporo",
+  "block.hollow.lotus_lilypad": "Ninfea Fiorita",
+  "block.hollow.twig": "Ramoscello",
+  "block.hollow.sculk_jaw": "Mascella di Sculk",
+
+  "death.attack.sculk_jaw.player": "%1$s è stato fatto a pezzi",
+  "death.attack.sculk_jaw": "%1$s è stato fatto a pezzi",
+
+  "item.hollow.firefly_spawn_egg": "Uovo generatore di Lucciola"
+}
