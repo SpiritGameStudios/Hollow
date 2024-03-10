@@ -22,5 +22,6 @@ Hollow adds in as many missing features as it can, fulfilling Mojang's hollow pr
 No. Do not ask me for forge or you will be blocked instantly.
 * Do you plan to add `X`? <br/>
 If it's in one of the concept art images, probably. Some features take longer than others.
+If you want to suggest something, join the [discord](https://discord.gg/TTmx7d2axf).
 * Can you port/backport to `X` version? <br/>
 Updating is a maybe. Seeing as I'm making this for fun, it comes down to whatever version I'm playing on at the time. For backports, probably not. I might do `1.19.2` as I play that a lot but other than that, no.
