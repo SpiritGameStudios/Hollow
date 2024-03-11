@@ -1,5 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
+import dev.callmeecho.cabinetapi.client.particle.ParticleSystem;
 import dev.callmeecho.hollow.main.Hollow;
 import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.block.*;
@@ -30,10 +31,20 @@ public class SculkJawBlock extends SculkBlock {
     public static final RegistryKey<DamageType> SCULK_JAW_DAMAGE_TYPE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(Hollow.MODID, "sculk_jaw"));
     
     public static final BooleanProperty ACTIVE = BooleanProperty.of("active");
+    private final ParticleSystem particleSystem;
     
     public SculkJawBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(ACTIVE, false));
+        particleSystem = new ParticleSystem(
+                new Vec3d(0.007F, 0.07F, 0.007F),
+                new Vec3d(0.5, 1, 0.5),
+                new Vec3d(0.45, 0, 0.45),
+                2,
+                1,
+                true,
+                ParticleTypes.SCULK_SOUL
+        );
     }
 
     @Override
@@ -74,22 +85,23 @@ public class SculkJawBlock extends SculkBlock {
         }
         
         if (state.get(ACTIVE) && world.isClient) {
-            Random random = world.getRandom();
-            for(int i = 0; i < 2; ++i) {
-                float x = 2.0F * random.nextFloat() - 1.0F;
-                float y = 2.0F * random.nextFloat() - 1.0F;
-                float z = 2.0F * random.nextFloat() - 1.0F;
-                world
-                        .addParticle(
-                                ParticleTypes.SCULK_SOUL,
-                                (double)pos.getX() + 0.5 + (x * 0.45),
-                                (double)pos.getY() + 1,
-                                (double)pos.getZ() + 0.5 + (z * 0.45),
-                                (x * 0.007F),
-                                (y * 0.07F),
-                                (z * 0.007F)
-                        );
-            }
+//            Random random = world.getRandom();
+//            for(int i = 0; i < 2; ++i) {
+//                float x = 2.0F * random.nextFloat() - 1.0F;
+//                float y = 2.0F * random.nextFloat() - 1.0F;
+//                float z = 2.0F * random.nextFloat() - 1.0F;
+//                world
+//                        .addParticle(
+//                                ParticleTypes.SCULK_SOUL,
+//                                (double)pos.getX() + 0.5 + (x * 0.45),
+//                                (double)pos.getY() + 1,
+//                                (double)pos.getZ() + 0.5 + (z * 0.45),
+//                                (x * 0.007F),
+//                                (y * 0.07F),
+//                                (z * 0.007F)
+//                        );
+//            }
+            particleSystem.tick(world, pos);
         }
     }
 

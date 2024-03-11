@@ -48,7 +48,7 @@ public class BranchTreeDecorator extends TreeDecorator {
             
             Direction direction = Direction.fromHorizontal(random.nextInt(4));
             BlockPos branch = pos.offset(direction);
-            
+
             if (!generator.isAir(branch)) continue;
             
             BlockState state = stateProvider.get(random, branch);

@@ -1,0 +1,43 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "block/chiseled_deepslate",
+		"1": "block/polished_deepslate",
+		"2": "hollow:block/pot_1_top",
+		"particle": "block/chiseled_deepslate"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 13, 15],
+			"faces": {
+				"north": {"uv": [1, 1, 15, 14], "texture": "#0"},
+				"east": {"uv": [15, 1, 1, 14], "texture": "#0"},
+				"south": {"uv": [1, 1, 15, 14], "texture": "#0"},
+				"west": {"uv": [15, 1, 1, 14], "texture": "#0"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#1"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#1"}
+			}
+		},
+		{
+			"from": [3, 13, 3],
+			"to": [13, 15, 13],
+			"faces": {
+				"north": {"uv": [3, 5, 13, 7], "rotation": 180, "texture": "#0"},
+				"east": {"uv": [3, 5, 13, 7], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [3, 5, 13, 7], "rotation": 180, "texture": "#0"},
+				"west": {"uv": [3, 5, 13, 7], "rotation": 180, "texture": "#0"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#2"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "VoxelShapes",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

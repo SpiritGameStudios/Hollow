@@ -26,18 +26,6 @@ import static dev.callmeecho.hollow.main.Hollow.GROUP;
 
 @SuppressWarnings("unused")
 public class HollowBlockRegistry implements BlockRegistrar {
-    @Override
-    public void register(String name, String namespace, Block object, Field field) {
-        if (object.settings instanceof CabinetBlockSettings settings) {
-            if (settings.getStrippedBlock() != null) { StrippableBlockRegistry.register(object, settings.getStrippedBlock()); }
-            if (settings.isFlammable()) { FlammableBlockRegistry.getDefaultInstance().add(object, settings.getBurn(), settings.getSpread()); }
-        }
-        Registry.register(getRegistry(), new Identifier(namespace, name), object);
-
-        if (field.isAnnotationPresent(NoBlockItem.class)) return;
-        registerBlockItem(object, namespace, name);
-    }
-    
     public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_OAK_LOG.settings).flammable(), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
     public static final HollowLogBlock OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.OAK_LOG.settings).strippedBlock(STRIPPED_OAK_HOLLOW_LOG).flammable(), "oak_log", "stripped_oak_log", "oak_log_top");
 
@@ -68,6 +56,13 @@ public class HollowBlockRegistry implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CHERRY_LOG.settings).flammable(), "stripped_cherry_log", "stripped_cherry_log", "stripped_cherry_log_top");
     public static final HollowLogBlock CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.CHERRY_LOG.settings).strippedBlock(STRIPPED_CHERRY_HOLLOW_LOG).flammable(), "cherry_log", "stripped_cherry_log", "cherry_log_top");
 
+    public static final PotBlock POT = new PotBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(0.2F)
+                    .sounds(BlockSoundGroup.POLISHED_DEEPSLATE)
+    );
+    
     public static final FlowerBlock PAEONIA = new FlowerBlock(
             StatusEffects.GLOWING,
             5,
