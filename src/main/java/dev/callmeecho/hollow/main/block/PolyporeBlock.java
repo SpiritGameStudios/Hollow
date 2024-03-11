@@ -1,6 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
-import dev.callmeecho.hollow.HollowTags;
+import dev.callmeecho.hollow.main.HollowTags;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;

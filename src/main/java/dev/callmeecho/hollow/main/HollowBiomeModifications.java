@@ -36,16 +36,32 @@ public class HollowBiomeModifications {
             if (generationSettings.removeFeature(VegetationPlacedFeatures.PATCH_WATERLILY))
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_waterlily"));
         });
+
+        BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamp_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
+                BiomeKeys.SWAMP
+        ), context -> {
+            BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
+
+            if (generationSettings.removeFeature(VegetationPlacedFeatures.FLOWER_SWAMP))
+                generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("swamp_flowers"));
+        });
         
+        BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamp_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
+                BiomeKeys.SWAMP
+        ), context -> {
+            BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
+
+            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("fallen_oak"));
+            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("huge_brown_mushroom"));
+        });
+
         BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamps_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP,
                 BiomeKeys.MANGROVE_SWAMP
         ), context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
-            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("fallen_oak"));
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_twig"));
-            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("huge_brown_mushroom"));
         });
 
         BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
