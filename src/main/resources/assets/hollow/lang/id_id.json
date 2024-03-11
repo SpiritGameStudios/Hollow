@@ -28,9 +28,13 @@
   "block.hollow.lotus_lilypad": "Daun Teratai Berbunga",
   "block.hollow.twig": "Ranting",
   "block.hollow.sculk_jaw": "Rahang Sculk",
+  "block.hollow.jar": "Stoples",
+  "block.hollow.firefly_jar": "Stoples Kunang-kunang",
 
   "death.attack.sculk_jaw.player": "%1$s tercabik-cabik",
   "death.attack.sculk_jaw": "%1$s tercabik-cabik",
-
-  "item.hollow.firefly_spawn_egg": "Telur Pijah Kunang-kunang"
+  
+  "item.hollow.firefly_spawn_egg": "Telur Pijah Kunang-kunang",
+  "advancements.adventure.diversity_win.title": "Keberagaman Menang",
+  "advancements.adventure.diversity_win.description": "Dapatkan satu dari setiap pewarna."
 }
