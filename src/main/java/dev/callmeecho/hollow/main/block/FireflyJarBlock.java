@@ -39,7 +39,7 @@ public class FireflyJarBlock extends BlockWithEntity {
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof FireflyJarBlockEntity && random.nextInt(20) == 0) {
+        if (blockEntity instanceof FireflyJarBlockEntity && random.nextInt(15) == 0) {
             ((FireflyJarBlockEntity)blockEntity).createParticles(world, pos, random);
         }
     }
