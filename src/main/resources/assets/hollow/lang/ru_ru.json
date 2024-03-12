@@ -1,0 +1,32 @@
+{
+  "itemGroup.hollow.item_group": "Полое",
+  
+  "block.hollow.oak_hollow_log": "Полое дубовое бревно",
+  "block.hollow.stripped_oak_hollow_log": "Полое обтёсанное дубовое бревно",
+  "block.hollow.spruce_hollow_log": "Полое еловое бревно",
+  "block.hollow.stripped_spruce_hollow_log": "Полое обтёсанное еловое бревно",
+  "block.hollow.birch_hollow_log": "Полое берёзовое бревно",
+  "block.hollow.stripped_birch_hollow_log": "Полое обтёсанное берёзовое бревно",
+  "block.hollow.jungle_hollow_log": "Полое тропическое бревно",
+  "block.hollow.stripped_jungle_hollow_log": "Полое обтёсанное тропическое бревно",
+  "block.hollow.acacia_hollow_log": "Полое акациевое бревно",
+  "block.hollow.stripped_acacia_hollow_log": "Полое обтёсанное акациевое бревно",
+  "block.hollow.dark_oak_hollow_log": "Полое бревно тёмного дуба",
+  "block.hollow.stripped_dark_oak_hollow_log": "Полое обтёсанное бревно тёмного дуба",
+  "block.hollow.crimson_hollow_stem": "Полый багровый стебель",
+  "block.hollow.stripped_crimson_hollow_stem": "Полый очищенный багровый стебель",
+  "block.hollow.warped_hollow_stem": "Полый искажённый стебель",
+  "block.hollow.stripped_warped_hollow_stem": "Полый очищенный искажённый стебель",
+  "block.hollow.mangrove_hollow_log": "Полое мангровое бревно",
+  "block.hollow.stripped_mangrove_hollow_log": "Полое обтёсанное мангровое бревноg",
+  "block.hollow.cherry_hollow_log": "Полое вишнёвое бревно",
+  "block.hollow.stripped_cherry_hollow_log": "Полое обтёсанное вишнёвое бревно",
+  
+  "block.hollow.paeonia": "Пион",
+  "block.hollow.campion": "Смолёвка",
+  "block.hollow.polypore": "Трутовик",
+  "block.hollow.lotus_lilypad": "Цветущая кувшинка",
+  "block.hollow.twig": "Хворост",
+  
+  "item.hollow.firefly_spawn_egg": "Яйцо призыва светлячка"
+}
