@@ -14,7 +14,7 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
     private final boolean xMover;
     private final boolean counterClockwise;
     
-    protected FireflyJarParticle(ClientWorld clientWorld, double x, double y, double z, SpriteProvider spriteProvider) {
+    protected FireflyJarParticle(ClientWorld clientWorld, double x, double y, double z) {
         super(clientWorld, x, y, z);
         this.maxAge = 400;
         this.red = 0.101960786f;
@@ -26,7 +26,6 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
         
         this.alpha = 0;
         this.scale = 0.5F;
-        this.setSpriteForAge(spriteProvider);
     }
     
     @Override
@@ -48,27 +47,31 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
 
         lightTicks = MathHelper.clamp(lightTicks, 0, 15);
 
-        int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - lightTicks / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF1A1E1B);
-
-        this.red = ColorHelper.Argb.getRed(color) / 255f;
-        this.green = ColorHelper.Argb.getGreen(color) / 255f;
-        this.blue = ColorHelper.Argb.getBlue(color) / 255f;
-
-        if (this.age < 20) {
-            this.alpha += 0.05f;
-        }
-
-        if (this.age > this.maxAge - 20) {
-            this.alpha -= 0.05f;
-        }
-
         // Hover around in circles
         double newY = MathHelper.sin((float) this.age / 15) * 0.0025;
         double newXZ = MathHelper.cos((float) this.age / 15) * 0.0025;
         
         this.x += xMover ? newXZ : -newXZ;
+        this.z += xMover ? newXZ : -newXZ;
+        this.y += counterClockwise ? newY : -newY;
 
+        if (this.age < 20 && this.alpha < 1.0F) {
+            this.alpha += 0.05f;
+        }
 
+        if (this.age > this.maxAge - 20 && this.alpha > 0.0F) {
+            this.alpha -= 0.05f;
+        }
+
+        if (this.age >= this.maxAge) {
+            this.markDead();
+        }
+
+        int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - lightTicks / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF1A1E1B);
+
+        this.red = ColorHelper.Argb.getRed(color) / 255f;
+        this.green = ColorHelper.Argb.getGreen(color) / 255f;
+        this.blue = ColorHelper.Argb.getBlue(color) / 255f;
     }
     
 
@@ -81,7 +84,9 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double velX, double velY, double velZ) {
-            return new FireflyJarParticle(clientWorld, x, y, z, this.spriteProvider);
+            FireflyJarParticle particle = new FireflyJarParticle(clientWorld, x, y, z);
+            particle.setSprite(this.spriteProvider);
+            return particle;
         }
     }
 }

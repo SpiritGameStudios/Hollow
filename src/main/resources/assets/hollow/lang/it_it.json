@@ -32,5 +32,11 @@
   "death.attack.sculk_jaw.player": "%1$s è stato fatto a pezzi",
   "death.attack.sculk_jaw": "%1$s è stato fatto a pezzi",
 
-  "item.hollow.firefly_spawn_egg": "Uovo generatore di Lucciola"
+  "item.hollow.firefly_spawn_egg": "Uovo generatore di Lucciola",
+  "block.hollow.jar": "Jar",
+  "block.hollow.firefly_jar": "Firefly Jar",
+  "block.hollow.pot": "Echoing Pot",
+  
+  "advancements.adventure.diversity_win.title": "Diversity Win",
+  "advancements.adventure.diversity_win.description": "Get one of every dye."
 }

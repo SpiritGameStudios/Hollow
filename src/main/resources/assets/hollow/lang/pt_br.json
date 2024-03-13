@@ -32,8 +32,10 @@
   "block.hollow.sculk_jaw": "Sculk Jaw",
   "block.hollow.jar": "Jar",
   "block.hollow.firefly_jar": "Firefly Jar",
+  
   "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
   "advancements.adventure.diversity_win.title": "Diversity Win",
-  "advancements.adventure.diversity_win.description": "Get one of every dye."
+  "advancements.adventure.diversity_win.description": "Get one of every dye.",
+  "block.hollow.pot": "Echoing Pot"
 }

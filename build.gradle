@@ -11,7 +11,9 @@ base {
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
+    maven {
+        url "https://maven.callmeecho.dev/releases"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -23,7 +25,6 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
-    mavenLocal()
 }
 
 loom {
@@ -50,7 +51,7 @@ sourceSets {
     }
 }
 
-configurations.all {
+configurations.configureEach {
     // check for updates every build
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
@@ -62,8 +63,8 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    include "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
-    modImplementation "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
+    include "dev.callmeecho:CabinetAPI:${project.cabinet_version}"
+    modImplementation "dev.callmeecho:CabinetAPI:${project.cabinet_version}"
     
     modCompileOnly "maven.modrinth:lambdynamiclights:2.3.2+1.20.1"
 }

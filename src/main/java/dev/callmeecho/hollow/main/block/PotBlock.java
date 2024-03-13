@@ -6,6 +6,8 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
@@ -13,6 +15,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.event.Vibrations;
+import net.minecraft.world.event.listener.Vibration;
 
 public class PotBlock extends Block {
     private final ParticleSystem particleSystem;
@@ -42,21 +46,7 @@ public class PotBlock extends Block {
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         particleSystem.tick(world, pos);
-        //        for(int i = 0; i < 2; ++i) {
-//            float x = 2.0F * random.nextFloat() - 1.0F;
-//            float y = 2.0F * random.nextFloat() - 1.0F;
-//            float z = 2.0F * random.nextFloat() - 1.0F;
-//            world
-//                    .addParticle(
-//                            ParticleTypes.SCULK_SOUL,
-//                            (double)pos.getX() + 0.5 + (x * 0.1),
-//                            (double)pos.getY() + 1,
-//                            (double)pos.getZ() + 0.5 + (z * 0.1),
-//                            (x * 0.007F),
-//                            (y * 0.07F),
-//                            (z * 0.007F)
-//                    );
-//        }
+        world.playSoundAtBlockCenter(pos, SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
     }
 
     @Override
