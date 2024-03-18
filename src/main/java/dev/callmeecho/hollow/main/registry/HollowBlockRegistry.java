@@ -4,10 +4,9 @@ import dev.callmeecho.cabinetapi.block.CabinetBlockSettings;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.BlockRegistrar;
 import dev.callmeecho.hollow.main.block.*;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -19,8 +18,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-
-import java.lang.reflect.Field;
 
 import static dev.callmeecho.hollow.main.Hollow.GROUP;
 
@@ -56,7 +53,7 @@ public class HollowBlockRegistry implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CHERRY_LOG.settings).flammable(), "stripped_cherry_log", "stripped_cherry_log", "stripped_cherry_log_top");
     public static final HollowLogBlock CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.CHERRY_LOG.settings).strippedBlock(STRIPPED_CHERRY_HOLLOW_LOG).flammable(), "cherry_log", "stripped_cherry_log", "cherry_log_top");
 
-    public static final PotBlock POT = new PotBlock(
+    public static final EchoingPotBlock ECHOING_POT = new EchoingPotBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(0.2F)
@@ -149,6 +146,24 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .nonOpaque()
                     .pistonBehavior(PistonBehavior.DESTROY)
                     .luminance(state -> 15)
+    );
+    
+    public static final Block STONE_CHEST = new StoneChestBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .requiresTool()
+                    .instrument(Instrument.BASEDRUM)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DEEPSLATE)
+    );
+
+    public static final Block STONE_CHEST_LID = new StoneChestLidBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .requiresTool()
+                    .instrument(Instrument.BASEDRUM)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DEEPSLATE)
     );
     
     @NoBlockItem

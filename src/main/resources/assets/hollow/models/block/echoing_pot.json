@@ -4,7 +4,7 @@
 	"textures": {
 		"0": "block/chiseled_deepslate",
 		"1": "block/polished_deepslate",
-		"2": "hollow:block/pot_1_top",
+		"2": "hollow:block/echoing_pot_top",
 		"particle": "block/chiseled_deepslate"
 	},
 	"elements": [

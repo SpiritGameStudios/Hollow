@@ -1,8 +1,10 @@
 package dev.callmeecho.hollow.client;
 
+import dev.callmeecho.cabinetapi.misc.ReflectionHelper;
 import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.client.render.entity.FireflyEntityRenderer;
 import dev.callmeecho.hollow.client.render.entity.JarBlockEntityRenderer;
+import dev.callmeecho.hollow.main.Hollow;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.particle.FireflyJarParticle;
 import dev.callmeecho.hollow.main.registry.*;
@@ -32,7 +34,7 @@ public class HollowClient implements ClientModInitializer {
 
         BlockEntityRendererFactories.register(HollowBlockEntityRegistry.JAR_BLOCK_ENTITY, JarBlockEntityRenderer::new);
 
-        RegistrarHandler.<HollowLogBlock>forEach(HollowBlockRegistry.class, (block) -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
+        ReflectionHelper.forEachStaticField(HollowBlockRegistry.class, HollowLogBlock.class, (block, name, field) -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistry.LOTUS_LILYPAD);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistry.LOTUS_LILYPAD);

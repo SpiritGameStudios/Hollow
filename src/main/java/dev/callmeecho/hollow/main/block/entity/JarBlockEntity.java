@@ -1,10 +1,9 @@
 package dev.callmeecho.hollow.main.block.entity;
 
+import dev.callmeecho.cabinetapi.misc.DefaultedInventory;
 import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
-import dev.callmeecho.hollow.main.utils.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
@@ -18,8 +17,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class JarBlockEntity extends BlockEntity implements ImplementedInventory {
+public class JarBlockEntity extends BlockEntity implements DefaultedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(16, ItemStack.EMPTY);
     
     public JarBlockEntity(BlockPos pos, BlockState state) {
@@ -32,20 +32,19 @@ public class JarBlockEntity extends BlockEntity implements ImplementedInventory 
     }
     
     public void use(World world, BlockPos pos, PlayerEntity player, Hand hand) {
-        if (!inventory.isEmpty()) {
-            world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2f, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+        if (!inventory.isEmpty() && !world.isClient) {
+            world.playSound(
+                    null,
+                    pos,
+                    SoundEvents.ENTITY_ITEM_PICKUP,
+                    SoundCategory.PLAYERS,
+                    0.2f,
+                    ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F
+            );
         }
 
         if (player.getStackInHand(hand).isEmpty()) {
-            ItemStack stack = null;
-            // extract item from jar
-            for (ItemStack newStack : inventory) {
-                if (!newStack.isEmpty()) {
-                    stack = newStack;
-                }
-            }
-
-            if (stack == null) return;
+            ItemStack stack = inventory.get(inventory.size() - 1);
 
             player.setStackInHand(hand, stack.copy());
             inventory.set(inventory.indexOf(stack), ItemStack.EMPTY);
@@ -61,16 +60,22 @@ public class JarBlockEntity extends BlockEntity implements ImplementedInventory 
             }
         }
 
+        if (slot == -1) return;
+
         setStack(slot, player.getStackInHand(hand));
         notifyListeners();
         player.setStackInHand(hand, ItemStack.EMPTY);
     }
+    
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        inventory.clear();
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 
     @Override
@@ -80,27 +85,9 @@ public class JarBlockEntity extends BlockEntity implements ImplementedInventory 
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
-
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-    @Override
-    public World getWorld() {
-        return super.getWorld();
-    }
-
-    @Override
-    public BlockPos getPos() {
-        return super.getPos();
-    }
-
-    @Override
-    public BlockState getCachedState() {
-        return super.getCachedState();
+    public void readNbt(NbtCompound nbt) {
+        inventory.clear();
+        super.readNbt(nbt);
+        Inventories.readNbt(nbt, inventory);
     }
 }

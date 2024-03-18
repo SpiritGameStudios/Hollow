@@ -1,15 +1,14 @@
 package dev.callmeecho.hollow.main.block;
 
-import dev.callmeecho.cabinetapi.client.particle.ParticleSystem;
+import dev.callmeecho.cabinetapi.particle.ParticleSystem;
 import dev.callmeecho.hollow.main.Hollow;
-import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SculkBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.mob.WardenEntity;
-import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -20,12 +19,9 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
-import net.minecraft.world.event.GameEvent;
 
 public class SculkJawBlock extends SculkBlock {
     public static final RegistryKey<DamageType> SCULK_JAW_DAMAGE_TYPE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(Hollow.MODID, "sculk_jaw"));
@@ -85,22 +81,6 @@ public class SculkJawBlock extends SculkBlock {
         }
         
         if (state.get(ACTIVE) && world.isClient) {
-//            Random random = world.getRandom();
-//            for(int i = 0; i < 2; ++i) {
-//                float x = 2.0F * random.nextFloat() - 1.0F;
-//                float y = 2.0F * random.nextFloat() - 1.0F;
-//                float z = 2.0F * random.nextFloat() - 1.0F;
-//                world
-//                        .addParticle(
-//                                ParticleTypes.SCULK_SOUL,
-//                                (double)pos.getX() + 0.5 + (x * 0.45),
-//                                (double)pos.getY() + 1,
-//                                (double)pos.getZ() + 0.5 + (z * 0.45),
-//                                (x * 0.007F),
-//                                (y * 0.07F),
-//                                (z * 0.007F)
-//                        );
-//            }
             particleSystem.tick(world, pos);
         }
     }

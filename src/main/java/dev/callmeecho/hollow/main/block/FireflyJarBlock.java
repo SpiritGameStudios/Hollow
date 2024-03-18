@@ -1,6 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
-import dev.callmeecho.cabinetapi.client.particle.ParticleSystem;
+import dev.callmeecho.cabinetapi.particle.ParticleSystem;
 import dev.callmeecho.hollow.main.registry.HollowParticleRegistrar;
 import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;

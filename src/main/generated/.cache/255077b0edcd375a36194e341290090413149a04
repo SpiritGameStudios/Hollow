@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-08T14:23:19.075266398	Hollow/Model Definitions
+// 1.20.1	2024-03-17T16:13:48.575690795	Hollow/Model Definitions
 957f8f0186bb09ed323faac324b5df5f8671b02d assets/hollow/models/block/stripped_cherry_hollow_log.json
 dc39eb275cecfb4cdd0b15185f9a6f45ac57d158 assets/hollow/models/block/oak_hollow_log.json
 551b73de8d5dab1b2e575497400b9e3fc400ba3d assets/hollow/models/block/stripped_crimson_hollow_stem_horizontal_mossy.json
@@ -44,8 +44,8 @@ fa35cf3b4a0bb49685761f8273ef35dcdd09af0c assets/hollow/models/block/birch_hollow
 cd92a5fb80a153381e922f3f45beb9934b3f1c4e assets/hollow/models/block/jungle_hollow_log.json
 641cc377332e8cf8d849ac2e135a175f33733b37 assets/hollow/models/block/stripped_cherry_hollow_log_horizontal.json
 28a6bd9e9b4a62bd3ce03d0f0af1c99acd72aa88 assets/hollow/models/item/stripped_oak_hollow_log.json
-0bea6ef381dbd571cc2e1a555f754e611a15e187 assets/hollow/blockstates/acacia_hollow_log.json
 7033b2680cc40e6eaa491ad88702503e468cd67f assets/hollow/models/item/stripped_cherry_hollow_log.json
+0bea6ef381dbd571cc2e1a555f754e611a15e187 assets/hollow/blockstates/acacia_hollow_log.json
 02ae804dd2ef177132d09849e9d5519c90442cd5 assets/hollow/models/block/jungle_hollow_log_horizontal.json
 407bd99b20cde5b2ece77e8f844afc177f5f4b3e assets/hollow/models/block/spruce_hollow_log.json
 a69a97b6b176f3845bf4609b91c7901e65ddbb1b assets/hollow/models/item/stripped_jungle_hollow_log.json
