@@ -31,6 +31,7 @@ public class HollowClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.POTTED_PAEONIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.JAR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.FIREFLY_JAR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.ROOT_VINES, RenderLayer.getCutout());
 
         BlockEntityRendererFactories.register(HollowBlockEntityRegistry.JAR_BLOCK_ENTITY, JarBlockEntityRenderer::new);
 

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "up=false": {
+      "model": "hollow:block/root_vines_head"
+    },
+    "up=true": {
+      "model": "hollow:block/root_vines_body"
+    }
+  }
+}

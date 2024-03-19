@@ -101,6 +101,18 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .nonOpaque()
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
+
+    public static final RootVinesBlock ROOT_VINES = new RootVinesBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DIRT_BROWN)
+                    .replaceable()
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.HANGING_ROOTS)
+                    .offset(AbstractBlock.OffsetType.XZ)
+                    .burnable()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
     
     @NoBlockItem
     public static final LilyPadBlock LOTUS_LILYPAD = new LilyPadBlock(
