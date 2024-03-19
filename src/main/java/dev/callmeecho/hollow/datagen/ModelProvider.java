@@ -1,6 +1,6 @@
 package dev.callmeecho.hollow.datagen;
 
-import dev.callmeecho.cabinetapi.misc.ReflectionHelper;
+import dev.callmeecho.cabinetapi.util.ReflectionHelper;
 import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;

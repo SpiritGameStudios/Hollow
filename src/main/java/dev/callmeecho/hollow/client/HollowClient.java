@@ -1,6 +1,6 @@
 package dev.callmeecho.hollow.client;
 
-import dev.callmeecho.cabinetapi.misc.ReflectionHelper;
+import dev.callmeecho.cabinetapi.util.ReflectionHelper;
 import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.client.render.entity.FireflyEntityRenderer;
 import dev.callmeecho.hollow.client.render.entity.JarBlockEntityRenderer;

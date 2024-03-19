@@ -1,34 +1,20 @@
 package dev.callmeecho.hollow.main.block.entity;
 
-import dev.callmeecho.cabinetapi.misc.DefaultedInventory;
+import dev.callmeecho.cabinetapi.util.DefaultedInventory;
+import dev.callmeecho.cabinetapi.util.InventoryBlockEntity;
 import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class JarBlockEntity extends BlockEntity implements DefaultedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(16, ItemStack.EMPTY);
-    
+public class JarBlockEntity extends InventoryBlockEntity implements DefaultedInventory {
     public JarBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityRegistry.JAR_BLOCK_ENTITY, pos, state);
-    }
-
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return inventory;
+        super(HollowBlockEntityRegistry.JAR_BLOCK_ENTITY, pos, state, 17);
     }
     
     public void use(World world, BlockPos pos, PlayerEntity player, Hand hand) {
@@ -65,29 +51,5 @@ public class JarBlockEntity extends BlockEntity implements DefaultedInventory {
         setStack(slot, player.getStackInHand(hand));
         notifyListeners();
         player.setStackInHand(hand, ItemStack.EMPTY);
-    }
-    
-    @Nullable
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
-
-    @Override
-    public void writeNbt(NbtCompound nbt) {
-        Inventories.writeNbt(nbt, inventory);
-        super.writeNbt(nbt);
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        inventory.clear();
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
     }
 }

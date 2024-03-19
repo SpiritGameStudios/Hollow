@@ -1,6 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
-import dev.callmeecho.cabinetapi.misc.VoxelShapeHelper;
+import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
 import dev.callmeecho.hollow.main.HollowTags;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;

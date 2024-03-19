@@ -1,6 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
-import dev.callmeecho.cabinetapi.misc.VoxelShapeHelper;
+import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
 import dev.callmeecho.hollow.main.block.entity.StoneChestBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
