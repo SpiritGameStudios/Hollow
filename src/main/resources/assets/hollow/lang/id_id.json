@@ -37,5 +37,8 @@
   "item.hollow.firefly_spawn_egg": "Telur Pijah Kunang-kunang",
   "advancements.adventure.diversity_win.title": "Keberagaman Menang",
   "advancements.adventure.diversity_win.description": "Dapatkan satu dari setiap pewarna.",
-  "block.hollow.echoing_pot": "Pot Bergema"
+  "block.hollow.echoing_pot": "Pot Bergema",
+  "block.hollow.stone_chest": "Peti Batu",
+  "block.hollow.stone_chest_lid": "Tutup Peti Batu",
+  "block.hollow.root_vines": "Akar Merambat"
 }

@@ -72,7 +72,6 @@ public class HollowBiomeModifications {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("fallen_birch"));
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_twig"));
-            context.getEffects().setGrassColor(9470285);
         });
 
         BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
@@ -91,8 +90,6 @@ public class HollowBiomeModifications {
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_campion"));
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("birch_forest_flowers"));
             }
-
-            context.getEffects().setGrassColor(9470285);
         });
 
         BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_remove")).add(ModificationPhase.REMOVALS, BiomeSelectors.includeByKey(

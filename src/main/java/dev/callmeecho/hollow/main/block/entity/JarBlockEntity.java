@@ -2,6 +2,7 @@ package dev.callmeecho.hollow.main.block.entity;
 
 import dev.callmeecho.cabinetapi.util.DefaultedInventory;
 import dev.callmeecho.cabinetapi.util.InventoryBlockEntity;
+import dev.callmeecho.hollow.main.Hollow;
 import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +31,16 @@ public class JarBlockEntity extends InventoryBlockEntity implements DefaultedInv
         }
 
         if (player.getStackInHand(hand).isEmpty()) {
-            ItemStack stack = inventory.get(inventory.size() - 1);
+            int slot = -1;
+            for (int i = inventory.size() - 1; i >= 0; i--) {
+                if (!inventory.get(i).isEmpty()) {
+                    slot = i;
+                    break;
+                }
+            }
+            if (slot == -1) return;
+
+            ItemStack stack = inventory.get(slot);
 
             player.setStackInHand(hand, stack.copy());
             inventory.set(inventory.indexOf(stack), ItemStack.EMPTY);

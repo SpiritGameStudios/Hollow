@@ -36,7 +36,7 @@ public class SculkJawBlock extends SculkBlock {
                 new Vec3d(0.007F, 0.07F, 0.007F),
                 new Vec3d(0.5, 1, 0.5),
                 new Vec3d(0.45, 0, 0.45),
-                2,
+                1,
                 1,
                 true,
                 ParticleTypes.SCULK_SOUL
@@ -77,10 +77,6 @@ public class SculkJawBlock extends SculkBlock {
             }
 
             entity.setVelocity(Vec3d.ZERO);
-            
-        }
-        
-        if (state.get(ACTIVE) && world.isClient) {
             particleSystem.tick(world, pos);
         }
     }

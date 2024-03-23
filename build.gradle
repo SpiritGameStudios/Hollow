@@ -11,7 +11,7 @@ base {
 
 repositories {
     mavenCentral()
-    maven { url "https://maven.callmeecho.dev/releases" }
+    maven { url "https://maven.callmeecho.dev/snapshots" }
     maven {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven"
