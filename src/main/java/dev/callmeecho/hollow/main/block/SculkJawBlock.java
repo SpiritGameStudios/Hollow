@@ -76,7 +76,7 @@ public class SculkJawBlock extends SculkBlock {
                 world.playSound(null, pos.up(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.BLOCKS, 1F, 1F);
             }
 
-            entity.setVelocity(Vec3d.ZERO);
+//            entity.setVelocity(Vec3d.ZERO);
             particleSystem.tick(world, pos);
         }
     }
