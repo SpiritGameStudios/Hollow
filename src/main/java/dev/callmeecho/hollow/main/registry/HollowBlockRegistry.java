@@ -3,13 +3,10 @@ package dev.callmeecho.hollow.main.registry;
 import dev.callmeecho.cabinetapi.block.CabinetBlockSettings;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.BlockRegistrar;
-import dev.callmeecho.hollow.main.block.HollowLogBlock;
-import dev.callmeecho.hollow.main.block.PolyporeBlock;
-import dev.callmeecho.hollow.main.block.TwigBlock;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import dev.callmeecho.hollow.main.block.*;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -22,24 +19,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-import java.lang.reflect.Field;
-
 import static dev.callmeecho.hollow.main.Hollow.GROUP;
 
 @SuppressWarnings("unused")
 public class HollowBlockRegistry implements BlockRegistrar {
-    @Override
-    public void register(String name, String namespace, Block object, Field field) {
-        if (object.settings instanceof CabinetBlockSettings settings) {
-            if (settings.getStrippedBlock() != null) { StrippableBlockRegistry.register(object, settings.getStrippedBlock()); }
-            if (settings.isFlammable()) { FlammableBlockRegistry.getDefaultInstance().add(object, settings.getBurn(), settings.getSpread()); }
-        }
-        Registry.register(getRegistry(), new Identifier(namespace, name), object);
-
-        if (field.isAnnotationPresent(NoBlockItem.class)) return;
-        registerBlockItem(object, namespace, name);
-    }
-    
     public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_OAK_LOG.settings).flammable(), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
     public static final HollowLogBlock OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.OAK_LOG.settings).strippedBlock(STRIPPED_OAK_HOLLOW_LOG).flammable(), "oak_log", "stripped_oak_log", "oak_log_top");
 
@@ -70,6 +53,13 @@ public class HollowBlockRegistry implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CHERRY_LOG.settings).flammable(), "stripped_cherry_log", "stripped_cherry_log", "stripped_cherry_log_top");
     public static final HollowLogBlock CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.CHERRY_LOG.settings).strippedBlock(STRIPPED_CHERRY_HOLLOW_LOG).flammable(), "cherry_log", "stripped_cherry_log", "cherry_log_top");
 
+    public static final EchoingPotBlock ECHOING_POT = new EchoingPotBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.POLISHED_DEEPSLATE)
+    );
+    
     public static final FlowerBlock PAEONIA = new FlowerBlock(
             StatusEffects.GLOWING,
             5,
@@ -111,6 +101,18 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .nonOpaque()
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
+
+    public static final RootVinesBlock ROOT_VINES = new RootVinesBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DIRT_BROWN)
+                    .replaceable()
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.HANGING_ROOTS)
+                    .offset(AbstractBlock.OffsetType.XZ)
+                    .burnable()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
     
     @NoBlockItem
     public static final LilyPadBlock LOTUS_LILYPAD = new LilyPadBlock(
@@ -130,6 +132,50 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .sounds(BlockSoundGroup.GRASS)
                     .pistonBehavior(PistonBehavior.DESTROY)
                     .solidBlock(Blocks::never)
+    );
+    
+    public static final Block SCULK_JAW = new SculkJawBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.BLACK)
+                    .strength(0.2F)
+                    .sounds(BlockSoundGroup.SCULK)
+    );
+    
+    public static final Block JAR = new JarBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.OAK_TAN)
+                    .strength(0.2F)
+                    .sounds(BlockSoundGroup.GLASS)
+                    .nonOpaque()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
+
+    public static final Block FIREFLY_JAR = new FireflyJarBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.OAK_TAN)
+                    .strength(0.2F)
+                    .sounds(BlockSoundGroup.GLASS)
+                    .nonOpaque()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .luminance(state -> 15)
+    );
+    
+    public static final Block STONE_CHEST = new StoneChestBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .requiresTool()
+                    .instrument(Instrument.BASEDRUM)
+                    .strength(6.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DEEPSLATE)
+    );
+
+    public static final Block STONE_CHEST_LID = new StoneChestLidBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .requiresTool()
+                    .instrument(Instrument.BASEDRUM)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DEEPSLATE)
     );
     
     @NoBlockItem

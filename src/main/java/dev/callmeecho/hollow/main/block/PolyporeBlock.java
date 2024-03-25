@@ -1,6 +1,7 @@
 package dev.callmeecho.hollow.main.block;
 
-import dev.callmeecho.hollow.HollowTags;
+import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
+import dev.callmeecho.hollow.main.HollowTags;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -21,9 +22,9 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     public static final IntProperty POLYPORE_AMOUNT = IntProperty.of("amount", 1, 3);
     
     public static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(1, 1, 8, 15, 15, 16);
-    public static final VoxelShape SHAPE_SOUTH = Block.createCuboidShape(1, 1, 0, 15, 15, 8);
-    public static final VoxelShape SHAPE_EAST = Block.createCuboidShape(0, 1, 1, 8, 15, 15);
-    public static final VoxelShape SHAPE_WEST = Block.createCuboidShape(8, 1, 1, 16, 15, 15);
+    public static final VoxelShape SHAPE_SOUTH = VoxelShapeHelper.rotate(Direction.SOUTH, Direction.NORTH, SHAPE_NORTH);
+    public static final VoxelShape SHAPE_EAST = VoxelShapeHelper.rotate(Direction.EAST, Direction.NORTH, SHAPE_NORTH);
+    public static final VoxelShape SHAPE_WEST = VoxelShapeHelper.rotate(Direction.WEST, Direction.NORTH, SHAPE_NORTH);
     
     public PolyporeBlock(Settings settings) {
         super(settings);

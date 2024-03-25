@@ -5,7 +5,8 @@
   "name": "Hollow",
   "description": "Hey Mojang! I did your job for you!",
   "authors": [
-    "CallMeEcho"
+    "CallMeEcho",
+    "WorldWidePixel"
   ],
   "contact": {
     "repo": "https://github.com/CallMeEchoCodes/hollow"

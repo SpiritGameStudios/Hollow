@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    " W ",
+    "G G",
+    " G "
+  ],
+  "result": {
+    "count": 4,
+    "item": "hollow:jar"
+  },
+  "show_notification": true
+}

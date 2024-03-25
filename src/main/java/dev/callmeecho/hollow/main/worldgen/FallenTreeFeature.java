@@ -48,7 +48,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
             BlockPos pos = origin.offset(axis, i);
             context.getWorld().setBlockState(pos, state, 2);
             
-            if (context.getWorld().isAir(pos.up()) && random.nextInt(2) == 0) {
+            if (context.getWorld().isAir(pos.up()) && random.nextInt(2) == 0 && context.getConfig().mossy) {
                 context.getWorld().setBlockState(pos.up(), Blocks.MOSS_CARPET.getDefaultState(), 2);
                 context.getWorld().setBlockState(pos, state.with(HollowLogBlock.MOSSY, true), 2);
             }
@@ -60,7 +60,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
             };
             BlockPos polyporePos = pos.offset(direction);
             
-            if (random.nextInt(2) != 0 || !context.getWorld().isAir(polyporePos)) continue;
+            if (random.nextInt(2) != 0 || !context.getWorld().isAir(polyporePos) || !context.getConfig().polypore) continue;
             
             BlockState polyporeState = HollowBlockRegistry.POLYPORE.getDefaultState()
                     .with(Properties.HORIZONTAL_FACING, direction)

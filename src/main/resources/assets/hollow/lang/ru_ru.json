@@ -28,5 +28,17 @@
   "block.hollow.lotus_lilypad": "Цветущая кувшинка",
   "block.hollow.twig": "Хворост",
   
-  "item.hollow.firefly_spawn_egg": "Яйцо призыва светлячка"
+  "item.hollow.firefly_spawn_egg": "Яйцо призыва светлячка",
+  
+  "block.hollow.sculk_jaw": "Sculk Jaw",
+  "block.hollow.jar": "Jar",
+  "block.hollow.firefly_jar": "Firefly Jar",
+  "block.hollow.echoing_pot": "Echoing Pot",
+  "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
+  "death.attack.sculk_jaw": "%1$s was ripped to shreds",
+  "advancements.adventure.diversity_win.title": "Diversity Win",
+  "advancements.adventure.diversity_win.description": "Get one of every dye.",
+  "block.hollow.stone_chest": "Stone Chest",
+  "block.hollow.stone_chest_lid": "Stone Chest Lid",
+  "block.hollow.root_vines": "Root Vines"
 }

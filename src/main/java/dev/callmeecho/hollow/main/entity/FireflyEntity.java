@@ -1,5 +1,7 @@
 package dev.callmeecho.hollow.main.entity;
 
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
@@ -17,6 +19,12 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
+import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -27,6 +35,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
 import java.util.EnumSet;
+import java.util.Optional;
 
 public class FireflyEntity extends PathAwareEntity implements Flutterer {
     private static final TrackedData<Integer> LIGHT_TICKS = DataTracker.registerData(FireflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -107,12 +116,20 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
             }
         }
 
-        if (this.getLightTicks() > 15) {
-            this.setLightTicks(15);
-        }
+        this.setLightTicks(MathHelper.clamp(getLightTicks(), 0, 15));
+    }
 
-        if (this.getLightTicks() < 0 || this.isWet()) {
-            this.setLightTicks(0);
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack itemStack = player.getStackInHand(hand);
+        if (itemStack.getItem() == HollowBlockRegistry.JAR.asItem() && this.isAlive()) {
+            player.setStackInHand(hand, itemStack.copyWithCount(itemStack.getCount() - 1));
+            player.getInventory().offerOrDrop(new ItemStack(HollowBlockRegistry.FIREFLY_JAR));
+
+            this.discard();
+            return ActionResult.success(player.getWorld().isClient);
+        } else {
+            return super.interactMob(player, hand);
         }
     }
 

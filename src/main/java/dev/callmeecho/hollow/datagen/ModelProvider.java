@@ -1,5 +1,6 @@
 package dev.callmeecho.hollow.datagen;
 
+import dev.callmeecho.cabinetapi.util.ReflectionHelper;
 import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
@@ -23,7 +24,7 @@ public class ModelProvider extends FabricModelProvider {
     
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        RegistrarHandler.<HollowLogBlock>forEach(HollowBlockRegistry.class, (block) -> {
+        ReflectionHelper.forEachStaticField(HollowBlockRegistry.class, HollowLogBlock.class, (block, name, field) -> {
             TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, new Identifier("minecraft", "block/" + block.sideTexture)).put(TextureKey.INSIDE, new Identifier("minecraft", "block/" + block.insideTexture)).put(TextureKey.END, new Identifier("minecraft", "block/" + block.endTexture));
             Identifier hollowLog = HOLLOW_LOG.upload(block, textureMap, blockStateModelGenerator.modelCollector);
             Identifier hollowLogHorizontal = HOLLOW_LOG_HORIZONTAL.upload(block, textureMap, blockStateModelGenerator.modelCollector);

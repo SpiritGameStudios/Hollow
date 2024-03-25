@@ -1,3 +1,6 @@
 accessWidener v2 named
 accessible field net/minecraft/block/AbstractBlock settings Lnet/minecraft/block/AbstractBlock$Settings;
 accessible method net/minecraft/world/gen/feature/TreeConfiguredFeatures builder (Lnet/minecraft/block/Block;Lnet/minecraft/block/Block;IIII)Lnet/minecraft/world/gen/feature/TreeFeatureConfig$Builder;
+accessible class net/minecraft/block/SculkVeinBlock$SculkVeinGrowChecker
+accessible field net/minecraft/entity/ai/WardenAngerManager suspectUuidsToAngerLevel Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+accessible field net/minecraft/entity/ai/WardenAngerManager suspects Ljava/util/ArrayList;

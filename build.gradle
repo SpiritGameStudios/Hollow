@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id "fabric-loom" version "1.5-SNAPSHOT"
 }
 
 version = project.mod_version
@@ -11,19 +11,11 @@ base {
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Modrinth"
-                url = "https://api.modrinth.com/maven"
-            }
-        }
-        filter {
-            includeGroup "maven.modrinth"
-        }
+    maven { url "https://maven.callmeecho.dev/releases" }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
     }
-    mavenLocal()
 }
 
 loom {
@@ -33,7 +25,7 @@ loom {
             name("Minecraft Data")
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
-            vmArg("-Dfabric-api.datagen.modid=${project.archives_base_name}")
+            vmArg("-Dfabric-api.datagen.modid=${project.properties.archives_base_name}")
 
             runDir("build/datagen")
         }
@@ -50,11 +42,6 @@ sourceSets {
     }
 }
 
-configurations.all {
-    // check for updates every build
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
-
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
@@ -62,31 +49,27 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    include "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
-    modImplementation "com.github.CallMeEchoCodes:CabinetAPI:main-SNAPSHOT"
+    include "dev.callmeecho:CabinetAPI:${project.cabinet_version}"
+    modImplementation "dev.callmeecho:CabinetAPI:${project.cabinet_version}"
     
     modCompileOnly "maven.modrinth:lambdynamiclights:2.3.2+1.20.1"
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "minecraft_version", project.minecraft_version
-    inputs.property "loader_version", project.loader_version
+    inputs.property "version", project.properties.version
+    inputs.property "minecraft_version", project.properties.minecraft_version
+    inputs.property "loader_version", project.properties.loader_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
-                "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "minecraft_version": project.properties.minecraft_version,
+                "loader_version": project.properties.loader_version
     }
 }
 
 def targetJavaVersion = 17
 tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
     it.options.encoding = "UTF-8"
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         it.options.release.set(targetJavaVersion)
@@ -104,6 +87,6 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+        rename { "${it}_${project.properties.archives_base_name}" }
     }
 }

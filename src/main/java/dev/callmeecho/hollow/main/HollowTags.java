@@ -1,4 +1,4 @@
-package dev.callmeecho.hollow;
+package dev.callmeecho.hollow.main;
 
 import dev.callmeecho.hollow.main.Hollow;
 import net.minecraft.block.Block;

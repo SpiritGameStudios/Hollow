@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
-
+    
     public static final CabinetItemGroup GROUP = new CabinetItemGroup(new Identifier(MODID, "item_group"), HollowBlockRegistry.BIRCH_HOLLOW_LOG);
 
     @Override
@@ -23,6 +23,8 @@ public class Hollow implements ModInitializer {
         RegistrarHandler.process(HollowEntityTypeRegistry.class, MODID);
         RegistrarHandler.process(HollowFeatureRegistry.class, MODID);
         RegistrarHandler.process(HollowTreeDecoratorRegistry.class, MODID);
+        RegistrarHandler.process(HollowBlockEntityRegistry.class, MODID);
+        RegistrarHandler.process(HollowParticleRegistrar.class, MODID);
         
         FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistry.FIREFLY, FireflyEntity.createFireflyAttributes());
     
