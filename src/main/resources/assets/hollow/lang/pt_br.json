@@ -37,5 +37,8 @@
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
   "advancements.adventure.diversity_win.title": "Diversity Win",
   "advancements.adventure.diversity_win.description": "Get one of every dye.",
-  "block.hollow.echoing_pot": "Echoing Pot"
+  "block.hollow.echoing_pot": "Echoing Pot",
+  "block.hollow.stone_chest": "Stone Chest",
+  "block.hollow.stone_chest_lid": "Stone Chest Lid",
+  "block.hollow.root_vines": "Root Vines"
 }
