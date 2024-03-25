@@ -168,8 +168,7 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         }
 
         StoneChestBlockEntity blockEntity = (StoneChestBlockEntity)world.getBlockEntity(pos);
-        Objects.requireNonNull(blockEntity).use(player, hand);
-        return ActionResult.CONSUME;
+        return Objects.requireNonNull(blockEntity).use(player, hand, hit.getSide());
     }
 
     @SuppressWarnings("deprecation")

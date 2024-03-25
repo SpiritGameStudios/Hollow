@@ -56,7 +56,7 @@ public class HollowBlockRegistry implements BlockRegistrar {
     public static final EchoingPotBlock ECHOING_POT = new EchoingPotBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
-                    .strength(0.2F)
+                    .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.POLISHED_DEEPSLATE)
     );
     
@@ -165,7 +165,7 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .requiresTool()
                     .instrument(Instrument.BASEDRUM)
-                    .strength(5.0F, 6.0F)
+                    .strength(6.0F, 6.0F)
                     .sounds(BlockSoundGroup.DEEPSLATE)
     );
 
