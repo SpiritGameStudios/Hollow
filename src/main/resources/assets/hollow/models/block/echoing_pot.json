@@ -2,10 +2,11 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "block/chiseled_deepslate",
-		"1": "block/polished_deepslate",
+		"0": "hollow:block/echoing_pot_side_2",
+		"1": "hollow:block/echoing_pot_side",
 		"2": "hollow:block/echoing_pot_top",
-		"particle": "block/chiseled_deepslate"
+		"3": "hollow:block/echoing_pot_side_3",
+		"particle": "hollow:block/echoing_pot_side_2"
 	},
 	"elements": [
 		{
@@ -13,9 +14,9 @@
 			"to": [15, 13, 15],
 			"faces": {
 				"north": {"uv": [1, 1, 15, 14], "texture": "#0"},
-				"east": {"uv": [15, 1, 1, 14], "texture": "#0"},
+				"east": {"uv": [15, 1, 1, 14], "texture": "#3"},
 				"south": {"uv": [1, 1, 15, 14], "texture": "#0"},
-				"west": {"uv": [15, 1, 1, 14], "texture": "#0"},
+				"west": {"uv": [15, 1, 1, 14], "texture": "#3"},
 				"up": {"uv": [1, 1, 15, 15], "texture": "#1"},
 				"down": {"uv": [1, 1, 15, 15], "texture": "#1"}
 			}
