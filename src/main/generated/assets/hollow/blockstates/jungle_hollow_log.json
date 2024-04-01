@@ -1,12 +1,12 @@
 {
   "variants": {
     "axis=x,mossy=false": {
-      "model": "hollow:block/jungle_hollow_log_horizontal",
+      "model": "hollow:block/jungle_hollow_log",
       "x": 90,
       "y": 90
     },
     "axis=x,mossy=true": {
-      "model": "hollow:block/jungle_hollow_log_horizontal_mossy",
+      "model": "hollow:block/jungle_hollow_log",
       "x": 90,
       "y": 90
     },
@@ -17,11 +17,11 @@
       "model": "hollow:block/jungle_hollow_log"
     },
     "axis=z,mossy=false": {
-      "model": "hollow:block/jungle_hollow_log_horizontal",
+      "model": "hollow:block/jungle_hollow_log",
       "x": 90
     },
     "axis=z,mossy=true": {
-      "model": "hollow:block/jungle_hollow_log_horizontal_mossy",
+      "model": "hollow:block/jungle_hollow_log",
       "x": 90
     }
   }

@@ -1,0 +1,9 @@
+{
+  "prenuptial": {
+    "sounds": [ {
+      "name": "hollow:music/game/prenuptial",
+      "stream": true
+    } ],
+    "subtitle": "subtitles.music.prenuptial"
+  }
+}

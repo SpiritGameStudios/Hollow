@@ -59,11 +59,11 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
         Matrix4f positionMatrix = entry.getPositionMatrix();
         Matrix3f normalMatrix = entry.getNormalMatrix();
 
-        int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - entity.getLightTicks() / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF30352F);
-        
-        float red = ColorHelper.Argb.getRed(color);
-        float green = ColorHelper.Argb.getGreen(color);
-        float blue = ColorHelper.Argb.getBlue(color);
+        // rainbow color
+        int red = (int) (MathHelper.sin(entity.age * 0.1F) * 128 + 128);
+        int green = (int) (MathHelper.sin(entity.age * 0.1F + 2.0943952F) * 128 + 128);
+        int blue = (int) (MathHelper.sin(entity.age * 0.1F + 4.1887903F) * 128 + 128);
+
         
         vertexConsumer.vertex(positionMatrix, x - 0.5F, y - 0.25F, 0.0F)
                 .color(red / 255.0F, green / 255.0F, blue / 255.0F, 1.0F)

@@ -1,12 +1,12 @@
 {
   "variants": {
     "axis=x,mossy=false": {
-      "model": "hollow:block/crimson_hollow_stem_horizontal",
+      "model": "hollow:block/crimson_hollow_stem",
       "x": 90,
       "y": 90
     },
     "axis=x,mossy=true": {
-      "model": "hollow:block/crimson_hollow_stem_horizontal_mossy",
+      "model": "hollow:block/crimson_hollow_stem",
       "x": 90,
       "y": 90
     },
@@ -17,11 +17,11 @@
       "model": "hollow:block/crimson_hollow_stem"
     },
     "axis=z,mossy=false": {
-      "model": "hollow:block/crimson_hollow_stem_horizontal",
+      "model": "hollow:block/crimson_hollow_stem",
       "x": 90
     },
     "axis=z,mossy=true": {
-      "model": "hollow:block/crimson_hollow_stem_horizontal_mossy",
+      "model": "hollow:block/crimson_hollow_stem",
       "x": 90
     }
   }

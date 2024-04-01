@@ -25,6 +25,7 @@ public class Hollow implements ModInitializer {
         RegistrarHandler.process(HollowTreeDecoratorRegistry.class, MODID);
         RegistrarHandler.process(HollowBlockEntityRegistry.class, MODID);
         RegistrarHandler.process(HollowParticleRegistrar.class, MODID);
+        RegistrarHandler.process(HallowSoundEventRegistry.class, MODID);
         
         FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistry.FIREFLY, FireflyEntity.createFireflyAttributes());
     

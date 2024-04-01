@@ -1,5 +1,5 @@
 {
-  "itemGroup.hollow.item_group": "Vuoto",
+  "itemGroup.hollow.item_group": "Voto",
 
   "block.hollow.oak_hollow_log": "Tronco cavo di quercia",
   "block.hollow.stripped_oak_hollow_log": "Tronco cavo di quercia scortecciato",
@@ -13,10 +13,10 @@
   "block.hollow.stripped_acacia_hollow_log": "Tronco cavo di acacia scortecciato",
   "block.hollow.dark_oak_hollow_log": "Tronco cavo di quercia scura",
   "block.hollow.stripped_dark_oak_hollow_log": "Tronco cavo di quercia scura scortecciato",
-  "block.hollow.crimson_hollow_stem": "Gambo cavo cremisi",
-  "block.hollow.stripped_crimson_hollow_stem": "Gambo cavo cremisi scortecciato",
-  "block.hollow.warped_hollow_stem": "Gambo cavo distorto",
-  "block.hollow.stripped_warped_hollow_stem": "Gambo cavo distorto scortecciato",
+  "block.hollow.crimson_hollow_stem": "Gamberi cavo scarlatta",
+  "block.hollow.stripped_crimson_hollow_stem": "Gamberi cavo scarlatta scortecciato",
+  "block.hollow.warped_hollow_stem": "Gamberi cavo distorto",
+  "block.hollow.stripped_warped_hollow_stem": "Gamberi cavo distorto scortecciato",
   "block.hollow.mangrove_hollow_log": "Tronco cavo di mangrovia",
   "block.hollow.stripped_mangrove_hollow_log": "Tronco cavo di mangrovia scortecciato",
   "block.hollow.cherry_hollow_log": "Tronco cavo di ciliego",
@@ -27,10 +27,10 @@
   "block.hollow.polypore": "Poliporo",
   "block.hollow.lotus_lilypad": "Ninfea Fiorita",
   "block.hollow.twig": "Ramoscello",
-  "block.hollow.sculk_jaw": "Mascella di Sculk",
+  "block.hollow.sculk_jaw": "Mascella di Skulk",
 
-  "death.attack.sculk_jaw.player": "%1$s è stato fatto a pezzi",
-  "death.attack.sculk_jaw": "%1$s è stato fatto a pezzi",
+  "death.attack.sculk_jaw.player": "%1$s è stato fatto a pizza",
+  "death.attack.sculk_jaw": "%1$s è stato fatto a pizza",
 
   "item.hollow.firefly_spawn_egg": "Uovo generatore di Lucciola",
   "block.hollow.jar": "Jar",
@@ -38,5 +38,11 @@
   "block.hollow.echoing_pot": "Echoing Pot",
   
   "advancements.adventure.diversity_win.title": "Diversity Win",
-  "advancements.adventure.diversity_win.description": "Get one of every dye."
+  "advancements.adventure.diversity_win.description": "Get one of every dye.",
+  "block.hollow.stone_chest": "cheestcade",
+  "block.hollow.stone_chest_lid": "toe cheese lit",
+  "block.hollow.root_vines": "chroot wine",
+  "subtitles.music.prenuptial": "You've met a terrible fate. §8No going back.",
+  "item.hollow.music_disc_prenuptial": "Prenuptial",
+  "item.hollow.music_disc_prenuptial.desc": "Prenupital by LocallyDeepVoxel"
 }

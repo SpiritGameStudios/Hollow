@@ -1,5 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
+import dev.callmeecho.cabinetapi.CabinetAPI;
 import dev.callmeecho.cabinetapi.particle.ParticleSystem;
 import dev.callmeecho.hollow.main.Hollow;
 import net.minecraft.block.Block;
@@ -37,9 +38,9 @@ public class SculkJawBlock extends SculkBlock {
                 new Vec3d(0.5, 1, 0.5),
                 new Vec3d(0.45, 0, 0.45),
                 1,
-                1,
+                3,
                 true,
-                ParticleTypes.SCULK_SOUL
+                ParticleTypes.HEART
         );
     }
 
@@ -68,15 +69,15 @@ public class SculkJawBlock extends SculkBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient() && state.get(ACTIVE)) {
             DamageSource damageSource = new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(SCULK_JAW_DAMAGE_TYPE));
-            entity.damage(damageSource, 3F);
-            
+            boolean damage = entity.damage(damageSource, 3F);
+            Hollow.LOGGER.info("Entity " + entity + " took damage: " + damage);
             Vec3d centerPos = pos.toCenterPos();
             entity.teleport(centerPos.getX(), centerPos.getY(), centerPos.getZ());
             if (world.getTime() % 5 == 0) {
                 world.playSound(null, pos.up(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.BLOCKS, 1F, 1F);
             }
 
-//            entity.setVelocity(Vec3d.ZERO);
+            entity.setVelocity(Vec3d.ZERO);
             particleSystem.tick(world, pos);
         }
     }

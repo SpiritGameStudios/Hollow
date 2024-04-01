@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "hollow",
   "version": "${version}",
-  "name": "Hollow",
-  "description": "Hey Mojang! I did your job for you!",
+  "name": "hallow",
+  "description": "its a mod or smthing",
   "authors": [
-    "CallMeEcho",
-    "WorldWidePixel"
+    "CallMeReverberation",
+    "LocallyDeepVoxel"
   ],
   "contact": {
     "repo": "https://github.com/CallMeEchoCodes/hollow"
