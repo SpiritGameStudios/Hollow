@@ -10,6 +10,6 @@ public class HollowTags {
     public static final TagKey<Block> HOLLOW_LOGS = TagKey.of(Registries.BLOCK.getKey(), id("hollow_logs"));
 
     public static Identifier id(String path) {
-        return new Identifier(Hollow.MODID, path);
+        return Identifier.of(Hollow.MODID, path);
     }
 }

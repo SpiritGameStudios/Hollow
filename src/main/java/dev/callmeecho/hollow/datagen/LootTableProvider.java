@@ -9,23 +9,27 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class LootTableProvider extends FabricBlockLootTableProvider {
-    protected LootTableProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+
+    protected LootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
     public void generate() { }
 
     @Override
-    public void accept(BiConsumer<Identifier, LootTable.Builder> biConsumer) {
+    public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> biConsumer) {
         ReflectionHelper.forEachStaticField(
                 HollowBlockRegistry.class,
                 HollowLogBlock.class,
-                (block, name, field) -> biConsumer.accept(block.getLootTableId(), this.drops(block, ConstantLootNumberProvider.create(1.0f))));
+                (block, name, field) -> biConsumer.accept(block.getLootTableKey(), this.drops(block, ConstantLootNumberProvider.create(1.0f))));
     }
 }

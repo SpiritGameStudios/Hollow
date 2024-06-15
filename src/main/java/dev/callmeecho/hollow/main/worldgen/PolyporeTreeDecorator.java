@@ -1,6 +1,7 @@
 package dev.callmeecho.hollow.main.worldgen;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.callmeecho.hollow.main.block.PolyporeBlock;
 import dev.callmeecho.hollow.main.registry.HollowTreeDecoratorRegistry;
@@ -11,13 +12,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.treedecorator.AlterGroundTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class PolyporeTreeDecorator extends TreeDecorator {
-    public static final Codec<PolyporeTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BlockStateProvider.TYPE_CODEC.fieldOf("state_provider").forGetter(decorator -> decorator.stateProvider)
-    ).apply(instance, PolyporeTreeDecorator::new));
+    public static final MapCodec<PolyporeTreeDecorator> CODEC = BlockStateProvider.TYPE_CODEC
+            .fieldOf("state_provider")
+            .xmap(PolyporeTreeDecorator::new, decorator -> decorator.stateProvider);
 
     public final BlockStateProvider stateProvider;
 

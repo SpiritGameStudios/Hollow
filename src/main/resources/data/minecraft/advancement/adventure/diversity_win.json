@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:beacon"
+      "id": "minecraft:beacon"
     },
     "title": {
       "translate": "advancements.adventure.diversity_win.title"

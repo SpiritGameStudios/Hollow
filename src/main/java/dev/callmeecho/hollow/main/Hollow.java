@@ -14,7 +14,7 @@ public class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
     
-    public static final CabinetItemGroup GROUP = new CabinetItemGroup(new Identifier(MODID, "item_group"), HollowBlockRegistry.BIRCH_HOLLOW_LOG);
+    public static final CabinetItemGroup GROUP = new CabinetItemGroup(Identifier.of(MODID, "item_group"), HollowBlockRegistry.BIRCH_HOLLOW_LOG);
 
     @Override
     public void onInitialize() {

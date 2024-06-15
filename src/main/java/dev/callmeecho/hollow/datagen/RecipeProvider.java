@@ -4,22 +4,25 @@ import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class RecipeProvider extends FabricRecipeProvider {
-    public RecipeProvider(FabricDataOutput output) {
-        super(output);
+
+    public RecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, registriesFuture);
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(RecipeExporter exporter) {
         createHollowLogRecipe(exporter, HollowBlockRegistry.OAK_HOLLOW_LOG, ItemTags.OAK_LOGS);
         createHollowLogRecipe(exporter, HollowBlockRegistry.SPRUCE_HOLLOW_LOG, ItemTags.SPRUCE_LOGS);
         createHollowLogRecipe(exporter, HollowBlockRegistry.BIRCH_HOLLOW_LOG, ItemTags.BIRCH_LOGS);
@@ -32,7 +35,7 @@ public class RecipeProvider extends FabricRecipeProvider {
         createHollowLogRecipe(exporter, HollowBlockRegistry.CHERRY_HOLLOW_LOG, ItemTags.CHERRY_LOGS);
     }
     
-    public void createHollowLogRecipe(Consumer<RecipeJsonProvider> exporter, HollowLogBlock block, TagKey<Item> LogBlock) {
+    public void createHollowLogRecipe(RecipeExporter exporter, HollowLogBlock block, TagKey<Item> LogBlock) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, block, 8)
                 .criterion("has_logs", FabricRecipeProvider.conditionsFromTag(LogBlock))
                 .input('#', LogBlock)

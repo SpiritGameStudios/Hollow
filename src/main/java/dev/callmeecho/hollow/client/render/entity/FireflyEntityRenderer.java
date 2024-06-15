@@ -19,7 +19,7 @@ import org.joml.Matrix4f;
 import static dev.callmeecho.hollow.main.Hollow.MODID;
 
 public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
-    private static final Identifier TEXTURE = new Identifier(MODID, "textures/entity/firefly.png");
+    private static final Identifier TEXTURE = Identifier.of(MODID, "textures/entity/firefly.png");
     private static final RenderLayer LAYER = RenderLayer.getItemEntityTranslucentCull(TEXTURE);
 
     public FireflyEntityRenderer(EntityRendererFactory.Context ctx) {
@@ -56,21 +56,17 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
     }
 
     private void renderVertex(VertexConsumer vertexConsumer, MatrixStack.Entry entry, float x, float y, float u, float v, FireflyEntity entity, int light) {
-        Matrix4f positionMatrix = entry.getPositionMatrix();
-        Matrix3f normalMatrix = entry.getNormalMatrix();
-
         int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - entity.getLightTicks() / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF30352F);
         
         float red = ColorHelper.Argb.getRed(color);
         float green = ColorHelper.Argb.getGreen(color);
         float blue = ColorHelper.Argb.getBlue(color);
         
-        vertexConsumer.vertex(positionMatrix, x - 0.5F, y - 0.25F, 0.0F)
+        vertexConsumer.vertex(entry, x - 0.5F, y - 0.25F, 0.0F)
                 .color(red / 255.0F, green / 255.0F, blue / 255.0F, 1.0F)
                 .texture(u, v)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
-                .normal(normalMatrix, 0.0F, 1.0F, 0.0F)
-                .next();
+                .normal(entry, 0.0F, 1.0F, 0.0F);
     }
 }

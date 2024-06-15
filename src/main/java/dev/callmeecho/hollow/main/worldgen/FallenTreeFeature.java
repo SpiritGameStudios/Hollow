@@ -39,7 +39,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
         boolean canPlace = true;
         for (int i = 0; i < size; i++) {
             BlockPos pos = origin.offset(axis, i);
-            canPlace = canPlace && (context.getWorld().isAir(pos) || context.getWorld().getBlockState(pos).isOf(Blocks.GRASS)) && context.getWorld().getBlockState(pos.down()).isSolidBlock(context.getWorld(), pos.down());
+            canPlace = canPlace && (context.getWorld().isAir(pos) || context.getWorld().getBlockState(pos).isOf(Blocks.SHORT_GRASS)) && context.getWorld().getBlockState(pos.down()).isSolidBlock(context.getWorld(), pos.down());
         }
         
         if (!canPlace) return false;

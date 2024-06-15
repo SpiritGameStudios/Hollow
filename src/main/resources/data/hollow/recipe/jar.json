@@ -16,7 +16,7 @@
   ],
   "result": {
     "count": 4,
-    "item": "hollow:jar"
+    "id": "hollow:jar"
   },
   "show_notification": true
 }

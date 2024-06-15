@@ -1,12 +1,10 @@
 package dev.callmeecho.hollow.main.registry;
 
-import dev.callmeecho.cabinetapi.block.CabinetBlockSettings;
-import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.BlockRegistrar;
 import dev.callmeecho.hollow.main.block.*;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -23,35 +21,35 @@ import static dev.callmeecho.hollow.main.Hollow.GROUP;
 
 @SuppressWarnings("unused")
 public class HollowBlockRegistry implements BlockRegistrar {
-    public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_OAK_LOG.settings).flammable(), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
-    public static final HollowLogBlock OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.OAK_LOG.settings).strippedBlock(STRIPPED_OAK_HOLLOW_LOG).flammable(), "oak_log", "stripped_oak_log", "oak_log_top");
+    public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG).flammable(), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
+    public static final HollowLogBlock OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG).strippedBlock(STRIPPED_OAK_HOLLOW_LOG).flammable(), "oak_log", "stripped_oak_log", "oak_log_top");
 
-    public static final HollowLogBlock STRIPPED_SPRUCE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_SPRUCE_LOG.settings).flammable(), "stripped_spruce_log", "stripped_spruce_log", "stripped_spruce_log_top");
-    public static final HollowLogBlock SPRUCE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.SPRUCE_LOG.settings).strippedBlock(STRIPPED_SPRUCE_HOLLOW_LOG).flammable(), "spruce_log", "stripped_spruce_log", "spruce_log_top");
+    public static final HollowLogBlock STRIPPED_SPRUCE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_SPRUCE_LOG).flammable(), "stripped_spruce_log", "stripped_spruce_log", "stripped_spruce_log_top");
+    public static final HollowLogBlock SPRUCE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.SPRUCE_LOG).strippedBlock(STRIPPED_SPRUCE_HOLLOW_LOG).flammable(), "spruce_log", "stripped_spruce_log", "spruce_log_top");
 
-    public static final HollowLogBlock STRIPPED_BIRCH_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_BIRCH_LOG.settings).flammable(), "stripped_birch_log", "stripped_birch_log", "stripped_birch_log_top");
-    public static final HollowLogBlock BIRCH_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.BIRCH_LOG.settings).strippedBlock(STRIPPED_BIRCH_HOLLOW_LOG).flammable(), "birch_log", "stripped_birch_log", "birch_log_top");
+    public static final HollowLogBlock STRIPPED_BIRCH_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_BIRCH_LOG).flammable(), "stripped_birch_log", "stripped_birch_log", "stripped_birch_log_top");
+    public static final HollowLogBlock BIRCH_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.BIRCH_LOG).strippedBlock(STRIPPED_BIRCH_HOLLOW_LOG).flammable(), "birch_log", "stripped_birch_log", "birch_log_top");
 
-    public static final HollowLogBlock STRIPPED_JUNGLE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_JUNGLE_LOG.settings).flammable(), "stripped_jungle_log", "stripped_jungle_log", "stripped_jungle_log_top");
-    public static final HollowLogBlock JUNGLE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.JUNGLE_LOG.settings).strippedBlock(STRIPPED_JUNGLE_HOLLOW_LOG).flammable(), "jungle_log", "stripped_jungle_log", "jungle_log_top");
+    public static final HollowLogBlock STRIPPED_JUNGLE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_JUNGLE_LOG).flammable(), "stripped_jungle_log", "stripped_jungle_log", "stripped_jungle_log_top");
+    public static final HollowLogBlock JUNGLE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.JUNGLE_LOG).strippedBlock(STRIPPED_JUNGLE_HOLLOW_LOG).flammable(), "jungle_log", "stripped_jungle_log", "jungle_log_top");
 
-    public static final HollowLogBlock STRIPPED_ACACIA_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_ACACIA_LOG.settings).flammable(), "stripped_acacia_log", "stripped_acacia_log", "stripped_acacia_log_top");
-    public static final HollowLogBlock ACACIA_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.ACACIA_LOG.settings).strippedBlock(STRIPPED_ACACIA_HOLLOW_LOG).flammable(), "acacia_log", "stripped_acacia_log", "acacia_log_top");
+    public static final HollowLogBlock STRIPPED_ACACIA_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_ACACIA_LOG).flammable(), "stripped_acacia_log", "stripped_acacia_log", "stripped_acacia_log_top");
+    public static final HollowLogBlock ACACIA_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_LOG).strippedBlock(STRIPPED_ACACIA_HOLLOW_LOG).flammable(), "acacia_log", "stripped_acacia_log", "acacia_log_top");
 
-    public static final HollowLogBlock STRIPPED_DARK_OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_DARK_OAK_LOG.settings).flammable(), "stripped_dark_oak_log", "stripped_dark_oak_log", "stripped_dark_oak_log_top");
-    public static final HollowLogBlock DARK_OAK_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.DARK_OAK_LOG.settings).strippedBlock(STRIPPED_DARK_OAK_HOLLOW_LOG).flammable(), "dark_oak_log", "stripped_dark_oak_log", "dark_oak_log_top");
+    public static final HollowLogBlock STRIPPED_DARK_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_DARK_OAK_LOG).flammable(), "stripped_dark_oak_log", "stripped_dark_oak_log", "stripped_dark_oak_log_top");
+    public static final HollowLogBlock DARK_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.DARK_OAK_LOG).strippedBlock(STRIPPED_DARK_OAK_HOLLOW_LOG).flammable(), "dark_oak_log", "stripped_dark_oak_log", "dark_oak_log_top");
 
-    public static final HollowLogBlock STRIPPED_CRIMSON_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CRIMSON_STEM.settings), "stripped_crimson_stem", "stripped_crimson_stem", "stripped_crimson_stem_top");
-    public static final HollowLogBlock CRIMSON_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.CRIMSON_STEM.settings).strippedBlock(STRIPPED_CRIMSON_HOLLOW_STEM), "crimson_stem", "stripped_crimson_stem", "crimson_stem_top");
+    public static final HollowLogBlock STRIPPED_CRIMSON_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_CRIMSON_STEM), "stripped_crimson_stem", "stripped_crimson_stem", "stripped_crimson_stem_top");
+    public static final HollowLogBlock CRIMSON_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_STEM).strippedBlock(STRIPPED_CRIMSON_HOLLOW_STEM), "crimson_stem", "stripped_crimson_stem", "crimson_stem_top");
 
-    public static final HollowLogBlock STRIPPED_WARPED_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_WARPED_STEM.settings), "stripped_warped_stem", "stripped_warped_stem", "stripped_warped_stem_top");
-    public static final HollowLogBlock WARPED_HOLLOW_STEM = new HollowLogBlock(new CabinetBlockSettings(Blocks.WARPED_STEM.settings).strippedBlock(STRIPPED_WARPED_HOLLOW_STEM), "warped_stem", "stripped_warped_stem", "warped_stem_top");
+    public static final HollowLogBlock STRIPPED_WARPED_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_WARPED_STEM), "stripped_warped_stem", "stripped_warped_stem", "stripped_warped_stem_top");
+    public static final HollowLogBlock WARPED_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.WARPED_STEM).strippedBlock(STRIPPED_WARPED_HOLLOW_STEM), "warped_stem", "stripped_warped_stem", "warped_stem_top");
 
-    public static final HollowLogBlock STRIPPED_MANGROVE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_MANGROVE_LOG.settings).flammable(), "stripped_mangrove_log", "stripped_mangrove_log", "stripped_mangrove_log_top");
-    public static final HollowLogBlock MANGROVE_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.MANGROVE_LOG.settings).strippedBlock(STRIPPED_MANGROVE_HOLLOW_LOG).flammable(), "mangrove_log", "stripped_mangrove_log", "mangrove_log_top");
+    public static final HollowLogBlock STRIPPED_MANGROVE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_MANGROVE_LOG).flammable(), "stripped_mangrove_log", "stripped_mangrove_log", "stripped_mangrove_log_top");
+    public static final HollowLogBlock MANGROVE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.MANGROVE_LOG).strippedBlock(STRIPPED_MANGROVE_HOLLOW_LOG).flammable(), "mangrove_log", "stripped_mangrove_log", "mangrove_log_top");
 
-    public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.STRIPPED_CHERRY_LOG.settings).flammable(), "stripped_cherry_log", "stripped_cherry_log", "stripped_cherry_log_top");
-    public static final HollowLogBlock CHERRY_HOLLOW_LOG = new HollowLogBlock(new CabinetBlockSettings(Blocks.CHERRY_LOG.settings).strippedBlock(STRIPPED_CHERRY_HOLLOW_LOG).flammable(), "cherry_log", "stripped_cherry_log", "cherry_log_top");
+    public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_CHERRY_LOG).flammable(), "stripped_cherry_log", "stripped_cherry_log", "stripped_cherry_log_top");
+    public static final HollowLogBlock CHERRY_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_LOG).strippedBlock(STRIPPED_CHERRY_HOLLOW_LOG).flammable(), "cherry_log", "stripped_cherry_log", "cherry_log_top");
 
     public static final EchoingPotBlock ECHOING_POT = new EchoingPotBlock(
             AbstractBlock.Settings.create()
@@ -73,7 +71,7 @@ public class HollowBlockRegistry implements BlockRegistrar {
     );
     
     public static final TallFlowerBlock CAMPION = new TallFlowerBlock(
-            CabinetBlockSettings.create()
+            AbstractBlock.Settings.create()
                     .mapColor(MapColor.DARK_GREEN)
                     .noCollision()
                     .breakInstantly()
@@ -164,7 +162,7 @@ public class HollowBlockRegistry implements BlockRegistrar {
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .requiresTool()
-                    .instrument(Instrument.BASEDRUM)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(6.0F, 6.0F)
                     .sounds(BlockSoundGroup.DEEPSLATE)
     );
@@ -173,30 +171,20 @@ public class HollowBlockRegistry implements BlockRegistrar {
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .requiresTool()
-                    .instrument(Instrument.BASEDRUM)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.DEEPSLATE)
     );
     
     @NoBlockItem
-    public static final FlowerPotBlock POTTED_PAEONIA = Blocks.createFlowerPotBlock(PAEONIA);
+    public static final Block POTTED_PAEONIA = Blocks.createFlowerPotBlock(PAEONIA);
 
+    @SuppressWarnings("UnstableApiUsage")
     @Override
     public void registerBlockItem(Block block, String namespace, String name) {
         BlockItem item = new BlockItem(block, new Item.Settings());
+        Registry.register(Registries.ITEM, Identifier.of(namespace, name), item);
 
-        Registry.register(Registries.ITEM, new Identifier(namespace, name), item);
-
-        if (block.settings instanceof CabinetBlockSettings settings) {
-            CabinetItemGroup group = settings.getGroup();
-            if (group != null) {
-                group.addItem(item);
-                return;
-            }
-        }
-
-        // Yes, I could have set group in block settings, but seeing as every block here has the same group, this is easier.
-        // TODO: Add a way to set group for every block in a Registrar
         GROUP.addItem(item);
     }
 }

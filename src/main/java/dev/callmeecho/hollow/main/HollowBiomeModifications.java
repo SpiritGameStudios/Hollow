@@ -26,9 +26,9 @@ public class HollowBiomeModifications {
                 BiomeKeys.SWAMP,
                 BiomeKeys.MANGROVE_SWAMP
         ), SpawnGroup.AMBIENT, HollowEntityTypeRegistry.FIREFLY, 5, 10, 15);
-        SpawnRestriction.register(HollowEntityTypeRegistry.FIREFLY, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.WORLD_SURFACE, FireflyEntity::canSpawn);
+        SpawnRestriction.register(HollowEntityTypeRegistry.FIREFLY, SpawnRestriction.getLocation(HollowEntityTypeRegistry.FIREFLY), Heightmap.Type.WORLD_SURFACE, FireflyEntity::canSpawn);
         
-        BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamps_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Identifier.of(Hollow.MODID, "better_swamps_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP,
                 BiomeKeys.MANGROVE_SWAMP
         ), context -> {
@@ -38,7 +38,7 @@ public class HollowBiomeModifications {
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_waterlily"));
         });
 
-        BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamp_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Identifier.of(Hollow.MODID, "better_swamp_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP
         ), context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
@@ -47,7 +47,7 @@ public class HollowBiomeModifications {
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("swamp_flowers"));
         });
         
-        BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamp_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Identifier.of(Hollow.MODID, "better_swamp_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP
         ), context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
@@ -56,7 +56,7 @@ public class HollowBiomeModifications {
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("huge_brown_mushroom"));
         });
 
-        BiomeModifications.create(new Identifier(Hollow.MODID, "better_swamps_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Identifier.of(Hollow.MODID, "better_swamps_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP,
                 BiomeKeys.MANGROVE_SWAMP
         ), context -> {
@@ -65,7 +65,7 @@ public class HollowBiomeModifications {
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_twig"));
         });
 
-        BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Identifier.of(Hollow.MODID, "better_birch_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
                 BiomeKeys.BIRCH_FOREST,
                 BiomeKeys.OLD_GROWTH_BIRCH_FOREST
         ), context -> {
@@ -74,7 +74,7 @@ public class HollowBiomeModifications {
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_twig"));
         });
 
-        BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Identifier.of(Hollow.MODID, "better_birch_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
                 BiomeKeys.BIRCH_FOREST,
                 BiomeKeys.OLD_GROWTH_BIRCH_FOREST
         ), context -> {
@@ -92,7 +92,7 @@ public class HollowBiomeModifications {
             }
         });
 
-        BiomeModifications.create(new Identifier(Hollow.MODID, "better_birch_remove")).add(ModificationPhase.REMOVALS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Identifier.of(Hollow.MODID, "better_birch_remove")).add(ModificationPhase.REMOVALS, BiomeSelectors.includeByKey(
                 BiomeKeys.BIRCH_FOREST,
                 BiomeKeys.OLD_GROWTH_BIRCH_FOREST
         ), context -> {
@@ -103,6 +103,6 @@ public class HollowBiomeModifications {
     }
     
     public static RegistryKey<PlacedFeature> getPlacedFeature(String id) {
-        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(Hollow.MODID, id));
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(Hollow.MODID, id));
     }
 }
