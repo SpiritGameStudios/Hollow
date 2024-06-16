@@ -70,3 +70,23 @@ tasks.processResources {
 
     filesMatching("fabric.mod.json") { expand(map) }
 }
+
+val targetJavaVersion = 21
+java {
+    withSourcesJar()
+
+
+    targetJavaVersion
+        .let { JavaVersion.values()[it - 1] }
+        .let {
+            sourceCompatibility = it
+            targetCompatibility = it
+        }
+}
+
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+    options.release = targetJavaVersion
+}
+
