@@ -20,7 +20,7 @@ import static dev.callmeecho.hollow.main.Hollow.MODID;
 
 public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
     private static final Identifier TEXTURE = Identifier.of(MODID, "textures/entity/firefly.png");
-    private static final RenderLayer LAYER = RenderLayer.getItemEntityTranslucentCull(TEXTURE);
+    private static final RenderLayer LAYER = RenderLayer.getEntityCutoutNoCull(TEXTURE);
 
     public FireflyEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);

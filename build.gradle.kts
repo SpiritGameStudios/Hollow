@@ -22,23 +22,15 @@ val mod = ModInfo()
 val deps = Dependencies()
 
 loom {
-    runConfigs.create("datagen") {
-            server()
-            name = "Minecraft Data"
-            vmArg("-Dfabric-api.datagen")
-            vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
-            vmArg("-Dfabric-api.datagen.modid=${mod.id}")
-
-            runDir = "build/datagen"
-    }
-
     accessWidenerPath = file("src/main/resources/hollow.accesswidener")
 }
 
-sourceSets.main { resources { srcDir(file("src/main/generated")) } }
+fabricApi {
+    configureDataGeneration()
+}
 
 repositories {
-    maven("https://maven.callmeecho.dev/snapshots/")
+    maven("https://maven.callmeecho.dev/releases/")
     maven("https://maven.terraformersmc.com/releases/")
 }
 
@@ -71,22 +63,16 @@ tasks.processResources {
     filesMatching("fabric.mod.json") { expand(map) }
 }
 
-val targetJavaVersion = 21
 java {
     withSourcesJar()
 
-
-    targetJavaVersion
-        .let { JavaVersion.values()[it - 1] }
-        .let {
-            sourceCompatibility = it
-            targetCompatibility = it
-        }
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release = targetJavaVersion
+    options.release = 21
 }
 

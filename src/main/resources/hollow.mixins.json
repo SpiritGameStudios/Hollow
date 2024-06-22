@@ -4,9 +4,10 @@
   "package": "dev.callmeecho.hollow.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "SaplingGeneratorMixin",
+    "BulbBlockMixin",
     "EntityMixin",
     "FrogEatEntityTaskMixin",
+    "SaplingGeneratorMixin",
     "SculkBlockMixin",
     "SculkVeinGrowCheckerMixin"
   ],

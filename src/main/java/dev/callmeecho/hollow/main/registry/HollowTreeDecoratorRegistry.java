@@ -1,6 +1,7 @@
 package dev.callmeecho.hollow.main.registry;
 
 import dev.callmeecho.cabinetapi.registry.Registrar;
+import dev.callmeecho.hollow.main.worldgen.BigBranchTreeDecorator;
 import dev.callmeecho.hollow.main.worldgen.BranchTreeDecorator;
 import dev.callmeecho.hollow.main.worldgen.PolyporeTreeDecorator;
 import net.minecraft.registry.Registries;
@@ -16,4 +17,5 @@ public class HollowTreeDecoratorRegistry implements Registrar<TreeDecoratorType<
     
     public static final TreeDecoratorType<BranchTreeDecorator> BRANCH_TREE_DECORATOR = new TreeDecoratorType<>(BranchTreeDecorator.CODEC);
     public static final TreeDecoratorType<PolyporeTreeDecorator> POLYPORE_TREE_DECORATOR = new TreeDecoratorType<>(PolyporeTreeDecorator.CODEC);
+    public static final TreeDecoratorType<BigBranchTreeDecorator> BIG_BRANCH_TREE_DECORATOR = new TreeDecoratorType<>(BigBranchTreeDecorator.CODEC);
 }

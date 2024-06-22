@@ -14,9 +14,23 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.registry.Registries;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
+import net.minecraft.sound.MusicType;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.profiler.Profiler;
+
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class HollowClient implements ClientModInitializer {
     @Override
@@ -41,5 +55,44 @@ public class HollowClient implements ClientModInitializer {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistry.LOTUS_LILYPAD);
 
         ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
+
+//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
+//                Identifier.ofVanilla("birch_forest"),
+//                new BiomeEffectsModifier.Builder()
+//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_BIRCH_FOREST)))
+//                        .waterColor(0x9DEBF6)
+//                        .grassColor(0x79c05a)
+//                        .build()
+//        );
+//
+//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
+//                Identifier.ofVanilla("old_growth_birch_forest"),
+//                new BiomeEffectsModifier.Builder()
+//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_BIRCH_FOREST)))
+//                        .waterColor(0x9DEBF6)
+//                        .grassColor(0x79c05a)
+//                        .build()
+//        );
+//
+//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
+//                Identifier.ofVanilla("swamp"),
+//                new BiomeEffectsModifier.Builder()
+//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_SWAMP)))
+//                        .build()
+//        );
+//
+//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
+//                Identifier.ofVanilla("mangrove_swamp"),
+//                new BiomeEffectsModifier.Builder()
+//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_SWAMP)))
+//                        .build()
+//        );
+//
+//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
+//                Identifier.ofVanilla("deep_dark"),
+//                new BiomeEffectsModifier.Builder()
+//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_DEEP_DARK)))
+//                        .build()
+//        );
     }
 }

@@ -19,6 +19,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -101,6 +102,9 @@ public class SculkJawBlock extends SculkBlock {
             }
 
             particleSystem.tick(world, pos);
+
+            if (world.random.nextFloat() <= 0.0025F)
+                world.setBlockState(pos, state.with(ACTIVE, false));
         }
     }
 

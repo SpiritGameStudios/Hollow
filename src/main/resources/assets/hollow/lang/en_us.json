@@ -39,7 +39,12 @@
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
 
   "item.hollow.firefly_spawn_egg": "Firefly Spawn Egg",
+  "item.hollow.music_disc_postmortem": "Music Disc",
+
+  "jukebox_song.hollow.postmortem": "WorldWidePixel - Postmortem",
   
   "advancements.adventure.diversity_win.title": "Diversity Win",
-  "advancements.adventure.diversity_win.description": "Get one of every dye."
+  "advancements.adventure.diversity_win.description": "Get one of every dye.",
+
+  "resourcepack.hollow_music": "Hollow Music"
 }

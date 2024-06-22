@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "minecraft:birch_forest",
+    "minecraft:old_growth_birch_forest"
+  ],
+  "water_color": 4445678,
+  "water_fog_color": 270131
+}
