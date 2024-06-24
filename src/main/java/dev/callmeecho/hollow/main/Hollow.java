@@ -35,6 +35,7 @@ public class Hollow implements ModInitializer {
         FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistry.FIREFLY, FireflyEntity.createFireflyAttributes());
     
         HollowBiomeModifications.init();
+        HollowLootTableModifications.init();
         
         GROUP.initialize();
 
