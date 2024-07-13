@@ -1,6 +1,7 @@
 package dev.callmeecho.hollow.main.registry;
 
 import dev.callmeecho.cabinetapi.registry.ItemRegistrar;
+import dev.callmeecho.hollow.main.item.GiantLilyPadItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.PlaceableOnWaterItem;
 import net.minecraft.item.SpawnEggItem;
@@ -17,6 +18,7 @@ public class HollowItemRegistry implements ItemRegistrar {
     public static Item FIREFLY_SPAWN_EGG = new SpawnEggItem(HollowEntityTypeRegistry.FIREFLY, 0x102F4E, 0xCAAF94, new Item.Settings().group(GROUP));
 
     public static Item LOTUS_LILYPAD = new PlaceableOnWaterItem(HollowBlockRegistry.LOTUS_LILYPAD, new Item.Settings().group(GROUP));
+    public static Item GIANT_LILY_PAD = new GiantLilyPadItem(HollowBlockRegistry.GIANT_LILY_PAD, new Item.Settings().group(GROUP));
 
     public static Item MUSIC_DISC_POSTMORTEM = new Item(new Item.Settings().group(GROUP).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MODID, "postmortem"))));
 }

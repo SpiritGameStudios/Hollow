@@ -81,7 +81,6 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .flammable()
                     .pistonBehavior(PistonBehavior.DESTROY)
     ) {
-        @SuppressWarnings("deprecation")
         @Override
         public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
             if (state.get(HALF) == DoubleBlockHalf.UPPER) return Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
@@ -114,6 +113,16 @@ public class HollowBlockRegistry implements BlockRegistrar {
     
     @NoBlockItem
     public static final LilyPadBlock LOTUS_LILYPAD = new LilyPadBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DARK_GREEN)
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.LILY_PAD)
+                    .nonOpaque()
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
+
+    @NoBlockItem
+    public static final Block GIANT_LILY_PAD = new GiantLilyPadBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DARK_GREEN)
                     .breakInstantly()

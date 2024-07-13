@@ -39,6 +39,7 @@ public class HollowClient implements ClientModInitializer {
         
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.PAEONIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.LOTUS_LILYPAD, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.GIANT_LILY_PAD, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.TWIG, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.CAMPION, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.POLYPORE, RenderLayer.getCutout());
@@ -54,45 +55,9 @@ public class HollowClient implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistry.LOTUS_LILYPAD);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistry.LOTUS_LILYPAD);
 
-        ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistry.GIANT_LILY_PAD);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistry.GIANT_LILY_PAD);
 
-//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
-//                Identifier.ofVanilla("birch_forest"),
-//                new BiomeEffectsModifier.Builder()
-//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_BIRCH_FOREST)))
-//                        .waterColor(0x9DEBF6)
-//                        .grassColor(0x79c05a)
-//                        .build()
-//        );
-//
-//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
-//                Identifier.ofVanilla("old_growth_birch_forest"),
-//                new BiomeEffectsModifier.Builder()
-//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_BIRCH_FOREST)))
-//                        .waterColor(0x9DEBF6)
-//                        .grassColor(0x79c05a)
-//                        .build()
-//        );
-//
-//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
-//                Identifier.ofVanilla("swamp"),
-//                new BiomeEffectsModifier.Builder()
-//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_SWAMP)))
-//                        .build()
-//        );
-//
-//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
-//                Identifier.ofVanilla("mangrove_swamp"),
-//                new BiomeEffectsModifier.Builder()
-//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_SWAMP)))
-//                        .build()
-//        );
-//
-//        BIOME_EFFECTS_MODIFICATION_MANAGER.addBiomeEffectsModification(
-//                Identifier.ofVanilla("deep_dark"),
-//                new BiomeEffectsModifier.Builder()
-//                        .music(MusicType.createIngameMusic(Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistry.MUSIC_DEEP_DARK)))
-//                        .build()
-//        );
+        ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
     }
 }
