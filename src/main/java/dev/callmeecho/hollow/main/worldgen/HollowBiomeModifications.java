@@ -73,6 +73,7 @@ public class HollowBiomeModifications {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_twig"));
+            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_giant_lilypad"));
         });
 
         BiomeModifications.create(Identifier.of(Hollow.MODID, "better_birch_add")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(

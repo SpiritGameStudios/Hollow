@@ -22,7 +22,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
     public boolean generate(FeatureContext<FallenTreeFeatureConfig> context) {
         BlockPos origin = context.getOrigin();
         Random random = context.getRandom();
-        BlockState state = context.getConfig().stateProvider.get(random, origin);
+        BlockState state = context.getConfig().stateProvider().get(random, origin);
         
         int size = random.nextBetween(3, 5);
         Direction.Axis axis = random.nextBoolean() ? Direction.Axis.X : Direction.Axis.Z;
@@ -48,7 +48,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
             BlockPos pos = origin.offset(axis, i);
             context.getWorld().setBlockState(pos, state, 2);
             
-            if (context.getWorld().isAir(pos.up()) && random.nextInt(2) == 0 && context.getConfig().mossy) {
+            if (context.getWorld().isAir(pos.up()) && random.nextInt(2) == 0 && context.getConfig().mossy()) {
                 context.getWorld().setBlockState(pos.up(), Blocks.MOSS_CARPET.getDefaultState(), 2);
                 context.getWorld().setBlockState(pos, state.with(HollowLogBlock.MOSSY, true), 2);
             }
@@ -60,7 +60,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
             };
             BlockPos polyporePos = pos.offset(direction);
             
-            if (random.nextInt(2) != 0 || !context.getWorld().isAir(polyporePos) || !context.getConfig().polypore) continue;
+            if (random.nextInt(2) != 0 || !context.getWorld().isAir(polyporePos) || !context.getConfig().polypore()) continue;
             
             BlockState polyporeState = HollowBlockRegistry.POLYPORE.getDefaultState()
                     .with(Properties.HORIZONTAL_FACING, direction)
