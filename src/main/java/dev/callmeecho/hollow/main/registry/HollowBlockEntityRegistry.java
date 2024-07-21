@@ -17,7 +17,7 @@ public class HollowBlockEntityRegistry implements Registrar<BlockEntityType<?>> 
         return Registries.BLOCK_ENTITY_TYPE;
     }
     
-    public static final BlockEntityType<JarBlockEntity> JAR_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, HollowBlockRegistry.JAR).build();
-    public static final BlockEntityType<EchoingPotBlockEntity> ECHOING_POT_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(EchoingPotBlockEntity::new, HollowBlockRegistry.ECHOING_POT).build();
-    public static final BlockEntityType<StoneChestBlockEntity> STONE_CHEST_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(StoneChestBlockEntity::new, HollowBlockRegistry.STONE_CHEST).build();
+    public static final BlockEntityType<JarBlockEntity> JAR_BLOCK_ENTITY = BlockEntityType.Builder.create(JarBlockEntity::new, HollowBlockRegistry.JAR).build();
+    public static final BlockEntityType<EchoingPotBlockEntity> ECHOING_POT_BLOCK_ENTITY = BlockEntityType.Builder.create(EchoingPotBlockEntity::new, HollowBlockRegistry.ECHOING_POT).build();
+    public static final BlockEntityType<StoneChestBlockEntity> STONE_CHEST_BLOCK_ENTITY = BlockEntityType.Builder.create(StoneChestBlockEntity::new, HollowBlockRegistry.STONE_CHEST).build();
 }

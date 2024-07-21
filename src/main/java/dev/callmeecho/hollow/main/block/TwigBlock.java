@@ -16,22 +16,19 @@ public class TwigBlock extends Block {
         super(settings);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.down();
         return world.getBlockState(blockPos).isSolidBlock(world, blockPos);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return type == NavigationType.AIR && !this.collidable || super.canPathfindThrough(state, world, pos, type);
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+        return type == NavigationType.AIR && !this.collidable || super.canPathfindThrough(state, type);
     }
 }

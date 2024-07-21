@@ -1,5 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
+import com.mojang.serialization.MapCodec;
 import dev.callmeecho.hollow.main.block.entity.EchoingPotBlockEntity;
 import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
 import net.minecraft.block.*;
@@ -8,10 +9,12 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -24,6 +27,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class EchoingPotBlock extends BlockWithEntity {
+    public static final MapCodec<EchoingPotBlock> CODEC = createCodec(EchoingPotBlock::new);
+
     public EchoingPotBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
@@ -59,21 +64,22 @@ public class EchoingPotBlock extends BlockWithEntity {
         return new EchoingPotBlockEntity(pos, state);
     }
 
-    @SuppressWarnings("deprecation")
+
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) {
-            return ActionResult.SUCCESS;
-        }
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient) return ItemActionResult.SUCCESS;
 
         EchoingPotBlockEntity blockEntity = (EchoingPotBlockEntity)world.getBlockEntity(pos);
         Objects.requireNonNull(blockEntity).use(player, hand);
-        return ActionResult.CONSUME;
+        return ItemActionResult.CONSUME;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, HollowBlockEntityRegistry.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
+        return validateTicker(type, HollowBlockEntityRegistry.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
     }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() { return CODEC; }
 }

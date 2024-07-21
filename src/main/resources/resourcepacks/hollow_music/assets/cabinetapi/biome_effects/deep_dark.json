@@ -1,0 +1,11 @@
+{
+  "targets": [
+    "minecraft:deep_dark"
+  ],
+  "music": {
+    "max_delay": 24000,
+    "min_delay": 12000,
+    "replace_current_music": false,
+    "sound": { "sound_id":"hollow:music.deep_dark" }
+  }
+}

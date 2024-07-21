@@ -1,7 +1,8 @@
 package dev.callmeecho.hollow.main.block;
 
+import com.mojang.serialization.MapCodec;
 import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
-import dev.callmeecho.hollow.main.HollowTags;
+import dev.callmeecho.hollow.main.registry.HollowTags;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,9 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     public static final VoxelShape SHAPE_SOUTH = VoxelShapeHelper.rotate(Direction.SOUTH, Direction.NORTH, SHAPE_NORTH);
     public static final VoxelShape SHAPE_EAST = VoxelShapeHelper.rotate(Direction.EAST, Direction.NORTH, SHAPE_NORTH);
     public static final VoxelShape SHAPE_WEST = VoxelShapeHelper.rotate(Direction.WEST, Direction.NORTH, SHAPE_NORTH);
-    
+
+    public static final MapCodec<PolyporeBlock> CODEC = createCodec(PolyporeBlock::new);
+
     public PolyporeBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState()
@@ -39,7 +42,6 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
         builder.add(Properties.HORIZONTAL_FACING, POLYPORE_AMOUNT);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         return !context.shouldCancelInteraction() && context.getStack().isOf(this.asItem()) && state.get(POLYPORE_AMOUNT) < 3 || super.canReplace(state, context);
@@ -61,14 +63,10 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
-        return true;
-    }
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) { return true; }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        return true;
-    }
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) { return true; }
 
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) { return true; }
@@ -79,7 +77,6 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
         else dropStack(world, pos, new ItemStack(this));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(Properties.HORIZONTAL_FACING)) {
@@ -100,4 +97,7 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
         return blockState.isSideSolidFullSquare(world, blockPos, direction) &&
                 (blockState.isIn(BlockTags.LOGS) || blockState.isIn(HollowTags.HOLLOW_LOGS));
     }
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() { return CODEC; }
 }

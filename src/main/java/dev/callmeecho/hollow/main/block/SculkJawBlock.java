@@ -19,12 +19,15 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+import java.util.Set;
+
 public class SculkJawBlock extends SculkBlock {
-    public static final RegistryKey<DamageType> SCULK_JAW_DAMAGE_TYPE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(Hollow.MODID, "sculk_jaw"));
+    public static final RegistryKey<DamageType> SCULK_JAW_DAMAGE_TYPE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(Hollow.MODID, "sculk_jaw"));
     
     public static final BooleanProperty ACTIVE = BooleanProperty.of("active");
     private final ParticleSystem particleSystem;
@@ -57,13 +60,20 @@ public class SculkJawBlock extends SculkBlock {
             world.setBlockState(pos, state.with(ACTIVE, true));
 
             Vec3d centerPos = pos.toCenterPos();
-            entity.teleport(centerPos.getX(), centerPos.getY(), centerPos.getZ());
+            entity.teleport(
+                    (ServerWorld)world,
+                    centerPos.getX(),
+                    centerPos.getY(),
+                    centerPos.getZ(),
+                    Set.of(),
+                    entity.getYaw(),
+                    entity.getPitch()
+            );
         }
         
         super.onSteppedOn(world, pos, state, entity);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient() && state.get(ACTIVE)) {
@@ -71,13 +81,30 @@ public class SculkJawBlock extends SculkBlock {
             entity.damage(damageSource, 3F);
             
             Vec3d centerPos = pos.toCenterPos();
-            entity.teleport(centerPos.getX(), centerPos.getY(), centerPos.getZ());
+            entity.teleport(
+                    (ServerWorld)world,
+                    centerPos.getX(),
+                    centerPos.getY(),
+                    centerPos.getZ(),
+                    Set.of(),
+                    entity.getYaw(),
+                    entity.getPitch()
+            );
             if (world.getTime() % 5 == 0) {
-                world.playSound(null, pos.up(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.BLOCKS, 1F, 1F);
+                world.playSound(
+                        null,
+                        pos.up(),
+                        SoundEvents.PARTICLE_SOUL_ESCAPE.value(),
+                        SoundCategory.BLOCKS,
+                        1F,
+                        1F
+                );
             }
 
-//            entity.setVelocity(Vec3d.ZERO);
             particleSystem.tick(world, pos);
+
+            if (world.random.nextFloat() <= 0.0025F)
+                world.setBlockState(pos, state.with(ACTIVE, false));
         }
     }
 
@@ -86,7 +113,6 @@ public class SculkJawBlock extends SculkBlock {
         return state.get(ACTIVE);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (state.get(ACTIVE)) world.setBlockState(pos, state.with(ACTIVE, false));

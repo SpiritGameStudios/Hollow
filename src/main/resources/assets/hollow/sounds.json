@@ -1,0 +1,63 @@
+{
+  "music_disc.postmortem": {
+    "sounds": [
+      {
+        "name": "hollow:records/postmortem",
+        "stream": true
+      }
+    ]
+  },
+
+  "music.birch_forest": {
+    "sounds": [
+      {
+        "name": "hollow:music/game/wildflower",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
+
+  "music.swamp": {
+    "sounds": [
+      {
+        "name": "hollow:music/game/waterlily",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "minecraft:music/game/swamp/aerie",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "minecraft:music/game/swamp/firebugs",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "minecraft:music/game/swamp/labyrinthine",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
+
+  "music.deep_dark": {
+    "sounds": [
+      {
+        "name": "hollow:music/game/echo",
+        "stream": true
+      },
+      {
+        "name": "minecraft:music/game/ancestry",
+        "stream": true
+      },
+      {
+        "name": "minecraft:music/game/deeper",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  }
+}

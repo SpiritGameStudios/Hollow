@@ -4,16 +4,28 @@ import dev.callmeecho.cabinetapi.particle.ParticleSystem;
 import dev.callmeecho.cabinetapi.util.LootableInventoryBlockEntity;
 import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootContextTypes;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 
 public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     private static final ParticleSystem PARTICLE_SYSTEM = new ParticleSystem(
@@ -28,6 +40,30 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
 
     public StoneChestBlockEntity(BlockPos pos, BlockState state) {
         super(HollowBlockEntityRegistry.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
+    }
+
+
+    public void checkLootInteraction(@Nullable PlayerEntity player, boolean randomSeed) {
+        if (world == null) return;
+        if (this.lootTable != null && this.world.getServer() != null) {
+            LootTable lootTable = this.world.getServer().getReloadableRegistries().getLootTable(this.lootTable);
+            if (player instanceof ServerPlayerEntity) {
+                Criteria.PLAYER_GENERATES_CONTAINER_LOOT.trigger((ServerPlayerEntity)player, this.lootTable);
+            }
+
+            this.lootTable = null;
+            LootContextParameterSet.Builder builder = new LootContextParameterSet.Builder((ServerWorld)this.world)
+                    .add(LootContextParameters.ORIGIN, Vec3d.ofCenter(this.pos));
+            if (player != null) {
+                builder.luck(player.getLuck()).add(LootContextParameters.THIS_ENTITY, player);
+            }
+
+            lootTable.supplyInventory(
+                    this,
+                    builder.build(LootContextTypes.CHEST),
+                    randomSeed ? world.getRandom().nextLong() : this.lootTableSeed
+            );
+        }
     }
     
     public void aboveBroken() {
@@ -66,5 +102,20 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
         notifyListeners();
         player.setStackInHand(hand, ItemStack.EMPTY);
         return ActionResult.CONSUME;
+    }
+
+    @Override
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
+        this.clear();
+        if (!this.readLootTable(nbt)) Inventories.readNbt(nbt, this.inventory, registryLookup);
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        if (!this.writeLootTable(nbt)) {
+            Inventories.writeNbt(nbt, this.inventory, registryLookup);
+        }
     }
 }

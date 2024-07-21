@@ -50,9 +50,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
     }
 
     @Override
-    public boolean canBeLeashedBy(PlayerEntity player) {
-        return false;
-    }
+    public boolean canBeLeashed() { return false; }
 
     private void setLightTicks(int ticks) {
         this.dataTracker.set(LIGHT_TICKS, ticks);
@@ -61,14 +59,11 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
     public int getLightTicks() {
         return this.dataTracker.get(LIGHT_TICKS);
     }
-    
-    
-    
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(LIGHT_TICKS, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(LIGHT_TICKS, 0);
     }
 
     @Override
@@ -165,11 +160,6 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView world) {
         return world.getBlockState(pos).isAir() ? 10.0F : 0.0F;
-    }
-    
-    @Override
-    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
-        return dimensions.height * 0.5F;
     }
 
     @Override

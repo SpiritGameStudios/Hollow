@@ -1,14 +1,13 @@
 package dev.callmeecho.hollow.main.worldgen;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.serialization.MapCodec;
 import dev.callmeecho.hollow.main.registry.HollowTreeDecoratorRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -18,9 +17,9 @@ import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class BranchTreeDecorator extends TreeDecorator {
-    public static final Codec<BranchTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BlockStateProvider.TYPE_CODEC.fieldOf("state_provider").forGetter(decorator -> decorator.stateProvider)
-    ).apply(instance, BranchTreeDecorator::new));
+    public static final MapCodec<BranchTreeDecorator> CODEC = BlockStateProvider.TYPE_CODEC
+            .fieldOf("provider")
+            .xmap(BranchTreeDecorator::new, decorator -> decorator.stateProvider);
     
     public BranchTreeDecorator(BlockStateProvider stateProvider) {
         this.stateProvider = stateProvider;
@@ -44,7 +43,7 @@ public class BranchTreeDecorator extends TreeDecorator {
         boolean hasBranch = false;
         for (BlockPos pos : logs) {
             if (hasBranch) break;
-            if (pos.getY() < (logs.get(0).getY() + logs.get(logs.size() - 1).getY()) / 2) continue;
+            if (pos.getY() < (logs.getFirst().getY() + logs.getLast().getY()) / 2) continue;
             
             Direction direction = Direction.fromHorizontal(random.nextInt(4));
             BlockPos branch = pos.offset(direction);
@@ -69,9 +68,8 @@ public class BranchTreeDecorator extends TreeDecorator {
                 int beeCount = 2 + random.nextInt(2);
                 
                 for (int i = 0; i < beeCount; i++) {
-                    NbtCompound nbtCompound = new NbtCompound();
-                    nbtCompound.putString("id", "minecraft:bee");
-                    beehive.addBee(nbtCompound, random.nextInt(599), false);
+                    BeehiveBlockEntity.BeeData beeData = BeehiveBlockEntity.BeeData.create(random.nextInt(599));
+                    beehive.addBee(beeData);
                 }
             });
         }

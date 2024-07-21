@@ -23,9 +23,6 @@
     ],
     "fabric-datagen": [
       "dev.callmeecho.hollow.datagen.HollowDatagen"
-    ],
-    "dynamiclights": [
-      "dev.callmeecho.hollow.client.HollowDynamicLights"
     ]
   },
   "mixins": [
@@ -36,7 +33,7 @@
     "fabricloader": ">=${loader_version}",
     "minecraft": "~${minecraft_version}",
     "fabric-api": "*",
-    "java": ">=17",
+    "java": ">=21",
     "cabinetapi": "*"
   }
 }

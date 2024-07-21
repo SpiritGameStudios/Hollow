@@ -1,5 +1,6 @@
 package dev.callmeecho.hollow.main.block;
 
+import com.mojang.serialization.MapCodec;
 import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
 import dev.callmeecho.hollow.main.block.entity.EchoingPotBlockEntity;
 import dev.callmeecho.hollow.main.block.entity.JarBlockEntity;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -34,6 +36,8 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final EnumProperty<ChestType> CHEST_TYPE = Properties.CHEST_TYPE;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+
+    public static final MapCodec<StoneChestBlock> CODEC = createCodec(StoneChestBlock::new);
     
     public static final VoxelShape SHAPE_SINGLE = VoxelShapes.union(
             createCuboidShape(1, 1, 1, 15, 16, 15),
@@ -112,19 +116,12 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         builder.add(FACING, CHEST_TYPE, WATERLOGGED);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
-    }
+    public BlockState rotate(BlockState state, BlockRotation rotation) { return state.with(FACING, rotation.rotate(state.get(FACING))); }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
-    }
+    public BlockState mirror(BlockState state, BlockMirror mirror) { return state.rotate(mirror.getRotation(state.get(FACING))); }
 
-    @SuppressWarnings("deprecation")
     @Override
     public BlockState getStateForNeighborUpdate(
             BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos
@@ -160,18 +157,15 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         return state.get(CHEST_TYPE) == ChestType.LEFT ? direction.rotateYClockwise() : direction.rotateYCounterclockwise();
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) {
-            return ActionResult.SUCCESS;
-        }
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient) return ItemActionResult.SUCCESS;
 
         StoneChestBlockEntity blockEntity = (StoneChestBlockEntity)world.getBlockEntity(pos);
-        return Objects.requireNonNull(blockEntity).use(player, hand, hit.getSide());
+        Objects.requireNonNull(blockEntity).use(player, hand, hit.getSide());
+        return ItemActionResult.CONSUME;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         switch (state.get(CHEST_TYPE)) {
@@ -202,7 +196,6 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
@@ -213,4 +206,7 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() { return CODEC; }
 }
