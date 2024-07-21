@@ -4,3 +4,4 @@ accessible method net/minecraft/world/gen/feature/TreeConfiguredFeatures builder
 accessible class net/minecraft/block/SculkVeinBlock$SculkVeinGrowChecker
 accessible field net/minecraft/entity/ai/WardenAngerManager suspectUuidsToAngerLevel Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 accessible field net/minecraft/entity/ai/WardenAngerManager suspects Ljava/util/ArrayList;
+accessible class net/minecraft/client/render/BackgroundRenderer$FogData

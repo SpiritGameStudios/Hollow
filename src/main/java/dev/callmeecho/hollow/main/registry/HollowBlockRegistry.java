@@ -69,6 +69,18 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .offset(AbstractBlock.OffsetType.XZ)
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
+
+    public static final FlowerBlock ROOTED_ORCHID = new FlowerBlock(
+            StatusEffects.SATURATION,
+            0.35F,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DARK_GREEN)
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.GRASS)
+                    .offset(AbstractBlock.OffsetType.XZ)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
     
     public static final TallFlowerBlock CAMPION = new TallFlowerBlock(
             AbstractBlock.Settings.create()
@@ -110,7 +122,19 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .burnable()
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
-    
+
+    public static final CattailBlock CATTAIL = new CattailBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WATER_BLUE)
+                    .replaceable()
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.WET_GRASS)
+                    .offset(AbstractBlock.OffsetType.XZ)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
+
+
     @NoBlockItem
     public static final LilyPadBlock LOTUS_LILYPAD = new LilyPadBlock(
             AbstractBlock.Settings.create()
@@ -122,7 +146,7 @@ public class HollowBlockRegistry implements BlockRegistrar {
     );
 
     @NoBlockItem
-    public static final Block GIANT_LILY_PAD = new GiantLilyPadBlock(
+    public static final Block GIANT_LILYPAD = new GiantLilyPadBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DARK_GREEN)
                     .breakInstantly()
@@ -184,9 +208,42 @@ public class HollowBlockRegistry implements BlockRegistrar {
                     .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.DEEPSLATE)
     );
+
+    public static final Block COPPER_PILLAR = new OxidizablePillarBlock(
+            Oxidizable.OxidationLevel.UNAFFECTED,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.ORANGE)
+                    .requiresTool()
+                    .strength(3.0F, 6.0F)
+                    .luminance(state -> 15)
+                    .sounds(BlockSoundGroup.COPPER)
+    );
+
+    public static final Block EXPOSED_COPPER_PILLAR = new OxidizablePillarBlock(
+            Oxidizable.OxidationLevel.EXPOSED,
+            AbstractBlock.Settings.copy(COPPER_PILLAR).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)
+    );
+
+    public static final Block WEATHERED_COPPER_PILLAR = new OxidizablePillarBlock(
+            Oxidizable.OxidationLevel.WEATHERED,
+            AbstractBlock.Settings.copy(COPPER_PILLAR).mapColor(MapColor.DARK_AQUA)
+    );
+
+    public static final Block OXIDIZED_COPPER_PILLAR = new OxidizablePillarBlock(
+            Oxidizable.OxidationLevel.OXIDIZED,
+            AbstractBlock.Settings.copy(COPPER_PILLAR).mapColor(MapColor.TEAL)
+    );
+
+    public static final Block WAXED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(COPPER_PILLAR));
+    public static final Block WAXED_EXPOSED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(EXPOSED_COPPER_PILLAR));
+    public static final Block WAXED_WEATHERED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(WEATHERED_COPPER_PILLAR));
+    public static final Block WAXED_OXIDIZED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(OXIDIZED_COPPER_PILLAR));
     
     @NoBlockItem
     public static final Block POTTED_PAEONIA = Blocks.createFlowerPotBlock(PAEONIA);
+
+    @NoBlockItem
+    public static final Block POTTED_ROOTED_ORCHID = Blocks.createFlowerPotBlock(ROOTED_ORCHID);
 
     @SuppressWarnings("UnstableApiUsage")
     @Override

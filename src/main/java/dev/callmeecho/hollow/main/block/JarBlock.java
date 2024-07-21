@@ -10,6 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -27,7 +28,7 @@ public class JarBlock extends BlockWithEntity {
         super(settings);
     }
     public static final VoxelShape SHAPE = VoxelShapes.union(
-            createCuboidShape(5.5, 14, 5.5, 10.5, 16, 10.5),
+            createCuboidShape(5.5, 12, 5.5, 10.5, 15, 10.5),
             createCuboidShape(3.5, 0, 3.5, 12.5, 14, 4.5),
             createCuboidShape(3.5, 0, 4.5, 4.5, 14, 11.5),
             createCuboidShape(3.5, 0, 11.5, 12.5, 14, 12.5),
@@ -35,7 +36,6 @@ public class JarBlock extends BlockWithEntity {
             createCuboidShape(4.5, 13, 4.5, 11.5, 14, 11.5),
             createCuboidShape(4.5, 0, 4.5, 11.5, 1, 11.5)
     );
-
     @Override
     public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
 

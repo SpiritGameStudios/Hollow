@@ -13,6 +13,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
@@ -31,5 +32,19 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
                 HollowBlockRegistry.class,
                 HollowLogBlock.class,
                 (block, name, field) -> biConsumer.accept(block.getLootTableKey(), this.drops(block, ConstantLootNumberProvider.create(1.0f))));
+
+        List.of(
+                HollowBlockRegistry.COPPER_PILLAR,
+                HollowBlockRegistry.EXPOSED_COPPER_PILLAR,
+                HollowBlockRegistry.WEATHERED_COPPER_PILLAR,
+                HollowBlockRegistry.OXIDIZED_COPPER_PILLAR,
+
+                HollowBlockRegistry.WAXED_COPPER_PILLAR,
+                HollowBlockRegistry.WAXED_EXPOSED_COPPER_PILLAR,
+                HollowBlockRegistry.WAXED_WEATHERED_COPPER_PILLAR,
+                HollowBlockRegistry.WAXED_OXIDIZED_COPPER_PILLAR
+        ).forEach(
+                block -> biConsumer.accept(block.getLootTableKey(), this.drops(block, ConstantLootNumberProvider.create(1.0f)))
+        );
     }
 }

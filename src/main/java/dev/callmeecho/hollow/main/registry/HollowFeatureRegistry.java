@@ -1,6 +1,7 @@
 package dev.callmeecho.hollow.main.registry;
 
 import dev.callmeecho.cabinetapi.registry.Registrar;
+import dev.callmeecho.hollow.main.worldgen.CattailFeature;
 import dev.callmeecho.hollow.main.worldgen.FallenTreeFeature;
 import dev.callmeecho.hollow.main.worldgen.FallenTreeFeatureConfig;
 import dev.callmeecho.hollow.main.worldgen.GiantLilypadFeature;
@@ -18,4 +19,5 @@ public class HollowFeatureRegistry implements Registrar<Feature<?>> {
     
     public static final Feature<FallenTreeFeatureConfig> FALLEN_TREE = new FallenTreeFeature(FallenTreeFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> GIANT_LILYPAD = new GiantLilypadFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> CATTAILS = new CattailFeature(DefaultFeatureConfig.CODEC);
 }

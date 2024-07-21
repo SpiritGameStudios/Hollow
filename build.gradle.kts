@@ -1,6 +1,6 @@
 plugins {
     java
-    id("fabric-loom") version "1.6.+"
+    id("fabric-loom") version "1.7-SNAPSHOT"
 }
 
 class ModInfo {

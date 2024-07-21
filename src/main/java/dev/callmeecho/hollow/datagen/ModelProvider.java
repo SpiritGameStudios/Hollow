@@ -2,13 +2,13 @@ package dev.callmeecho.hollow.datagen;
 
 import com.google.common.collect.ImmutableMap;
 import dev.callmeecho.cabinetapi.util.ReflectionHelper;
-import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.main.block.GiantLilyPadBlock;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -31,8 +31,8 @@ public class ModelProvider extends FabricModelProvider {
     private static void createGiantLilyPadBlockState(Block block, BlockStateModelGenerator blockStateModelGenerator) {
         Identifier[] modelIds = new Identifier[4];
         for (int i = 0; i < 4; i++) {
-            TextureMap textureMap = new TextureMap().put(TextureKey.TEXTURE, Identifier.of(MODID, "block/giant_lily_pad_" + i));
-            Model model = new Model(Optional.of(Identifier.of(MODID, "block/giant_lily_pad_template")), Optional.of("_" + i), TextureKey.TEXTURE);
+            TextureMap textureMap = new TextureMap().put(TextureKey.TEXTURE, Identifier.of(MODID, "block/giant_lilypad_" + i));
+            Model model = new Model(Optional.of(Identifier.of(MODID, "block/giant_lilypad_template")), Optional.of("_" + i), TextureKey.TEXTURE);
             modelIds[i] = model.upload(block, textureMap, blockStateModelGenerator.modelCollector);
         }
 
@@ -92,6 +92,7 @@ public class ModelProvider extends FabricModelProvider {
         );
 
         blockStateModelGenerator.blockStateCollector.accept(supplier);
+        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(block);
     }
 
     private static BlockStateSupplier createAxisRotatedBlockStateWithMossy(Block block, Identifier verticalModelId, Identifier horizontalModelId, Identifier horizontalMossyModelId) {
@@ -131,11 +132,41 @@ public class ModelProvider extends FabricModelProvider {
             blockStateModelGenerator.blockStateCollector.accept(createAxisRotatedBlockStateWithMossy(block, hollowLog, hollowLogHorizontal, hollowLogHorizontalMossy));
         });
 
-        createGiantLilyPadBlockState(HollowBlockRegistry.GIANT_LILY_PAD, blockStateModelGenerator);
+        createGiantLilyPadBlockState(HollowBlockRegistry.GIANT_LILYPAD, blockStateModelGenerator);
+
+        registerCopperPillar(blockStateModelGenerator, HollowBlockRegistry.COPPER_PILLAR, Blocks.CHISELED_COPPER);
+        registerCopperPillar(blockStateModelGenerator, HollowBlockRegistry.EXPOSED_COPPER_PILLAR, Blocks.EXPOSED_CHISELED_COPPER);
+        registerCopperPillar(blockStateModelGenerator, HollowBlockRegistry.WEATHERED_COPPER_PILLAR, Blocks.WEATHERED_CHISELED_COPPER);
+        registerCopperPillar(blockStateModelGenerator, HollowBlockRegistry.OXIDIZED_COPPER_PILLAR, Blocks.OXIDIZED_CHISELED_COPPER);
+
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistry.WAXED_COPPER_PILLAR, Blocks.CHISELED_COPPER, HollowBlockRegistry.COPPER_PILLAR);
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistry.WAXED_EXPOSED_COPPER_PILLAR, Blocks.EXPOSED_CHISELED_COPPER, HollowBlockRegistry.EXPOSED_COPPER_PILLAR);
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistry.WAXED_WEATHERED_COPPER_PILLAR, Blocks.WEATHERED_CHISELED_COPPER, HollowBlockRegistry.WEATHERED_COPPER_PILLAR);
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistry.WAXED_OXIDIZED_COPPER_PILLAR, Blocks.OXIDIZED_CHISELED_COPPER, HollowBlockRegistry.OXIDIZED_COPPER_PILLAR);
+    }
+
+    public void registerCopperPillarWaxed(BlockStateModelGenerator blockStateModelGenerator, Block block, Block end, Block unWaxed) {
+        blockStateModelGenerator.registerAxisRotated(
+                block,
+                TexturedModel.makeFactory((Block b) -> sideAndEndForTopCopper(unWaxed, end), Models.CUBE_COLUMN),
+                TexturedModel.makeFactory((Block b) -> sideAndEndForTopCopper(unWaxed, end), Models.CUBE_COLUMN_HORIZONTAL)
+        );
+    }
+
+    public void registerCopperPillar(BlockStateModelGenerator blockStateModelGenerator, Block block, Block end) {
+        blockStateModelGenerator.registerAxisRotated(
+                block,
+                TexturedModel.makeFactory((Block b) -> sideAndEndForTopCopper(b, end), Models.CUBE_COLUMN),
+                TexturedModel.makeFactory((Block b) -> sideAndEndForTopCopper(b, end), Models.CUBE_COLUMN_HORIZONTAL)
+        );
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
 
+    }
+
+    public static TextureMap sideAndEndForTopCopper(Block block, Block end) {
+        return new TextureMap().put(TextureKey.SIDE, TextureMap.getId(block)).put(TextureKey.END, TextureMap.getId(end)).put(TextureKey.PARTICLE, TextureMap.getId(block));
     }
 }

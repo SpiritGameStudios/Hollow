@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "reeds_part=base": {
+      "model": "hollow:block/cattail_base"
+    },
+    "reeds_part=middle": [
+      {
+        "model": "hollow:block/cattail_middle"
+      },
+      {
+        "model": "hollow:block/cattail_middle_2"
+      }
+    ],
+    "reeds_part=top": {
+      "model": "hollow:block/cattail_top"
+    }
+  }
+}

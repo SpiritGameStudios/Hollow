@@ -7,6 +7,7 @@ import dev.callmeecho.hollow.main.registry.*;
 import dev.callmeecho.hollow.main.worldgen.HollowBiomeModifications;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -33,7 +34,16 @@ public class Hollow implements ModInitializer {
         RegistrarHandler.process(HollowParticleRegistrar.class, MODID);
 
         FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistry.FIREFLY, FireflyEntity.createFireflyAttributes());
-    
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistry.COPPER_PILLAR, HollowBlockRegistry.EXPOSED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistry.EXPOSED_COPPER_PILLAR, HollowBlockRegistry.WEATHERED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistry.WEATHERED_COPPER_PILLAR, HollowBlockRegistry.OXIDIZED_COPPER_PILLAR);
+
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.COPPER_PILLAR, HollowBlockRegistry.WAXED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.EXPOSED_COPPER_PILLAR, HollowBlockRegistry.WAXED_EXPOSED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.WEATHERED_COPPER_PILLAR, HollowBlockRegistry.WAXED_WEATHERED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.OXIDIZED_COPPER_PILLAR, HollowBlockRegistry.WAXED_OXIDIZED_COPPER_PILLAR);
+
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
         

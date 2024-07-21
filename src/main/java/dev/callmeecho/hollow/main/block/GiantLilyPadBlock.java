@@ -35,7 +35,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         for (BlockPos blockPos : getBlocks(pos, state)) {
             BlockState blockState = world.getBlockState(blockPos);
-            if (blockState.getBlock() == this) world.breakBlock(blockPos, false);
+            if (blockState.getBlock() == this) world.breakBlock(blockPos, blockPos.equals(pos));
         }
 
         return super.onBreak(world, pos, state, player);

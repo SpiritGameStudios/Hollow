@@ -21,11 +21,23 @@
   "block.hollow.stripped_mangrove_hollow_log": "Hollow Stripped Mangrove Log",
   "block.hollow.cherry_hollow_log": "Hollow Cherry Log",
   "block.hollow.stripped_cherry_hollow_log": "Hollow Stripped Cherry Log",
+
+  "block.hollow.copper_pillar": "Copper Pillar",
+  "block.hollow.exposed_copper_pillar": "Exposed Copper Pillar",
+  "block.hollow.weathered_copper_pillar": "Weathered Copper Pillar",
+  "block.hollow.oxidized_copper_pillar": "Oxidized Copper Pillar",
+
+  "block.hollow.waxed_copper_pillar": "Waxed Copper Pillar",
+  "block.hollow.waxed_exposed_copper_pillar": "Waxed Exposed Copper Pillar",
+  "block.hollow.waxed_weathered_copper_pillar": "Waxed Weathered Copper Pillar",
+  "block.hollow.waxed_oxidized_copper_pillar": "Waxed Oxidized Copper Pillar",
   
   "block.hollow.paeonia": "Paeonia",
+  "block.hollow.rooted_orchid": "Rooted Orchid",
   "block.hollow.campion": "Campion",
   "block.hollow.polypore": "Polypore",
   "block.hollow.lotus_lilypad": "Flowering Lily Pad",
+  "block.hollow.giant_lilypad": "Giant Lily Pad",
   "block.hollow.twig": "Twig",
   "block.hollow.sculk_jaw": "Sculk Jaw",
   "block.hollow.jar": "Jar",
@@ -34,6 +46,7 @@
   "block.hollow.stone_chest": "Stone Chest",
   "block.hollow.stone_chest_lid": "Stone Chest Lid",
   "block.hollow.root_vines": "Root Vines",
+  "block.hollow.cattail": "Cattail",
 
   "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
