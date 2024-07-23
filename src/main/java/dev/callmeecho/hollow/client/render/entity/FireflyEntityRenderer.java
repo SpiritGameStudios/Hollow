@@ -8,6 +8,8 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ColorHelper;
@@ -61,6 +63,12 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
         float red = ColorHelper.Argb.getRed(color);
         float green = ColorHelper.Argb.getGreen(color);
         float blue = ColorHelper.Argb.getBlue(color);
+
+        if (entity.hasCustomName() && "jeb_".equals(entity.getName().getString())) {
+            red = MathHelper.sin(entity.age * 0.1F) * 128.0F + 128.0F;
+            green = MathHelper.sin(entity.age * 0.1F + (float) Math.toRadians(120.0F)) * 128.0F + 128.0F;
+            blue = MathHelper.sin(entity.age * 0.1F + (float) Math.toRadians(240.0F)) * 128.0F + 128.0F;
+        }
         
         vertexConsumer.vertex(entry, x - 0.5F, y - 0.25F, 0.0F)
                 .color(red / 255.0F, green / 255.0F, blue / 255.0F, 1.0F)

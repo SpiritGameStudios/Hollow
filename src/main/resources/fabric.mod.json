@@ -3,13 +3,14 @@
   "id": "hollow",
   "version": "${version}",
   "name": "Hollow",
-  "description": "Hey Mojang! I did your job for you!",
+  "description": "A mod about hollow logs and hollow promises.",
   "authors": [
     "CallMeEcho",
     "WorldWidePixel"
   ],
   "contact": {
-    "repo": "https://github.com/CallMeEchoCodes/hollow"
+    "repo": "https://github.com/SpiritGameStudios/Hollow",
+    "issues": "https://github.com/SpiritGameStudios/Hollow/issues"
   },
   "license": "MPL-2.0",
   "icon": "assets/hollow/icon.png",

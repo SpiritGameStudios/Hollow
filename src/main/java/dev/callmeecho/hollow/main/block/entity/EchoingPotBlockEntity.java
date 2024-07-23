@@ -1,7 +1,7 @@
 package dev.callmeecho.hollow.main.block.entity;
 
 import dev.callmeecho.cabinetapi.particle.ParticleSystem;
-import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -42,7 +42,7 @@ public class EchoingPotBlockEntity extends BlockEntity {
     public int activeTime = 0;
     
     public EchoingPotBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityRegistry.ECHOING_POT_BLOCK_ENTITY, pos, state);
+        super(HollowBlockEntityRegistrar.ECHOING_POT_BLOCK_ENTITY, pos, state);
     }
 
     public void use(PlayerEntity player, Hand hand) {

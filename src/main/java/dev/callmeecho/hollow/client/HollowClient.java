@@ -17,31 +17,31 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 public class HollowClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(HollowEntityTypeRegistry.FIREFLY, FireflyEntityRenderer::new);
+        EntityRendererRegistry.register(HollowEntityTypeRegistrar.FIREFLY, FireflyEntityRenderer::new);
         
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.PAEONIA, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.LOTUS_LILYPAD, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.GIANT_LILYPAD, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.TWIG, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.CAMPION, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.POLYPORE, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.POTTED_PAEONIA, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.JAR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.FIREFLY_JAR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.ROOT_VINES, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.CATTAIL, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.ROOTED_ORCHID, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistry.POTTED_ROOTED_ORCHID, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.PAEONIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.LOTUS_LILYPAD, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.GIANT_LILYPAD, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.TWIG, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.CAMPION, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.POLYPORE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.POTTED_PAEONIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.JAR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.FIREFLY_JAR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.ROOT_VINES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.CATTAIL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.ROOTED_ORCHID, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.POTTED_ROOTED_ORCHID, RenderLayer.getCutout());
 
-        BlockEntityRendererFactories.register(HollowBlockEntityRegistry.JAR_BLOCK_ENTITY, JarBlockEntityRenderer::new);
+        ReflectionHelper.forEachStaticField(HollowBlockRegistrar.class, HollowLogBlock.class, (block, name, field) -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
 
-        ReflectionHelper.forEachStaticField(HollowBlockRegistry.class, HollowLogBlock.class, (block, name, field) -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
+        BlockEntityRendererFactories.register(HollowBlockEntityRegistrar.JAR_BLOCK_ENTITY, JarBlockEntityRenderer::new);
 
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistry.LOTUS_LILYPAD);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistry.LOTUS_LILYPAD);
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistrar.LOTUS_LILYPAD);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistrar.LOTUS_LILYPAD);
 
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistry.GIANT_LILYPAD);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistry.GIANT_LILYPAD);
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlockRegistrar.GIANT_LILYPAD);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistrar.GIANT_LILYPAD);
 
         ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
     }

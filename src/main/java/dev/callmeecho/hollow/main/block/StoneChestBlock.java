@@ -2,10 +2,7 @@ package dev.callmeecho.hollow.main.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
-import dev.callmeecho.hollow.main.block.entity.EchoingPotBlockEntity;
-import dev.callmeecho.hollow.main.block.entity.JarBlockEntity;
 import dev.callmeecho.hollow.main.block.entity.StoneChestBlockEntity;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;

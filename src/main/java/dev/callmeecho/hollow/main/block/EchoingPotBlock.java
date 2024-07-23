@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.main.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.callmeecho.hollow.main.block.entity.EchoingPotBlockEntity;
-import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistrar;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -12,7 +12,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -77,7 +76,7 @@ public class EchoingPotBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, HollowBlockEntityRegistry.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
+        return validateTicker(type, HollowBlockEntityRegistrar.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
     }
 
     @Override

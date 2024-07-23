@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 @SuppressWarnings("unused")
-public class HollowFeatureRegistry implements Registrar<Feature<?>> {
+public class HollowFeatureRegistrar implements Registrar<Feature<?>> {
     @Override
     public Registry<Feature<?>> getRegistry() {
         return Registries.FEATURE;

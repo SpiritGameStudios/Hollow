@@ -2,8 +2,8 @@ package dev.callmeecho.hollow.main.block.entity;
 
 import dev.callmeecho.cabinetapi.particle.ParticleSystem;
 import dev.callmeecho.cabinetapi.util.LootableInventoryBlockEntity;
-import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistrar;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
@@ -19,10 +19,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -40,7 +38,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     );
 
     public StoneChestBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityRegistry.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
+        super(HollowBlockEntityRegistrar.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
     }
 
 
@@ -86,7 +84,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
 
     public ItemActionResult use(PlayerEntity player, Hand hand, Direction side) {
         if (player.getStackInHand(hand).isEmpty()) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
-        if (player.getStackInHand(hand).isOf(HollowBlockRegistry.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP)) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        if (player.getStackInHand(hand).isOf(HollowBlockRegistrar.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP)) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 
 
         int slot = -1;

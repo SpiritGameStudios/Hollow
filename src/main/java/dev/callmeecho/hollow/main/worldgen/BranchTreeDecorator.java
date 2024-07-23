@@ -1,7 +1,7 @@
 package dev.callmeecho.hollow.main.worldgen;
 
 import com.mojang.serialization.MapCodec;
-import dev.callmeecho.hollow.main.registry.HollowTreeDecoratorRegistry;
+import dev.callmeecho.hollow.main.registry.HollowTreeDecoratorRegistrar;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
@@ -29,7 +29,7 @@ public class BranchTreeDecorator extends TreeDecorator {
     
     @Override
     protected TreeDecoratorType<?> getType() {
-        return HollowTreeDecoratorRegistry.BRANCH_TREE_DECORATOR;
+        return HollowTreeDecoratorRegistrar.BRANCH_TREE_DECORATOR;
     }
 
     @Override

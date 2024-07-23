@@ -2,8 +2,7 @@ package dev.callmeecho.hollow.main.block.entity;
 
 import dev.callmeecho.cabinetapi.util.DefaultedInventory;
 import dev.callmeecho.cabinetapi.util.InventoryBlockEntity;
-import dev.callmeecho.hollow.main.Hollow;
-import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistrar;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
@@ -13,14 +12,12 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 public class JarBlockEntity extends InventoryBlockEntity implements DefaultedInventory {
     public JarBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityRegistry.JAR_BLOCK_ENTITY, pos, state, 17);
+        super(HollowBlockEntityRegistrar.JAR_BLOCK_ENTITY, pos, state, 17);
     }
     
     public void use(World world, BlockPos pos, PlayerEntity player, Hand hand) {
