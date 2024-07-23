@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.main.worldgen;
 
 import dev.callmeecho.hollow.main.Hollow;
 import dev.callmeecho.hollow.main.entity.FireflyEntity;
-import dev.callmeecho.hollow.main.registry.HollowEntityTypeRegistry;
+import dev.callmeecho.hollow.main.registry.HollowEntityTypeRegistrar;
 import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -23,8 +23,8 @@ public class HollowBiomeModifications {
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP,
                 BiomeKeys.MANGROVE_SWAMP
-        ), SpawnGroup.AMBIENT, HollowEntityTypeRegistry.FIREFLY, 5, 10, 15);
-        SpawnRestriction.register(HollowEntityTypeRegistry.FIREFLY, SpawnRestriction.getLocation(HollowEntityTypeRegistry.FIREFLY), Heightmap.Type.WORLD_SURFACE, FireflyEntity::canSpawn);
+        ), SpawnGroup.AMBIENT, HollowEntityTypeRegistrar.FIREFLY, 5, 10, 15);
+        SpawnRestriction.register(HollowEntityTypeRegistrar.FIREFLY, SpawnRestriction.getLocation(HollowEntityTypeRegistrar.FIREFLY), Heightmap.Type.WORLD_SURFACE, FireflyEntity::canSpawn);
         
         BiomeModifications.create(Identifier.of(Hollow.MODID, "better_swamps_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
                 BiomeKeys.SWAMP,

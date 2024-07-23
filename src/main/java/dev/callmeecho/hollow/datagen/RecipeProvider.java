@@ -1,13 +1,10 @@
 package dev.callmeecho.hollow.datagen;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.block.OxidizablePillarBlock;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -20,10 +17,8 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 public class RecipeProvider extends FabricRecipeProvider {
 
@@ -33,16 +28,16 @@ public class RecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
-        createHollowLogRecipe(exporter, HollowBlockRegistry.OAK_HOLLOW_LOG, ItemTags.OAK_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.SPRUCE_HOLLOW_LOG, ItemTags.SPRUCE_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.BIRCH_HOLLOW_LOG, ItemTags.BIRCH_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.JUNGLE_HOLLOW_LOG, ItemTags.JUNGLE_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.ACACIA_HOLLOW_LOG, ItemTags.ACACIA_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.DARK_OAK_HOLLOW_LOG, ItemTags.DARK_OAK_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.CRIMSON_HOLLOW_STEM, ItemTags.CRIMSON_STEMS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.WARPED_HOLLOW_STEM, ItemTags.WARPED_STEMS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.MANGROVE_HOLLOW_LOG, ItemTags.MANGROVE_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistry.CHERRY_HOLLOW_LOG, ItemTags.CHERRY_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.OAK_HOLLOW_LOG, ItemTags.OAK_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.SPRUCE_HOLLOW_LOG, ItemTags.SPRUCE_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.BIRCH_HOLLOW_LOG, ItemTags.BIRCH_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.JUNGLE_HOLLOW_LOG, ItemTags.JUNGLE_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.ACACIA_HOLLOW_LOG, ItemTags.ACACIA_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.DARK_OAK_HOLLOW_LOG, ItemTags.DARK_OAK_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.CRIMSON_HOLLOW_STEM, ItemTags.CRIMSON_STEMS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.WARPED_HOLLOW_STEM, ItemTags.WARPED_STEMS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.MANGROVE_HOLLOW_LOG, ItemTags.MANGROVE_LOGS);
+        createHollowLogRecipe(exporter, HollowBlockRegistrar.CHERRY_HOLLOW_LOG, ItemTags.CHERRY_LOGS);
 
         HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach(
                 (unWaxed, waxed) -> {
@@ -57,20 +52,17 @@ public class RecipeProvider extends FabricRecipeProvider {
                 }
         );
 
-        Map<Block, Block> recipes = Map.of(
-                HollowBlockRegistry.COPPER_PILLAR, Blocks.CUT_COPPER_SLAB,
-                HollowBlockRegistry.EXPOSED_COPPER_PILLAR, Blocks.EXPOSED_CUT_COPPER_SLAB,
-                HollowBlockRegistry.WEATHERED_COPPER_PILLAR, Blocks.WEATHERED_CUT_COPPER_SLAB,
-                HollowBlockRegistry.OXIDIZED_COPPER_PILLAR, Blocks.OXIDIZED_CUT_COPPER_SLAB,
+        Map.of(
+                HollowBlockRegistrar.COPPER_PILLAR, Blocks.CUT_COPPER_SLAB,
+                HollowBlockRegistrar.EXPOSED_COPPER_PILLAR, Blocks.EXPOSED_CUT_COPPER_SLAB,
+                HollowBlockRegistrar.WEATHERED_COPPER_PILLAR, Blocks.WEATHERED_CUT_COPPER_SLAB,
+                HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR, Blocks.OXIDIZED_CUT_COPPER_SLAB,
 
-                HollowBlockRegistry.WAXED_COPPER_PILLAR, Blocks.WAXED_CUT_COPPER_SLAB,
-                HollowBlockRegistry.WAXED_EXPOSED_COPPER_PILLAR, Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB,
-                HollowBlockRegistry.WAXED_WEATHERED_COPPER_PILLAR, Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB,
-                HollowBlockRegistry.WAXED_OXIDIZED_COPPER_PILLAR, Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB
-        );
-
-
-        recipes.forEach(
+                HollowBlockRegistrar.WAXED_COPPER_PILLAR, Blocks.WAXED_CUT_COPPER_SLAB,
+                HollowBlockRegistrar.WAXED_EXPOSED_COPPER_PILLAR, Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB,
+                HollowBlockRegistrar.WAXED_WEATHERED_COPPER_PILLAR, Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB,
+                HollowBlockRegistrar.WAXED_OXIDIZED_COPPER_PILLAR, Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB
+        ).forEach(
                 (pillar, slab) -> ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, pillar)
                         .input('#', slab)
                         .pattern("##")

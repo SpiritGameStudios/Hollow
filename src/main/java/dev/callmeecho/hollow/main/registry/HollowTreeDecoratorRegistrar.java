@@ -9,7 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 @SuppressWarnings("unused")
-public class HollowTreeDecoratorRegistry implements Registrar<TreeDecoratorType<?>> {
+public class HollowTreeDecoratorRegistrar implements Registrar<TreeDecoratorType<?>> {
     @Override
     public Registry<TreeDecoratorType<?>> getRegistry() {
         return Registries.TREE_DECORATOR_TYPE;

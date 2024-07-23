@@ -2,10 +2,7 @@ package dev.callmeecho.hollow.main.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
-import dev.callmeecho.hollow.main.block.entity.EchoingPotBlockEntity;
-import dev.callmeecho.hollow.main.block.entity.JarBlockEntity;
 import dev.callmeecho.hollow.main.block.entity.StoneChestBlockEntity;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
@@ -162,8 +159,7 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         if (world.isClient) return ItemActionResult.SUCCESS;
 
         StoneChestBlockEntity blockEntity = (StoneChestBlockEntity)world.getBlockEntity(pos);
-        Objects.requireNonNull(blockEntity).use(player, hand, hit.getSide());
-        return ItemActionResult.CONSUME;
+        return Objects.requireNonNull(blockEntity).use(player, hand, hit.getSide());
     }
 
     @Override

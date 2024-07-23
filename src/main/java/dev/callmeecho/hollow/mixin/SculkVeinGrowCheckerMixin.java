@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkVeinBlock;
@@ -16,6 +16,6 @@ public class SculkVeinGrowCheckerMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 0)
     )
     private boolean canGrow(BlockState instance, Block block, Operation<Boolean> original) {
-        return original.call(instance, block) || instance.isOf(HollowBlockRegistry.SCULK_JAW);
+        return original.call(instance, block) || instance.isOf(HollowBlockRegistrar.SCULK_JAW);
     }
 }

@@ -5,12 +5,11 @@ import dev.callmeecho.hollow.main.block.entity.JarBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -36,6 +35,7 @@ public class JarBlock extends BlockWithEntity {
             createCuboidShape(4.5, 13, 4.5, 11.5, 14, 11.5),
             createCuboidShape(4.5, 0, 4.5, 11.5, 1, 11.5)
     );
+
     @Override
     public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
 

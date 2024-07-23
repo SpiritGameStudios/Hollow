@@ -28,7 +28,6 @@ public class RootVinesBlock extends Block implements Waterloggable {
         builder.add(UP);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
@@ -46,7 +45,6 @@ public class RootVinesBlock extends Block implements Waterloggable {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
@@ -54,7 +52,6 @@ public class RootVinesBlock extends Block implements Waterloggable {
         return blockState.isSideSolidFullSquare(world, blockPos, Direction.DOWN) || blockState.getBlock() == this;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public BlockState getStateForNeighborUpdate(
             BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos

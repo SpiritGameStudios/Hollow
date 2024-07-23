@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.main.worldgen;
 
 import com.mojang.serialization.Codec;
 import dev.callmeecho.hollow.main.block.GiantLilyPadBlock;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -33,7 +33,7 @@ public class GiantLilypadFeature extends Feature<DefaultFeatureConfig> {
         if (!canPlaceAt(world, pos)) return false;
 
         Direction facing = Direction.fromHorizontal(random.nextInt(4));
-        BlockState lilypadState = HollowBlockRegistry.GIANT_LILYPAD.getDefaultState().with(GiantLilyPadBlock.FACING, facing);
+        BlockState lilypadState = HollowBlockRegistrar.GIANT_LILYPAD.getDefaultState().with(GiantLilyPadBlock.FACING, facing);
 
         world.setBlockState(pos, lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_WEST), 11);
         world.setBlockState(pos.east(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_EAST), 11);

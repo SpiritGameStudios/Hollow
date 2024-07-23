@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.main.worldgen;
 
 import com.mojang.serialization.MapCodec;
 import dev.callmeecho.hollow.main.block.PolyporeBlock;
-import dev.callmeecho.hollow.main.registry.HollowTreeDecoratorRegistry;
+import dev.callmeecho.hollow.main.registry.HollowTreeDecoratorRegistrar;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
@@ -27,7 +27,7 @@ public class PolyporeTreeDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> getType() {
-        return HollowTreeDecoratorRegistry.POLYPORE_TREE_DECORATOR;
+        return HollowTreeDecoratorRegistrar.POLYPORE_TREE_DECORATOR;
     }
 
     @Override

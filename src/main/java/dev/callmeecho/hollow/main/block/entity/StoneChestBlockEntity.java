@@ -2,8 +2,8 @@ package dev.callmeecho.hollow.main.block.entity;
 
 import dev.callmeecho.cabinetapi.particle.ParticleSystem;
 import dev.callmeecho.cabinetapi.util.LootableInventoryBlockEntity;
-import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistrar;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
@@ -19,9 +19,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -39,7 +38,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     );
 
     public StoneChestBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityRegistry.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
+        super(HollowBlockEntityRegistrar.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
     }
 
 
@@ -83,9 +82,9 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
         PARTICLE_SYSTEM.tick(world, pos);
     }
 
-    public ActionResult use(PlayerEntity player, Hand hand, Direction side) {
-        if (player.getStackInHand(hand).isEmpty()) return ActionResult.PASS;
-        if (player.getStackInHand(hand).isOf(HollowBlockRegistry.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP)) return ActionResult.PASS;
+    public ItemActionResult use(PlayerEntity player, Hand hand, Direction side) {
+        if (player.getStackInHand(hand).isEmpty()) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        if (player.getStackInHand(hand).isOf(HollowBlockRegistrar.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP)) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 
 
         int slot = -1;
@@ -96,12 +95,12 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
             }
         }
 
-        if (slot == -1) return ActionResult.PASS;
+        if (slot == -1) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 
         setStack(slot, player.getStackInHand(hand));
         notifyListeners();
         player.setStackInHand(hand, ItemStack.EMPTY);
-        return ActionResult.CONSUME;
+        return ItemActionResult.SUCCESS;
     }
 
     @Override
@@ -114,8 +113,13 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt, registryLookup);
-        if (!this.writeLootTable(nbt)) {
-            Inventories.writeNbt(nbt, this.inventory, registryLookup);
-        }
+        if (!this.writeLootTable(nbt)) Inventories.writeNbt(nbt, this.inventory, registryLookup);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        NbtCompound nbtCompound = new NbtCompound();
+        Inventories.writeNbt(nbtCompound, this.inventory, true, registryLookup);
+        return nbtCompound;
     }
 }

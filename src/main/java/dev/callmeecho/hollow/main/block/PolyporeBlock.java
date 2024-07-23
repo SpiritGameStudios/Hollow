@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.main.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.callmeecho.cabinetapi.util.VoxelShapeHelper;
-import dev.callmeecho.hollow.main.registry.HollowTags;
+import dev.callmeecho.hollow.main.HollowTags;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;

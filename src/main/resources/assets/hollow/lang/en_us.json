@@ -59,5 +59,9 @@
   "advancements.adventure.diversity_win.title": "Diversity Win",
   "advancements.adventure.diversity_win.description": "Get one of every dye.",
 
-  "resourcepack.hollow_music": "Hollow Music"
+  "resourcepack.hollow_music": "Hollow Music",
+
+  "config.hollow:config.title": "Hollow",
+  "config.hollow:config.revertCopperBulb": "Revert Copper Bulb",
+  "config.hollow:config.revertCopperBulb.tooltip": "Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this."
 }

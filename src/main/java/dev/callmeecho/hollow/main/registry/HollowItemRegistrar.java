@@ -14,11 +14,11 @@ import static dev.callmeecho.hollow.main.Hollow.GROUP;
 import static dev.callmeecho.hollow.main.Hollow.MODID;
 
 @SuppressWarnings("unused")
-public class HollowItemRegistry implements ItemRegistrar {
-    public static Item FIREFLY_SPAWN_EGG = new SpawnEggItem(HollowEntityTypeRegistry.FIREFLY, 0x102F4E, 0xCAAF94, new Item.Settings().group(GROUP));
+public class HollowItemRegistrar implements ItemRegistrar {
+    public static Item FIREFLY_SPAWN_EGG = new SpawnEggItem(HollowEntityTypeRegistrar.FIREFLY, 0x102F4E, 0xCAAF94, new Item.Settings().group(GROUP));
 
-    public static Item LOTUS_LILYPAD = new PlaceableOnWaterItem(HollowBlockRegistry.LOTUS_LILYPAD, new Item.Settings().group(GROUP));
-    public static Item GIANT_LILYPAD = new GiantLilyPadItem(HollowBlockRegistry.GIANT_LILYPAD, new Item.Settings().group(GROUP));
+    public static Item LOTUS_LILYPAD = new PlaceableOnWaterItem(HollowBlockRegistrar.LOTUS_LILYPAD, new Item.Settings().group(GROUP));
+    public static Item GIANT_LILYPAD = new GiantLilyPadItem(HollowBlockRegistrar.GIANT_LILYPAD, new Item.Settings().group(GROUP));
 
     public static Item MUSIC_DISC_POSTMORTEM = new Item(new Item.Settings().group(GROUP).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MODID, "postmortem"))));
 }

@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.main.worldgen;
 
 import com.mojang.serialization.Codec;
 import dev.callmeecho.hollow.main.block.CattailBlock;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -27,22 +27,22 @@ public class CattailFeature extends Feature<DefaultFeatureConfig> {
         BlockPos pos = origin.withY(world.getTopY(Heightmap.Type.OCEAN_FLOOR, origin.getX(), origin.getZ()));
         if (!world.getBlockState(pos).isOf(Blocks.WATER)) return false;
 
-        world.setBlockState(pos, HollowBlockRegistry.CATTAIL.getDefaultState(), Block.NOTIFY_LISTENERS);
+        world.setBlockState(pos, HollowBlockRegistrar.CATTAIL.getDefaultState(), Block.NOTIFY_LISTENERS);
         pos = pos.up();
 
         while (world.isWater(pos)) {
-            world.setBlockState(pos, HollowBlockRegistry.CATTAIL.getDefaultState().with(CattailBlock.PIECE, CattailBlock.Piece.MIDDLE), Block.NOTIFY_LISTENERS);
+            world.setBlockState(pos, HollowBlockRegistrar.CATTAIL.getDefaultState().with(CattailBlock.PIECE, CattailBlock.Piece.MIDDLE), Block.NOTIFY_LISTENERS);
             pos = pos.up();
         }
 
         int height = random.nextBetween(1, 3);
 
         for (int i = 0; i < height; i++) {
-            world.setBlockState(pos, HollowBlockRegistry.CATTAIL.getDefaultState().with(CattailBlock.PIECE, CattailBlock.Piece.MIDDLE).with(CattailBlock.WATERLOGGED, false), Block.NOTIFY_ALL);
+            world.setBlockState(pos, HollowBlockRegistrar.CATTAIL.getDefaultState().with(CattailBlock.PIECE, CattailBlock.Piece.MIDDLE).with(CattailBlock.WATERLOGGED, false), Block.NOTIFY_ALL);
             pos = pos.up();
         }
 
-        world.setBlockState(pos, HollowBlockRegistry.CATTAIL.getDefaultState().with(CattailBlock.PIECE, CattailBlock.Piece.TOP).with(CattailBlock.WATERLOGGED, false), Block.NOTIFY_ALL);
+        world.setBlockState(pos, HollowBlockRegistrar.CATTAIL.getDefaultState().with(CattailBlock.PIECE, CattailBlock.Piece.TOP).with(CattailBlock.WATERLOGGED, false), Block.NOTIFY_ALL);
 
         return true;
     }

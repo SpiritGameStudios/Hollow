@@ -20,7 +20,7 @@ import net.minecraft.world.BlockView;
 import static dev.callmeecho.hollow.main.Hollow.GROUP;
 
 @SuppressWarnings("unused")
-public class HollowBlockRegistry implements BlockRegistrar {
+public class HollowBlockRegistrar implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG).flammable(), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
     public static final HollowLogBlock OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG).strippedBlock(STRIPPED_OAK_HOLLOW_LOG).flammable(), "oak_log", "stripped_oak_log", "oak_log_top");
 

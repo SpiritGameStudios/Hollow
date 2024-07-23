@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column_horizontal",
   "textures": {
-    "end": "minecraft:block/exposed_chiseled_copper",
+    "end": "hollow:block/exposed_copper_pillar_top",
     "side": "hollow:block/exposed_copper_pillar"
   }
 }

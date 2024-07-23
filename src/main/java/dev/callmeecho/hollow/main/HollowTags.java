@@ -1,6 +1,5 @@
-package dev.callmeecho.hollow.main.registry;
+package dev.callmeecho.hollow.main;
 
-import dev.callmeecho.hollow.main.Hollow;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;

@@ -1,5 +1,6 @@
 package dev.callmeecho.hollow.main;
 
+import dev.callmeecho.cabinetapi.config.ConfigHandler;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.main.entity.FireflyEntity;
@@ -19,30 +20,31 @@ import org.slf4j.LoggerFactory;
 public class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
+    public static final HollowConfig CONFIG = ConfigHandler.getConfig(HollowConfig.class);
     
-    public static final CabinetItemGroup GROUP = new CabinetItemGroup(Identifier.of(MODID, "item_group"), HollowBlockRegistry.BIRCH_HOLLOW_LOG);
+    public static final CabinetItemGroup GROUP = new CabinetItemGroup(Identifier.of(MODID, "item_group"), HollowBlockRegistrar.BIRCH_HOLLOW_LOG);
 
     @Override
     public void onInitialize() {
-        RegistrarHandler.process(HollowSoundEventRegistry.class, MODID);
-        RegistrarHandler.process(HollowBlockRegistry.class, MODID);
-        RegistrarHandler.process(HollowItemRegistry.class, MODID);
-        RegistrarHandler.process(HollowEntityTypeRegistry.class, MODID);
-        RegistrarHandler.process(HollowFeatureRegistry.class, MODID);
-        RegistrarHandler.process(HollowTreeDecoratorRegistry.class, MODID);
-        RegistrarHandler.process(HollowBlockEntityRegistry.class, MODID);
+        RegistrarHandler.process(HollowSoundEventRegistrar.class, MODID);
+        RegistrarHandler.process(HollowBlockRegistrar.class, MODID);
+        RegistrarHandler.process(HollowItemRegistrar.class, MODID);
+        RegistrarHandler.process(HollowEntityTypeRegistrar.class, MODID);
+        RegistrarHandler.process(HollowFeatureRegistrar.class, MODID);
+        RegistrarHandler.process(HollowTreeDecoratorRegistrar.class, MODID);
+        RegistrarHandler.process(HollowBlockEntityRegistrar.class, MODID);
         RegistrarHandler.process(HollowParticleRegistrar.class, MODID);
 
-        FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistry.FIREFLY, FireflyEntity.createFireflyAttributes());
+        FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistrar.FIREFLY, FireflyEntity.createFireflyAttributes());
 
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistry.COPPER_PILLAR, HollowBlockRegistry.EXPOSED_COPPER_PILLAR);
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistry.EXPOSED_COPPER_PILLAR, HollowBlockRegistry.WEATHERED_COPPER_PILLAR);
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistry.WEATHERED_COPPER_PILLAR, HollowBlockRegistry.OXIDIZED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistrar.COPPER_PILLAR, HollowBlockRegistrar.EXPOSED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistrar.EXPOSED_COPPER_PILLAR, HollowBlockRegistrar.WEATHERED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(HollowBlockRegistrar.WEATHERED_COPPER_PILLAR, HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR);
 
-        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.COPPER_PILLAR, HollowBlockRegistry.WAXED_COPPER_PILLAR);
-        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.EXPOSED_COPPER_PILLAR, HollowBlockRegistry.WAXED_EXPOSED_COPPER_PILLAR);
-        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.WEATHERED_COPPER_PILLAR, HollowBlockRegistry.WAXED_WEATHERED_COPPER_PILLAR);
-        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistry.OXIDIZED_COPPER_PILLAR, HollowBlockRegistry.WAXED_OXIDIZED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistrar.COPPER_PILLAR, HollowBlockRegistrar.WAXED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistrar.EXPOSED_COPPER_PILLAR, HollowBlockRegistrar.WAXED_EXPOSED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistrar.WEATHERED_COPPER_PILLAR, HollowBlockRegistrar.WAXED_WEATHERED_COPPER_PILLAR);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR, HollowBlockRegistrar.WAXED_OXIDIZED_COPPER_PILLAR);
 
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();

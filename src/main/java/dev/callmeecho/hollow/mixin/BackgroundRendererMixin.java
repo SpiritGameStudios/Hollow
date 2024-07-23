@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.callmeecho.cabinetapi.util.Easing;
-import dev.callmeecho.hollow.main.registry.HollowTags;
+import dev.callmeecho.hollow.main.HollowTags;
 import net.minecraft.block.enums.CameraSubmersionType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BackgroundRenderer;

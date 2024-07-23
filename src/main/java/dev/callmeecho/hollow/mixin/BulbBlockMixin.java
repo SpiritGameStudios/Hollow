@@ -1,5 +1,8 @@
 package dev.callmeecho.hollow.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import dev.callmeecho.hollow.main.Hollow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BulbBlock;
@@ -19,9 +22,12 @@ public abstract class BulbBlockMixin extends Block {
         super(settings);
     }
 
-    @Redirect(method = "neighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BulbBlock;update(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;)V"))
-    private void updateRedirect(BulbBlock instance, BlockState state, ServerWorld world, BlockPos pos) {
-        world.scheduleBlockTick(pos, instance, 1);
+    @WrapOperation(method = "neighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BulbBlock;update(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;)V"))
+    private void updateRedirect(BulbBlock instance, BlockState state, ServerWorld world, BlockPos pos, Operation<Void> original) {
+        if (Hollow.CONFIG.revertCopperBulb)
+            world.scheduleBlockTick(pos, instance, 1);
+        else
+            original.call(instance, state, world, pos);
     }
 
     @Override

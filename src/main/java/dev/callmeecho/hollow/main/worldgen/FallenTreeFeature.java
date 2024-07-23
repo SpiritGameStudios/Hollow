@@ -3,7 +3,7 @@ package dev.callmeecho.hollow.main.worldgen;
 import com.mojang.serialization.Codec;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.block.PolyporeBlock;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistry;
+import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
@@ -62,7 +62,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
             
             if (random.nextInt(2) != 0 || !context.getWorld().isAir(polyporePos) || !context.getConfig().polypore()) continue;
             
-            BlockState polyporeState = HollowBlockRegistry.POLYPORE.getDefaultState()
+            BlockState polyporeState = HollowBlockRegistrar.POLYPORE.getDefaultState()
                     .with(Properties.HORIZONTAL_FACING, direction)
                     .with(PolyporeBlock.POLYPORE_AMOUNT, random.nextBetween(1, 3));
             context.getWorld().setBlockState(polyporePos, polyporeState, 2);
