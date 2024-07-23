@@ -59,7 +59,6 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
         builder.add(Properties.AXIS, WATERLOGGED, MOSSY);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean hasSidedTransparency(BlockState state) {
         return true;
@@ -79,13 +78,11 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
                 .with(MOSSY, (above == Blocks.MOSS_CARPET) || (above == Blocks.MOSS_BLOCK));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
@@ -100,7 +97,6 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(AXIS)) {

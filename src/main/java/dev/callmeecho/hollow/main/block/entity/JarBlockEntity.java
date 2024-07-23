@@ -6,12 +6,17 @@ import dev.callmeecho.hollow.main.Hollow;
 import dev.callmeecho.hollow.main.registry.HollowBlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class JarBlockEntity extends InventoryBlockEntity implements DefaultedInventory {
     public JarBlockEntity(BlockPos pos, BlockState state) {
@@ -61,5 +66,25 @@ public class JarBlockEntity extends InventoryBlockEntity implements DefaultedInv
         setStack(slot, player.getStackInHand(hand));
         notifyListeners();
         player.setStackInHand(hand, ItemStack.EMPTY);
+    }
+
+    @Override
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        this.inventory.clear();
+        super.readNbt(nbt, registryLookup);
+        Inventories.readNbt(nbt, this.inventory, registryLookup);
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        Inventories.writeNbt(nbt, this.inventory, registryLookup);
+        super.writeNbt(nbt, registryLookup);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        NbtCompound nbtCompound = new NbtCompound();
+        Inventories.writeNbt(nbtCompound, this.inventory, true, registryLookup);
+        return nbtCompound;
     }
 }

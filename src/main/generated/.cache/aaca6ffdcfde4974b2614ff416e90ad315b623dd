@@ -1,4 +1,4 @@
-// 1.21	2024-07-21T17:34:39.237619428	Hollow/Recipes
+// 1.21	2024-07-23T13:42:59.602756772	Hollow/Recipes
 b57f88f72e95833b60c8542414b4be5648250109 data/hollow/recipe/cherry_hollow_log.json
 c4216acb498cb863a7645e02d9219cbfde20506d data/hollow/recipe/dark_oak_hollow_log.json
 d590c7c8dd99b9643c78957a003fb3fdfa8b6443 data/hollow/recipe/waxed_weathered_copper_pillar_from_honeycomb.json
@@ -35,8 +35,8 @@ d389b1511f5cc448cb8a3f7a94bcedc38e1adcb4 data/hollow/recipe/waxed_oxidized_coppe
 0386dbc7b5085c01cad516dfdc100fcc05a0a5a0 data/hollow/recipe/waxed_exposed_copper_pillar.json
 24107c9e565dc528690d1a2190d2d65b4797d9e0 data/hollow/recipe/waxed_weathered_copper_pillar.json
 d247894543535898868fd9b7469e964a4b8654d8 data/hollow/advancement/recipes/building_blocks/waxed_oxidized_copper_pillar_from_honeycomb.json
-3497750d81a735841c42797b8712223d046e58ad data/hollow/advancement/recipes/building_blocks/waxed_copper_pillar.json
 49f32d58ee7db29e51b2403a7120442adbdf6961 data/hollow/recipe/oxidized_copper_pillar.json
+3497750d81a735841c42797b8712223d046e58ad data/hollow/advancement/recipes/building_blocks/waxed_copper_pillar.json
 ce35c85fe42569627505c4fd719f10ac7b7d6754 data/hollow/recipe/waxed_copper_pillar_from_honeycomb.json
 fd96af7659d28b8bf937d3297087ea5aee0a71f9 data/hollow/advancement/recipes/building_blocks/waxed_weathered_copper_pillar.json
 b14da95db904b166a40e1ac36fce07c9223b3f34 data/hollow/advancement/recipes/building_blocks/copper_pillar.json
