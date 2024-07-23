@@ -5,7 +5,6 @@ import dev.callmeecho.hollow.main.block.OxidizablePillarBlock;
 import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;

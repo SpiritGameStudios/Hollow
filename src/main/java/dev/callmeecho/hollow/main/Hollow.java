@@ -1,5 +1,6 @@
 package dev.callmeecho.hollow.main;
 
+import dev.callmeecho.cabinetapi.config.ConfigHandler;
 import dev.callmeecho.cabinetapi.item.CabinetItemGroup;
 import dev.callmeecho.cabinetapi.registry.RegistrarHandler;
 import dev.callmeecho.hollow.main.entity.FireflyEntity;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 public class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
+    public static final HollowConfig CONFIG = ConfigHandler.getConfig(HollowConfig.class);
     
     public static final CabinetItemGroup GROUP = new CabinetItemGroup(Identifier.of(MODID, "item_group"), HollowBlockRegistrar.BIRCH_HOLLOW_LOG);
 

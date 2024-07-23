@@ -1,8 +1,11 @@
 package dev.callmeecho.hollow.client;
 
+import dev.callmeecho.cabinetapi.client.ModMenuHelper;
 import dev.callmeecho.cabinetapi.util.ReflectionHelper;
 import dev.callmeecho.hollow.client.render.entity.FireflyEntityRenderer;
 import dev.callmeecho.hollow.client.render.entity.JarBlockEntityRenderer;
+import dev.callmeecho.hollow.main.Hollow;
+import dev.callmeecho.hollow.main.HollowConfig;
 import dev.callmeecho.hollow.main.block.HollowLogBlock;
 import dev.callmeecho.hollow.main.particle.FireflyJarParticle;
 import dev.callmeecho.hollow.main.registry.*;
@@ -44,5 +47,7 @@ public class HollowClient implements ClientModInitializer {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItemRegistrar.GIANT_LILYPAD);
 
         ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
+
+        ModMenuHelper.addConfig(Hollow.MODID, HollowConfig.class);
     }
 }
