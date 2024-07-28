@@ -1,8 +1,8 @@
 package dev.callmeecho.hollow.datagen;
 
-import dev.callmeecho.hollow.main.block.HollowLogBlock;
-import dev.callmeecho.hollow.main.block.OxidizablePillarBlock;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
+import dev.callmeecho.hollow.block.HollowLogBlock;
+import dev.callmeecho.hollow.block.OxidizablePillarBlock;
+import dev.callmeecho.hollow.registry.HollowBlockRegistrar;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;

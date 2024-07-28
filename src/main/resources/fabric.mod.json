@@ -17,13 +17,16 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "dev.callmeecho.hollow.client.HollowClient"
+      "dev.callmeecho.hollow.HollowClient"
     ],
     "main": [
-      "dev.callmeecho.hollow.main.Hollow"
+      "dev.callmeecho.hollow.Hollow"
     ],
     "fabric-datagen": [
       "dev.callmeecho.hollow.datagen.HollowDatagen"
+    ],
+    "dynamiclights": [
+      "dev.callmeecho.hollow.HollowDynamicLights"
     ]
   },
   "mixins": [

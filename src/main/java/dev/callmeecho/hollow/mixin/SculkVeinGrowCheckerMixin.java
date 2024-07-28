@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
+import dev.callmeecho.hollow.registry.HollowBlockRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkVeinBlock;

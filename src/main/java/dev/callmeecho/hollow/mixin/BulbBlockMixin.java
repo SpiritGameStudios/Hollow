@@ -2,7 +2,7 @@ package dev.callmeecho.hollow.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.callmeecho.hollow.main.Hollow;
+import dev.callmeecho.hollow.Hollow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BulbBlock;

@@ -1,8 +1,8 @@
 package dev.callmeecho.hollow.mixin;
 
 
-import dev.callmeecho.hollow.main.block.SculkJawBlock;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
+import dev.callmeecho.hollow.block.SculkJawBlock;
+import dev.callmeecho.hollow.registry.HollowBlockRegistrar;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
