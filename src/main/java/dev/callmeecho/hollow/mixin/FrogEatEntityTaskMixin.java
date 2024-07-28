@@ -1,7 +1,7 @@
 package dev.callmeecho.hollow.mixin;
 
-import dev.callmeecho.hollow.main.Hollow;
-import dev.callmeecho.hollow.main.entity.FireflyEntity;
+import dev.callmeecho.hollow.Hollow;
+import dev.callmeecho.hollow.entity.FireflyEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.brain.task.FrogEatEntityTask;
 import net.minecraft.entity.effect.StatusEffectInstance;

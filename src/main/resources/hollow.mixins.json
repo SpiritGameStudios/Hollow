@@ -11,9 +11,6 @@
     "SculkBlockMixin",
     "SculkVeinGrowCheckerMixin"
   ],
-  "client": [
-    "BackgroundRendererMixin"
-  ],
   "injectors": {
     "defaultRequire": 1
   }

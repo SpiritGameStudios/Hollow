@@ -22,7 +22,13 @@ val mod = ModInfo()
 val deps = Dependencies()
 
 loom {
+    splitEnvironmentSourceSets()
     accessWidenerPath = file("src/main/resources/hollow.accesswidener")
+
+    mods.create(mod.id) {
+        sourceSet(sourceSets.getByName("main"))
+        sourceSet(sourceSets.getByName("client"))
+    }
 }
 
 fabricApi {
@@ -32,6 +38,7 @@ fabricApi {
 repositories {
     maven("https://maven.callmeecho.dev/releases/")
     maven("https://maven.terraformersmc.com/releases/")
+    maven("https://api.modrinth.com/maven/")
 }
 
 dependencies {
@@ -43,8 +50,8 @@ dependencies {
     include("dev.callmeecho:cabinetapi:${deps.cabinetApi}")
     modImplementation("dev.callmeecho:cabinetapi:${deps.cabinetApi}")
 
-    // not ported
-    // modCompileOnly("maven.modrinth:lambdynamiclights:2.3.2+1.20.1")
+    // will be switched back to lambdynamiclights once it's updated
+    modCompileOnly("maven.modrinth:ryoamiclights:0.2.9+mc1.21-fabric")
 }
 
 tasks.processResources {

@@ -2,9 +2,9 @@ package dev.callmeecho.hollow.datagen;
 
 import com.google.common.collect.ImmutableMap;
 import dev.callmeecho.cabinetapi.util.ReflectionHelper;
-import dev.callmeecho.hollow.main.block.GiantLilyPadBlock;
-import dev.callmeecho.hollow.main.block.HollowLogBlock;
-import dev.callmeecho.hollow.main.registry.HollowBlockRegistrar;
+import dev.callmeecho.hollow.block.GiantLilyPadBlock;
+import dev.callmeecho.hollow.block.HollowLogBlock;
+import dev.callmeecho.hollow.registry.HollowBlockRegistrar;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.Direction;
 import java.util.Map;
 import java.util.Optional;
 
-import static dev.callmeecho.hollow.main.Hollow.MODID;
+import static dev.callmeecho.hollow.Hollow.MODID;
 
 public class ModelProvider extends FabricModelProvider {
     public static final Model HOLLOW_LOG = new Model(Optional.of(Identifier.of(MODID, "block/" + "hollow_log_template")), Optional.empty(), TextureKey.SIDE, TextureKey.INSIDE, TextureKey.END);
