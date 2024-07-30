@@ -30,7 +30,11 @@
     ]
   },
   "mixins": [
-    "hollow.mixins.json"
+    "hollow.mixins.json",
+    {
+      "config": "hollow.client.mixins.json",
+      "environment": "client"
+    }
   ],
   "accessWidener": "hollow.accesswidener",
   "depends": {
