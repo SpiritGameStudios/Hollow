@@ -17,16 +17,16 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "dev.callmeecho.hollow.HollowClient"
+      "dev.spiritstudios.hollow.HollowClient"
     ],
     "main": [
-      "dev.callmeecho.hollow.Hollow"
+      "dev.spiritstudios.hollow.Hollow"
     ],
     "fabric-datagen": [
-      "dev.callmeecho.hollow.datagen.HollowDatagen"
+      "dev.spiritstudios.hollow.datagen.HollowDatagen"
     ],
     "dynamiclights": [
-      "dev.callmeecho.hollow.HollowDynamicLights"
+      "dev.spiritstudios.hollow.HollowDynamicLights"
     ]
   },
   "mixins": [
@@ -42,6 +42,6 @@
     "minecraft": "~${minecraft_version}",
     "fabric-api": "*",
     "java": ">=21",
-    "cabinetapi": "*"
+    "specter": "*"
   }
 }

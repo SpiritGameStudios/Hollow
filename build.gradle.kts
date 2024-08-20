@@ -15,7 +15,7 @@ class Dependencies {
     val yarn = property("deps.yarn").toString()
 
     val fabricApi = property("deps.fabricapi").toString()
-    val cabinetApi = property("deps.cabinetapi").toString()
+    val specter = property("deps.specter").toString()
 }
 
 val mod = ModInfo()
@@ -36,7 +36,7 @@ fabricApi {
 }
 
 repositories {
-    maven("https://maven.callmeecho.dev/releases/")
+    maven("https://maven.callmeecho.dev/snapshots/")
     maven("https://maven.terraformersmc.com/releases/")
     maven("https://api.modrinth.com/maven/")
 }
@@ -47,8 +47,20 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${deps.loader}")
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fabricApi}")
-    include("dev.callmeecho:cabinetapi:${deps.cabinetApi}")
-    modImplementation("dev.callmeecho:cabinetapi:${deps.cabinetApi}")
+
+    fun specterModule(name: String) {
+        include("dev.spiritstudios.specter:specter-$name:${deps.specter}")
+        modImplementation("dev.spiritstudios.specter:specter-$name:${deps.specter}")
+    }
+
+    specterModule("api")
+    specterModule("core")
+    specterModule("config")
+    specterModule("item")
+    specterModule("block")
+    specterModule("registry")
+    specterModule("render")
+    specterModule("biome")
 
     // will be switched back to lambdynamiclights once it's updated
     modCompileOnly("maven.modrinth:ryoamiclights:0.2.9+mc1.21-fabric")

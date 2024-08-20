@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "W": {
-      "tag": "minecraft:planks"
+      "item": "hollow:polypore"
     },
     "G": {
       "item": "minecraft:glass"
