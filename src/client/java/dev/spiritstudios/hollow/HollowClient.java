@@ -54,54 +54,5 @@ public class HollowClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
 
         ModMenuHelper.addConfig(Hollow.MODID, HollowConfig.class);
-
-        if (!Hollow.CONFIG.music) {
-            BiomeEffectsModificationManager.register(
-                    List.of(BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST),
-                    new BiomeEffectsModification.Builder()
-                            .waterColor(0x43D5EE)
-                            .waterFogColor(0x41f33)
-                            .build(List.of(BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST))
-            );
-
-            return;
-        }
-
-        BiomeEffectsModificationManager.register(
-                List.of(BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST),
-                new BiomeEffectsModification.Builder()
-                        .waterColor(0x43D5EE)
-                        .waterFogColor(0x41f33)
-                        .music(new MusicSound(
-                                Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_BIRCH_FOREST),
-                                12000,
-                                24000,
-                                false
-                        )).build(List.of(BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST))
-        );
-
-        BiomeEffectsModificationManager.register(
-                List.of(BiomeKeys.SWAMP, BiomeKeys.MANGROVE_SWAMP),
-                new BiomeEffectsModification.Builder()
-                        .music(new MusicSound(
-                                Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_SWAMP),
-                                12000,
-                                24000,
-                                false
-                        )).build(List.of(BiomeKeys.SWAMP, BiomeKeys.MANGROVE_SWAMP))
-        );
-
-        BiomeEffectsModificationManager.register(
-                BiomeKeys.DEEP_DARK,
-                new BiomeEffectsModification.Builder()
-                        .music(new MusicSound(
-                                Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_DEEP_DARK),
-                                12000,
-                                24000,
-                                false
-                        )).build(List.of(BiomeKeys.DEEP_DARK))
-        );
-
-
     }
 }

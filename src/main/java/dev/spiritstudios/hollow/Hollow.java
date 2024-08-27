@@ -4,7 +4,6 @@ import dev.spiritstudios.hollow.entity.FireflyEntity;
 import dev.spiritstudios.hollow.registry.*;
 import dev.spiritstudios.hollow.worldgen.HollowBiomeModifications;
 import dev.spiritstudios.specter.api.config.ConfigManager;
-import dev.spiritstudios.specter.api.item.SpecterItemGroup;
 import dev.spiritstudios.specter.api.registry.registration.Registrar;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -17,8 +16,6 @@ public class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
     public static final HollowConfig CONFIG = ConfigManager.getConfig(HollowConfig.class);
-    
-    public static final SpecterItemGroup GROUP = new SpecterItemGroup(Identifier.of(MODID, "item_group"), HollowBlockRegistrar.BIRCH_HOLLOW_LOG);
 
     @Override
     public void onInitialize() {
@@ -35,7 +32,5 @@ public class Hollow implements ModInitializer {
 
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
-        
-        GROUP.init();
     }
 }

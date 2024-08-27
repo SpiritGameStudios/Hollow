@@ -45,17 +45,17 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
             createCuboidShape(1, 1, 1, 16, 16, 15),
             createCuboidShape(0, 0, 0, 16, 1, 16)
     );
-    public static final VoxelShape SHAPE_LEFT_EAST = VoxelShapeHelper.rotate(Direction.EAST, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_SOUTH = VoxelShapeHelper.rotate(Direction.SOUTH, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_WEST = VoxelShapeHelper.rotate(Direction.WEST, Direction.NORTH, SHAPE_LEFT_NORTH);
+    public static final VoxelShape SHAPE_LEFT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_LEFT_NORTH);
+    public static final VoxelShape SHAPE_LEFT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_LEFT_NORTH);
+    public static final VoxelShape SHAPE_LEFT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_LEFT_NORTH);
     
     public static final VoxelShape SHAPE_RIGHT_NORTH = VoxelShapes.union(
             createCuboidShape(0, 1, 1, 15, 16, 15),
             createCuboidShape(0, 0, 0, 16, 1, 16)
     );
-    public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotate(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotate(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotate(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
     
     public StoneChestBlock(Settings settings) {
         super(settings);

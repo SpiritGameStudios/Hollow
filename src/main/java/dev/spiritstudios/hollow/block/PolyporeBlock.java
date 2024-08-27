@@ -23,9 +23,9 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     public static final IntProperty POLYPORE_AMOUNT = IntProperty.of("amount", 1, 3);
     
     public static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(1, 1, 8, 15, 15, 16);
-    public static final VoxelShape SHAPE_SOUTH = VoxelShapeHelper.rotate(Direction.SOUTH, Direction.NORTH, SHAPE_NORTH);
-    public static final VoxelShape SHAPE_EAST = VoxelShapeHelper.rotate(Direction.EAST, Direction.NORTH, SHAPE_NORTH);
-    public static final VoxelShape SHAPE_WEST = VoxelShapeHelper.rotate(Direction.WEST, Direction.NORTH, SHAPE_NORTH);
+    public static final VoxelShape SHAPE_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_NORTH);
+    public static final VoxelShape SHAPE_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_NORTH);
+    public static final VoxelShape SHAPE_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_NORTH);
 
     public static final MapCodec<PolyporeBlock> CODEC = createCodec(PolyporeBlock::new);
 

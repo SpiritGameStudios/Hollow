@@ -1,5 +1,5 @@
 {
-  "itemGroup.hollow.item_group": "Hollow",
+  "item_group.hollow": "Hollow",
   
   "block.hollow.oak_hollow_log": "Hollow Oak Log",
   "block.hollow.stripped_oak_hollow_log": "Hollow Stripped Oak Log",

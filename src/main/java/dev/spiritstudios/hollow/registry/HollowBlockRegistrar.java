@@ -17,8 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-import static dev.spiritstudios.hollow.Hollow.GROUP;
-
 @SuppressWarnings("unused")
 public class HollowBlockRegistrar implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
@@ -244,12 +242,4 @@ public class HollowBlockRegistrar implements BlockRegistrar {
 
     @NoBlockItem
     public static final Block POTTED_ROOTED_ORCHID = Blocks.createFlowerPotBlock(ROOTED_ORCHID);
-
-    @Override
-    public void registerBlockItem(Block block, String namespace, String name) {
-        BlockItem item = new BlockItem(block, new Item.Settings());
-        Registry.register(Registries.ITEM, Identifier.of(namespace, name), item);
-
-        GROUP.addItem(item);
-    }
 }

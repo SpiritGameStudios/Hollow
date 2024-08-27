@@ -28,14 +28,14 @@ public class StoneChestLidBlock extends Block {
     public static final VoxelShape SHAPE_SINGLE = Block.createCuboidShape(1, 0, 1, 15, 4, 15);
     
     public static final VoxelShape SHAPE_LEFT_NORTH = Block.createCuboidShape(1, 0, 1, 16, 4, 15);
-    public static final VoxelShape SHAPE_LEFT_EAST = VoxelShapeHelper.rotate(Direction.EAST, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_SOUTH = VoxelShapeHelper.rotate(Direction.SOUTH, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_WEST = VoxelShapeHelper.rotate(Direction.WEST, Direction.NORTH, SHAPE_LEFT_NORTH);
+    public static final VoxelShape SHAPE_LEFT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_LEFT_NORTH);
+    public static final VoxelShape SHAPE_LEFT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_LEFT_NORTH);
+    public static final VoxelShape SHAPE_LEFT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_LEFT_NORTH);
     
     public static final VoxelShape SHAPE_RIGHT_NORTH = Block.createCuboidShape(0, 0, 1, 15, 4, 15);
-    public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotate(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotate(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotate(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
     
     public StoneChestLidBlock(Settings settings) {
         super(settings);
