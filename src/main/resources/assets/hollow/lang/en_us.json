@@ -1,6 +1,5 @@
 {
-  "item_group.hollow": "Hollow",
-  
+  "item_group.hollow.hollow": "Hollow",
   "block.hollow.oak_hollow_log": "Hollow Oak Log",
   "block.hollow.stripped_oak_hollow_log": "Hollow Stripped Oak Log",
   "block.hollow.spruce_hollow_log": "Hollow Spruce Log",
@@ -21,17 +20,14 @@
   "block.hollow.stripped_mangrove_hollow_log": "Hollow Stripped Mangrove Log",
   "block.hollow.cherry_hollow_log": "Hollow Cherry Log",
   "block.hollow.stripped_cherry_hollow_log": "Hollow Stripped Cherry Log",
-
   "block.hollow.copper_pillar": "Copper Pillar",
   "block.hollow.exposed_copper_pillar": "Exposed Copper Pillar",
   "block.hollow.weathered_copper_pillar": "Weathered Copper Pillar",
   "block.hollow.oxidized_copper_pillar": "Oxidized Copper Pillar",
-
   "block.hollow.waxed_copper_pillar": "Waxed Copper Pillar",
   "block.hollow.waxed_exposed_copper_pillar": "Waxed Exposed Copper Pillar",
   "block.hollow.waxed_weathered_copper_pillar": "Waxed Weathered Copper Pillar",
   "block.hollow.waxed_oxidized_copper_pillar": "Waxed Oxidized Copper Pillar",
-  
   "block.hollow.paeonia": "Paeonia",
   "block.hollow.rooted_orchid": "Rooted Orchid",
   "block.hollow.campion": "Campion",
@@ -47,23 +43,57 @@
   "block.hollow.stone_chest_lid": "Stone Chest Lid",
   "block.hollow.root_vines": "Root Vines",
   "block.hollow.cattail": "Cattail",
-
   "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
-
   "item.hollow.firefly_spawn_egg": "Firefly Spawn Egg",
   "item.hollow.music_disc_postmortem": "Music Disc",
-
+  "item.hollow.copper_horn": "Copper Horn",
   "jukebox_song.hollow.postmortem": "WorldWidePixel - Postmortem",
-
   "subtitles.block.sculk_jaw.bite": "Sculk Jaw bites",
-  
   "advancements.adventure.diversity_win.title": "Diversity Win",
   "advancements.adventure.diversity_win.description": "Get one of every dye.",
-
   "resourcepack.hollow_music": "Hollow Music",
-
   "config.hollow:config.title": "Hollow",
   "config.hollow:config.revertCopperBulb": "Revert Copper Bulb",
-  "config.hollow:config.revertCopperBulb.tooltip": "Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this."
+  "config.hollow:config.revertCopperBulb.tooltip": "Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this.",
+  "copper_horn.great_sky_falling": "Great Sky Falling",
+  "copper_horn.old_hymn_resting": "Old Hymn Resting",
+  "copper_horn.pure_water_desire": "Pure Water Desire",
+  "copper_horn.humble_fire_memory": "Humble Fire Memory",
+  "copper_horn.dry_urge_anger": "Dry Urge Anger",
+  "copper_horn.clear_temper_journey": "Clear Temper Journey",
+  "copper_horn.fresh_nest_thought": "Fresh Nest Thought",
+  "copper_horn.secret_lake_tear": "Secret Lake Tear",
+  "copper_horn.fearless_river_gift": "Fearless River Gift",
+  "copper_horn.sweet_moon_love": "Sweet Moon Love",
+  "subtitles.copper_horn.great": "Great",
+  "subtitles.copper_horn.sky": "Sky",
+  "subtitles.copper_horn.falling": "Falling",
+  "subtitles.copper_horn.old": "Old",
+  "subtitles.copper_horn.hymn": "Hymn",
+  "subtitles.copper_horn.resting": "Resting",
+  "subtitles.copper_horn.pure": "Pure",
+  "subtitles.copper_horn.water": "Water",
+  "subtitles.copper_horn.desire": "Desire",
+  "subtitles.copper_horn.humble": "Humble",
+  "subtitles.copper_horn.fire": "Fire",
+  "subtitles.copper_horn.memory": "Memory",
+  "subtitles.copper_horn.dry": "Dry",
+  "subtitles.copper_horn.urge": "Urge",
+  "subtitles.copper_horn.anger": "Anger",
+  "subtitles.copper_horn.clear": "Clear",
+  "subtitles.copper_horn.temper": "Temper",
+  "subtitles.copper_horn.journey": "Journey",
+  "subtitles.copper_horn.fresh": "Fresh",
+  "subtitles.copper_horn.nest": "Nest",
+  "subtitles.copper_horn.thought": "Thought",
+  "subtitles.copper_horn.secret": "Secret",
+  "subtitles.copper_horn.lake": "Lake",
+  "subtitles.copper_horn.tear": "Tear",
+  "subtitles.copper_horn.fearless": "Fearless",
+  "subtitles.copper_horn.river": "River",
+  "subtitles.copper_horn.gift": "Gift",
+  "subtitles.copper_horn.sweet": "Sweet",
+  "subtitles.copper_horn.moon": "Moon",
+  "subtitles.copper_horn.love": "Love"
 }

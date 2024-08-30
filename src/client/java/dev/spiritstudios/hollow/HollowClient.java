@@ -1,32 +1,27 @@
 package dev.spiritstudios.hollow;
 
+import dev.spiritstudios.hollow.block.HollowLogBlock;
+import dev.spiritstudios.hollow.particle.FireflyJarParticle;
 import dev.spiritstudios.hollow.registry.*;
 import dev.spiritstudios.hollow.render.entity.FireflyEntityRenderer;
 import dev.spiritstudios.hollow.render.entity.JarBlockEntityRenderer;
-import dev.spiritstudios.hollow.block.HollowLogBlock;
-import dev.spiritstudios.hollow.particle.FireflyJarParticle;
 import dev.spiritstudios.specter.api.ModMenuHelper;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
-import dev.spiritstudios.specter.api.biome.BiomeEffectsModification;
-import dev.spiritstudios.specter.api.biome.BiomeEffectsModificationManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.registry.Registries;
-import net.minecraft.sound.MusicSound;
-import net.minecraft.world.biome.BiomeKeys;
-
-import java.util.List;
+import net.minecraft.util.Identifier;
 
 public class HollowClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(HollowEntityTypeRegistrar.FIREFLY, FireflyEntityRenderer::new);
-        
+
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.PAEONIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.LOTUS_LILYPAD, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.GIANT_LILYPAD, RenderLayer.getCutout());
@@ -40,6 +35,12 @@ public class HollowClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.CATTAIL, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.ROOTED_ORCHID, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.POTTED_ROOTED_ORCHID, RenderLayer.getCutout());
+
+        ModelPredicateProviderRegistry.register(
+                HollowItemRegistrar.COPPER_HORN,
+                Identifier.ofVanilla("tooting"),
+                (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F
+        );
 
         ReflectionHelper.forEachStaticField(HollowBlockRegistrar.class, HollowLogBlock.class, (block, name, field) -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
 

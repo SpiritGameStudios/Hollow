@@ -60,7 +60,8 @@ dependencies {
     specterModule("block")
     specterModule("registry")
     specterModule("render")
-    specterModule("biome")
+
+//    localRuntime("dev.spiritstudios.specter:specter-debug:${deps.specter}")
 
     // will be switched back to lambdynamiclights once it's updated
     modCompileOnly("maven.modrinth:ryoamiclights:0.2.9+mc1.21-fabric")

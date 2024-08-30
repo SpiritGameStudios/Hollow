@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.registry;
 
+import dev.spiritstudios.hollow.item.CopperHornItem;
 import dev.spiritstudios.hollow.item.GiantLilyPadItem;
 import dev.spiritstudios.specter.api.registry.registration.ItemRegistrar;
 import net.minecraft.item.Item;
@@ -20,4 +21,6 @@ public class HollowItemRegistrar implements ItemRegistrar {
     public static Item GIANT_LILYPAD = new GiantLilyPadItem(HollowBlockRegistrar.GIANT_LILYPAD, new Item.Settings());
 
     public static Item MUSIC_DISC_POSTMORTEM = new Item(new Item.Settings().maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(MODID, "postmortem"))));
+
+    public static Item COPPER_HORN = new CopperHornItem(new Item.Settings().maxCount(1));
 }

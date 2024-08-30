@@ -1,15 +1,18 @@
 package dev.spiritstudios.hollow.datagen;
 
-import com.mojang.datafixers.util.Either;
 import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowDataComponentRegistrar;
 import dev.spiritstudios.hollow.registry.HollowItemRegistrar;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
 import dev.spiritstudios.specter.api.item.datagen.SpecterItemGroupProvider;
-import dev.spiritstudios.specter.api.item.DataItemGroup;
+import dev.spiritstudios.specter.impl.item.DataItemGroup;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
+import net.minecraft.component.ComponentChanges;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 
@@ -25,26 +28,59 @@ public class ItemGroupProvider extends SpecterItemGroupProvider {
         super(dataOutput, registriesFuture);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Override
     protected void configure(BiConsumer<Identifier, DataItemGroup> provider, RegistryWrapper.WrapperLookup lookup) {
         List<ItemStack> items = new ArrayList<>();
+        for (HollowDataComponentRegistrar.CopperInstrument instrument : HollowDataComponentRegistrar.CopperInstrument.values()) {
+            items.add(
+                    new ItemStack(
+                            Registries.ITEM.getEntry(HollowItemRegistrar.COPPER_HORN),
+                            1,
+                            ComponentChanges.builder()
+                                    .add(HollowDataComponentRegistrar.COPPER_INSTRUMENT, instrument)
+                                    .build()
+                    )
+            );
+        }
+
+        generate((id, data) -> {
+                    List<ItemStack> itemStacks = new ArrayList<>(data.items().stream().map(ItemConvertible::asItem).map(Item::getDefaultStack).toList());
+                    itemStacks.addAll(items);
+
+                    provider.accept(
+                            id,
+                            new DataItemGroup(
+                                    id.toTranslationKey("item_group"),
+                                    data.icon(),
+                                    itemStacks
+                            )
+                    );
+                },
+                lookup
+        );
+    }
+
+    @Override
+    protected void generate(BiConsumer<Identifier, ItemGroupData> provider, RegistryWrapper.WrapperLookup lookup) {
+        List<ItemConvertible> items = new ArrayList<>();
         ReflectionHelper.forEachStaticField(
                 HollowBlockRegistrar.class,
                 Block.class,
                 (block, name, field) -> {
                     ItemStack stack = new ItemStack(block.asItem());
-                    if (!stack.isEmpty()) items.add(stack);
+                    if (!stack.isEmpty()) items.add(block);
                 }
         );
-        items.add(new ItemStack(HollowItemRegistrar.FIREFLY_SPAWN_EGG));
-        items.add(new ItemStack(HollowItemRegistrar.MUSIC_DISC_POSTMORTEM));
+        items.add(HollowItemRegistrar.FIREFLY_SPAWN_EGG);
+        items.add(HollowItemRegistrar.MUSIC_DISC_POSTMORTEM);
 
         provider.accept(
                 Identifier.of(MODID, "hollow"),
-                new DataItemGroup(
-                        "item_group.hollow",
-                        new ItemStack(HollowBlockRegistrar.BIRCH_HOLLOW_LOG),
-                        items.stream().map(Either::<Item, ItemStack>right).toList()
+                ItemGroupData.of(
+                        Identifier.of(MODID, "hollow"),
+                        HollowBlockRegistrar.BIRCH_HOLLOW_LOG,
+                        items
                 )
         );
     }

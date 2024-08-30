@@ -183,7 +183,77 @@
     {
       "count": 1,
       "id": "hollow:music_disc_postmortem"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "great_sky_falling"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "old_hymn_resting"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "pure_water_desire"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "humble_fire_memory"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "dry_urge_anger"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "clear_temper_journey"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "fresh_nest_thought"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "secret_lake_tear"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "fearless_river_gift"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
+    },
+    {
+      "components": {
+        "hollow:copper_instrument": "sweet_moon_love"
+      },
+      "count": 1,
+      "id": "hollow:copper_horn"
     }
   ],
-  "translate": "item_group.hollow"
+  "translate": "item_group.hollow.hollow"
 }
