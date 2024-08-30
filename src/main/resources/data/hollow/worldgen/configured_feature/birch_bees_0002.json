@@ -6,10 +6,11 @@
         "type": "hollow:branch_tree_decorator",
         "provider": {
           "type": "minecraft:simple_state_provider",
-            "state": {
-                "Name": "minecraft:birch_log"
-            }
-        }
+          "state": {
+            "Name": "minecraft:birch_log"
+          }
+        },
+        "probability": 0.5
       },
       {
         "type": "hollow:polypore_tree_decorator",

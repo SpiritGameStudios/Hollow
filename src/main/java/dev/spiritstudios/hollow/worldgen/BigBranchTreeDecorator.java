@@ -1,6 +1,8 @@
 package dev.spiritstudios.hollow.worldgen;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.registry.HollowTreeDecoratorRegistrar;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
@@ -13,15 +15,16 @@ import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class BigBranchTreeDecorator extends TreeDecorator {
-    public static final MapCodec<BigBranchTreeDecorator> CODEC = BlockStateProvider.TYPE_CODEC
-            .fieldOf("provider")
-            .xmap(BigBranchTreeDecorator::new, decorator -> decorator.stateProvider);
-
-    public BigBranchTreeDecorator(BlockStateProvider stateProvider) {
-        this.stateProvider = stateProvider;
-    }
-
+    public static final MapCodec<BigBranchTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            BlockStateProvider.TYPE_CODEC.fieldOf("provider").forGetter(decorator -> decorator.stateProvider),
+            Codec.floatRange(0.0F, 1.0F).fieldOf("probability").forGetter(decorator -> decorator.probability)
+    ).apply(instance, BigBranchTreeDecorator::new));
     public final BlockStateProvider stateProvider;
+    public final float probability;
+    public BigBranchTreeDecorator(BlockStateProvider stateProvider, float probability) {
+        this.stateProvider = stateProvider;
+        this.probability = probability;
+    }
 
     @Override
     protected TreeDecoratorType<?> getType() {
@@ -33,11 +36,9 @@ public class BigBranchTreeDecorator extends TreeDecorator {
         Random random = generator.getRandom();
         ObjectArrayList<BlockPos> logs = generator.getLogPositions();
 
-        if (random.nextBoolean()) return;
+        if (random.nextFloat() > probability) return;
 
-        boolean hasBranch = false;
         for (BlockPos pos : logs) {
-            if (hasBranch) break;
             if (pos.getY() < (logs.getFirst().getY() + logs.getLast().getY()) / 2) continue;
 
             Direction direction = Direction.fromHorizontal(random.nextInt(4));
@@ -46,22 +47,24 @@ public class BigBranchTreeDecorator extends TreeDecorator {
             if (!generator.isAir(branch)) continue;
 
             BlockState state = stateProvider.get(random, branch);
-            if (state.contains(Properties.AXIS)) state = state.with(Properties.AXIS, direction.getAxis());
+            state = state.withIfExists(Properties.AXIS, direction.getAxis());
+
             generator.replace(branch, state);
+
             branch = branch.offset(direction);
             generator.replace(branch, state);
 
-            if (state.contains(Properties.AXIS)) state = state.with(Properties.AXIS, Direction.Axis.Y);
+            state = state.withIfExists(Properties.AXIS, Direction.Axis.Y);
 
             for (int i = 0; i < 10; i++) {
-                BlockPos branch2 = branch.up();
-                if (!generator.isAir(branch2)) break;
+                BlockPos upperBranch = branch.up();
+                if (!generator.isAir(upperBranch)) break;
 
-                generator.replace(branch2, state);
-                branch = branch2;
+                generator.replace(upperBranch, state);
+                branch = upperBranch;
             }
 
-            hasBranch = true;
+            break;
         }
     }
 }

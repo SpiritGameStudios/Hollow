@@ -13,7 +13,8 @@
           "state": {
             "Name": "minecraft:oak_log"
           }
-        }
+        },
+        "probability": 0.5
       }
     ],
     "dirt_provider": {

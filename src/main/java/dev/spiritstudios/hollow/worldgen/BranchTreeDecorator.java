@@ -1,6 +1,8 @@
 package dev.spiritstudios.hollow.worldgen;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.registry.HollowTreeDecoratorRegistrar;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BeehiveBlock;
@@ -17,15 +19,18 @@ import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class BranchTreeDecorator extends TreeDecorator {
-    public static final MapCodec<BranchTreeDecorator> CODEC = BlockStateProvider.TYPE_CODEC
-            .fieldOf("provider")
-            .xmap(BranchTreeDecorator::new, decorator -> decorator.stateProvider);
+    public static final MapCodec<BranchTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            BlockStateProvider.TYPE_CODEC.fieldOf("provider").forGetter(decorator -> decorator.stateProvider),
+            Codec.floatRange(0.0F, 1.0F).fieldOf("probability").forGetter(decorator -> decorator.probability)
+    ).apply(instance, BranchTreeDecorator::new));
     
-    public BranchTreeDecorator(BlockStateProvider stateProvider) {
+    public BranchTreeDecorator(BlockStateProvider stateProvider, float probability) {
         this.stateProvider = stateProvider;
+        this.probability = probability;
     }
     
     public final BlockStateProvider stateProvider;
+    public final float probability;
     
     @Override
     protected TreeDecoratorType<?> getType() {
@@ -37,12 +42,9 @@ public class BranchTreeDecorator extends TreeDecorator {
         Random random = generator.getRandom();
         ObjectArrayList<BlockPos> logs = generator.getLogPositions();
 
-        if (random.nextBetween(0, 4) == 0) return;
-        
+        if (random.nextFloat() > probability) return;
 
-        boolean hasBranch = false;
         for (BlockPos pos : logs) {
-            if (hasBranch) break;
             if (pos.getY() < (logs.getFirst().getY() + logs.getLast().getY()) / 2) continue;
             
             Direction direction = Direction.fromHorizontal(random.nextInt(4));
@@ -51,11 +53,10 @@ public class BranchTreeDecorator extends TreeDecorator {
             if (!generator.isAir(branch)) continue;
             
             BlockState state = stateProvider.get(random, branch);
-            if (state.contains(Properties.AXIS)) state = state.with(Properties.AXIS, direction.getAxis());
+            state = state.withIfExists(Properties.AXIS, direction.getAxis());
             generator.replace(branch, state);
-            hasBranch = true;
-            
-            if (random.nextBetween(0, 32) != 0) continue;
+
+            if (random.nextBetween(0, 32) != 0) break;
             
             BlockPos beeHive = branch.down();
             if (!generator.isAir(beeHive)) continue;
@@ -72,6 +73,8 @@ public class BranchTreeDecorator extends TreeDecorator {
                     beehive.addBee(beeData);
                 }
             });
+
+            break;
         }
     }
 }

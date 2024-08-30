@@ -9,7 +9,8 @@
           "state": {
             "Name": "minecraft:birch_log"
           }
-        }
+        },
+        "probability": 0.5
       },
       {
         "type": "hollow:polypore_tree_decorator",

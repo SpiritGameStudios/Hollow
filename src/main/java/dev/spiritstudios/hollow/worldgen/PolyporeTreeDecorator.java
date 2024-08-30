@@ -13,6 +13,8 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
+import java.util.List;
+
 public class PolyporeTreeDecorator extends TreeDecorator {
     public static final MapCodec<PolyporeTreeDecorator> CODEC = BlockStateProvider.TYPE_CODEC
             .fieldOf("provider")
@@ -24,7 +26,6 @@ public class PolyporeTreeDecorator extends TreeDecorator {
         this.stateProvider = stateProvider;
     }
 
-
     @Override
     protected TreeDecoratorType<?> getType() {
         return HollowTreeDecoratorRegistrar.POLYPORE_TREE_DECORATOR;
@@ -33,7 +34,7 @@ public class PolyporeTreeDecorator extends TreeDecorator {
     @Override
     public void generate(Generator generator) {
         Random random = generator.getRandom();
-        ObjectArrayList<BlockPos> logs = generator.getLogPositions();
+        List<BlockPos> logs = generator.getLogPositions();
         
         for (BlockPos pos : logs) {
             Direction direction = Direction.fromHorizontal(random.nextInt(4));
@@ -42,9 +43,10 @@ public class PolyporeTreeDecorator extends TreeDecorator {
             if (!generator.isAir(polyporePos)) continue;
             
             BlockState state = stateProvider.get(random, polyporePos);
-            if (state.contains(Properties.HORIZONTAL_FACING)) state = state.with(Properties.HORIZONTAL_FACING, direction);
-            if (state.contains(PolyporeBlock.POLYPORE_AMOUNT)) state = state.with(PolyporeBlock.POLYPORE_AMOUNT, random.nextBetween(1, 3));
-            
+
+            state = state.withIfExists(Properties.HORIZONTAL_FACING, direction);
+            state = state.withIfExists(PolyporeBlock.POLYPORE_AMOUNT, random.nextBetween(1, 3));
+
             generator.replace(polyporePos, state);
         }
     }
