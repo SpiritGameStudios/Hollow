@@ -51,25 +51,27 @@ public class StoneChestLidBlock extends Block {
         ChestType chestType = ChestType.SINGLE;
         Direction direction = ctx.getHorizontalPlayerFacing().getOpposite();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        boolean bl = ctx.shouldCancelInteraction();
-        Direction direction2 = ctx.getSide();
-        if (direction2.getAxis().isHorizontal() && bl) {
-            Direction direction3 = this.getNeighborChestDirection(ctx, direction2.getOpposite());
-            if (direction3 != null && direction3.getAxis() != direction2.getAxis()) {
-                direction = direction3;
-                chestType = direction3.rotateYCounterclockwise() == direction2.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
+        boolean shouldCancel = ctx.shouldCancelInteraction();
+        Direction side = ctx.getSide();
+
+        if (side.getAxis().isHorizontal() && shouldCancel) {
+            Direction neighborDirection = this.getNeighborChestDirection(ctx, side.getOpposite());
+            if (neighborDirection != null && neighborDirection.getAxis() != side.getAxis()) {
+                direction = neighborDirection;
+                chestType = neighborDirection.rotateYCounterclockwise() == side.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
             }
         }
 
-        if (chestType == ChestType.SINGLE && !bl) {
-            if (direction == this.getNeighborChestDirection(ctx, direction.rotateYClockwise())) {
+        if (chestType == ChestType.SINGLE && !shouldCancel)
+            if (direction == this.getNeighborChestDirection(ctx, direction.rotateYClockwise()))
                 chestType = ChestType.LEFT;
-            } else if (direction == this.getNeighborChestDirection(ctx, direction.rotateYCounterclockwise())) {
+            else if (direction == this.getNeighborChestDirection(ctx, direction.rotateYCounterclockwise()))
                 chestType = ChestType.RIGHT;
-            }
-        }
 
-        return this.getDefaultState().with(FACING, direction).with(CHEST_TYPE, chestType).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        return this.getDefaultState()
+                .with(FACING, direction)
+                .with(CHEST_TYPE, chestType)
+                .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
     }
 
     @Nullable
@@ -94,9 +96,7 @@ public class StoneChestLidBlock extends Block {
     public BlockState getStateForNeighborUpdate(
             BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos
     ) {
-        if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-        }
+        if (state.get(WATERLOGGED)) world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 
         if (neighborState.isOf(this) && direction.getAxis().isHorizontal()) {
             ChestType chestType = neighborState.get(CHEST_TYPE);
@@ -106,9 +106,7 @@ public class StoneChestLidBlock extends Block {
                     && getFacing(neighborState) == direction.getOpposite()) {
                 return state.with(CHEST_TYPE, chestType.getOpposite());
             }
-        } else if (getFacing(state) == direction) {
-            return state.with(CHEST_TYPE, ChestType.SINGLE);
-        }
+        } else if (getFacing(state) == direction) return state.with(CHEST_TYPE, ChestType.SINGLE);
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }

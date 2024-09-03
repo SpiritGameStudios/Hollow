@@ -35,11 +35,8 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
     public void tick() {
         super.tick();
         
-        if (this.age % 5 == 0 && this.random.nextInt(5) == 0) {
-            lightTicks -= this.random.nextBetween(10, 15);
-        } else {
-            lightTicks += 1;
-        }
+        if (this.age % 5 == 0 && this.random.nextInt(5) == 0) lightTicks -= this.random.nextBetween(10, 15);
+        else lightTicks += 1;
 
         lightTicks = MathHelper.clamp(lightTicks, 0, 15);
 

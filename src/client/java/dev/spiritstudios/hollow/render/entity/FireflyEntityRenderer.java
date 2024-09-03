@@ -54,18 +54,22 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
     }
 
     private void renderVertex(VertexConsumer vertexConsumer, MatrixStack.Entry entry, float x, float y, float u, float v, FireflyEntity entity, int light) {
-        int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - entity.getLightTicks() / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF30352F);
-        
-        float red = ColorHelper.Argb.getRed(color);
-        float green = ColorHelper.Argb.getGreen(color);
-        float blue = ColorHelper.Argb.getBlue(color);
+        float red;
+        float green;
+        float blue;
 
         if (entity.hasCustomName() && "jeb_".equals(entity.getName().getString())) {
             red = MathHelper.sin(entity.age * 0.1F) * 128.0F + 128.0F;
             green = MathHelper.sin(entity.age * 0.1F + (float) Math.toRadians(120.0F)) * 128.0F + 128.0F;
             blue = MathHelper.sin(entity.age * 0.1F + (float) Math.toRadians(240.0F)) * 128.0F + 128.0F;
+        } else {
+            int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - entity.getLightTicks() / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF30352F);
+
+            red = ColorHelper.Argb.getRed(color);
+            green = ColorHelper.Argb.getGreen(color);
+            blue = ColorHelper.Argb.getBlue(color);
         }
-        
+
         vertexConsumer.vertex(entry, x - 0.5F, y - 0.25F, 0.0F)
                 .color(red / 255.0F, green / 255.0F, blue / 255.0F, 1.0F)
                 .texture(u, v)

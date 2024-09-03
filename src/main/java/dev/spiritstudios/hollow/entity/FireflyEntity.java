@@ -34,10 +34,10 @@ import java.util.EnumSet;
 
 public class FireflyEntity extends PathAwareEntity implements Flutterer {
     private static final TrackedData<Integer> LIGHT_TICKS = DataTracker.registerData(FireflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    
+
     public FireflyEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
-        
+
         this.moveControl = new FlightMoveControl(this, 360, true);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
@@ -48,9 +48,9 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
     public boolean canBeLeashed() { return false; }
 
     private void setLightTicks(int ticks) {
-        this.dataTracker.set(LIGHT_TICKS, ticks);
+        this.dataTracker.set(LIGHT_TICKS, MathHelper.clamp(ticks, 0, 15));
     }
-    
+
     public int getLightTicks() {
         return this.dataTracker.get(LIGHT_TICKS);
     }
@@ -74,7 +74,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
                 return !this.world.getBlockState(pos.down()).isAir();
             }
         };
-        
+
         birdNavigation.setCanPathThroughDoors(false);
         birdNavigation.setCanSwim(false);
         birdNavigation.setCanEnterOpenDoors(true);
@@ -91,22 +91,11 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
     @Override
     public void tick() {
         super.tick();
-        
-        if (getEntityWorld().isNight() || getEntityWorld().getLightLevel(this.getBlockPos()) < 5) {
-            if (this.age % 5 == 0 && this.random.nextInt(5) == 0) {
-                this.setLightTicks(this.getLightTicks() - this.random.nextBetween(10, 15));
-            } else {
-                this.setLightTicks(this.getLightTicks() + 1);
-            }
-        } else {
-            if (this.age % 5 == 0 && this.random.nextInt(5) == 0) {
-                this.setLightTicks(this.getLightTicks() + this.random.nextBetween(5, 10));
-            } else {
-                this.setLightTicks(this.getLightTicks() - 1);
-            }
-        }
 
-        this.setLightTicks(MathHelper.clamp(getLightTicks(), 0, 15));
+        if (getEntityWorld().isNight() || getEntityWorld().getLightLevel(this.getBlockPos()) < 5)
+            this.setLightTicks(this.age % 5 == 0 && this.random.nextInt(5) == 0 ? this.getLightTicks() - this.random.nextBetween(10, 15) : this.getLightTicks() + 1);
+        else
+            this.setLightTicks(this.age % 5 == 0 && this.random.nextInt(5) == 0 ? this.getLightTicks() + this.random.nextBetween(5, 10) : this.getLightTicks() - 1);
     }
 
     @Override
@@ -143,7 +132,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
 
     @Override
     protected void pushAway(Entity entity) {
-        
+
     }
 
     public static boolean canSpawn(EntityType<FireflyEntity> entityType, ServerWorldAccess worldAccess, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -167,7 +156,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
 
     static class FlyRandomlyGoal extends Goal {
         private final FireflyEntity firefly;
-        
+
         public FlyRandomlyGoal(FireflyEntity firefly) {
             this.firefly = firefly;
             this.setControls(EnumSet.of(Goal.Control.MOVE));
@@ -178,10 +167,10 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
             Vec3d rotation = firefly.getRotationVec(0.0F);
             Vec3d target = AboveGroundTargeting.find(firefly, 8, 7, rotation.x, rotation.z, MathHelper.HALF_PI, 3, 1);
             if (target != null) return target;
-            
+
             return NoPenaltySolidTargeting.find(firefly, 8, 4, -2, rotation.x, rotation.z, MathHelper.HALF_PI);
         }
-        
+
         @Override
         public boolean canStart() {
             return firefly.navigation.isIdle() && firefly.random.nextInt(10) == 0;

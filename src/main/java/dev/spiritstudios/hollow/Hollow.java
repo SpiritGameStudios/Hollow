@@ -39,7 +39,7 @@ public class Hollow implements ModInitializer {
                 "call",
                 "melody",
                 "bass"
-        ).forEach((name) -> {
+        ).forEach(name -> {
             for (int i = 0; i < 10; i++) {
                 Identifier id = Identifier.of(MODID, "horn.%s.%d".formatted(name, i));
                 Registry.register(
@@ -49,7 +49,6 @@ public class Hollow implements ModInitializer {
                 );
             }
         });
-
 
         FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistrar.FIREFLY, FireflyEntity.createFireflyAttributes());
 

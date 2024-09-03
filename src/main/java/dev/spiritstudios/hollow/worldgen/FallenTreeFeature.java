@@ -35,14 +35,6 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
 
         origin = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, origin);
 
-//        boolean canPlace = true;
-//        for (int i = 0; i < size; i++) {
-//            BlockPos pos = origin.offset(axis, i);
-//            canPlace = canPlace && (world.isAir(pos) || world.getBlockState(pos).isOf(Blocks.SHORT_GRASS)) && world.getBlockState(pos.down()).isSolidBlock(world, pos.down());
-//        }
-//
-//        if (!canPlace) return false;
-
         for (int i = 0; i < size; i++) {
             BlockPos pos = origin.offset(axis, i);
             if ((!world.isAir(pos) && !world.getBlockState(pos).isReplaceable()) || !world.getBlockState(pos.down()).isSolidBlock(world, pos.down()))

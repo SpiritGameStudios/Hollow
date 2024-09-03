@@ -17,14 +17,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
 public class JarBlock extends BlockWithEntity {
     public static final MapCodec<JarBlock> CODEC = createCodec(JarBlock::new);
-
-    public JarBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
     public static final VoxelShape SHAPE = VoxelShapes.union(
             createCuboidShape(5.5, 12, 5.5, 10.5, 15, 10.5),
             createCuboidShape(3.5, 0, 3.5, 12.5, 14, 4.5),
@@ -35,8 +29,14 @@ public class JarBlock extends BlockWithEntity {
             createCuboidShape(4.5, 0, 4.5, 11.5, 1, 11.5)
     );
 
+    public JarBlock(AbstractBlock.Settings settings) {
+        super(settings);
+    }
+
     @Override
-    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
 
     @Nullable
     @Override
@@ -54,22 +54,23 @@ public class JarBlock extends BlockWithEntity {
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) return ItemActionResult.SUCCESS;
 
-        JarBlockEntity blockEntity = (JarBlockEntity)world.getBlockEntity(pos);
-        Objects.requireNonNull(blockEntity).use(world, pos, player, hand);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof JarBlockEntity jarBlockEntity) jarBlockEntity.use(world, pos, player, hand);
         return ItemActionResult.CONSUME;
     }
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof JarBlockEntity) {
-                ItemScatterer.spawn(world, pos, (JarBlockEntity)blockEntity);
-            }
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
+        if (state.getBlock() == newState.getBlock()) return;
+
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof JarBlockEntity jarBlockEntity) ItemScatterer.spawn(world, pos, jarBlockEntity);
+
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 
     @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() { return CODEC; }
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
 }

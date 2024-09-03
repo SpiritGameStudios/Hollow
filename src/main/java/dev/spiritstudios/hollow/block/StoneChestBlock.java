@@ -35,12 +35,12 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public static final MapCodec<StoneChestBlock> CODEC = createCodec(StoneChestBlock::new);
-    
+
     public static final VoxelShape SHAPE_SINGLE = VoxelShapes.union(
             createCuboidShape(1, 1, 1, 15, 16, 15),
             createCuboidShape(0, 0, 0, 16, 1, 16)
     );
-    
+
     public static final VoxelShape SHAPE_LEFT_NORTH = VoxelShapes.union(
             createCuboidShape(1, 1, 1, 16, 16, 15),
             createCuboidShape(0, 0, 0, 16, 1, 16)
@@ -48,7 +48,7 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
     public static final VoxelShape SHAPE_LEFT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_LEFT_NORTH);
     public static final VoxelShape SHAPE_LEFT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_LEFT_NORTH);
     public static final VoxelShape SHAPE_LEFT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_LEFT_NORTH);
-    
+
     public static final VoxelShape SHAPE_RIGHT_NORTH = VoxelShapes.union(
             createCuboidShape(0, 1, 1, 15, 16, 15),
             createCuboidShape(0, 0, 0, 16, 1, 16)
@@ -56,7 +56,7 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
     public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
     public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
     public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    
+
     public StoneChestBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState()
@@ -66,30 +66,37 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         );
     }
 
+    public static Direction getFacing(BlockState state) {
+        Direction direction = state.get(FACING);
+        return state.get(CHEST_TYPE) == ChestType.LEFT ? direction.rotateYClockwise() : direction.rotateYCounterclockwise();
+    }
+
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         ChestType chestType = ChestType.SINGLE;
         Direction direction = ctx.getHorizontalPlayerFacing().getOpposite();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        boolean bl = ctx.shouldCancelInteraction();
-        Direction direction2 = ctx.getSide();
-        if (direction2.getAxis().isHorizontal() && bl) {
-            Direction direction3 = this.getNeighborChestDirection(ctx, direction2.getOpposite());
-            if (direction3 != null && direction3.getAxis() != direction2.getAxis()) {
-                direction = direction3;
-                chestType = direction3.rotateYCounterclockwise() == direction2.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
+        boolean shouldCancel = ctx.shouldCancelInteraction();
+        Direction side = ctx.getSide();
+
+        if (side.getAxis().isHorizontal() && shouldCancel) {
+            Direction neighborDirection = this.getNeighborChestDirection(ctx, side.getOpposite());
+            if (neighborDirection != null && neighborDirection.getAxis() != side.getAxis()) {
+                direction = neighborDirection;
+                chestType = neighborDirection.rotateYCounterclockwise() == side.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
             }
         }
 
-        if (chestType == ChestType.SINGLE && !bl) {
-            if (direction == this.getNeighborChestDirection(ctx, direction.rotateYClockwise())) {
+        if (chestType == ChestType.SINGLE && !shouldCancel)
+            if (direction == this.getNeighborChestDirection(ctx, direction.rotateYClockwise()))
                 chestType = ChestType.LEFT;
-            } else if (direction == this.getNeighborChestDirection(ctx, direction.rotateYCounterclockwise())) {
+            else if (direction == this.getNeighborChestDirection(ctx, direction.rotateYCounterclockwise()))
                 chestType = ChestType.RIGHT;
-            }
-        }
-        
-        return this.getDefaultState().with(FACING, direction).with(CHEST_TYPE, chestType).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+
+        return this.getDefaultState()
+                .with(FACING, direction)
+                .with(CHEST_TYPE, chestType)
+                .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
     }
 
     @Nullable
@@ -99,8 +106,9 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
-
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
 
     @Nullable
     @Override
@@ -114,10 +122,14 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) { return state.with(FACING, rotation.rotate(state.get(FACING))); }
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) { return state.rotate(mirror.getRotation(state.get(FACING))); }
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation(state.get(FACING)));
+    }
 
     @Override
     public BlockState getStateForNeighborUpdate(
@@ -126,7 +138,7 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        
+
         if (direction == Direction.UP && neighborState.isAir()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof StoneChestBlockEntity stoneChest) {
@@ -149,16 +161,11 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    public static Direction getFacing(BlockState state) {
-        Direction direction = state.get(FACING);
-        return state.get(CHEST_TYPE) == ChestType.LEFT ? direction.rotateYClockwise() : direction.rotateYCounterclockwise();
-    }
-
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) return ItemActionResult.SUCCESS;
 
-        StoneChestBlockEntity blockEntity = (StoneChestBlockEntity)world.getBlockEntity(pos);
+        StoneChestBlockEntity blockEntity = (StoneChestBlockEntity) world.getBlockEntity(pos);
         return Objects.requireNonNull(blockEntity).use(player, hand, hit.getSide());
     }
 
@@ -197,12 +204,14 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof StoneChestBlockEntity) {
-                ItemScatterer.spawn(world, pos, (StoneChestBlockEntity)blockEntity);
+                ItemScatterer.spawn(world, pos, (StoneChestBlockEntity) blockEntity);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
 
     @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() { return CODEC; }
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
 }

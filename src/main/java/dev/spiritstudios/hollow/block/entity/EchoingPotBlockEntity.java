@@ -28,16 +28,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class EchoingPotBlockEntity extends BlockEntity {
-//    private static final ParticleSystem PARTICLE_SYSTEM = new ParticleSystem(
-//            new Vec3d(0.007F, 0.07F, 0.007F),
-//            new Vec3d(0.5, 1, 0.5),
-//            new Vec3d(0.1, 0, 0.1),
-//            2,
-//            1,
-//            true,
-//            ParticleTypes.SCULK_SOUL
-//    );
-
     public int activeTime = 0;
 
     public EchoingPotBlockEntity(BlockPos pos, BlockState state) {
@@ -45,46 +35,46 @@ public class EchoingPotBlockEntity extends BlockEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, EchoingPotBlockEntity blockEntity) {
-        if (blockEntity.activeTime > 0) {
-            if (!world.isClient) {
-                blockEntity.activeTime--;
-                blockEntity.markDirty();
-                world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
+        if (blockEntity.activeTime <= 0) return;
 
-                List<WardenEntity> wardens = world.getEntitiesByClass(
-                        WardenEntity.class,
-                        Box.from(pos.toCenterPos()).expand(16),
-                        warden -> true
+        if (!world.isClient) {
+            blockEntity.activeTime--;
+            blockEntity.markDirty();
+            world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
+
+            List<WardenEntity> wardens = world.getEntitiesByClass(
+                    WardenEntity.class,
+                    Box.from(pos.toCenterPos()).expand(16),
+                    warden -> true
+            );
+
+            wardens.forEach(warden -> {
+                WardenAngerManager angerManager = warden.getAngerManager();
+
+                Optional<LivingEntity> target = angerManager.getPrimeSuspect();
+                if (target.isEmpty()) return;
+
+                angerManager.removeSuspect(target.get());
+            });
+        } else {
+            Random random = world.getRandom();
+            for (int i = 0; i < 2; ++i) {
+                float x = 2.0F * random.nextFloat() - 1.0F;
+                float y = 2.0F * random.nextFloat() - 1.0F;
+                float z = 2.0F * random.nextFloat() - 1.0F;
+                world.addParticle(
+                        ParticleTypes.SCULK_SOUL,
+                        (double) pos.getX() + 0.5 + (x * 0.25),
+                        (double) pos.getY() + 1,
+                        (double) pos.getZ() + 0.5 + (z * 0.25),
+                        (x * 0.0075F),
+                        (y * 0.075F),
+                        (z * 0.0075F)
                 );
-
-                wardens.forEach(warden -> {
-                    WardenAngerManager angerManager = warden.getAngerManager();
-
-                    Optional<LivingEntity> target = angerManager.getPrimeSuspect();
-                    if (target.isEmpty()) return;
-
-                    angerManager.removeSuspect(target.get());
-                });
-            } else {
-                Random random = world.getRandom();
-                for (int i = 0; i < 2; ++i) {
-                    float x = 2.0F * random.nextFloat() - 1.0F;
-                    float y = 2.0F * random.nextFloat() - 1.0F;
-                    float z = 2.0F * random.nextFloat() - 1.0F;
-                    world.addParticle(
-                            ParticleTypes.SCULK_SOUL,
-                            (double) pos.getX() + 0.5 + (x * 0.25),
-                            (double) pos.getY() + 1,
-                            (double) pos.getZ() + 0.5 + (z * 0.25),
-                            (x * 0.0075F),
-                            (y * 0.075F),
-                            (z * 0.0075F)
-                    );
-                }
-
-                if (world.random.nextInt(5) == 0)
-                    world.playSoundAtBlockCenter(pos, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.BLOCKS, 0.5F, 1.0F, false);
             }
+
+            if (world.random.nextInt(5) == 0)
+                world.playSoundAtBlockCenter(pos, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.BLOCKS, 0.5F, 1.0F, false);
         }
     }
 

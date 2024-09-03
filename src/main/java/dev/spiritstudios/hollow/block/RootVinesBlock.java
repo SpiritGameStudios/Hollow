@@ -40,9 +40,7 @@ public class RootVinesBlock extends Block implements Waterloggable {
         if (blockState != null) {
             FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
             return blockState.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-        } else {
-            return null;
-        }
+        } else return null;
     }
 
     @Override
@@ -56,17 +54,11 @@ public class RootVinesBlock extends Block implements Waterloggable {
     public BlockState getStateForNeighborUpdate(
             BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos
     ) {
-        if (direction == Direction.DOWN && neighborState.getBlock() == this) {
-            return state.with(UP, true);
-        }
+        if (direction == Direction.DOWN && neighborState.getBlock() == this) return state.with(UP, true);
 
-        if (direction == Direction.UP && !this.canPlaceAt(state, world, pos)) {
-            return Blocks.AIR.getDefaultState();
-        } else {
-            if (state.get(WATERLOGGED)) {
-                world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-            }
-
+        if (direction == Direction.UP && !this.canPlaceAt(state, world, pos)) return Blocks.AIR.getDefaultState();
+        else {
+            if (state.get(WATERLOGGED)) world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
             return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
         }
     }
