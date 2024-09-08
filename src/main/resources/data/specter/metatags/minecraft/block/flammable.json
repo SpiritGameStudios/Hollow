@@ -1,0 +1,69 @@
+{
+  "replace": false,
+  "values": {
+    "hollow:oak_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_oak_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:spruce_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_spruce_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:birch_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_birch_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:jungle_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_jungle_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:acacia_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_acacia_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:dark_oak_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_dark_oak_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:cherry_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_cherry_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:mangrove_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_mangrove_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    }
+  }
+}

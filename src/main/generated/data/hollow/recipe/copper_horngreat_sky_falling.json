@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "hollow_copper_horn",
+  "key": {
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "fabric:type": "fabric:components",
+      "base": {
+        "item": "minecraft:goat_horn"
+      },
+      "components": {
+        "minecraft:instrument": "minecraft:ponder_goat_horn"
+      }
+    }
+  },
+  "pattern": [
+    "#G#",
+    " # "
+  ],
+  "result": {
+    "components": {
+      "hollow:copper_instrument": "great_sky_falling"
+    },
+    "count": 1,
+    "id": "hollow:copper_horn"
+  }
+}
