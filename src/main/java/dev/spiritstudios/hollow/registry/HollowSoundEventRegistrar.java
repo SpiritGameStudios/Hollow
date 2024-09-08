@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.registry;
 
 import dev.spiritstudios.specter.api.registry.registration.MinecraftRegistrar;
+import dev.spiritstudios.specter.api.registry.registration.SoundEventRegistrar;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -8,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 import static dev.spiritstudios.hollow.Hollow.MODID;
 
-public class HollowSoundEventRegistrar implements MinecraftRegistrar<SoundEvent> {
+public class HollowSoundEventRegistrar implements SoundEventRegistrar {
     @Name("music_disc.postmortem")
     public static final SoundEvent MUSIC_DISC_POSTMORTEM = SoundEvent.of(Identifier.of(MODID, "music_disc.postmortem"));
 
@@ -23,7 +24,4 @@ public class HollowSoundEventRegistrar implements MinecraftRegistrar<SoundEvent>
 
     @Name("block.sculk_jaw.bite")
     public static final SoundEvent SCULK_JAW_BITE = SoundEvent.of(Identifier.of(MODID, "block.sculk_jaw.bite"));
-
-    @Override
-    public Registry<SoundEvent> getRegistry() { return Registries.SOUND_EVENT; }
 }

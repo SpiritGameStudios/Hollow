@@ -22,27 +22,11 @@ public class HollowClient implements ClientModInitializer {
     public void onInitializeClient() {
         EntityRendererRegistry.register(HollowEntityTypeRegistrar.FIREFLY, FireflyEntityRenderer::new);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.PAEONIA, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.LOTUS_LILYPAD, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.GIANT_LILYPAD, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.TWIG, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.CAMPION, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.POLYPORE, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.POTTED_PAEONIA, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.JAR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.FIREFLY_JAR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.ROOT_VINES, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.CATTAIL, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.ROOTED_ORCHID, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(HollowBlockRegistrar.POTTED_ROOTED_ORCHID, RenderLayer.getCutout());
-
         ModelPredicateProviderRegistry.register(
                 HollowItemRegistrar.COPPER_HORN,
                 Identifier.ofVanilla("tooting"),
                 (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F
         );
-
-        ReflectionHelper.forEachStaticField(HollowBlockRegistrar.class, HollowLogBlock.class, (block, name, field) -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
 
         BlockEntityRendererFactories.register(HollowBlockEntityRegistrar.JAR_BLOCK_ENTITY, JarBlockEntityRenderer::new);
 
@@ -54,6 +38,6 @@ public class HollowClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
 
-        ModMenuHelper.addConfig(Hollow.MODID, HollowConfig.class);
+        ModMenuHelper.addConfig(Hollow.MODID, HollowConfig.INSTANCE.getId());
     }
 }

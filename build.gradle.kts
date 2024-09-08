@@ -36,7 +36,7 @@ fabricApi {
 }
 
 repositories {
-    maven("https://maven.callmeecho.dev/snapshots/")
+    maven("https://maven.callmeecho.dev/releases/")
     maven("https://maven.terraformersmc.com/releases/")
     maven("https://api.modrinth.com/maven/")
 }
@@ -54,14 +54,15 @@ dependencies {
     }
 
     specterModule("api")
-    specterModule("core")
-    specterModule("config")
-    specterModule("item")
     specterModule("block")
+    specterModule("config")
+    specterModule("core")
+    specterModule("entity")
+    specterModule("item")
     specterModule("registry")
     specterModule("render")
 
-//    localRuntime("dev.spiritstudios.specter:specter-debug:${deps.specter}")
+    modRuntimeOnly("dev.spiritstudios.specter:specter-debug:${deps.specter}")
 
     // will be switched back to lambdynamiclights once it's updated
     modCompileOnly("maven.modrinth:ryoamiclights:0.2.9+mc1.21-fabric")

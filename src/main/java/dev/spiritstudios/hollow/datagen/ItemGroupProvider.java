@@ -9,8 +9,6 @@ import dev.spiritstudios.specter.impl.item.DataItemGroup;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.component.ComponentChanges;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
@@ -45,15 +43,14 @@ public class ItemGroupProvider extends SpecterItemGroupProvider {
         }
 
         generate((id, data) -> {
-                    List<ItemStack> itemStacks = new ArrayList<>(data.items().stream().map(ItemConvertible::asItem).map(Item::getDefaultStack).toList());
-                    itemStacks.addAll(items);
+                    items.addAll(data.items());
 
                     provider.accept(
                             id,
                             new DataItemGroup(
                                     id.toTranslationKey("item_group"),
                                     data.icon(),
-                                    itemStacks
+                                    items
                             )
                     );
                 },
@@ -63,17 +60,17 @@ public class ItemGroupProvider extends SpecterItemGroupProvider {
 
     @Override
     protected void generate(BiConsumer<Identifier, ItemGroupData> provider, RegistryWrapper.WrapperLookup lookup) {
-        List<ItemConvertible> items = new ArrayList<>();
+        List<ItemStack> items = new ArrayList<>();
         ReflectionHelper.forEachStaticField(
                 HollowBlockRegistrar.class,
                 Block.class,
                 (block, name, field) -> {
                     ItemStack stack = new ItemStack(block.asItem());
-                    if (!stack.isEmpty()) items.add(block);
+                    if (!stack.isEmpty()) items.add(stack);
                 }
         );
-        items.add(HollowItemRegistrar.FIREFLY_SPAWN_EGG);
-        items.add(HollowItemRegistrar.MUSIC_DISC_POSTMORTEM);
+        items.add(HollowItemRegistrar.FIREFLY_SPAWN_EGG.getDefaultStack());
+        items.add(HollowItemRegistrar.MUSIC_DISC_POSTMORTEM.getDefaultStack());
 
         provider.accept(
                 Identifier.of(MODID, "hollow"),

@@ -3,6 +3,7 @@ package dev.spiritstudios.hollow.registry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.specter.api.registry.registration.MinecraftRegistrar;
+import dev.spiritstudios.specter.api.registry.registration.Registrar;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodec;
@@ -70,5 +71,10 @@ public class HollowDataComponentRegistrar implements MinecraftRegistrar<Componen
     @Override
     public Registry<ComponentType<?>> getRegistry() {
         return Registries.DATA_COMPONENT_TYPE;
+    }
+
+    @Override
+    public Class<ComponentType<?>> getObjectType() {
+        return Registrar.fixGenerics(ComponentType.class);
     }
 }

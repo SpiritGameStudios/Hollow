@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.registry;
 
 import dev.spiritstudios.specter.api.registry.registration.MinecraftRegistrar;
+import dev.spiritstudios.specter.api.registry.registration.Registrar;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.SimpleParticleType;
@@ -13,5 +14,10 @@ public class HollowParticleRegistrar implements MinecraftRegistrar<ParticleType<
     @Override
     public Registry<ParticleType<?>> getRegistry() {
         return Registries.PARTICLE_TYPE;
+    }
+
+    @Override
+    public Class<ParticleType<?>> getObjectType() {
+        return Registrar.fixGenerics(ParticleType.class);
     }
 }

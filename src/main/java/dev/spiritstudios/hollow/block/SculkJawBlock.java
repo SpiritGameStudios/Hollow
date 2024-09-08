@@ -88,7 +88,7 @@ public class SculkJawBlock extends SculkBlock {
         }
 
         DamageSource damageSource = new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(SCULK_JAW_DAMAGE_TYPE));
-        entity.damage(damageSource, 2F);
+        entity.damage(damageSource, 1F);
 
         Vec3d centerPos = pos.toCenterPos();
         entity.teleport(

@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.worldgen;
 
 import dev.spiritstudios.hollow.Hollow;
+import dev.spiritstudios.hollow.HollowConfig;
 import dev.spiritstudios.hollow.entity.FireflyEntity;
 import dev.spiritstudios.hollow.registry.HollowEntityTypeRegistrar;
 import dev.spiritstudios.hollow.registry.HollowSoundEventRegistrar;
@@ -55,7 +56,7 @@ public class HollowBiomeModifications {
                 BiomeKeys.SWAMP
         ), context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
-            if (Hollow.CONFIG.music)
+            if (HollowConfig.INSTANCE.music.get())
                 context.getEffects().setMusic(new MusicSound(
                         Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_SWAMP),
                         12000,
@@ -94,7 +95,7 @@ public class HollowBiomeModifications {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
             BiomeModificationContext.EffectsContext effects = context.getEffects();
 
-            if (Hollow.CONFIG.music)
+            if (HollowConfig.INSTANCE.music.get())
                 effects.setMusic(new MusicSound(
                         Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_BIRCH_FOREST),
                         12000,
@@ -139,7 +140,7 @@ public class HollowBiomeModifications {
         BiomeModifications.create(Identifier.of(Hollow.MODID, "deep_dark_music")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
                 BiomeKeys.DEEP_DARK
         ), context -> {
-            if (Hollow.CONFIG.music)
+            if (HollowConfig.INSTANCE.music.get())
                 context.getEffects().setMusic(new MusicSound(
                         Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_DEEP_DARK),
                         12000,
