@@ -177,14 +177,6 @@
       "id": "hollow:waxed_oxidized_copper_pillar"
     },
     {
-      "count": 1,
-      "id": "hollow:firefly_spawn_egg"
-    },
-    {
-      "count": 1,
-      "id": "hollow:music_disc_postmortem"
-    },
-    {
       "components": {
         "hollow:copper_instrument": "great_sky_falling"
       },
@@ -253,6 +245,14 @@
       },
       "count": 1,
       "id": "hollow:copper_horn"
+    },
+    {
+      "count": 1,
+      "id": "hollow:firefly_spawn_egg"
+    },
+    {
+      "count": 1,
+      "id": "hollow:music_disc_postmortem"
     }
   ],
   "translate": "item_group.hollow.hollow"
