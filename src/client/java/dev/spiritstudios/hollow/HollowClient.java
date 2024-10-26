@@ -5,7 +5,7 @@ import dev.spiritstudios.hollow.particle.FireflyJarParticle;
 import dev.spiritstudios.hollow.registry.*;
 import dev.spiritstudios.hollow.render.entity.FireflyEntityRenderer;
 import dev.spiritstudios.hollow.render.entity.JarBlockEntityRenderer;
-import dev.spiritstudios.specter.api.ModMenuHelper;
+import dev.spiritstudios.specter.api.config.ModMenuHelper;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -38,6 +38,6 @@ public class HollowClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(HollowParticleRegistrar.FIREFLY_JAR, FireflyJarParticle.Factory::new);
 
-        ModMenuHelper.addConfig(Hollow.MODID, HollowConfig.INSTANCE.getId());
+        ModMenuHelper.addConfig(Hollow.MODID, HollowConfig.HOLDER.id());
     }
 }

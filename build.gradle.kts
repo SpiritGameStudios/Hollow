@@ -57,6 +57,7 @@ dependencies {
     specterModule("block")
     specterModule("config")
     specterModule("core")
+    specterModule("serialization")
     specterModule("entity")
     specterModule("item")
     specterModule("registry")

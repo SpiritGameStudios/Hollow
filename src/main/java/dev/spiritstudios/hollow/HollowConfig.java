@@ -1,13 +1,15 @@
 package dev.spiritstudios.hollow;
 
 import dev.spiritstudios.specter.api.config.Config;
+import dev.spiritstudios.specter.api.config.ConfigHolder;
+import dev.spiritstudios.specter.api.config.Value;
 import net.minecraft.util.Identifier;
 
 public class HollowConfig extends Config<HollowConfig> {
-    public static final HollowConfig INSTANCE = create(HollowConfig.class);
-
-    @Override
-    public Identifier getId() { return Identifier.of(Hollow.MODID, "hollow"); }
+    public static final ConfigHolder<HollowConfig, ?> HOLDER = ConfigHolder.builder(
+            Identifier.of(Hollow.MODID, "hollow"), HollowConfig.class
+    ).build();
+    public static final HollowConfig INSTANCE = HOLDER.get();
 
     public Value<Boolean> revertCopperBulb = booleanValue(true)
             .comment("Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this.")
