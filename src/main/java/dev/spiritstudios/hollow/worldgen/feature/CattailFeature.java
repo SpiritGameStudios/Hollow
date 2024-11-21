@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.worldgen;
+package dev.spiritstudios.hollow.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import dev.spiritstudios.hollow.block.CattailBlock;

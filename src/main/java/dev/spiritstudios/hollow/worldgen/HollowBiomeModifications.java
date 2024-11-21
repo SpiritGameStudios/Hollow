@@ -103,11 +103,9 @@ public class HollowBiomeModifications {
                         false
                 ));
 
-            effects.setWaterColor(0x43D5EE);
-            effects.setWaterFogColor(0x41f33);
-
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("fallen_birch"));
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_twig"));
+            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_tall_grass_birch"));
         });
 
         BiomeModifications.create(Identifier.of(Hollow.MODID, "better_birch_replace")).add(ModificationPhase.REPLACEMENTS, BiomeSelectors.includeByKey(
@@ -122,10 +120,12 @@ public class HollowBiomeModifications {
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("birch_tall"));
 
             if (generationSettings.removeFeature(VegetationPlacedFeatures.FLOWER_DEFAULT) && generationSettings.removeFeature(VegetationPlacedFeatures.FOREST_FLOWERS)) {
-                generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_lilac"));
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_campion"));
                 generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("birch_forest_flowers"));
             }
+
+            if (generationSettings.removeFeature(VegetationPlacedFeatures.PATCH_GRASS_FOREST))
+                generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, getPlacedFeature("patch_grass_birch"));
         });
 
         BiomeModifications.create(Identifier.of(Hollow.MODID, "better_birch_remove")).add(ModificationPhase.REMOVALS, BiomeSelectors.includeByKey(

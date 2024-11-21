@@ -1,8 +1,8 @@
 package dev.spiritstudios.hollow.registry;
 
-import dev.spiritstudios.hollow.worldgen.BigBranchTreeDecorator;
-import dev.spiritstudios.hollow.worldgen.BranchTreeDecorator;
-import dev.spiritstudios.hollow.worldgen.PolyporeTreeDecorator;
+import dev.spiritstudios.hollow.worldgen.decorator.BigBranchTreeDecorator;
+import dev.spiritstudios.hollow.worldgen.decorator.BranchTreeDecorator;
+import dev.spiritstudios.hollow.worldgen.decorator.PolyporeTreeDecorator;
 import dev.spiritstudios.specter.api.registry.registration.MinecraftRegistrar;
 import dev.spiritstudios.specter.api.registry.registration.Registrar;
 import net.minecraft.registry.Registries;

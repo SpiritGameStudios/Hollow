@@ -87,17 +87,13 @@ public class CattailBlock extends PlantBlock implements Fertilizable, FluidFilla
             BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos
     ) {
         BlockState blockState = super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-        if (!blockState.isAir()) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-        }
+        if (!blockState.isAir()) world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 
-        if (direction == Direction.UP && neighborState.isOf(this) && state.get(PIECE) == Piece.TOP) {
+        if (direction == Direction.UP && neighborState.isOf(this) && state.get(PIECE) == Piece.TOP)
             return blockState.with(PIECE, Piece.MIDDLE);
-        }
 
-        if (direction == Direction.UP && !neighborState.isOf(this) && state.get(PIECE) == Piece.MIDDLE) {
+        if (direction == Direction.UP && !neighborState.isOf(this) && state.get(PIECE) == Piece.MIDDLE)
             return Blocks.AIR.getDefaultState();
-        }
 
         return blockState;
     }

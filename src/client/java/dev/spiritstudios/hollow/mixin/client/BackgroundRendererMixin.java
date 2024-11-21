@@ -25,6 +25,9 @@ public class BackgroundRendererMixin {
     @Unique
     private static float transitionProgress;
 
+    @Unique
+    private static final float DURATION = 50F;
+
     @Inject(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", shift = At.Shift.BEFORE))
     private static void applyCloserFog(
             Camera camera,
@@ -47,20 +50,20 @@ public class BackgroundRendererMixin {
             fogData.fogStart = -8;
             fogData.fogEnd = 92.0F;
 
-            transitionProgress += tickDelta * 0.05F;
-            transitionProgress = MathHelper.clamp(transitionProgress, 0.0F, 1.0F);
+            transitionProgress += tickDelta;
+            transitionProgress = MathHelper.clamp(transitionProgress, 0.0F, DURATION);
 
-            fogData.fogStart = (float) Easing.QUAD.inOut(transitionProgress, prevStart, fogData.fogStart, 1.0F);
-            fogData.fogEnd = (float) Easing.QUAD.inOut(transitionProgress, prevEnd, fogData.fogEnd, 1.0F);
+            fogData.fogStart = (float) Easing.SINE.inOut(transitionProgress, prevStart, fogData.fogStart, DURATION);
+            fogData.fogEnd = (float) Easing.SINE.inOut(transitionProgress, prevEnd, fogData.fogEnd, DURATION);
         } else if (transitionProgress > 0.0F) {
-            transitionProgress -= tickDelta * 0.05F;
-            transitionProgress = MathHelper.clamp(transitionProgress, 0.0F, 1.0F);
+            transitionProgress -= tickDelta;
+            transitionProgress = MathHelper.clamp(transitionProgress, 0.0F, DURATION);
 
             fogData.fogStart = -8;
             fogData.fogEnd = 92.0F;
 
-            fogData.fogStart = (float) Easing.QUAD.inOut(transitionProgress, prevStart, fogData.fogStart, 1.0F);
-            fogData.fogEnd = (float) Easing.QUAD.inOut(transitionProgress, prevEnd, fogData.fogEnd, 1.0F);
+            fogData.fogStart = (float) Easing.SINE.inOut(transitionProgress, prevStart, fogData.fogStart, DURATION);
+            fogData.fogEnd = (float) Easing.SINE.inOut(transitionProgress, prevEnd, fogData.fogEnd, DURATION);
         }
     }
 }

@@ -1,8 +1,9 @@
-package dev.spiritstudios.hollow.worldgen;
+package dev.spiritstudios.hollow.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
 import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -35,10 +36,10 @@ public class GiantLilypadFeature extends Feature<DefaultFeatureConfig> {
         Direction facing = Direction.fromHorizontal(random.nextInt(4));
         BlockState lilypadState = HollowBlockRegistrar.GIANT_LILYPAD.getDefaultState().with(GiantLilyPadBlock.FACING, facing);
 
-        world.setBlockState(pos, lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_WEST), 11);
-        world.setBlockState(pos.east(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_EAST), 11);
-        world.setBlockState(pos.south(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.SOUTH_WEST), 11);
-        world.setBlockState(pos.east().south(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.SOUTH_EAST), 11);
+        world.setBlockState(pos, lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_WEST), Block.NOTIFY_ALL_AND_REDRAW);
+        world.setBlockState(pos.east(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_EAST), Block.NOTIFY_ALL_AND_REDRAW);
+        world.setBlockState(pos.south(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.SOUTH_WEST), Block.NOTIFY_ALL_AND_REDRAW);
+        world.setBlockState(pos.east().south(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.SOUTH_EAST), Block.NOTIFY_ALL_AND_REDRAW);
 
         return true;
     }

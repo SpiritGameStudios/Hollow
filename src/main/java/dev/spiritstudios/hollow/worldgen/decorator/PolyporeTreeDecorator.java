@@ -1,9 +1,8 @@
-package dev.spiritstudios.hollow.worldgen;
+package dev.spiritstudios.hollow.worldgen.decorator;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
 import dev.spiritstudios.hollow.registry.HollowTreeDecoratorRegistrar;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;

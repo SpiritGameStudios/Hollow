@@ -85,10 +85,9 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(WATERLOGGED)) {
+        if (state.get(WATERLOGGED))
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-        }
-        
+
         if (direction == Direction.UP) {
             Block above = neighborState.getBlock();
             return state.with(MOSSY, (above == Blocks.MOSS_CARPET) || (above == Blocks.MOSS_BLOCK));

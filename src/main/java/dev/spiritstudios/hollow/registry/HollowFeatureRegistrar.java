@@ -1,9 +1,9 @@
 package dev.spiritstudios.hollow.registry;
 
-import dev.spiritstudios.hollow.worldgen.CattailFeature;
-import dev.spiritstudios.hollow.worldgen.FallenTreeFeature;
-import dev.spiritstudios.hollow.worldgen.FallenTreeFeatureConfig;
-import dev.spiritstudios.hollow.worldgen.GiantLilypadFeature;
+import dev.spiritstudios.hollow.worldgen.feature.CattailFeature;
+import dev.spiritstudios.hollow.worldgen.feature.FallenTreeFeature;
+import dev.spiritstudios.hollow.worldgen.feature.FallenTreeFeatureConfig;
+import dev.spiritstudios.hollow.worldgen.feature.GiantLilypadFeature;
 import dev.spiritstudios.specter.api.registry.registration.MinecraftRegistrar;
 import dev.spiritstudios.specter.api.registry.registration.Registrar;
 import net.minecraft.registry.Registries;

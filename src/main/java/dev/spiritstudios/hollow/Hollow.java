@@ -36,6 +36,7 @@ public class Hollow implements ModInitializer {
         Registrar.process(HollowBlockEntityRegistrar.class, MODID);
         Registrar.process(HollowParticleRegistrar.class, MODID);
         Registrar.process(HollowDataComponentRegistrar.class, MODID);
+        Registrar.process(HollowFoliagePlacerRegistrar.class, MODID);
 
         Registry.register(
                 Registries.LOOT_FUNCTION_TYPE,

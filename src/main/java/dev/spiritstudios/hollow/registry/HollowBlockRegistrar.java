@@ -55,7 +55,7 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.POLISHED_DEEPSLATE)
     );
-    
+
     public static final FlowerBlock PAEONIA = new FlowerBlock(
             StatusEffects.GLOWING,
             5,
@@ -79,8 +79,8 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .offset(AbstractBlock.OffsetType.XZ)
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
-    
-    public static final TallFlowerBlock CAMPION = new TallFlowerBlock(
+
+    public static final TallFlowerBlock CAMPION = new CampionBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DARK_GREEN)
                     .noCollision()
@@ -88,16 +88,10 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .sounds(BlockSoundGroup.GRASS)
                     .offset(AbstractBlock.OffsetType.XZ)
                     .burnable()
-                    
+
                     .pistonBehavior(PistonBehavior.DESTROY)
-    ) {
-        @Override
-        public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-            if (state.get(HALF) == DoubleBlockHalf.UPPER) return Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-            return super.getOutlineShape(state, world, pos, context);
-        }
-    };
-    
+    );
+
     public static final TwigBlock TWIG = new TwigBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.OAK_TAN)
@@ -106,18 +100,6 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .sounds(BlockSoundGroup.GRASS)
                     .burnable()
                     .nonOpaque()
-                    .pistonBehavior(PistonBehavior.DESTROY)
-    );
-
-    public static final RootVinesBlock ROOT_VINES = new RootVinesBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.DIRT_BROWN)
-                    .replaceable()
-                    .noCollision()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.HANGING_ROOTS)
-                    .offset(AbstractBlock.OffsetType.XZ)
-                    .burnable()
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
@@ -152,7 +134,7 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .nonOpaque()
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
-    
+
     public static final PolyporeBlock POLYPORE = new PolyporeBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.OAK_TAN)
@@ -162,14 +144,14 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .pistonBehavior(PistonBehavior.DESTROY)
                     .solidBlock(Blocks::never)
     );
-    
+
     public static final Block SCULK_JAW = new SculkJawBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.BLACK)
                     .strength(0.2F)
                     .sounds(BlockSoundGroup.SCULK)
     );
-    
+
     public static final Block JAR = new JarBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.OAK_TAN)
@@ -188,7 +170,7 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .pistonBehavior(PistonBehavior.DESTROY)
                     .luminance(state -> 15)
     );
-    
+
     public static final Block STONE_CHEST = new StoneChestBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
@@ -236,7 +218,7 @@ public class HollowBlockRegistrar implements BlockRegistrar {
     public static final Block WAXED_EXPOSED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(EXPOSED_COPPER_PILLAR));
     public static final Block WAXED_WEATHERED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(WEATHERED_COPPER_PILLAR));
     public static final Block WAXED_OXIDIZED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(OXIDIZED_COPPER_PILLAR));
-    
+
     @NoBlockItem
     public static final Block POTTED_PAEONIA = Blocks.createFlowerPotBlock(PAEONIA);
 
