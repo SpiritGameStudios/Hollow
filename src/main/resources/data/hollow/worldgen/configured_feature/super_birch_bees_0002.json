@@ -10,6 +10,7 @@
             "Name": "minecraft:birch_log"
           }
         },
+        "max_amount": 5,
         "probability": 0.5
       },
       {

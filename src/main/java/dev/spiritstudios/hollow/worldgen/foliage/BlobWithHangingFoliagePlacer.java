@@ -1,15 +1,14 @@
 package dev.spiritstudios.hollow.worldgen.foliage;
 
-import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.registry.HollowFoliagePlacerRegistrar;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
@@ -50,9 +49,16 @@ public class BlobWithHangingFoliagePlacer extends FoliagePlacer {
             int radius,
             int offset
     ) {
-        for (int i = offset; i >= offset - foliageHeight; i--) {
-            int j = Math.max(radius + treeNode.getFoliageRadius() - 1 - i / 2, 0);
-            this.generateSquareWithHangingLeaves(world, placer, random, config, treeNode.getCenter(), j, i, treeNode.isGiantTrunk(), hangingLeavesChance, hangingLeavesExtensionChance);
+        BlockPos adjustedPos = treeNode.getCenter().up(offset);
+
+        for (int i = offset - foliageHeight; i <= offset; i++) {
+            this.generateSquareWithHangingLeaves(
+                    world, placer, random, config,
+                    adjustedPos,
+                    Math.max(radius + treeNode.getFoliageRadius() - 1 - i / 2, 0), i,
+                    treeNode.isGiantTrunk(),
+                    hangingLeavesChance, hangingLeavesExtensionChance
+            );
         }
     }
 

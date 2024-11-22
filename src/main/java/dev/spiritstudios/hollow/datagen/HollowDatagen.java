@@ -12,5 +12,6 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(LootTableProvider::new);
         pack.addProvider(RecipeProvider::new);
         pack.addProvider(ItemGroupProvider::new);
+        pack.addProvider(ConfiguredFeatureProvider::new);
     }
 }
