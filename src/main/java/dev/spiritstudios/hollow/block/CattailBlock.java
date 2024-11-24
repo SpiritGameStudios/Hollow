@@ -78,6 +78,17 @@ public class CattailBlock extends PlantBlock implements Fertilizable, FluidFilla
     }
 
     @Override
+    protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        boolean canPlace = true;
+        if (state.get(PIECE) == Piece.BASE) {
+            FluidState fluidState = world.getFluidState(pos);
+            if (!fluidState.isIn(FluidTags.WATER) || fluidState.getLevel() != 8) canPlace = false;
+
+        }
+        return super.canPlaceAt(state, world, pos) && canPlace;
+    }
+
+    @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }

@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import dev.spiritstudios.hollow.block.CattailBlock;
 import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
@@ -25,7 +24,7 @@ public class CattailFeature extends Feature<DefaultFeatureConfig> {
         StructureWorldAccess world = context.getWorld();
 
         BlockPos pos = origin.withY(world.getTopY(Heightmap.Type.OCEAN_FLOOR, origin.getX(), origin.getZ()));
-        if (!world.getBlockState(pos).isOf(Blocks.WATER)) return false;
+        if (!HollowBlockRegistrar.CATTAIL.getDefaultState().canPlaceAt(world, pos)) return false;
 
         world.setBlockState(pos, HollowBlockRegistrar.CATTAIL.getDefaultState(), Block.NOTIFY_LISTENERS);
         pos = pos.up();

@@ -1,9 +1,6 @@
 {
   "type": "minecraft:random_patch",
   "config": {
-    "tries": 10,
-    "xz_spread": 7,
-    "y_spread": 3,
     "feature": {
       "feature": {
         "type": "minecraft:simple_block",
@@ -12,16 +9,16 @@
             "type": "minecraft:weighted_state_provider",
             "entries": [
               {
-                "weight": 4,
                 "data": {
                   "Name": "minecraft:lily_pad"
-                }
+                },
+                "weight": 4
               },
               {
-                "weight": 1,
                 "data": {
                   "Name": "hollow:lotus_lilypad"
-                }
+                },
+                "weight": 1
               }
             ]
           }
@@ -36,6 +33,9 @@
           }
         }
       ]
-    }
+    },
+    "tries": 10,
+    "xz_spread": 7,
+    "y_spread": 3
   }
 }
