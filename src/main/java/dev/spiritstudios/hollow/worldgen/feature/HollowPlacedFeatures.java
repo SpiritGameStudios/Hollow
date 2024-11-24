@@ -1,61 +1,47 @@
 package dev.spiritstudios.hollow.worldgen.feature;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.*;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DataPool;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.intprovider.WeightedListIntProvider;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
 
 import java.util.List;
 
 public final class HollowPlacedFeatures {
-    public static final RegistryKey<PlacedFeature> BIRCH_BEES_0002 = of("birch_bees_0002");
-    public static final RegistryKey<PlacedFeature> SUPER_BIRCH_BEES_0002 = of("super_birch_bees_0002");
-
-    public static final RegistryKey<PlacedFeature> BIRCH_TALL = of("birch_tall");
-
     public static final RegistryKey<PlacedFeature> CATTAILS = of("cattails");
 
     public static final RegistryKey<PlacedFeature> PATCH_TWIG = of("patch_twig");
-    public static final RegistryKey<PlacedFeature> PATCH_WATERLILY = of("patch_waterlily");
     public static final RegistryKey<PlacedFeature> PATCH_CAMPION = of("patch_campion");
+    public static final RegistryKey<PlacedFeature> PATCH_GIANT_LILYPAD = of("patch_giant_lilypad");
+    public static final RegistryKey<PlacedFeature> PATCH_GRASS_BIRCH = of("patch_grass_birch");
+    public static final RegistryKey<PlacedFeature> PATCH_TALL_GRASS_BIRCH = of("patch_tall_grass_birch");
+
+    public static final RegistryKey<PlacedFeature> FALLEN_BIRCH = of("fallen_birch");
+    public static final RegistryKey<PlacedFeature> FALLEN_OAK = of("fallen_oak");
+
+    public static final RegistryKey<PlacedFeature> HUGE_BROWN_MUSHROOM_SWAMP = of("huge_brown_mushroom_swamp");
 
     public static void bootstrap(Registerable<PlacedFeature> featureRegisterable) {
         PlacedFeatureHelper helper = new PlacedFeatureHelper(featureRegisterable.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE), featureRegisterable);
 
         helper.add(
-                BIRCH_BEES_0002,
-                HollowConfiguredFeatures.BIRCH_BEES_0002,
-                PlacedFeatures.wouldSurvive(Blocks.BIRCH_SAPLING)
-        );
-
-        helper.add(
-                SUPER_BIRCH_BEES_0002,
-                HollowConfiguredFeatures.SUPER_BIRCH_BEES_0002,
-                PlacedFeatures.wouldSurvive(Blocks.BIRCH_SAPLING)
-        );
-
-        helper.add(
-                BIRCH_TALL,
-                HollowConfiguredFeatures.BIRCH_TALL,
-                PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP,
-                CountPlacementModifier.of(new WeightedListIntProvider(DataPool.<IntProvider>builder()
-                        .add(ConstantIntProvider.create(10), 9)
-                        .add(ConstantIntProvider.create(11), 1)
-                        .build())),
+                FALLEN_BIRCH,
+                HollowConfiguredFeatures.FALLEN_BIRCH,
                 SquarePlacementModifier.of(),
-                SurfaceWaterDepthFilterPlacementModifier.of(0),
+                HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
                 BiomePlacementModifier.of(),
-                PlacedFeatures.wouldSurvive(Blocks.BIRCH_SAPLING)
+                CountPlacementModifier.of(1)
+        );
+
+        helper.add(
+                FALLEN_OAK,
+                HollowConfiguredFeatures.FALLEN_OAK,
+                SquarePlacementModifier.of(),
+                HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
+                BiomePlacementModifier.of(),
+                CountPlacementModifier.of(1)
         );
 
         helper.add(
@@ -79,15 +65,6 @@ public final class HollowPlacedFeatures {
         );
 
         helper.add(
-                PATCH_WATERLILY,
-                HollowConfiguredFeatures.PATCH_WATERLILY,
-                CountPlacementModifier.of(4),
-                HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
-                BiomePlacementModifier.of(),
-                SquarePlacementModifier.of()
-        );
-
-        helper.add(
                 PATCH_CAMPION,
                 HollowConfiguredFeatures.PATCH_CAMPION,
                 CountPlacementModifier.of(1),
@@ -96,12 +73,48 @@ public final class HollowPlacedFeatures {
                 BiomePlacementModifier.of(),
                 SquarePlacementModifier.of()
         );
+
+        helper.add(
+                PATCH_GRASS_BIRCH,
+                VegetationConfiguredFeatures.PATCH_GRASS,
+                CountPlacementModifier.of(20),
+                HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
+                BiomePlacementModifier.of(),
+                SquarePlacementModifier.of()
+        );
+
+        helper.add(
+                PATCH_TALL_GRASS_BIRCH,
+                VegetationConfiguredFeatures.PATCH_TALL_GRASS,
+                CountPlacementModifier.of(1),
+                HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING),
+                BiomePlacementModifier.of(),
+                SquarePlacementModifier.of()
+        );
+
+        helper.add(
+                HUGE_BROWN_MUSHROOM_SWAMP,
+                TreeConfiguredFeatures.HUGE_BROWN_MUSHROOM,
+                CountPlacementModifier.of(1),
+                RarityFilterPlacementModifier.of(2),
+                HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING),
+                BiomePlacementModifier.of(),
+                SquarePlacementModifier.of()
+        );
+
+        helper.add(
+                PATCH_GIANT_LILYPAD,
+                HollowConfiguredFeatures.PATCH_GIANT_LILYPAD,
+                CountPlacementModifier.of(1),
+                HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
+                BiomePlacementModifier.of(),
+                SquarePlacementModifier.of()
+        );
     }
 
     public static RegistryKey<PlacedFeature> of(String id) {
         return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(Hollow.MODID, id));
     }
-
 
     private record PlacedFeatureHelper(RegistryEntryLookup<ConfiguredFeature<?, ?>> lookup,
                                        Registerable<PlacedFeature> featureRegisterable) {

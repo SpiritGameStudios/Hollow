@@ -1,9 +1,6 @@
 package dev.spiritstudios.hollow.registry;
 
-import dev.spiritstudios.specter.api.registry.registration.MinecraftRegistrar;
 import dev.spiritstudios.specter.api.registry.registration.SoundEventRegistrar;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 

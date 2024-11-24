@@ -1,12 +1,9 @@
 {
-  "feature": "minecraft:patch_grass",
+  "feature": "hollow:patch_giant_lilypad",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 20
-    },
-    {
-      "type": "minecraft:in_square"
+      "count": 1
     },
     {
       "type": "minecraft:heightmap",
@@ -14,6 +11,9 @@
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:in_square"
     }
   ]
 }

@@ -1,13 +1,6 @@
 {
-  "feature": "hollow:swamp_flowers",
+  "feature": "minecraft:flower_swamp",
   "placement": [
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING"
-    },
     {
       "type": "minecraft:count",
       "count": 5
@@ -17,7 +10,14 @@
       "chance": 2
     },
     {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:in_square"
     }
   ]
 }

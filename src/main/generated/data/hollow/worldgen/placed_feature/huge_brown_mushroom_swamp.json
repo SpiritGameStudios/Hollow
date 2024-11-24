@@ -1,12 +1,13 @@
 {
-  "feature": "minecraft:patch_tall_grass",
+  "feature": "minecraft:huge_brown_mushroom",
   "placement": [
     {
       "type": "minecraft:count",
       "count": 1
     },
     {
-      "type": "minecraft:in_square"
+      "type": "minecraft:rarity_filter",
+      "chance": 2
     },
     {
       "type": "minecraft:heightmap",
@@ -14,6 +15,9 @@
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:in_square"
     }
   ]
 }

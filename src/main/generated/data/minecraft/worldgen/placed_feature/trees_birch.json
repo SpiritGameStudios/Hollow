@@ -1,5 +1,5 @@
 {
-  "feature": "hollow:swamp_oak",
+  "feature": "minecraft:birch_bees_0002",
   "placement": [
     {
       "type": "minecraft:count",
@@ -7,22 +7,15 @@
         "type": "minecraft:weighted_list",
         "distribution": [
           {
-            "data": 2,
+            "data": 9,
             "weight": 9
           },
           {
-            "data": 3,
+            "data": 8,
             "weight": 1
           }
         ]
       }
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:surface_water_depth_filter",
-      "max_water_depth": 2
     },
     {
       "type": "minecraft:heightmap",
@@ -32,11 +25,18 @@
       "type": "minecraft:biome"
     },
     {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
+    },
+    {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "minecraft:oak_sapling",
+          "Name": "minecraft:birch_sapling",
           "Properties": {
             "stage": "0"
           }
