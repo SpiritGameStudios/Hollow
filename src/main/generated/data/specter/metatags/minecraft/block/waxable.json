@@ -1,0 +1,8 @@
+{
+  "values": {
+    "hollow:copper_pillar": "hollow:waxed_copper_pillar",
+    "hollow:exposed_copper_pillar": "hollow:waxed_exposed_copper_pillar",
+    "hollow:oxidized_copper_pillar": "hollow:waxed_oxidized_copper_pillar",
+    "hollow:weathered_copper_pillar": "hollow:waxed_weathered_copper_pillar"
+  }
+}
