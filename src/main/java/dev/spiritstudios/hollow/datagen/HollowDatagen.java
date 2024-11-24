@@ -19,6 +19,7 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(ConfiguredFeatureProvider::new);
         pack.addProvider(PlacedFeatureProvider::new);
         pack.addProvider(BlockMetatagProvider::new);
+        pack.addProvider(BlockTagProvider::new);
     }
 
     @Override
