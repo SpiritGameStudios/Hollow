@@ -11,11 +11,10 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hollow:twig"
+          "name": "hollow:cattail"
         }
       ],
       "rolls": 1.0
     }
-  ],
-  "random_sequence": "hollow:blocks/twig"
+  ]
 }

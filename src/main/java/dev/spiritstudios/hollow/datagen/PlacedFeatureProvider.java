@@ -42,16 +42,6 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
         );
 
         helper.add(
-                VegetationPlacedFeatures.FLOWER_SWAMP,
-                VegetationConfiguredFeatures.FLOWER_SWAMP,
-                CountPlacementModifier.of(5),
-                RarityFilterPlacementModifier.of(2),
-                HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING),
-                BiomePlacementModifier.of(),
-                SquarePlacementModifier.of()
-        );
-
-        helper.add(
                 VegetationPlacedFeatures.TREES_BIRCH,
                 TreeConfiguredFeatures.BIRCH_BEES_0002,
                 CountPlacementModifier.of(new WeightedListIntProvider(DataPool.<IntProvider>builder()

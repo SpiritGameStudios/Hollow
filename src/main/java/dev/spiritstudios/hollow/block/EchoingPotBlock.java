@@ -34,8 +34,8 @@ public class EchoingPotBlock extends BlockWithEntity {
     }
     
     public static final VoxelShape SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(1, 0, 1, 15, 13, 15),
-            Block.createCuboidShape(3, 13, 3, 13, 15, 13)
+            Block.createCuboidShape(1, 0, 1, 15, 14, 15),
+            Block.createCuboidShape(4, 14, 4, 12, 16, 12)
     );
 
     @Override

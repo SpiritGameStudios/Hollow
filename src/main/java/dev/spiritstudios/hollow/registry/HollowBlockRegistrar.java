@@ -53,7 +53,7 @@ public class HollowBlockRegistrar implements BlockRegistrar {
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(3.0F, 6.0F)
-                    .sounds(BlockSoundGroup.POLISHED_DEEPSLATE)
+                    .sounds(BlockSoundGroup.DECORATED_POT)
     );
 
     public static final FlowerBlock PAEONIA = new FlowerBlock(
@@ -103,7 +103,8 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
-    public static final CattailBlock CATTAIL = new CattailBlock(
+    @NoBlockItem
+    public static final CattailStemBlock CATTAIL_STEM = new CattailStemBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.WATER_BLUE)
                     .replaceable()
@@ -114,6 +115,16 @@ public class HollowBlockRegistrar implements BlockRegistrar {
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
+    public static final CattailBlock CATTAIL = new CattailBlock(
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WATER_BLUE)
+                    .replaceable()
+                    .noCollision()
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.WET_GRASS)
+                    .offset(AbstractBlock.OffsetType.XZ)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
 
     @NoBlockItem
     public static final LilyPadBlock LOTUS_LILYPAD = new LilyPadBlock(

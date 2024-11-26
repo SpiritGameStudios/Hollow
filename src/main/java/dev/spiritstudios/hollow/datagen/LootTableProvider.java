@@ -22,6 +22,11 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
         this.addDropWithSilkTouch(HollowBlockRegistrar.SCULK_JAW);
         this.addDropWithSilkTouch(HollowBlockRegistrar.STONE_CHEST_LID);
 
+        this.addDrop(HollowBlockRegistrar.CATTAIL_STEM, HollowBlockRegistrar.CATTAIL);
+        this.addDrop(HollowBlockRegistrar.CATTAIL);
+
+        this.addDrop(HollowBlockRegistrar.TWIG);
+
         ReflectionHelper.forEachStaticField(
                 HollowBlockRegistrar.class,
                 HollowLogBlock.class,
@@ -38,6 +43,8 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
                 HollowBlockRegistrar.WAXED_WEATHERED_COPPER_PILLAR,
                 HollowBlockRegistrar.WAXED_OXIDIZED_COPPER_PILLAR
         ).forEach(this::addDrop);
+
+
 
     }
 }

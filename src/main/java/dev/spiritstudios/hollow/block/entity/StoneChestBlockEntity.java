@@ -18,6 +18,8 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -84,6 +86,16 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
 
         setStack(slot, player.getStackInHand(hand));
         player.setStackInHand(hand, ItemStack.EMPTY);
+
+        if (!inventory.isEmpty() && !player.getWorld().isClient()) player.getWorld().playSound(
+                null,
+                pos,
+                SoundEvents.ENTITY_ITEM_PICKUP,
+                SoundCategory.PLAYERS,
+                0.2f,
+                ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F
+        );
+
         return ItemActionResult.SUCCESS;
     }
 
