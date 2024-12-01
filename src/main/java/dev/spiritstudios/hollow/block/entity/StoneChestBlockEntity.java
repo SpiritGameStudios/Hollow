@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.block.entity;
 
-import dev.spiritstudios.hollow.registry.HollowBlockEntityRegistrar;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.block.entity.LootableInventoryBlockEntity;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
@@ -27,11 +27,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.stream.IntStream;
-
 public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     public StoneChestBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityRegistrar.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
+        super(HollowBlockEntityTypes.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
     }
 
     public void checkLootInteraction(@Nullable PlayerEntity player, boolean randomSeed) {
@@ -70,7 +68,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     }
 
     public ItemActionResult use(PlayerEntity player, Hand hand, Direction side) {
-        if (player.getStackInHand(hand).isEmpty() || player.getStackInHand(hand).isOf(HollowBlockRegistrar.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP))
+        if (player.getStackInHand(hand).isEmpty() || player.getStackInHand(hand).isOf(HollowBlocks.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP))
             return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 
 

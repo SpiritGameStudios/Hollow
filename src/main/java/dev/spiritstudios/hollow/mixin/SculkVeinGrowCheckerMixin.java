@@ -2,10 +2,9 @@ package dev.spiritstudios.hollow.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SculkVeinBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -16,6 +15,6 @@ public class SculkVeinGrowCheckerMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 0)
     )
     private boolean canGrow(BlockState instance, Block block, Operation<Boolean> original) {
-        return original.call(instance, block) || instance.isOf(HollowBlockRegistrar.SCULK_JAW);
+        return original.call(instance, block) || instance.isOf(HollowBlocks.SCULK_JAW);
     }
 }

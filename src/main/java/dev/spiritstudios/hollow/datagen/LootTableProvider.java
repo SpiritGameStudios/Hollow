@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.block.HollowLogBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
@@ -18,30 +18,30 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        this.addDropWithSilkTouch(HollowBlockRegistrar.ECHOING_POT);
-        this.addDropWithSilkTouch(HollowBlockRegistrar.SCULK_JAW);
-        this.addDropWithSilkTouch(HollowBlockRegistrar.STONE_CHEST_LID);
+        this.addDropWithSilkTouch(HollowBlocks.ECHOING_POT);
+        this.addDropWithSilkTouch(HollowBlocks.SCULK_JAW);
+        this.addDropWithSilkTouch(HollowBlocks.STONE_CHEST_LID);
 
-        this.addDrop(HollowBlockRegistrar.CATTAIL_STEM, HollowBlockRegistrar.CATTAIL);
-        this.addDrop(HollowBlockRegistrar.CATTAIL);
+        this.addDrop(HollowBlocks.CATTAIL_STEM, HollowBlocks.CATTAIL);
+        this.addDrop(HollowBlocks.CATTAIL);
 
-        this.addDrop(HollowBlockRegistrar.TWIG);
+        this.addDrop(HollowBlocks.TWIG);
 
         ReflectionHelper.forEachStaticField(
-                HollowBlockRegistrar.class,
+                HollowBlocks.class,
                 HollowLogBlock.class,
                 (block, name, field) -> this.addDrop(block));
 
         List.of(
-                HollowBlockRegistrar.COPPER_PILLAR,
-                HollowBlockRegistrar.EXPOSED_COPPER_PILLAR,
-                HollowBlockRegistrar.WEATHERED_COPPER_PILLAR,
-                HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR,
+                HollowBlocks.COPPER_PILLAR,
+                HollowBlocks.EXPOSED_COPPER_PILLAR,
+                HollowBlocks.WEATHERED_COPPER_PILLAR,
+                HollowBlocks.OXIDIZED_COPPER_PILLAR,
 
-                HollowBlockRegistrar.WAXED_COPPER_PILLAR,
-                HollowBlockRegistrar.WAXED_EXPOSED_COPPER_PILLAR,
-                HollowBlockRegistrar.WAXED_WEATHERED_COPPER_PILLAR,
-                HollowBlockRegistrar.WAXED_OXIDIZED_COPPER_PILLAR
+                HollowBlocks.WAXED_COPPER_PILLAR,
+                HollowBlocks.WAXED_EXPOSED_COPPER_PILLAR,
+                HollowBlocks.WAXED_WEATHERED_COPPER_PILLAR,
+                HollowBlocks.WAXED_OXIDIZED_COPPER_PILLAR
         ).forEach(this::addDrop);
 
 

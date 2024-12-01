@@ -1,22 +1,18 @@
 package dev.spiritstudios.hollow.block;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +40,7 @@ public class CattailStemBlock extends AbstractPlantBlock implements FluidFillabl
 
     @Override
     protected AbstractPlantStemBlock getStem() {
-        return HollowBlockRegistrar.CATTAIL;
+        return HollowBlocks.CATTAIL;
     }
 
     @Nullable

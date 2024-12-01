@@ -1,24 +1,19 @@
 package dev.spiritstudios.hollow.worldgen.feature;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
-import dev.spiritstudios.hollow.registry.HollowFeatureRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.registry.HollowFeatures;
 import dev.spiritstudios.hollow.worldgen.foliage.BlobWithHangingFoliagePlacer;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 public final class HollowConfiguredFeatures {
@@ -33,15 +28,15 @@ public final class HollowConfiguredFeatures {
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> featureRegisterable) {
-        featureRegisterable.register(FALLEN_OAK, fallenTree(HollowBlockRegistrar.OAK_HOLLOW_LOG, false, true));
-        featureRegisterable.register(FALLEN_BIRCH, fallenTree(HollowBlockRegistrar.BIRCH_HOLLOW_LOG, true, true));
+        featureRegisterable.register(FALLEN_OAK, fallenTree(HollowBlocks.OAK_HOLLOW_LOG, false, true));
+        featureRegisterable.register(FALLEN_BIRCH, fallenTree(HollowBlocks.BIRCH_HOLLOW_LOG, true, true));
 
-        featureRegisterable.register(PATCH_TWIG, createRandomPatch(HollowBlockRegistrar.TWIG, 10));
-        featureRegisterable.register(PATCH_CAMPION, createRandomPatch(HollowBlockRegistrar.CAMPION, 10));
+        featureRegisterable.register(PATCH_TWIG, createRandomPatch(HollowBlocks.TWIG, 10));
+        featureRegisterable.register(PATCH_CAMPION, createRandomPatch(HollowBlocks.CAMPION, 10));
         featureRegisterable.register(
                 PATCH_GIANT_LILYPAD,
                 createRandomPatch(
-                        PlacedFeatures.createEntry(HollowFeatureRegistrar.GIANT_LILYPAD, new DefaultFeatureConfig()),
+                        PlacedFeatures.createEntry(HollowFeatures.GIANT_LILYPAD, new DefaultFeatureConfig()),
                         10
                 )
         );
@@ -49,7 +44,7 @@ public final class HollowConfiguredFeatures {
         featureRegisterable.register(
                 CATTAILS,
                 new ConfiguredFeature<>(
-                        HollowFeatureRegistrar.CATTAILS,
+                        HollowFeatures.CATTAILS,
                         new DefaultFeatureConfig()
                 )
         );
@@ -62,8 +57,8 @@ public final class HollowConfiguredFeatures {
 
     public static ConfiguredFeature<?, ?> fallenTree(Block block, boolean polypore, boolean mossy) {
         return new ConfiguredFeature<>(
-                HollowFeatureRegistrar.FALLEN_TREE,
-                new FallenTreeFeatureConfig(BlockStateProvider.of(block), polypore, mossy)
+                HollowFeatures.FALLEN_TREE,
+                new FallenTreeFeature.Config(BlockStateProvider.of(block), polypore, mossy)
         );
     }
 
@@ -90,16 +85,6 @@ public final class HollowConfiguredFeatures {
 
     private static ConfiguredFeature<?, ?> createRandomPatch(Block block, int tries) {
         return createRandomPatch(BlockStateProvider.of(block), tries);
-    }
-
-    private static TreeFeatureConfig.Builder treeBuilder(Block log, Block leaves, int baseHeight, int firstRandomHeight, int secondRandomHeight, int radius) {
-        return new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(log),
-                new StraightTrunkPlacer(baseHeight, firstRandomHeight, secondRandomHeight),
-                BlockStateProvider.of(leaves),
-                new BlobFoliagePlacer(ConstantIntProvider.create(radius), ConstantIntProvider.create(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1)
-        );
     }
 
     public static TreeFeatureConfig.Builder hangingLeavestreeBuilder(Block log, Block leaves, int baseHeight, int firstRandomHeight, int secondRandomHeight, int radius, float hangingLeavesChance, float hangingLeavesExtensionChance) {

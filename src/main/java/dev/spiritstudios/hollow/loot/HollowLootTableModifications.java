@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.loot;
 
-import dev.spiritstudios.hollow.registry.HollowItemRegistrar;
+import dev.spiritstudios.hollow.registry.HollowItems;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -15,7 +15,7 @@ public class HollowLootTableModifications {
 
             if (LootTables.ANCIENT_CITY_CHEST == key) {
                 LootPool.Builder lootPoolBuilder = LootPool.builder()
-                        .with(ItemEntry.builder(HollowItemRegistrar.MUSIC_DISC_POSTMORTEM))
+                        .with(ItemEntry.builder(HollowItems.MUSIC_DISC_POSTMORTEM))
                         .conditionally(RandomChanceLootCondition.builder(0.1F));
 
                 tableBuilder.pool(lootPoolBuilder);
@@ -24,7 +24,7 @@ public class HollowLootTableModifications {
             if (LootTables.PILLAGER_OUTPOST_CHEST == key) {
                 LootPool.Builder lootPoolBuilder = LootPool.builder()
                         .rolls(UniformLootNumberProvider.create(0.0F, 1.0F))
-                        .with(ItemEntry.builder(HollowItemRegistrar.COPPER_HORN))
+                        .with(ItemEntry.builder(HollowItems.COPPER_HORN))
                         .apply(SetCopperInstrumentFunction.builder());
 
                 tableBuilder.pool(lootPoolBuilder);

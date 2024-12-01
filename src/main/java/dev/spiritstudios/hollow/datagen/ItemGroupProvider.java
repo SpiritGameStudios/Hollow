@@ -1,8 +1,9 @@
 package dev.spiritstudios.hollow.datagen;
 
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
-import dev.spiritstudios.hollow.registry.HollowDataComponentRegistrar;
-import dev.spiritstudios.hollow.registry.HollowItemRegistrar;
+import dev.spiritstudios.hollow.component.CopperInstrument;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.registry.HollowDataComponentTypes;
+import dev.spiritstudios.hollow.registry.HollowItems;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
 import dev.spiritstudios.specter.api.item.datagen.SpecterItemGroupProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -30,7 +31,7 @@ public class ItemGroupProvider extends SpecterItemGroupProvider {
     protected void generate(BiConsumer<Identifier, ItemGroupData> provider, RegistryWrapper.WrapperLookup lookup) {
         List<ItemStack> items = new ArrayList<>();
         ReflectionHelper.forEachStaticField(
-                HollowBlockRegistrar.class,
+                HollowBlocks.class,
                 Block.class,
                 (block, name, field) -> {
                     ItemStack stack = new ItemStack(block.asItem());
@@ -38,22 +39,22 @@ public class ItemGroupProvider extends SpecterItemGroupProvider {
                 }
         );
 
-        Arrays.stream(HollowDataComponentRegistrar.CopperInstrument.values()).map(instrument -> new ItemStack(
-                Registries.ITEM.getEntry(HollowItemRegistrar.COPPER_HORN),
+        Arrays.stream(CopperInstrument.values()).map(instrument -> new ItemStack(
+                Registries.ITEM.getEntry(HollowItems.COPPER_HORN),
                 1,
                 ComponentChanges.builder()
-                        .add(HollowDataComponentRegistrar.COPPER_INSTRUMENT, instrument)
+                        .add(HollowDataComponentTypes.COPPER_INSTRUMENT, instrument)
                         .build()
         )).forEach(items::add);
 
-        items.add(HollowItemRegistrar.FIREFLY_SPAWN_EGG.getDefaultStack());
-        items.add(HollowItemRegistrar.MUSIC_DISC_POSTMORTEM.getDefaultStack());
+        items.add(HollowItems.FIREFLY_SPAWN_EGG.getDefaultStack());
+        items.add(HollowItems.MUSIC_DISC_POSTMORTEM.getDefaultStack());
 
         provider.accept(
                 Identifier.of(MODID, "hollow"),
                 ItemGroupData.of(
                         Identifier.of(MODID, "hollow"),
-                        HollowBlockRegistrar.BIRCH_HOLLOW_LOG,
+                        HollowBlocks.BIRCH_HOLLOW_LOG,
                         items
                 )
         );

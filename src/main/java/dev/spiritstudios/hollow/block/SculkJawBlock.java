@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.block;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.registry.HollowSoundEventRegistrar;
+import dev.spiritstudios.hollow.registry.HollowSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkBlock;
@@ -44,7 +44,7 @@ public class SculkJawBlock extends SculkBlock {
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (!entity.bypassesSteppingEffects() && !world.isClient() && !(entity instanceof WardenEntity)) {
             if (!world.getBlockState(pos).get(ACTIVE))
-                world.playSound(null, pos.up(), HollowSoundEventRegistrar.SCULK_JAW_BITE, SoundCategory.BLOCKS, 1F, 0.6F);
+                world.playSound(null, pos.up(), HollowSoundEvents.SCULK_JAW_BITE, SoundCategory.BLOCKS, 1F, 0.6F);
 
             world.setBlockState(pos, state.with(ACTIVE, true));
 

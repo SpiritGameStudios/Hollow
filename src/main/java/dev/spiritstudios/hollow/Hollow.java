@@ -27,20 +27,20 @@ public class Hollow implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Registrar.process(HollowSoundEventRegistrar.class, MODID);
-        Registrar.process(HollowBlockRegistrar.class, MODID);
-        Registrar.process(HollowItemRegistrar.class, MODID);
-        Registrar.process(HollowEntityTypeRegistrar.class, MODID);
-        Registrar.process(HollowFeatureRegistrar.class, MODID);
-        Registrar.process(HollowTreeDecoratorRegistrar.class, MODID);
-        Registrar.process(HollowBlockEntityRegistrar.class, MODID);
-        Registrar.process(HollowParticleRegistrar.class, MODID);
-        Registrar.process(HollowDataComponentRegistrar.class, MODID);
-        Registrar.process(HollowFoliagePlacerRegistrar.class, MODID);
+        Registrar.process(HollowSoundEvents.class, MODID);
+        Registrar.process(HollowBlocks.class, MODID);
+        Registrar.process(HollowItems.class, MODID);
+        Registrar.process(HollowEntityTypes.class, MODID);
+        Registrar.process(HollowFeatures.class, MODID);
+        Registrar.process(HollowTreeDecorators.class, MODID);
+        Registrar.process(HollowBlockEntityTypes.class, MODID);
+        Registrar.process(HollowParticleTypes.class, MODID);
+        Registrar.process(HollowDataComponentTypes.class, MODID);
+        Registrar.process(HollowFoliagePlacerTypes.class, MODID);
 
         Registry.register(
                 Registries.LOOT_FUNCTION_TYPE,
-                Identifier.of(MODID, "set_copper_instrument"),
+                id("set_copper_instrument"),
                 SET_COPPER_INSTRUMENT
         );
 
@@ -50,7 +50,7 @@ public class Hollow implements ModInitializer {
                 "bass"
         ).forEach(name -> {
             for (int i = 0; i < 10; i++) {
-                Identifier id = Identifier.of(MODID, "horn.%s.%d".formatted(name, i));
+                Identifier id = id("horn.%s.%d".formatted(name, i));
                 Registry.register(
                         Registries.SOUND_EVENT,
                         id,
@@ -59,9 +59,13 @@ public class Hollow implements ModInitializer {
             }
         });
 
-        FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistrar.FIREFLY, FireflyEntity.createFireflyAttributes());
+        FabricDefaultAttributeRegistry.register(HollowEntityTypes.FIREFLY, FireflyEntity.createFireflyAttributes());
 
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
+    }
+
+    public static Identifier id(String path) {
+        return Identifier.of(MODID, path);
     }
 }

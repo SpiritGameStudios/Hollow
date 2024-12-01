@@ -3,7 +3,7 @@ package dev.spiritstudios.hollow.datagen;
 import com.google.common.collect.ImmutableMap;
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -32,7 +32,7 @@ public class ModelProvider extends FabricModelProvider {
         for (int i = 0; i < 4; i++) {
             TextureMap textureMap = new TextureMap().put(TextureKey.TEXTURE, Identifier.of(MODID, "block/giant_lilypad_" + i));
             Model model = new Model(Optional.of(Identifier.of(MODID, "block/giant_lilypad_template")), Optional.of("_" + i), TextureKey.TEXTURE);
-            modelIds[i] = model.upload(HollowBlockRegistrar.GIANT_LILYPAD, textureMap, blockStateModelGenerator.modelCollector);
+            modelIds[i] = model.upload(HollowBlocks.GIANT_LILYPAD, textureMap, blockStateModelGenerator.modelCollector);
         }
 
         Map<GiantLilyPadBlock.Piece, Identifier> north = ImmutableMap.of(
@@ -63,7 +63,7 @@ public class ModelProvider extends FabricModelProvider {
                 GiantLilyPadBlock.Piece.SOUTH_WEST, modelIds[1]
         );
 
-        BlockStateSupplier supplier = VariantsBlockStateSupplier.create(HollowBlockRegistrar.GIANT_LILYPAD).coordinate(
+        BlockStateSupplier supplier = VariantsBlockStateSupplier.create(HollowBlocks.GIANT_LILYPAD).coordinate(
                 BlockStateVariantMap.create(GiantLilyPadBlock.FACING, GiantLilyPadBlock.PIECE).register(
                         (direction, piece) -> {
                             BlockStateVariant variant = BlockStateVariant.create();
@@ -91,7 +91,7 @@ public class ModelProvider extends FabricModelProvider {
         );
 
         blockStateModelGenerator.blockStateCollector.accept(supplier);
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlockRegistrar.GIANT_LILYPAD);
+        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.GIANT_LILYPAD);
     }
 
     private static BlockStateSupplier createAxisRotatedBlockStateWithMossy(Block block, Identifier verticalModelId, Identifier horizontalModelId, Identifier horizontalMossyModelId) {
@@ -123,7 +123,7 @@ public class ModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        ReflectionHelper.forEachStaticField(HollowBlockRegistrar.class, HollowLogBlock.class, (block, name, field) -> {
+        ReflectionHelper.forEachStaticField(HollowBlocks.class, HollowLogBlock.class, (block, name, field) -> {
             TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, Identifier.of("minecraft", "block/" + block.sideTexture)).put(TextureKey.INSIDE, Identifier.ofVanilla("block/" + block.insideTexture)).put(TextureKey.END, Identifier.of("minecraft", "block/" + block.endTexture));
             Identifier hollowLog = HOLLOW_LOG.upload(block, textureMap, blockStateModelGenerator.modelCollector);
             Identifier hollowLogHorizontal = HOLLOW_LOG_HORIZONTAL.upload(block, textureMap, blockStateModelGenerator.modelCollector);
@@ -131,40 +131,40 @@ public class ModelProvider extends FabricModelProvider {
             blockStateModelGenerator.blockStateCollector.accept(createAxisRotatedBlockStateWithMossy(block, hollowLog, hollowLogHorizontal, hollowLogHorizontalMossy));
         });
 
-        blockStateModelGenerator.registerFlowerPotPlant(HollowBlockRegistrar.PAEONIA, HollowBlockRegistrar.POTTED_PAEONIA, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(HollowBlockRegistrar.ROOTED_ORCHID, HollowBlockRegistrar.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(HollowBlocks.PAEONIA, HollowBlocks.POTTED_PAEONIA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(HollowBlocks.ROOTED_ORCHID, HollowBlocks.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.TintType.NOT_TINTED);
 
-        Identifier campionTop = blockStateModelGenerator.createSubModel(HollowBlockRegistrar.CAMPION, "_top", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
-        Identifier campionBottom = blockStateModelGenerator.createSubModel(HollowBlockRegistrar.CAMPION, "_bottom", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
-        blockStateModelGenerator.registerDoubleBlock(HollowBlockRegistrar.CAMPION, campionTop, campionBottom);
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlockRegistrar.CAMPION);
+        Identifier campionTop = blockStateModelGenerator.createSubModel(HollowBlocks.CAMPION, "_top", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
+        Identifier campionBottom = blockStateModelGenerator.createSubModel(HollowBlocks.CAMPION, "_bottom", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
+        blockStateModelGenerator.registerDoubleBlock(HollowBlocks.CAMPION, campionTop, campionBottom);
+        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.CAMPION);
 
-        blockStateModelGenerator.registerItemModel(HollowBlockRegistrar.TWIG);
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlockRegistrar.TWIG, ModelIds.getBlockModelId(HollowBlockRegistrar.TWIG)));
+        blockStateModelGenerator.registerItemModel(HollowBlocks.TWIG);
+        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.TWIG, ModelIds.getBlockModelId(HollowBlocks.TWIG)));
 
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlockRegistrar.LOTUS_LILYPAD, ModelIds.getBlockModelId(HollowBlockRegistrar.LOTUS_LILYPAD)));
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlockRegistrar.LOTUS_LILYPAD);
+        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.LOTUS_LILYPAD, ModelIds.getBlockModelId(HollowBlocks.LOTUS_LILYPAD)));
+        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.LOTUS_LILYPAD);
 
         blockStateModelGenerator.blockStateCollector.accept(
-                VariantsBlockStateSupplier.create(HollowBlockRegistrar.ECHOING_POT, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(HollowBlockRegistrar.ECHOING_POT)))
+                VariantsBlockStateSupplier.create(HollowBlocks.ECHOING_POT, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(HollowBlocks.ECHOING_POT)))
                         .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
 
         createGiantLilyPadBlockState(blockStateModelGenerator);
 
-        blockStateModelGenerator.registerAxisRotated(HollowBlockRegistrar.COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
-        blockStateModelGenerator.registerAxisRotated(HollowBlockRegistrar.EXPOSED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
-        blockStateModelGenerator.registerAxisRotated(HollowBlockRegistrar.WEATHERED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
-        blockStateModelGenerator.registerAxisRotated(HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        blockStateModelGenerator.registerAxisRotated(HollowBlocks.COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        blockStateModelGenerator.registerAxisRotated(HollowBlocks.EXPOSED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        blockStateModelGenerator.registerAxisRotated(HollowBlocks.WEATHERED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        blockStateModelGenerator.registerAxisRotated(HollowBlocks.OXIDIZED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
 
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistrar.WAXED_COPPER_PILLAR, HollowBlockRegistrar.COPPER_PILLAR);
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistrar.WAXED_EXPOSED_COPPER_PILLAR, HollowBlockRegistrar.EXPOSED_COPPER_PILLAR);
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistrar.WAXED_WEATHERED_COPPER_PILLAR, HollowBlockRegistrar.WEATHERED_COPPER_PILLAR);
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlockRegistrar.WAXED_OXIDIZED_COPPER_PILLAR, HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR);
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_COPPER_PILLAR, HollowBlocks.COPPER_PILLAR);
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_EXPOSED_COPPER_PILLAR, HollowBlocks.EXPOSED_COPPER_PILLAR);
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_WEATHERED_COPPER_PILLAR, HollowBlocks.WEATHERED_COPPER_PILLAR);
+        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_OXIDIZED_COPPER_PILLAR, HollowBlocks.OXIDIZED_COPPER_PILLAR);
 
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlockRegistrar.JAR);
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlockRegistrar.FIREFLY_JAR);
-        blockStateModelGenerator.registerSimpleState(HollowBlockRegistrar.JAR);
-        blockStateModelGenerator.registerStateWithModelReference(HollowBlockRegistrar.FIREFLY_JAR, HollowBlockRegistrar.JAR);
+        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.JAR);
+        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.FIREFLY_JAR);
+        blockStateModelGenerator.registerSimpleState(HollowBlocks.JAR);
+        blockStateModelGenerator.registerStateWithModelReference(HollowBlocks.FIREFLY_JAR, HollowBlocks.JAR);
     }
 
     public void registerCopperPillarWaxed(BlockStateModelGenerator blockStateModelGenerator, Block block, Block unWaxed) {

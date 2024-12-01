@@ -3,7 +3,7 @@ package dev.spiritstudios.hollow.worldgen.decorator;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.spiritstudios.hollow.registry.HollowTreeDecoratorRegistrar;
+import dev.spiritstudios.hollow.registry.HollowTreeDecorators;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
@@ -18,9 +18,7 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class BranchTreeDecorator extends TreeDecorator {
@@ -42,7 +40,7 @@ public class BranchTreeDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> getType() {
-        return HollowTreeDecoratorRegistrar.BRANCH_TREE_DECORATOR;
+        return HollowTreeDecorators.BRANCH_TREE_DECORATOR;
     }
 
     @Override

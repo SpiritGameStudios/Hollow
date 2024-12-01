@@ -3,11 +3,10 @@ package dev.spiritstudios.hollow;
 import dev.spiritstudios.specter.api.config.Config;
 import dev.spiritstudios.specter.api.config.ConfigHolder;
 import dev.spiritstudios.specter.api.config.Value;
-import net.minecraft.util.Identifier;
 
 public class HollowConfig extends Config<HollowConfig> {
     public static final ConfigHolder<HollowConfig, ?> HOLDER = ConfigHolder.builder(
-            Identifier.of(Hollow.MODID, "hollow"), HollowConfig.class
+            Hollow.id("hollow"), HollowConfig.class
     ).build();
     public static final HollowConfig INSTANCE = HOLDER.get();
 

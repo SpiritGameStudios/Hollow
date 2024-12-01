@@ -1,9 +1,10 @@
 package dev.spiritstudios.hollow.worldgen.feature;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.core.exception.UnreachableException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,15 +16,17 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
-public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
-    public FallenTreeFeature(Codec<FallenTreeFeatureConfig> configCodec) {
+public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
+    public FallenTreeFeature(Codec<Config> configCodec) {
         super(configCodec);
     }
 
     @Override
-    public boolean generate(FeatureContext<FallenTreeFeatureConfig> context) {
+    public boolean generate(FeatureContext<Config> context) {
         BlockPos origin = context.getOrigin();
         Random random = context.getRandom();
         BlockState state = context.getConfig().stateProvider().get(random, origin);
@@ -63,7 +66,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
 
             world.setBlockState(
                     polyporePos,
-                    HollowBlockRegistrar.POLYPORE.getDefaultState()
+                    HollowBlocks.POLYPORE.getDefaultState()
                             .with(Properties.HORIZONTAL_FACING, direction)
                             .with(PolyporeBlock.POLYPORE_AMOUNT, random.nextBetween(1, 3)),
                     Block.NOTIFY_LISTENERS
@@ -71,5 +74,13 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig> {
         }
 
         return true;
+    }
+
+    public record Config(BlockStateProvider stateProvider, boolean polypore, boolean mossy) implements FeatureConfig {
+        public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                BlockStateProvider.TYPE_CODEC.fieldOf("state_provider").forGetter(config -> config.stateProvider),
+                Codec.BOOL.fieldOf("polypore").orElse(false).forGetter(config -> config.polypore),
+                Codec.BOOL.fieldOf("mossy").orElse(false).forGetter(config -> config.mossy)
+        ).apply(instance, Config::new));
     }
 }

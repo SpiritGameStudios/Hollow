@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.render.entity;
 
+import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.entity.FireflyEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -13,10 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
-import static dev.spiritstudios.hollow.Hollow.MODID;
-
 public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
-    private static final Identifier TEXTURE = Identifier.of(MODID, "textures/entity/firefly.png");
+    private static final Identifier TEXTURE = Hollow.id("textures/entity/firefly.png");
     private static final RenderLayer LAYER = RenderLayer.getEntityCutoutNoCull(TEXTURE);
 
     public FireflyEntityRenderer(EntityRendererFactory.Context ctx) {

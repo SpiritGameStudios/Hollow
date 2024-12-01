@@ -3,7 +3,7 @@ package dev.spiritstudios.hollow.worldgen.foliage;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.spiritstudios.hollow.registry.HollowFoliagePlacerRegistrar;
+import dev.spiritstudios.hollow.registry.HollowFoliagePlacerTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
@@ -34,7 +34,7 @@ public class BlobWithHangingFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> getType() {
-        return HollowFoliagePlacerRegistrar.BLOB_WITH_HANGING;
+        return HollowFoliagePlacerTypes.BLOB_WITH_HANGING;
     }
 
     @Override

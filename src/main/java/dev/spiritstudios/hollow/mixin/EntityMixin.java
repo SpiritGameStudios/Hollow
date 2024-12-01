@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.mixin;
 
 
 import dev.spiritstudios.hollow.block.SculkJawBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
@@ -26,14 +26,14 @@ public abstract class EntityMixin {
 
     @Redirect(method = "bypassesSteppingEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;isSneaking()Z"))
     private boolean isSneaking(Entity instance) {
-        if (getWorld().getBlockState(getLandingPos()).getBlock() == HollowBlockRegistrar.SCULK_JAW) return false;
+        if (getWorld().getBlockState(getLandingPos()).getBlock() == HollowBlocks.SCULK_JAW) return false;
         return instance.isSneaking();
     }
     
     @ModifyVariable(method = "move", at = @At("HEAD"), argsOnly = true)
     private Vec3d move(Vec3d movement, MovementType type) {
         BlockState block = getWorld().getBlockState(getPosWithYOffset(0));
-        if (type == MovementType.SELF && block.getBlock() == HollowBlockRegistrar.SCULK_JAW && block.get(SculkJawBlock.ACTIVE)) {
+        if (type == MovementType.SELF && block.getBlock() == HollowBlocks.SCULK_JAW && block.get(SculkJawBlock.ACTIVE)) {
             return Vec3d.ZERO;
         }
         return movement;

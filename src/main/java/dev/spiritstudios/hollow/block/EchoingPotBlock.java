@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.EchoingPotBlockEntity;
-import dev.spiritstudios.hollow.registry.HollowBlockEntityRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -75,7 +75,7 @@ public class EchoingPotBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, HollowBlockEntityRegistrar.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
+        return validateTicker(type, HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.hollow.worldgen.decorator.BigBranchTreeDecorator;
 import dev.spiritstudios.hollow.worldgen.decorator.BranchTreeDecorator;
 import dev.spiritstudios.hollow.worldgen.decorator.PolyporeTreeDecorator;
@@ -47,7 +47,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                                 8, 5, 0,
                                 2, 0.25F, 0.4F
                         ).decorators(List.of(
-                                new PolyporeTreeDecorator(BlockStateProvider.of(HollowBlockRegistrar.POLYPORE)),
+                                new PolyporeTreeDecorator(BlockStateProvider.of(HollowBlocks.POLYPORE)),
                                 new BranchTreeDecorator(BlockStateProvider.of(Blocks.BIRCH_LOG), 0.5F, 2)
                         )).ignoreVines().build()
                 )
@@ -62,7 +62,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                                 8, 5, 6,
                                 2, 0.25F, 0.4F
                         ).decorators(List.of(
-                                new PolyporeTreeDecorator(BlockStateProvider.of(HollowBlockRegistrar.POLYPORE)),
+                                new PolyporeTreeDecorator(BlockStateProvider.of(HollowBlocks.POLYPORE)),
                                 new BranchTreeDecorator(BlockStateProvider.of(Blocks.BIRCH_LOG), 0.5F, 5)
                         )).ignoreVines().build()
                 )
@@ -88,7 +88,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                 createRandomPatch(
                         new WeightedBlockStateProvider(DataPool.<BlockState>builder()
                                 .add(Blocks.LILY_PAD.getDefaultState(), 4)
-                                .add(HollowBlockRegistrar.LOTUS_LILYPAD.getDefaultState(), 1)
+                                .add(HollowBlocks.LOTUS_LILYPAD.getDefaultState(), 1)
                                 .build()),
                         10
                 )
@@ -104,7 +104,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                                         Feature.SIMPLE_BLOCK,
                                         new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder()
                                                 .add(Blocks.BLUE_ORCHID.getDefaultState())
-                                                .add(HollowBlockRegistrar.ROOTED_ORCHID.getDefaultState())
+                                                .add(HollowBlocks.ROOTED_ORCHID.getDefaultState())
                                                 .build()))
                                 )
                         )

@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.block.entity;
 
-import dev.spiritstudios.hollow.registry.HollowBlockEntityRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -31,7 +31,7 @@ public class EchoingPotBlockEntity extends BlockEntity {
     public int activeTime = 0;
 
     public EchoingPotBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityRegistrar.ECHOING_POT_BLOCK_ENTITY, pos, state);
+        super(HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, EchoingPotBlockEntity blockEntity) {
@@ -98,13 +98,13 @@ public class EchoingPotBlockEntity extends BlockEntity {
 
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        nbt.putInt("activeTime", activeTime);
+        nbt.putInt("ActiveTime", activeTime);
         super.writeNbt(nbt, registryLookup);
     }
 
     @Override
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        activeTime = nbt.getInt("activeTime");
+        activeTime = nbt.getInt("ActiveTime");
     }
 }

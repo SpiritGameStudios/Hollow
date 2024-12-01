@@ -1,9 +1,7 @@
 package dev.spiritstudios.hollow.block;
 
-import com.llamalad7.mixinextras.sugar.Share;
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
-import net.minecraft.SharedConstants;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -17,13 +15,10 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class CattailBlock extends AbstractPlantStemBlock implements FluidFillable {
@@ -60,7 +55,7 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
 
     @Override
     protected Block getPlant() {
-        return HollowBlockRegistrar.CATTAIL_STEM;
+        return HollowBlocks.CATTAIL_STEM;
     }
 
     @Override

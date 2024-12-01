@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.block;
 
-import dev.spiritstudios.hollow.registry.HollowParticleRegistrar;
+import dev.spiritstudios.hollow.registry.HollowParticleTypes;
 import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -22,7 +22,7 @@ public class FireflyJarBlock extends Block {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(15) == 0)
             world.addParticle(
-                    HollowParticleRegistrar.FIREFLY_JAR,
+                    HollowParticleTypes.FIREFLY_JAR,
                     (pos.getX() + 0.5) + (random.nextDouble() - 0.5) / 5.0F,
                     (pos.getY() + 0.5) + (2 * random.nextDouble() - 1) / 5.0F,
                     (pos.getZ() + 0.5) + (random.nextDouble() - 0.5) / 5.0F,

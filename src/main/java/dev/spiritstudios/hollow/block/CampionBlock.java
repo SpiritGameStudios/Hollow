@@ -15,8 +15,7 @@ public class CampionBlock extends TallFlowerBlock {
     public CampionBlock(Settings settings) {
         super(settings);
     }
-
-
+    
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return state.get(HALF) == DoubleBlockHalf.UPPER ?

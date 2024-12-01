@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.block.HollowLogBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.block.BlockMetatags;
 import dev.spiritstudios.specter.api.block.FlammableBlockData;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
@@ -24,7 +24,7 @@ public class BlockMetatagProvider extends MetatagProvider<Block> {
         MetatagBuilder<Block, FlammableBlockData> flammableBuilder = create(BlockMetatags.FLAMMABLE);
 
         ReflectionHelper.forEachStaticField(
-                HollowBlockRegistrar.class,
+                HollowBlocks.class,
                 HollowLogBlock.class,
                 (block, name, field) -> {
                     flammableBuilder.put(block, new FlammableBlockData(5, 5));
@@ -33,26 +33,26 @@ public class BlockMetatagProvider extends MetatagProvider<Block> {
         provider.accept(flammableBuilder);
 
         provider.accept(create(BlockMetatags.WAXABLE)
-                .put(HollowBlockRegistrar.COPPER_PILLAR, HollowBlockRegistrar.WAXED_COPPER_PILLAR)
-                .put(HollowBlockRegistrar.EXPOSED_COPPER_PILLAR, HollowBlockRegistrar.WAXED_EXPOSED_COPPER_PILLAR)
-                .put(HollowBlockRegistrar.WEATHERED_COPPER_PILLAR, HollowBlockRegistrar.WAXED_WEATHERED_COPPER_PILLAR)
-                .put(HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR, HollowBlockRegistrar.WAXED_OXIDIZED_COPPER_PILLAR));
+                .put(HollowBlocks.COPPER_PILLAR, HollowBlocks.WAXED_COPPER_PILLAR)
+                .put(HollowBlocks.EXPOSED_COPPER_PILLAR, HollowBlocks.WAXED_EXPOSED_COPPER_PILLAR)
+                .put(HollowBlocks.WEATHERED_COPPER_PILLAR, HollowBlocks.WAXED_WEATHERED_COPPER_PILLAR)
+                .put(HollowBlocks.OXIDIZED_COPPER_PILLAR, HollowBlocks.WAXED_OXIDIZED_COPPER_PILLAR));
 
         provider.accept(create(BlockMetatags.STRIPPABLE)
-                .put(HollowBlockRegistrar.OAK_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_OAK_HOLLOW_LOG)
-                .put(HollowBlockRegistrar.SPRUCE_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_SPRUCE_HOLLOW_LOG)
-                .put(HollowBlockRegistrar.BIRCH_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_BIRCH_HOLLOW_LOG)
-                .put(HollowBlockRegistrar.JUNGLE_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_JUNGLE_HOLLOW_LOG)
-                .put(HollowBlockRegistrar.ACACIA_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_ACACIA_HOLLOW_LOG)
-                .put(HollowBlockRegistrar.DARK_OAK_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_DARK_OAK_HOLLOW_LOG)
-                .put(HollowBlockRegistrar.CRIMSON_HOLLOW_STEM, HollowBlockRegistrar.STRIPPED_CRIMSON_HOLLOW_STEM)
-                .put(HollowBlockRegistrar.WARPED_HOLLOW_STEM, HollowBlockRegistrar.STRIPPED_WARPED_HOLLOW_STEM)
-                .put(HollowBlockRegistrar.MANGROVE_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_MANGROVE_HOLLOW_LOG)
-                .put(HollowBlockRegistrar.CHERRY_HOLLOW_LOG, HollowBlockRegistrar.STRIPPED_CHERRY_HOLLOW_LOG));
+                .put(HollowBlocks.OAK_HOLLOW_LOG, HollowBlocks.STRIPPED_OAK_HOLLOW_LOG)
+                .put(HollowBlocks.SPRUCE_HOLLOW_LOG, HollowBlocks.STRIPPED_SPRUCE_HOLLOW_LOG)
+                .put(HollowBlocks.BIRCH_HOLLOW_LOG, HollowBlocks.STRIPPED_BIRCH_HOLLOW_LOG)
+                .put(HollowBlocks.JUNGLE_HOLLOW_LOG, HollowBlocks.STRIPPED_JUNGLE_HOLLOW_LOG)
+                .put(HollowBlocks.ACACIA_HOLLOW_LOG, HollowBlocks.STRIPPED_ACACIA_HOLLOW_LOG)
+                .put(HollowBlocks.DARK_OAK_HOLLOW_LOG, HollowBlocks.STRIPPED_DARK_OAK_HOLLOW_LOG)
+                .put(HollowBlocks.CRIMSON_HOLLOW_STEM, HollowBlocks.STRIPPED_CRIMSON_HOLLOW_STEM)
+                .put(HollowBlocks.WARPED_HOLLOW_STEM, HollowBlocks.STRIPPED_WARPED_HOLLOW_STEM)
+                .put(HollowBlocks.MANGROVE_HOLLOW_LOG, HollowBlocks.STRIPPED_MANGROVE_HOLLOW_LOG)
+                .put(HollowBlocks.CHERRY_HOLLOW_LOG, HollowBlocks.STRIPPED_CHERRY_HOLLOW_LOG));
 
         provider.accept(create(BlockMetatags.OXIDIZABLE)
-                .put(HollowBlockRegistrar.COPPER_PILLAR, HollowBlockRegistrar.EXPOSED_COPPER_PILLAR)
-                .put(HollowBlockRegistrar.EXPOSED_COPPER_PILLAR, HollowBlockRegistrar.WEATHERED_COPPER_PILLAR)
-                .put(HollowBlockRegistrar.WEATHERED_COPPER_PILLAR, HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR));
+                .put(HollowBlocks.COPPER_PILLAR, HollowBlocks.EXPOSED_COPPER_PILLAR)
+                .put(HollowBlocks.EXPOSED_COPPER_PILLAR, HollowBlocks.WEATHERED_COPPER_PILLAR)
+                .put(HollowBlocks.WEATHERED_COPPER_PILLAR, HollowBlocks.OXIDIZED_COPPER_PILLAR));
     }
 }

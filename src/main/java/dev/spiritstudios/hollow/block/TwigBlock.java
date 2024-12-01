@@ -16,6 +16,7 @@ public class TwigBlock extends Block {
         super(settings);
     }
 
+    // region Settings
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
@@ -31,4 +32,5 @@ public class TwigBlock extends Block {
     protected boolean canPathfindThrough(BlockState state, NavigationType type) {
         return type == NavigationType.AIR && !this.collidable || super.canPathfindThrough(state, type);
     }
+    // endregion
 }

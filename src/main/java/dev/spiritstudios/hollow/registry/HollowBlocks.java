@@ -3,22 +3,13 @@ package dev.spiritstudios.hollow.registry;
 import dev.spiritstudios.hollow.block.*;
 import dev.spiritstudios.specter.api.registry.registration.BlockRegistrar;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 
 @SuppressWarnings("unused")
-public class HollowBlockRegistrar implements BlockRegistrar {
+public class HollowBlocks implements BlockRegistrar {
     public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
     public static final HollowLogBlock OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG), "oak_log", "stripped_oak_log", "oak_log_top");
 

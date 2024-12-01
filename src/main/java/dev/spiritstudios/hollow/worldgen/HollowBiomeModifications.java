@@ -3,21 +3,17 @@ package dev.spiritstudios.hollow.worldgen;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.HollowConfig;
 import dev.spiritstudios.hollow.entity.FireflyEntity;
-import dev.spiritstudios.hollow.registry.HollowEntityTypeRegistrar;
-import dev.spiritstudios.hollow.registry.HollowSoundEventRegistrar;
+import dev.spiritstudios.hollow.registry.HollowEntityTypes;
+import dev.spiritstudios.hollow.registry.HollowSoundEvents;
 import dev.spiritstudios.hollow.worldgen.feature.HollowPlacedFeatures;
 import net.fabricmc.fabric.api.biome.v1.*;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.MusicSound;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 
 import java.util.function.Predicate;
@@ -37,18 +33,18 @@ public class HollowBiomeModifications {
         BiomeModifications.addSpawn(
                 swamps,
                 SpawnGroup.AMBIENT,
-                HollowEntityTypeRegistrar.FIREFLY,
+                HollowEntityTypes.FIREFLY,
                 5,
                 10, 15
         );
 
-        SpawnRestriction.register(HollowEntityTypeRegistrar.FIREFLY, SpawnRestriction.getLocation(HollowEntityTypeRegistrar.FIREFLY), Heightmap.Type.WORLD_SURFACE, FireflyEntity::canSpawn);
+        SpawnRestriction.register(HollowEntityTypes.FIREFLY, SpawnRestriction.getLocation(HollowEntityTypes.FIREFLY), Heightmap.Type.WORLD_SURFACE, FireflyEntity::canSpawn);
 
-        BiomeModifications.create(Identifier.of(Hollow.MODID, "hollow_swamp")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(BiomeKeys.SWAMP), context -> {
+        BiomeModifications.create(Hollow.id("hollow_swamp")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(BiomeKeys.SWAMP), context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
             if (HollowConfig.INSTANCE.music.get())
                 context.getEffects().setMusic(new MusicSound(
-                        Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_SWAMP),
+                        Registries.SOUND_EVENT.getEntry(HollowSoundEvents.MUSIC_SWAMP),
                         12000,
                         24000,
                         false
@@ -57,7 +53,7 @@ public class HollowBiomeModifications {
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, HollowPlacedFeatures.HUGE_BROWN_MUSHROOM_SWAMP);
         });
 
-        BiomeModifications.create(Identifier.of(Hollow.MODID, "hollow_swamps")).add(ModificationPhase.ADDITIONS, swamps, context -> {
+        BiomeModifications.create(Hollow.id("hollow_swamps")).add(ModificationPhase.ADDITIONS, swamps, context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, HollowPlacedFeatures.PATCH_TWIG);
@@ -71,12 +67,12 @@ public class HollowBiomeModifications {
                 HollowPlacedFeatures.FALLEN_OAK
         );
 
-        BiomeModifications.create(Identifier.of(Hollow.MODID, "hollow_birch")).add(ModificationPhase.ADDITIONS, birch, context -> {
+        BiomeModifications.create(Hollow.id("hollow_birch")).add(ModificationPhase.ADDITIONS, birch, context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 
             if (HollowConfig.INSTANCE.music.get())
                 context.getEffects().setMusic(new MusicSound(
-                        Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_BIRCH_FOREST),
+                        Registries.SOUND_EVENT.getEntry(HollowSoundEvents.MUSIC_BIRCH_FOREST),
                         12000,
                         24000,
                         false
@@ -93,12 +89,12 @@ public class HollowBiomeModifications {
         }).add(ModificationPhase.REMOVALS, birch, context ->
                 context.getGenerationSettings().removeFeature(VegetationPlacedFeatures.PATCH_PUMPKIN));
 
-        BiomeModifications.create(Identifier.of(Hollow.MODID, "deep_dark_music")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
+        BiomeModifications.create(Hollow.id("deep_dark_music")).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(
                 BiomeKeys.DEEP_DARK
         ), context -> {
             if (HollowConfig.INSTANCE.music.get())
                 context.getEffects().setMusic(new MusicSound(
-                        Registries.SOUND_EVENT.getEntry(HollowSoundEventRegistrar.MUSIC_DEEP_DARK),
+                        Registries.SOUND_EVENT.getEntry(HollowSoundEvents.MUSIC_DEEP_DARK),
                         12000,
                         24000,
                         false

@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -34,7 +34,7 @@ public class GiantLilypadFeature extends Feature<DefaultFeatureConfig> {
         if (!canPlaceAt(world, pos)) return false;
 
         Direction facing = Direction.fromHorizontal(random.nextInt(4));
-        BlockState lilypadState = HollowBlockRegistrar.GIANT_LILYPAD.getDefaultState().with(GiantLilyPadBlock.FACING, facing);
+        BlockState lilypadState = HollowBlocks.GIANT_LILYPAD.getDefaultState().with(GiantLilyPadBlock.FACING, facing);
 
         world.setBlockState(pos, lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_WEST), Block.NOTIFY_ALL_AND_REDRAW);
         world.setBlockState(pos.east(), lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_EAST), Block.NOTIFY_ALL_AND_REDRAW);

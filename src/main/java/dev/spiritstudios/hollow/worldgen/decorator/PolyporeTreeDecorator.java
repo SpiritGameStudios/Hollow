@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.worldgen.decorator;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
-import dev.spiritstudios.hollow.registry.HollowTreeDecoratorRegistrar;
+import dev.spiritstudios.hollow.registry.HollowTreeDecorators;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -27,7 +27,7 @@ public class PolyporeTreeDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> getType() {
-        return HollowTreeDecoratorRegistrar.POLYPORE_TREE_DECORATOR;
+        return HollowTreeDecorators.POLYPORE_TREE_DECORATOR;
     }
 
     @Override
