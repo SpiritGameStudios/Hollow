@@ -9,5 +9,7 @@ import net.minecraft.entity.SpawnGroup;
 public class HollowEntityTypes implements EntityTypeRegistrar {
     public static EntityType<FireflyEntity> FIREFLY = EntityType.Builder
             .create(FireflyEntity::new, SpawnGroup.AMBIENT)
-            .dimensions(0.125F, 0.0625F).maxTrackingRange(8).build();
+            .dimensions(0.125F, 0.0625F)
+            .maxTrackingRange(20)
+            .build();
 }

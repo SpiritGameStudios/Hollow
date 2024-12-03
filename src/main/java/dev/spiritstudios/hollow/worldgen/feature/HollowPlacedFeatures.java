@@ -3,6 +3,8 @@ package dev.spiritstudios.hollow.worldgen.feature;
 import dev.spiritstudios.hollow.Hollow;
 import net.minecraft.registry.*;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.ClampedIntProvider;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
@@ -32,7 +34,7 @@ public final class HollowPlacedFeatures {
                 SquarePlacementModifier.of(),
                 HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
                 BiomePlacementModifier.of(),
-                CountPlacementModifier.of(1)
+                RarityFilterPlacementModifier.of(4)
         );
 
         helper.add(
@@ -41,7 +43,7 @@ public final class HollowPlacedFeatures {
                 SquarePlacementModifier.of(),
                 HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG),
                 BiomePlacementModifier.of(),
-                CountPlacementModifier.of(1)
+                RarityFilterPlacementModifier.of(4)
         );
 
         helper.add(
@@ -67,11 +69,11 @@ public final class HollowPlacedFeatures {
         helper.add(
                 PATCH_CAMPION,
                 HollowConfiguredFeatures.PATCH_CAMPION,
-                CountPlacementModifier.of(1),
-                RarityFilterPlacementModifier.of(2),
-                HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING),
-                BiomePlacementModifier.of(),
-                SquarePlacementModifier.of()
+                RarityFilterPlacementModifier.of(7),
+                SquarePlacementModifier.of(),
+                PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+                CountPlacementModifier.of(ClampedIntProvider.create(UniformIntProvider.create(-3, 1), 0, 1)),
+                BiomePlacementModifier.of()
         );
 
         helper.add(

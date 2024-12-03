@@ -23,7 +23,7 @@ public class CattailStemBlock extends AbstractPlantBlock implements FluidFillabl
     public static final BooleanProperty BOTTOM = Properties.BOTTOM;
 
     public CattailStemBlock(AbstractBlock.Settings settings) {
-        super(settings, Direction.UP, VoxelShapes.fullCube(), true);
+        super(settings, Direction.UP, CattailBlock.SHAPE, true);
         setDefaultState(getDefaultState().with(BOTTOM, false));
     }
 

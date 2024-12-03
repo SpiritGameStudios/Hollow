@@ -1,9 +1,11 @@
 package dev.spiritstudios.hollow.block;
 
+import dev.spiritstudios.hollow.data.LogTypeData;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.Registries;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -39,19 +41,29 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty MOSSY = BooleanProperty.of("mossy");
     
-    public String insideTexture;
-    public String sideTexture;
-    public String endTexture;
+    public final LogTypeData typeData;
     
-    public HollowLogBlock(Settings settings, String sideTexture, String insideTexture, String endTexture) {
+    public HollowLogBlock(Settings settings, LogTypeData typeData) {
         super(settings);
-        this.insideTexture = insideTexture;
-        this.sideTexture = sideTexture;
-        this.endTexture = endTexture;
+        this.typeData = typeData;
         setDefaultState(getDefaultState()
                 .with(AXIS, Direction.Axis.Y)
                 .with(WATERLOGGED, false)
                 .with(MOSSY, false));
+    }
+
+    public static HollowLogBlock of(Block block) {
+        return new HollowLogBlock(
+                AbstractBlock.Settings.copy(block),
+                LogTypeData.byId(Registries.BLOCK.getId(block))
+        );
+    }
+
+    public static HollowLogBlock ofStripped(Block block) {
+        return new HollowLogBlock(
+                AbstractBlock.Settings.copy(block),
+                LogTypeData.byIdStripped(Registries.BLOCK.getId(block))
+        );
     }
 
     @Override

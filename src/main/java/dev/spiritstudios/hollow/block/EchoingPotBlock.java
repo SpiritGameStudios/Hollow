@@ -32,7 +32,7 @@ public class EchoingPotBlock extends BlockWithEntity {
         super(settings);
         setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
     }
-    
+
     public static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(1, 0, 1, 15, 14, 15),
             Block.createCuboidShape(4, 14, 4, 12, 16, 12)
@@ -44,7 +44,9 @@ public class EchoingPotBlock extends BlockWithEntity {
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -62,12 +64,11 @@ public class EchoingPotBlock extends BlockWithEntity {
         return new EchoingPotBlockEntity(pos, state);
     }
 
-
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) return ItemActionResult.SUCCESS;
 
-        EchoingPotBlockEntity blockEntity = (EchoingPotBlockEntity)world.getBlockEntity(pos);
+        EchoingPotBlockEntity blockEntity = (EchoingPotBlockEntity) world.getBlockEntity(pos);
         Objects.requireNonNull(blockEntity).use(player, hand);
         return ItemActionResult.CONSUME;
     }
@@ -79,5 +80,7 @@ public class EchoingPotBlock extends BlockWithEntity {
     }
 
     @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() { return CODEC; }
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
 }

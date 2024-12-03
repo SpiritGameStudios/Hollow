@@ -15,8 +15,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class GiantLilypadFeature extends Feature<DefaultFeatureConfig> {
-    public GiantLilypadFeature(Codec<DefaultFeatureConfig> configCodec) {
-        super(configCodec);
+    public GiantLilypadFeature() {
+        super(DefaultFeatureConfig.CODEC);
     }
 
     @Override

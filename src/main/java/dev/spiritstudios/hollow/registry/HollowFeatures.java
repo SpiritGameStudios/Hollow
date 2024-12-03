@@ -17,9 +17,9 @@ public class HollowFeatures implements MinecraftRegistrar<Feature<?>> {
         return Registries.FEATURE;
     }
     
-    public static final Feature<FallenTreeFeature.Config> FALLEN_TREE = new FallenTreeFeature(FallenTreeFeature.Config.CODEC);
-    public static final Feature<DefaultFeatureConfig> GIANT_LILYPAD = new GiantLilypadFeature(DefaultFeatureConfig.CODEC);
-    public static final Feature<DefaultFeatureConfig> CATTAILS = new CattailFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<FallenTreeFeature.Config> FALLEN_TREE = new FallenTreeFeature();
+    public static final Feature<DefaultFeatureConfig> GIANT_LILYPAD = new GiantLilypadFeature();
+    public static final Feature<DefaultFeatureConfig> CATTAILS = new CattailFeature();
 
     @Override
     public Class<Feature<?>> getObjectType() {

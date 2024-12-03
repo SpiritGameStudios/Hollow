@@ -2,22 +2,31 @@
   "feature": "hollow:patch_campion",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 1
+      "type": "minecraft:rarity_filter",
+      "chance": 7
     },
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
       "heightmap": "MOTION_BLOCKING"
     },
     {
-      "type": "minecraft:biome"
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:clamped",
+        "max_inclusive": 1,
+        "min_inclusive": 0,
+        "source": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 1,
+          "min_inclusive": -3
+        }
+      }
     },
     {
-      "type": "minecraft:in_square"
+      "type": "minecraft:biome"
     }
   ]
 }

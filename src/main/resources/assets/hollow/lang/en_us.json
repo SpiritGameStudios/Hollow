@@ -95,5 +95,6 @@
   "subtitles.copper_horn.gift": "Gift",
   "subtitles.copper_horn.sweet": "Sweet",
   "subtitles.copper_horn.moon": "Moon",
-  "subtitles.copper_horn.love": "Love"
+  "subtitles.copper_horn.love": "Love",
+  "gamerule.doFrogPoisoning": "Allow frog poisoning"
 }

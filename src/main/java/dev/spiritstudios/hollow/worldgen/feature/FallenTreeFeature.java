@@ -21,22 +21,26 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
 public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
-    public FallenTreeFeature(Codec<Config> configCodec) {
-        super(configCodec);
+    public FallenTreeFeature() {
+        super(Config.CODEC);
     }
 
     @Override
     public boolean generate(FeatureContext<Config> context) {
         BlockPos origin = context.getOrigin();
-        Random random = context.getRandom();
-        BlockState state = context.getConfig().stateProvider().get(random, origin);
         StructureWorldAccess world = context.getWorld();
 
-        int size = random.nextBetween(3, 5);
+        origin = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, origin);
+
+        Random random = context.getRandom();
+        BlockState state = context.getConfig().stateProvider().get(random, origin);
+        Config config = context.getConfig();
+
+        int size = config.baseHeight + random.nextInt(config.variance);
+
         Direction.Axis axis = random.nextBoolean() ? Direction.Axis.X : Direction.Axis.Z;
         state = state.withIfExists(Properties.AXIS, axis);
 
-        origin = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, origin);
 
         for (int i = 0; i < size; i++) {
             BlockPos pos = origin.offset(axis, i);
@@ -48,9 +52,11 @@ public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
             BlockPos pos = origin.offset(axis, i);
             world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
 
-            if (world.isAir(pos.up()) && random.nextInt(2) == 0 && context.getConfig().mossy()) {
-                world.setBlockState(pos.up(), Blocks.MOSS_CARPET.getDefaultState(), 2);
-                world.setBlockState(pos, state.with(HollowLogBlock.MOSSY, true), 2);
+            if (world.isAir(pos.up())) {
+                BlockState top = config.topBlockProvider().get(random, pos.up());
+                world.setBlockState(pos.up(), top, Block.NOTIFY_LISTENERS);
+                if (top.isOf(Blocks.MOSS_CARPET))
+                    world.setBlockState(pos, state.withIfExists(HollowLogBlock.MOSSY, true), Block.NOTIFY_LISTENERS);
             }
 
             Direction direction = switch (axis) {
@@ -59,16 +65,13 @@ public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
                 default -> throw new UnreachableException();
             };
 
-            if (!context.getConfig().polypore() || random.nextInt(2) != 0) continue;
-
-            BlockPos polyporePos = pos.offset(direction);
-            if (!world.isAir(polyporePos)) continue;
+            BlockPos sidePos = pos.offset(direction);
+            if (!world.isAir(sidePos) && !world.getBlockState(sidePos).isReplaceable()) continue;
 
             world.setBlockState(
-                    polyporePos,
-                    HollowBlocks.POLYPORE.getDefaultState()
-                            .with(Properties.HORIZONTAL_FACING, direction)
-                            .with(PolyporeBlock.POLYPORE_AMOUNT, random.nextBetween(1, 3)),
+                    sidePos,
+                    config.sideBlockProvider.get(random, sidePos)
+                            .withIfExists(Properties.HORIZONTAL_FACING, direction),
                     Block.NOTIFY_LISTENERS
             );
         }
@@ -76,11 +79,19 @@ public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
         return true;
     }
 
-    public record Config(BlockStateProvider stateProvider, boolean polypore, boolean mossy) implements FeatureConfig {
+    public record Config(
+            BlockStateProvider stateProvider,
+            int baseHeight,
+            int variance,
+            BlockStateProvider topBlockProvider,
+            BlockStateProvider sideBlockProvider
+    ) implements FeatureConfig {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                BlockStateProvider.TYPE_CODEC.fieldOf("state_provider").forGetter(config -> config.stateProvider),
-                Codec.BOOL.fieldOf("polypore").orElse(false).forGetter(config -> config.polypore),
-                Codec.BOOL.fieldOf("mossy").orElse(false).forGetter(config -> config.mossy)
+                BlockStateProvider.TYPE_CODEC.fieldOf("state_provider").forGetter(Config::stateProvider),
+                Codec.INT.optionalFieldOf("base_height", 3).forGetter(Config::baseHeight),
+                Codec.INT.optionalFieldOf("variance", 2).forGetter(Config::variance),
+                BlockStateProvider.TYPE_CODEC.fieldOf("top_block_provider").forGetter(Config::topBlockProvider),
+                BlockStateProvider.TYPE_CODEC.fieldOf("side_block_provider").forGetter(Config::sideBlockProvider)
         ).apply(instance, Config::new));
     }
 }

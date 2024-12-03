@@ -6,15 +6,11 @@
   "items": [
     {
       "count": 1,
-      "id": "hollow:stripped_oak_hollow_log"
-    },
-    {
-      "count": 1,
       "id": "hollow:oak_hollow_log"
     },
     {
       "count": 1,
-      "id": "hollow:stripped_spruce_hollow_log"
+      "id": "hollow:stripped_oak_hollow_log"
     },
     {
       "count": 1,
@@ -22,7 +18,7 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_birch_hollow_log"
+      "id": "hollow:stripped_spruce_hollow_log"
     },
     {
       "count": 1,
@@ -30,7 +26,7 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_jungle_hollow_log"
+      "id": "hollow:stripped_birch_hollow_log"
     },
     {
       "count": 1,
@@ -38,7 +34,7 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_acacia_hollow_log"
+      "id": "hollow:stripped_jungle_hollow_log"
     },
     {
       "count": 1,
@@ -46,7 +42,7 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_dark_oak_hollow_log"
+      "id": "hollow:stripped_acacia_hollow_log"
     },
     {
       "count": 1,
@@ -54,7 +50,7 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_crimson_hollow_stem"
+      "id": "hollow:stripped_dark_oak_hollow_log"
     },
     {
       "count": 1,
@@ -62,7 +58,7 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_warped_hollow_stem"
+      "id": "hollow:stripped_crimson_hollow_stem"
     },
     {
       "count": 1,
@@ -70,7 +66,7 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_mangrove_hollow_log"
+      "id": "hollow:stripped_warped_hollow_stem"
     },
     {
       "count": 1,
@@ -78,11 +74,15 @@
     },
     {
       "count": 1,
-      "id": "hollow:stripped_cherry_hollow_log"
+      "id": "hollow:stripped_mangrove_hollow_log"
     },
     {
       "count": 1,
       "id": "hollow:cherry_hollow_log"
+    },
+    {
+      "count": 1,
+      "id": "hollow:stripped_cherry_hollow_log"
     },
     {
       "count": 1,
@@ -171,6 +171,18 @@
     {
       "count": 1,
       "id": "hollow:waxed_oxidized_copper_pillar"
+    },
+    {
+      "count": 1,
+      "id": "hollow:blue_wildflower"
+    },
+    {
+      "count": 1,
+      "id": "hollow:purple_wildflower"
+    },
+    {
+      "count": 1,
+      "id": "hollow:white_wildflower"
     },
     {
       "components": {

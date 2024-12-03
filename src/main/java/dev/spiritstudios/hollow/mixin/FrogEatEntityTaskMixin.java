@@ -1,5 +1,7 @@
 package dev.spiritstudios.hollow.mixin;
 
+import dev.spiritstudios.hollow.HollowGameRules;
+import dev.spiritstudios.hollow.HollowTags;
 import dev.spiritstudios.hollow.entity.FireflyEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.brain.task.FrogEatEntityTask;
@@ -18,11 +20,18 @@ import java.util.Optional;
 public class FrogEatEntityTaskMixin {
     @Inject(method = "eat", at = @At("HEAD"))
     private void eat(ServerWorld world, FrogEntity frog, CallbackInfo ci) {
-        Optional<Entity> entity = frog.getFrogTarget();
-        if (entity.isEmpty()) return;
-        if (entity.get() instanceof FireflyEntity && world.random.nextFloat() > 0.75F) {
-            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.POISON, 100, 0);
-            frog.addStatusEffect(statusEffectInstance);
-        }
+        if (!world.getGameRules().getBoolean(HollowGameRules.DO_FROG_POISONING)) return;
+
+        Optional<Entity> target = frog.getFrogTarget();
+        if (target.isEmpty()) return;
+        if (!target.get().getType().isIn(HollowTags.POISONS_FROG) || world.random.nextFloat() <= 0.75F) return;
+
+        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(
+                StatusEffects.POISON,
+                100,
+                0
+        );
+
+        frog.addStatusEffect(statusEffectInstance);
     }
 }

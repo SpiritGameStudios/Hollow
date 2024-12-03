@@ -14,8 +14,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class CattailFeature extends Feature<DefaultFeatureConfig> {
-    public CattailFeature(Codec<DefaultFeatureConfig> configCodec) {
-        super(configCodec);
+    public CattailFeature() {
+        super(DefaultFeatureConfig.CODEC);
     }
 
     @Override

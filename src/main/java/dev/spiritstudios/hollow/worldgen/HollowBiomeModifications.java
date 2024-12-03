@@ -81,6 +81,7 @@ public class HollowBiomeModifications {
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, HollowPlacedFeatures.PATCH_TWIG);
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, HollowPlacedFeatures.PATCH_TALL_GRASS_BIRCH);
             generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, HollowPlacedFeatures.PATCH_CAMPION);
+            generationSettings.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, HollowPlacedFeatures.FALLEN_BIRCH);
         }).add(ModificationPhase.REPLACEMENTS, birch, context -> {
             BiomeModificationContext.GenerationSettingsContext generationSettings = context.getGenerationSettings();
 

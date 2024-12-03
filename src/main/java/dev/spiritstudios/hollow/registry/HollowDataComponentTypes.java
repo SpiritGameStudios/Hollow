@@ -11,6 +11,7 @@ public class HollowDataComponentTypes implements MinecraftRegistrar<ComponentTyp
     public static final ComponentType<CopperInstrument> COPPER_INSTRUMENT = ComponentType.<CopperInstrument>builder()
             .codec(CopperInstrument.CODEC)
             .packetCodec(CopperInstrument.PACKET_CODEC)
+            .cache()
             .build();
 
     @Override

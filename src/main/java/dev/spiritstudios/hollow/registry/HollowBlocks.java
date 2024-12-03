@@ -10,41 +10,45 @@ import net.minecraft.sound.BlockSoundGroup;
 
 @SuppressWarnings("unused")
 public class HollowBlocks implements BlockRegistrar {
-    public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG), "stripped_oak_log", "stripped_oak_log", "stripped_oak_log_top");
-    public static final HollowLogBlock OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG), "oak_log", "stripped_oak_log", "oak_log_top");
+    // region Hollow logs
+    public static final HollowLogBlock OAK_HOLLOW_LOG = HollowLogBlock.of(Blocks.OAK_LOG);
+    public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_OAK_LOG);
 
-    public static final HollowLogBlock STRIPPED_SPRUCE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_SPRUCE_LOG), "stripped_spruce_log", "stripped_spruce_log", "stripped_spruce_log_top");
-    public static final HollowLogBlock SPRUCE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.SPRUCE_LOG), "spruce_log", "stripped_spruce_log", "spruce_log_top");
+    public static final HollowLogBlock SPRUCE_HOLLOW_LOG = HollowLogBlock.of(Blocks.SPRUCE_LOG);
+    public static final HollowLogBlock STRIPPED_SPRUCE_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_SPRUCE_LOG);
 
-    public static final HollowLogBlock STRIPPED_BIRCH_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_BIRCH_LOG), "stripped_birch_log", "stripped_birch_log", "stripped_birch_log_top");
-    public static final HollowLogBlock BIRCH_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.BIRCH_LOG), "birch_log", "stripped_birch_log", "birch_log_top");
+    public static final HollowLogBlock BIRCH_HOLLOW_LOG = HollowLogBlock.of(Blocks.BIRCH_LOG);
+    public static final HollowLogBlock STRIPPED_BIRCH_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_BIRCH_LOG);
 
-    public static final HollowLogBlock STRIPPED_JUNGLE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_JUNGLE_LOG), "stripped_jungle_log", "stripped_jungle_log", "stripped_jungle_log_top");
-    public static final HollowLogBlock JUNGLE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.JUNGLE_LOG), "jungle_log", "stripped_jungle_log", "jungle_log_top");
+    public static final HollowLogBlock JUNGLE_HOLLOW_LOG = HollowLogBlock.of(Blocks.JUNGLE_LOG);
+    public static final HollowLogBlock STRIPPED_JUNGLE_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_JUNGLE_LOG);
 
-    public static final HollowLogBlock STRIPPED_ACACIA_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_ACACIA_LOG), "stripped_acacia_log", "stripped_acacia_log", "stripped_acacia_log_top");
-    public static final HollowLogBlock ACACIA_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_LOG), "acacia_log", "stripped_acacia_log", "acacia_log_top");
+    public static final HollowLogBlock ACACIA_HOLLOW_LOG = HollowLogBlock.of(Blocks.ACACIA_LOG);
+    public static final HollowLogBlock STRIPPED_ACACIA_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_ACACIA_LOG);
 
-    public static final HollowLogBlock STRIPPED_DARK_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_DARK_OAK_LOG), "stripped_dark_oak_log", "stripped_dark_oak_log", "stripped_dark_oak_log_top");
-    public static final HollowLogBlock DARK_OAK_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.DARK_OAK_LOG), "dark_oak_log", "stripped_dark_oak_log", "dark_oak_log_top");
+    public static final HollowLogBlock DARK_OAK_HOLLOW_LOG = HollowLogBlock.of(Blocks.DARK_OAK_LOG);
+    public static final HollowLogBlock STRIPPED_DARK_OAK_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_DARK_OAK_LOG);
 
-    public static final HollowLogBlock STRIPPED_CRIMSON_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_CRIMSON_STEM), "stripped_crimson_stem", "stripped_crimson_stem", "stripped_crimson_stem_top");
-    public static final HollowLogBlock CRIMSON_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_STEM), "crimson_stem", "stripped_crimson_stem", "crimson_stem_top");
+    public static final HollowLogBlock CRIMSON_HOLLOW_STEM = HollowLogBlock.of(Blocks.CRIMSON_STEM);
+    public static final HollowLogBlock STRIPPED_CRIMSON_HOLLOW_STEM = HollowLogBlock.ofStripped(Blocks.STRIPPED_CRIMSON_STEM);
 
-    public static final HollowLogBlock STRIPPED_WARPED_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_WARPED_STEM), "stripped_warped_stem", "stripped_warped_stem", "stripped_warped_stem_top");
-    public static final HollowLogBlock WARPED_HOLLOW_STEM = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.WARPED_STEM), "warped_stem", "stripped_warped_stem", "warped_stem_top");
+    public static final HollowLogBlock WARPED_HOLLOW_STEM = HollowLogBlock.of(Blocks.WARPED_STEM);
+    public static final HollowLogBlock STRIPPED_WARPED_HOLLOW_STEM = HollowLogBlock.ofStripped(Blocks.STRIPPED_WARPED_STEM);
 
-    public static final HollowLogBlock STRIPPED_MANGROVE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_MANGROVE_LOG), "stripped_mangrove_log", "stripped_mangrove_log", "stripped_mangrove_log_top");
-    public static final HollowLogBlock MANGROVE_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.MANGROVE_LOG), "mangrove_log", "stripped_mangrove_log", "mangrove_log_top");
+    public static final HollowLogBlock MANGROVE_HOLLOW_LOG = HollowLogBlock.of(Blocks.MANGROVE_LOG);
+    public static final HollowLogBlock STRIPPED_MANGROVE_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_MANGROVE_LOG);
 
-    public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_CHERRY_LOG), "stripped_cherry_log", "stripped_cherry_log", "stripped_cherry_log_top");
-    public static final HollowLogBlock CHERRY_HOLLOW_LOG = new HollowLogBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_LOG), "cherry_log", "stripped_cherry_log", "cherry_log_top");
+    public static final HollowLogBlock CHERRY_HOLLOW_LOG = HollowLogBlock.of(Blocks.CHERRY_LOG);
+    public static final HollowLogBlock STRIPPED_CHERRY_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_CHERRY_LOG);
+    // endregion
 
     public static final EchoingPotBlock ECHOING_POT = new EchoingPotBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.DECORATED_POT)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .nonOpaque()
     );
 
     public static final FlowerBlock PAEONIA = new FlowerBlock(
@@ -79,7 +83,6 @@ public class HollowBlocks implements BlockRegistrar {
                     .sounds(BlockSoundGroup.GRASS)
                     .offset(AbstractBlock.OffsetType.XZ)
                     .burnable()
-
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
@@ -148,10 +151,11 @@ public class HollowBlocks implements BlockRegistrar {
     );
 
     public static final Block SCULK_JAW = new SculkJawBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.BLACK)
-                    .strength(0.2F)
-                    .sounds(BlockSoundGroup.SCULK)
+            AbstractBlock.Settings.copy(Blocks.SCULK)
+                    .velocityMultiplier(0.25F)
+                    .jumpVelocityMultiplier(0.0F)
+                    .strength(3.0F, 3.0F)
+                    .luminance(state -> state.get(SculkJawBlock.ACTIVE) ? 6 : 0)
     );
 
     public static final Block JAR = new JarBlock(
@@ -226,4 +230,22 @@ public class HollowBlocks implements BlockRegistrar {
 
     @NoBlockItem
     public static final Block POTTED_ROOTED_ORCHID = Blocks.createFlowerPotBlock(ROOTED_ORCHID);
+
+    public static final Block BLUE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.TERRACOTTA_BLUE)
+            .noCollision()
+            .sounds(BlockSoundGroup.PINK_PETALS)
+            .pistonBehavior(PistonBehavior.DESTROY));
+
+    public static final Block PURPLE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.PURPLE)
+            .noCollision()
+            .sounds(BlockSoundGroup.PINK_PETALS)
+            .pistonBehavior(PistonBehavior.DESTROY));
+
+    public static final Block WHITE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.WHITE_GRAY)
+            .noCollision()
+            .sounds(BlockSoundGroup.PINK_PETALS)
+            .pistonBehavior(PistonBehavior.DESTROY));
 }

@@ -8,6 +8,7 @@ import dev.spiritstudios.hollow.worldgen.HollowBiomeModifications;
 import dev.spiritstudios.specter.api.registry.registration.Registrar;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.SharedConstants;
 import net.minecraft.loot.function.LootFunctionType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -38,6 +39,8 @@ public class Hollow implements ModInitializer {
         Registrar.process(HollowDataComponentTypes.class, MODID);
         Registrar.process(HollowFoliagePlacerTypes.class, MODID);
 
+        HollowGameRules.init();
+
         Registry.register(
                 Registries.LOOT_FUNCTION_TYPE,
                 id("set_copper_instrument"),
@@ -63,6 +66,7 @@ public class Hollow implements ModInitializer {
 
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
+        HollowItemGroupAdditions.init();
     }
 
     public static Identifier id(String path) {

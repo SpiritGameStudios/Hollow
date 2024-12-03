@@ -3,11 +3,14 @@ package dev.spiritstudios.hollow.datagen;
 import com.google.common.collect.ImmutableMap;
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
+import dev.spiritstudios.hollow.block.SculkJawBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.registry.HollowItems;
 import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -25,6 +28,123 @@ public class ModelProvider extends FabricModelProvider {
 
     public ModelProvider(FabricDataOutput output) {
         super(output);
+    }
+
+    @Override
+    public void generateBlockStateModels(BlockStateModelGenerator generator) {
+        ReflectionHelper.forEachStaticField(HollowBlocks.class, HollowLogBlock.class, (block, name, field) ->
+                registerHollowLog(generator, block));
+
+        generator.registerFlowerPotPlant(HollowBlocks.PAEONIA, HollowBlocks.POTTED_PAEONIA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerFlowerPotPlant(HollowBlocks.ROOTED_ORCHID, HollowBlocks.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        Identifier campionTop = generator.createSubModel(HollowBlocks.CAMPION, "_top", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
+        Identifier campionBottom = generator.createSubModel(HollowBlocks.CAMPION, "_bottom", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
+
+        generator.registerDoubleBlock(HollowBlocks.CAMPION, campionTop, campionBottom);
+        generator.registerItemModel(HollowBlocks.CAMPION.asItem());
+
+        generator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.TWIG, ModelIds.getBlockModelId(HollowBlocks.TWIG)));
+        generator.registerItemModel(HollowBlocks.TWIG);
+
+        Models.GENERATED_TWO_LAYERS.upload(
+                ModelIds.getItemModelId(HollowItems.LOTUS_LILYPAD),
+                TextureMap.layered(
+                        TextureMap.getId(Blocks.LILY_PAD),
+                        TextureMap.getId(HollowItems.LOTUS_LILYPAD)
+                ),
+                generator.modelCollector
+        );
+        generator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.LOTUS_LILYPAD, ModelIds.getBlockModelId(HollowBlocks.LOTUS_LILYPAD)));
+
+        generator.blockStateCollector.accept(
+                VariantsBlockStateSupplier.create(HollowBlocks.ECHOING_POT, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(HollowBlocks.ECHOING_POT)))
+                        .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
+
+        registerSculkJaw(generator);
+
+        generator.registerItemModel(HollowItems.GIANT_LILYPAD);
+        createGiantLilyPadBlockState(generator);
+
+        generator.registerItemModel(HollowBlocks.CATTAIL, "_top");
+        generator.registerTintableCrossBlockState(
+                HollowBlocks.CATTAIL,
+                BlockStateModelGenerator.TintType.NOT_TINTED,
+                TextureMap.cross(TextureMap.getSubId(HollowBlocks.CATTAIL, "_top"))
+        );
+
+        generator.registerAxisRotated(HollowBlocks.COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        generator.registerAxisRotated(HollowBlocks.EXPOSED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        generator.registerAxisRotated(HollowBlocks.WEATHERED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        generator.registerAxisRotated(HollowBlocks.OXIDIZED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+
+        registerCopperPillarWaxed(generator, HollowBlocks.WAXED_COPPER_PILLAR, HollowBlocks.COPPER_PILLAR);
+        registerCopperPillarWaxed(generator, HollowBlocks.WAXED_EXPOSED_COPPER_PILLAR, HollowBlocks.EXPOSED_COPPER_PILLAR);
+        registerCopperPillarWaxed(generator, HollowBlocks.WAXED_WEATHERED_COPPER_PILLAR, HollowBlocks.WEATHERED_COPPER_PILLAR);
+        registerCopperPillarWaxed(generator, HollowBlocks.WAXED_OXIDIZED_COPPER_PILLAR, HollowBlocks.OXIDIZED_COPPER_PILLAR);
+
+        generator.registerItemModel(HollowBlocks.JAR.asItem());
+        generator.registerSimpleState(HollowBlocks.JAR);
+
+        generator.registerItemModel(HollowBlocks.FIREFLY_JAR.asItem());
+        generator.registerStateWithModelReference(HollowBlocks.FIREFLY_JAR, HollowBlocks.JAR);
+
+        registerFlowerbed(generator, HollowBlocks.BLUE_WILDFLOWER);
+        registerFlowerbed(generator, HollowBlocks.WHITE_WILDFLOWER);
+        registerFlowerbed(generator, HollowBlocks.PURPLE_WILDFLOWER);
+    }
+
+    @Override
+    public void generateItemModels(ItemModelGenerator generator) {
+        generator.register(HollowBlocks.POLYPORE.asItem(), Models.GENERATED);
+        generator.register(HollowItems.MUSIC_DISC_POSTMORTEM, Models.GENERATED);
+
+        generator.writer.accept(
+                ModelIds.getItemModelId(HollowItems.FIREFLY_SPAWN_EGG),
+                new SimpleModelSupplier(ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
+        );
+    }
+
+    // region Helpers
+    public final void registerSculkJaw(BlockStateModelGenerator generator) {
+        Identifier inactive = Models.CUBE_TOP.upload(
+                HollowBlocks.SCULK_JAW,
+                new TextureMap()
+                        .put(TextureKey.TOP, TextureMap.getId(HollowBlocks.SCULK_JAW))
+                        .put(TextureKey.SIDE, TextureMap.getId(Blocks.SCULK)),
+                generator.modelCollector
+        );
+
+        Identifier active = Models.CUBE_TOP.upload(
+                ModelIds.getBlockSubModelId(HollowBlocks.SCULK_JAW, "_active"),
+                new TextureMap()
+                        .put(TextureKey.TOP, TextureMap.getSubId(HollowBlocks.SCULK_JAW, "_active"))
+                        .put(TextureKey.SIDE, TextureMap.getId(Blocks.SCULK)),
+                generator.modelCollector
+        );
+
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(HollowBlocks.SCULK_JAW)
+                .coordinate(BlockStateModelGenerator.createBooleanModelMap(
+                        SculkJawBlock.ACTIVE,
+                        active, inactive
+                )));
+    }
+
+    private static void registerHollowLog(BlockStateModelGenerator generator, HollowLogBlock block) {
+        TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, block.typeData.sideTexture()).put(TextureKey.INSIDE, block.typeData.insideTexture()).put(TextureKey.END, block.typeData.endTexture());
+        Identifier hollowLog = HOLLOW_LOG.upload(block, textureMap, generator.modelCollector);
+        Identifier hollowLogHorizontal = HOLLOW_LOG_HORIZONTAL.upload(block, textureMap, generator.modelCollector);
+        Identifier hollowLogHorizontalMossy = HOLLOW_LOG_HORIZONTAL_MOSSY.upload(block, textureMap, generator.modelCollector);
+
+        generator.blockStateCollector.accept(createAxisRotatedBlockStateWithMossy(block, hollowLog, hollowLogHorizontal, hollowLogHorizontalMossy));
+    }
+
+    private static void registerCopperPillarWaxed(BlockStateModelGenerator blockStateModelGenerator, Block block, Block unWaxed) {
+        blockStateModelGenerator.registerAxisRotated(
+                block,
+                TexturedModel.makeFactory((Block b) -> TextureMap.sideAndEndForTop(unWaxed), Models.CUBE_COLUMN),
+                TexturedModel.makeFactory((Block b) -> TextureMap.sideAndEndForTop(unWaxed), Models.CUBE_COLUMN_HORIZONTAL)
+        );
     }
 
     private static void createGiantLilyPadBlockState(BlockStateModelGenerator blockStateModelGenerator) {
@@ -121,62 +241,106 @@ public class ModelProvider extends FabricModelProvider {
                 );
     }
 
-    @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        ReflectionHelper.forEachStaticField(HollowBlocks.class, HollowLogBlock.class, (block, name, field) -> {
-            TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, Identifier.of("minecraft", "block/" + block.sideTexture)).put(TextureKey.INSIDE, Identifier.ofVanilla("block/" + block.insideTexture)).put(TextureKey.END, Identifier.of("minecraft", "block/" + block.endTexture));
-            Identifier hollowLog = HOLLOW_LOG.upload(block, textureMap, blockStateModelGenerator.modelCollector);
-            Identifier hollowLogHorizontal = HOLLOW_LOG_HORIZONTAL.upload(block, textureMap, blockStateModelGenerator.modelCollector);
-            Identifier hollowLogHorizontalMossy = HOLLOW_LOG_HORIZONTAL_MOSSY.upload(block, textureMap, blockStateModelGenerator.modelCollector);
-            blockStateModelGenerator.blockStateCollector.accept(createAxisRotatedBlockStateWithMossy(block, hollowLog, hollowLogHorizontal, hollowLogHorizontalMossy));
-        });
+    public static final TexturedModel.Factory FLOWERBED_1 = TexturedModel.makeFactory(
+            block -> new TextureMap()
+                    .put(TextureKey.FLOWERBED, TextureMap.getId(block))
+                    .put(TextureKey.STEM, Identifier.ofVanilla("block/pink_petals_stem")),
+            Models.FLOWERBED_1
+    );
+    public static final TexturedModel.Factory FLOWERBED_2 = TexturedModel.makeFactory(
+            block -> new TextureMap()
+                    .put(TextureKey.FLOWERBED, TextureMap.getId(block))
+                    .put(TextureKey.STEM, Identifier.ofVanilla("block/pink_petals_stem")),
+            Models.FLOWERBED_2
+    );
+    public static final TexturedModel.Factory FLOWERBED_3 = TexturedModel.makeFactory(
+            block -> new TextureMap()
+                    .put(TextureKey.FLOWERBED, TextureMap.getId(block))
+                    .put(TextureKey.STEM, Identifier.ofVanilla("block/pink_petals_stem")),
+            Models.FLOWERBED_3
+    );
+    public static final TexturedModel.Factory FLOWERBED_4 = TexturedModel.makeFactory(
+            block -> new TextureMap()
+                    .put(TextureKey.FLOWERBED, TextureMap.getId(block))
+                    .put(TextureKey.STEM, Identifier.ofVanilla("block/pink_petals_stem")),
+            Models.FLOWERBED_4
+    );
 
-        blockStateModelGenerator.registerFlowerPotPlant(HollowBlocks.PAEONIA, HollowBlocks.POTTED_PAEONIA, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(HollowBlocks.ROOTED_ORCHID, HollowBlocks.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.TintType.NOT_TINTED);
+    private static void registerFlowerbed(BlockStateModelGenerator generator, Block flowerbed) {
+        generator.registerItemModel(flowerbed);
+        Identifier one = FLOWERBED_1.upload(flowerbed, generator.modelCollector);
+        Identifier two = FLOWERBED_2.upload(flowerbed, generator.modelCollector);
+        Identifier three = FLOWERBED_3.upload(flowerbed, generator.modelCollector);
+        Identifier four = FLOWERBED_4.upload(flowerbed, generator.modelCollector);
 
-        Identifier campionTop = blockStateModelGenerator.createSubModel(HollowBlocks.CAMPION, "_top", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
-        Identifier campionBottom = blockStateModelGenerator.createSubModel(HollowBlocks.CAMPION, "_bottom", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross);
-        blockStateModelGenerator.registerDoubleBlock(HollowBlocks.CAMPION, campionTop, campionBottom);
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.CAMPION);
-
-        blockStateModelGenerator.registerItemModel(HollowBlocks.TWIG);
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.TWIG, ModelIds.getBlockModelId(HollowBlocks.TWIG)));
-
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.LOTUS_LILYPAD, ModelIds.getBlockModelId(HollowBlocks.LOTUS_LILYPAD)));
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.LOTUS_LILYPAD);
-
-        blockStateModelGenerator.blockStateCollector.accept(
-                VariantsBlockStateSupplier.create(HollowBlocks.ECHOING_POT, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(HollowBlocks.ECHOING_POT)))
-                        .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
-
-        createGiantLilyPadBlockState(blockStateModelGenerator);
-
-        blockStateModelGenerator.registerAxisRotated(HollowBlocks.COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
-        blockStateModelGenerator.registerAxisRotated(HollowBlocks.EXPOSED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
-        blockStateModelGenerator.registerAxisRotated(HollowBlocks.WEATHERED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
-        blockStateModelGenerator.registerAxisRotated(HollowBlocks.OXIDIZED_COPPER_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
-
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_COPPER_PILLAR, HollowBlocks.COPPER_PILLAR);
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_EXPOSED_COPPER_PILLAR, HollowBlocks.EXPOSED_COPPER_PILLAR);
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_WEATHERED_COPPER_PILLAR, HollowBlocks.WEATHERED_COPPER_PILLAR);
-        registerCopperPillarWaxed(blockStateModelGenerator, HollowBlocks.WAXED_OXIDIZED_COPPER_PILLAR, HollowBlocks.OXIDIZED_COPPER_PILLAR);
-
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.JAR);
-        blockStateModelGenerator.excludeFromSimpleItemModelGeneration(HollowBlocks.FIREFLY_JAR);
-        blockStateModelGenerator.registerSimpleState(HollowBlocks.JAR);
-        blockStateModelGenerator.registerStateWithModelReference(HollowBlocks.FIREFLY_JAR, HollowBlocks.JAR);
-    }
-
-    public void registerCopperPillarWaxed(BlockStateModelGenerator blockStateModelGenerator, Block block, Block unWaxed) {
-        blockStateModelGenerator.registerAxisRotated(
-                block,
-                TexturedModel.makeFactory((Block b) -> TextureMap.sideAndEndForTop(unWaxed), Models.CUBE_COLUMN),
-                TexturedModel.makeFactory((Block b) -> TextureMap.sideAndEndForTop(unWaxed), Models.CUBE_COLUMN_HORIZONTAL)
+        generator.blockStateCollector.accept(
+                MultipartBlockStateSupplier.create(flowerbed)
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 1, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.NORTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, one)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 1, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.EAST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, one).put(VariantSettings.Y, VariantSettings.Rotation.R90)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 1, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.SOUTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, one).put(VariantSettings.Y, VariantSettings.Rotation.R180)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 1, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.WEST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, one).put(VariantSettings.Y, VariantSettings.Rotation.R270)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.NORTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, two)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.EAST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, two).put(VariantSettings.Y, VariantSettings.Rotation.R90)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.SOUTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, two).put(VariantSettings.Y, VariantSettings.Rotation.R180)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 2, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.WEST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, two).put(VariantSettings.Y, VariantSettings.Rotation.R270)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.NORTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, three)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.EAST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, three).put(VariantSettings.Y, VariantSettings.Rotation.R90)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.SOUTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, three).put(VariantSettings.Y, VariantSettings.Rotation.R180)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 3, 4).set(Properties.HORIZONTAL_FACING, Direction.WEST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, three).put(VariantSettings.Y, VariantSettings.Rotation.R270)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 4).set(Properties.HORIZONTAL_FACING, Direction.NORTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, four)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 4).set(Properties.HORIZONTAL_FACING, Direction.EAST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, four).put(VariantSettings.Y, VariantSettings.Rotation.R90)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 4).set(Properties.HORIZONTAL_FACING, Direction.SOUTH),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, four).put(VariantSettings.Y, VariantSettings.Rotation.R180)
+                        )
+                        .with(
+                                When.create().set(Properties.FLOWER_AMOUNT, 4).set(Properties.HORIZONTAL_FACING, Direction.WEST),
+                                BlockStateVariant.create().put(VariantSettings.MODEL, four).put(VariantSettings.Y, VariantSettings.Rotation.R270)
+                        )
         );
     }
 
-    @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-
-    }
+    // endregion
 }
