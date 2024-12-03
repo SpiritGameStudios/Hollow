@@ -11,15 +11,15 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 @SuppressWarnings("unused")
-public class HollowFeatures implements MinecraftRegistrar<Feature<?>> {
+public final class HollowFeatures implements MinecraftRegistrar<Feature<?>> {
+    public static final Feature<FallenTreeFeature.Config> FALLEN_TREE = new FallenTreeFeature();
+    public static final Feature<DefaultFeatureConfig> GIANT_LILYPAD = new GiantLilypadFeature();
+    public static final Feature<DefaultFeatureConfig> CATTAILS = new CattailFeature();
+
     @Override
     public Registry<Feature<?>> getRegistry() {
         return Registries.FEATURE;
     }
-    
-    public static final Feature<FallenTreeFeature.Config> FALLEN_TREE = new FallenTreeFeature();
-    public static final Feature<DefaultFeatureConfig> GIANT_LILYPAD = new GiantLilypadFeature();
-    public static final Feature<DefaultFeatureConfig> CATTAILS = new CattailFeature();
 
     @Override
     public Class<Feature<?>> getObjectType() {

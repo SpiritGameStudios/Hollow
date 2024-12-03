@@ -8,7 +8,7 @@ import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-public class HollowParticleTypes implements MinecraftRegistrar<ParticleType<?>> {
+public final class HollowParticleTypes implements MinecraftRegistrar<ParticleType<?>> {
     public static final SimpleParticleType FIREFLY_JAR = FabricParticleTypes.simple();
 
     @Override

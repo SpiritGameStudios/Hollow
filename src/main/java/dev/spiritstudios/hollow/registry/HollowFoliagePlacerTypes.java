@@ -7,7 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
-public class HollowFoliagePlacerTypes implements MinecraftRegistrar<FoliagePlacerType<?>> {
+public final class HollowFoliagePlacerTypes implements MinecraftRegistrar<FoliagePlacerType<?>> {
     public static final FoliagePlacerType<BlobWithHangingFoliagePlacer> BLOB_WITH_HANGING = new FoliagePlacerType<>(BlobWithHangingFoliagePlacer.CODEC);
 
     @Override

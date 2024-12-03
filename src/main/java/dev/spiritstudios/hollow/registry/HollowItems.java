@@ -15,7 +15,7 @@ import net.minecraft.util.Rarity;
 import static dev.spiritstudios.hollow.Hollow.MODID;
 
 @SuppressWarnings("unused")
-public class HollowItems implements ItemRegistrar {
+public final class HollowItems implements ItemRegistrar {
     public static Item FIREFLY_SPAWN_EGG = new SpawnEggItem(
             HollowEntityTypes.FIREFLY,
             0x102F4E, 0xCAAF94,

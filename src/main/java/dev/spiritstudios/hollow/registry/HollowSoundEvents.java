@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 import static dev.spiritstudios.hollow.Hollow.MODID;
 
-public class HollowSoundEvents implements SoundEventRegistrar {
+public final class HollowSoundEvents implements SoundEventRegistrar {
     @Name("music_disc.postmortem")
     public static final SoundEvent MUSIC_DISC_POSTMORTEM = SoundEvent.of(Identifier.of(MODID, "music_disc.postmortem"));
 

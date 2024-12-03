@@ -7,7 +7,7 @@ import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-public class HollowDataComponentTypes implements MinecraftRegistrar<ComponentType<?>> {
+public final class HollowDataComponentTypes implements MinecraftRegistrar<ComponentType<?>> {
     public static final ComponentType<CopperInstrument> COPPER_INSTRUMENT = ComponentType.<CopperInstrument>builder()
             .codec(CopperInstrument.CODEC)
             .packetCodec(CopperInstrument.PACKET_CODEC)
