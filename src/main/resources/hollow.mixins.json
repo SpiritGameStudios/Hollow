@@ -7,7 +7,9 @@
     "BulbBlockMixin",
     "FrogEatEntityTaskMixin",
     "SaplingGeneratorMixin",
-    "SculkBlockMixin"
+    "SculkBlockMixin",
+    "SculkVeinBlockMixin",
+    "SculkVeinGrowCheckerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
