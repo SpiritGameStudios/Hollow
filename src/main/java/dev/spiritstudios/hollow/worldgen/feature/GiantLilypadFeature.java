@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.worldgen.feature;
 
-import com.mojang.serialization.Codec;
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.Block;

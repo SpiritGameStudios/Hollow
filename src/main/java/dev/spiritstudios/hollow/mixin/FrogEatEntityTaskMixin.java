@@ -2,7 +2,6 @@ package dev.spiritstudios.hollow.mixin;
 
 import dev.spiritstudios.hollow.HollowGameRules;
 import dev.spiritstudios.hollow.HollowTags;
-import dev.spiritstudios.hollow.entity.FireflyEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.brain.task.FrogEatEntityTask;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Optional;
 
 @Mixin(FrogEatEntityTask.class)
-public class FrogEatEntityTaskMixin {
+public abstract class FrogEatEntityTaskMixin {
     @Inject(method = "eat", at = @At("HEAD"))
     private void eat(ServerWorld world, FrogEntity frog, CallbackInfo ci) {
         if (!world.getGameRules().getBoolean(HollowGameRules.DO_FROG_POISONING)) return;
