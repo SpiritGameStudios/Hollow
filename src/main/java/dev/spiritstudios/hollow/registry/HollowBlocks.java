@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.registry;
 
 import dev.spiritstudios.hollow.block.*;
-import dev.spiritstudios.specter.api.registry.registration.BlockRegistrar;
+import dev.spiritstudios.specter.api.registry.annotations.NoBlockItem;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
@@ -9,7 +9,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 
 @SuppressWarnings("unused")
-public final class HollowBlocks implements BlockRegistrar {
+public final class HollowBlocks {
     // region Hollow logs
     public static final HollowLogBlock OAK_HOLLOW_LOG = HollowLogBlock.of(Blocks.OAK_LOG);
     public static final HollowLogBlock STRIPPED_OAK_HOLLOW_LOG = HollowLogBlock.ofStripped(Blocks.STRIPPED_OAK_LOG);

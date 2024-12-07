@@ -3,7 +3,7 @@ package dev.spiritstudios.hollow.datagen;
 import dev.spiritstudios.hollow.HollowTags;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
+import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
@@ -22,13 +22,13 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         FabricTagProvider<Block>.FabricTagBuilder hollowLogs = getOrCreateTagBuilder(HollowTags.HOLLOW_LOGS);
         FabricTagProvider<Block>.FabricTagBuilder axeMineable = getOrCreateTagBuilder(BlockTags.AXE_MINEABLE);
 
-        ReflectionHelper.forEachStaticField(
+        ReflectionHelper.getStaticFields(
                 HollowBlocks.class,
-                HollowLogBlock.class,
-                (block, name, field) -> {
-                    hollowLogs.add(block);
-                    axeMineable.add(block);
-                });
+                HollowLogBlock.class
+        ).forEach(pair -> {
+            hollowLogs.add(pair.value());
+            axeMineable.add(pair.value());
+        });
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(HollowBlocks.ECHOING_POT)

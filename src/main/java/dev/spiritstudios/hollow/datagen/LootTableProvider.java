@@ -3,7 +3,7 @@ package dev.spiritstudios.hollow.datagen;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
+import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Blocks;
@@ -70,10 +70,10 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(HollowBlocks.JAR, this.nameableContainerDrops(HollowBlocks.JAR));
 
 
-        ReflectionHelper.forEachStaticField(
+        ReflectionHelper.getStaticFields(
                 HollowBlocks.class,
-                HollowLogBlock.class,
-                (block, name, field) -> this.addDrop(block));
+                HollowLogBlock.class
+        ).forEach(pair -> this.addDrop(pair.value()));
 
         List.of(
                 HollowBlocks.COPPER_PILLAR,
@@ -86,7 +86,5 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
                 HollowBlocks.WAXED_WEATHERED_COPPER_PILLAR,
                 HollowBlocks.WAXED_OXIDIZED_COPPER_PILLAR
         ).forEach(this::addDrop);
-
-
     }
 }

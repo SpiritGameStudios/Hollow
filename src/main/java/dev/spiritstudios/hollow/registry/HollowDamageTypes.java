@@ -7,5 +7,4 @@ import net.minecraft.registry.RegistryKeys;
 
 public final class HollowDamageTypes {
     public static final RegistryKey<DamageType> SCULK_JAW = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Hollow.id("sculk_jaw"));
-
 }

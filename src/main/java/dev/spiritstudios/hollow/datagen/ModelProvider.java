@@ -6,7 +6,7 @@ import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.SculkJawBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.hollow.registry.HollowItems;
-import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
+import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
@@ -32,8 +32,8 @@ public class ModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
-        ReflectionHelper.forEachStaticField(HollowBlocks.class, HollowLogBlock.class, (block, name, field) ->
-                registerHollowLog(generator, block));
+        ReflectionHelper.getStaticFields(HollowBlocks.class, HollowLogBlock.class)
+                .forEach(pair -> registerHollowLog(generator, pair.value()));
 
         generator.registerFlowerPotPlant(HollowBlocks.PAEONIA, HollowBlocks.POTTED_PAEONIA, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerFlowerPotPlant(HollowBlocks.ROOTED_ORCHID, HollowBlocks.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.TintType.NOT_TINTED);

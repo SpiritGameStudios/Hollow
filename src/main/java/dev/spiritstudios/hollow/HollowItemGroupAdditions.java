@@ -5,11 +5,10 @@ import dev.spiritstudios.hollow.component.CopperInstrument;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.hollow.registry.HollowDataComponentTypes;
 import dev.spiritstudios.hollow.registry.HollowItems;
-import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
+import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
 import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.Blocks;
 import net.minecraft.component.ComponentChanges;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -20,7 +19,9 @@ import java.util.Map;
 public final class HollowItemGroupAdditions {
     public static void init() {
         Map<Item, HollowLogBlock> baseToHollow = new Object2ReferenceOpenHashMap<>();
-        ReflectionHelper.forEachStaticField(HollowBlocks.class, HollowLogBlock.class, (block, name, field) -> baseToHollow.put(Registries.ITEM.get(block.typeData.id()), block));
+        ReflectionHelper.getStaticFields(HollowBlocks.class, HollowLogBlock.class)
+                .forEach(pair ->
+                        baseToHollow.put(Registries.ITEM.get(pair.value().typeData.id()), pair.value()));
 
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register((itemGroup, entries) -> {
             ItemGroupHelper helper = new ItemGroupHelper(itemGroup, entries);

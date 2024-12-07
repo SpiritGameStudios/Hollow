@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.StoneChestBlockEntity;
-import dev.spiritstudios.specter.api.core.util.VoxelShapeHelper;
+import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;

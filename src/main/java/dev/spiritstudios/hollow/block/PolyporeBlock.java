@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.HollowTags;
-import dev.spiritstudios.specter.api.core.util.VoxelShapeHelper;
+import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;

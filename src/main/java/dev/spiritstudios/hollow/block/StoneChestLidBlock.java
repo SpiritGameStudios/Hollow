@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.block;
 
-import dev.spiritstudios.specter.api.core.util.VoxelShapeHelper;
+import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.fluid.FluidState;

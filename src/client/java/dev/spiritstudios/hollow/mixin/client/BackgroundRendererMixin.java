@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.spiritstudios.hollow.HollowTags;
-import dev.spiritstudios.specter.api.core.util.Easing;
+import dev.spiritstudios.specter.api.core.math.Easing;
 import net.minecraft.block.enums.CameraSubmersionType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BackgroundRenderer;

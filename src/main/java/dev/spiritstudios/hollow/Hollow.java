@@ -5,15 +5,17 @@ import dev.spiritstudios.hollow.loot.HollowLootTableModifications;
 import dev.spiritstudios.hollow.loot.SetCopperInstrumentFunction;
 import dev.spiritstudios.hollow.registry.*;
 import dev.spiritstudios.hollow.worldgen.HollowBiomeModifications;
-import dev.spiritstudios.specter.api.registry.registration.Registrar;
+import dev.spiritstudios.specter.api.registry.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.SharedConstants;
 import net.minecraft.loot.function.LootFunctionType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,16 +30,16 @@ public class Hollow implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Registrar.process(HollowSoundEvents.class, MODID);
-        Registrar.process(HollowBlocks.class, MODID);
-        Registrar.process(HollowItems.class, MODID);
-        Registrar.process(HollowEntityTypes.class, MODID);
-        Registrar.process(HollowFeatures.class, MODID);
-        Registrar.process(HollowTreeDecorators.class, MODID);
-        Registrar.process(HollowBlockEntityTypes.class, MODID);
-        Registrar.process(HollowParticleTypes.class, MODID);
-        Registrar.process(HollowDataComponentTypes.class, MODID);
-        Registrar.process(HollowFoliagePlacerTypes.class, MODID);
+        RegistryHelper.registerSoundEvents(HollowSoundEvents.class, MODID);
+        RegistryHelper.registerBlocks(HollowBlocks.class, MODID);
+        RegistryHelper.registerItems(HollowItems.class, MODID);
+        RegistryHelper.registerEntityTypes(HollowEntityTypes.class, MODID);
+        RegistryHelper.registerFields(Registries.FEATURE, RegistryHelper.fixGenerics(Feature.class), HollowFeatures.class, MODID);
+        RegistryHelper.registerFields(Registries.TREE_DECORATOR_TYPE, RegistryHelper.fixGenerics(TreeDecoratorType.class), HollowTreeDecoratorTypes.class, MODID);
+        RegistryHelper.registerBlockEntityTypes(HollowBlockEntityTypes.class, MODID);
+        RegistryHelper.registerParticleTypes(HollowParticleTypes.class, MODID);
+        RegistryHelper.registerDataComponentTypes(HollowDataComponentTypes.class, MODID);
+        RegistryHelper.registerFields(Registries.FOLIAGE_PLACER_TYPE, RegistryHelper.fixGenerics(FoliagePlacerType.class), HollowFoliagePlacerTypes.class, MODID);
 
         HollowGameRules.init();
 

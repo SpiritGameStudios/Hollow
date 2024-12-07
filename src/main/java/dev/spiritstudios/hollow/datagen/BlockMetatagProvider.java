@@ -4,7 +4,7 @@ import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.block.BlockMetatags;
 import dev.spiritstudios.specter.api.block.FlammableBlockData;
-import dev.spiritstudios.specter.api.core.util.ReflectionHelper;
+import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
 import dev.spiritstudios.specter.api.registry.metatag.datagen.MetatagProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
@@ -23,12 +23,11 @@ public class BlockMetatagProvider extends MetatagProvider<Block> {
     protected void configure(Consumer<MetatagBuilder<Block, ?>> provider, RegistryWrapper.WrapperLookup lookup) {
         MetatagBuilder<Block, FlammableBlockData> flammableBuilder = create(BlockMetatags.FLAMMABLE);
 
-        ReflectionHelper.forEachStaticField(
+        ReflectionHelper.getStaticFields(
                 HollowBlocks.class,
-                HollowLogBlock.class,
-                (block, name, field) -> {
-                    flammableBuilder.put(block, new FlammableBlockData(5, 5));
-                });
+                HollowLogBlock.class
+        ).forEach(pair ->
+                flammableBuilder.put(pair.value(), new FlammableBlockData(5, 5)));
 
         provider.accept(flammableBuilder);
 
