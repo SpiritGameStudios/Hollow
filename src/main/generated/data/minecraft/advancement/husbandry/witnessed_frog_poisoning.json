@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "witnessed_frog_poisoning": {
+      "trigger": "hollow:frog_poisoned"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.witnessed_frog_poisoning.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hollow:firefly_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.husbandry.witnessed_frog_poisoning.title"
+    }
+  },
+  "requirements": [
+    [
+      "witnessed_frog_poisoning"
+    ]
+  ]
+}

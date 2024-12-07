@@ -8,6 +8,7 @@ import dev.spiritstudios.hollow.worldgen.HollowBiomeModifications;
 import dev.spiritstudios.specter.api.registry.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.advancement.criterion.Criterion;
 import net.minecraft.loot.function.LootFunctionType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -22,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 
-public class Hollow implements ModInitializer {
+public final class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
@@ -40,6 +41,7 @@ public class Hollow implements ModInitializer {
         RegistryHelper.registerParticleTypes(HollowParticleTypes.class, MODID);
         RegistryHelper.registerDataComponentTypes(HollowDataComponentTypes.class, MODID);
         RegistryHelper.registerFields(Registries.FOLIAGE_PLACER_TYPE, RegistryHelper.fixGenerics(FoliagePlacerType.class), HollowFoliagePlacerTypes.class, MODID);
+        RegistryHelper.registerFields(Registries.CRITERION, RegistryHelper.fixGenerics(Criterion.class), HollowCriteria.class, MODID);
 
         HollowGameRules.init();
 

@@ -2,6 +2,8 @@ package dev.spiritstudios.hollow.mixin;
 
 import dev.spiritstudios.hollow.HollowGameRules;
 import dev.spiritstudios.hollow.HollowTags;
+import dev.spiritstudios.hollow.registry.HollowCriteria;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.brain.task.FrogEatEntityTask;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -32,5 +34,6 @@ public abstract class FrogEatEntityTaskMixin {
         );
 
         frog.addStatusEffect(statusEffectInstance);
+        PlayerLookup.tracking(frog).forEach(HollowCriteria.FROG_POISONED::trigger);
     }
 }

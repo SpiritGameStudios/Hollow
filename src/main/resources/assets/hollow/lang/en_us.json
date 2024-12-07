@@ -96,5 +96,8 @@
   "subtitles.copper_horn.sweet": "Sweet",
   "subtitles.copper_horn.moon": "Moon",
   "subtitles.copper_horn.love": "Love",
-  "gamerule.doFrogPoisoning": "Allow frog poisoning"
+  "gamerule.doFrogPoisoning": "Allow Frog poisoning",
+  "advancements.husbandry.witnessed_frog_poisoning.title": "Poisonous To Frogs",
+  "advancements.husbandry.witnessed_frog_poisoning.description": "Witness a Frog be poisoned upon eating a Firefly",
+  "entity.hollow.firefly": "Firefly"
 }
