@@ -29,6 +29,7 @@ public final class HollowItemGroupAdditions {
 
             helper.addAfter(
                     Items.PINK_PETALS,
+                    HollowBlocks.PINK_WILDFLOWER,
                     HollowBlocks.PURPLE_WILDFLOWER,
                     HollowBlocks.BLUE_WILDFLOWER,
                     HollowBlocks.WHITE_WILDFLOWER

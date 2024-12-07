@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hollow:item/white_wildflower"
+    "layer0": "hollow:item/pink_wildflower"
   }
 }

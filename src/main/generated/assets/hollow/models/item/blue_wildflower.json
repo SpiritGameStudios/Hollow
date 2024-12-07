@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hollow:block/blue_wildflower"
+    "layer0": "hollow:item/blue_wildflower"
   }
 }

@@ -89,6 +89,7 @@ public class ModelProvider extends FabricModelProvider {
         generator.registerItemModel(HollowBlocks.FIREFLY_JAR.asItem());
         generator.registerStateWithModelReference(HollowBlocks.FIREFLY_JAR, HollowBlocks.JAR);
 
+        registerFlowerbed(generator, HollowBlocks.PINK_WILDFLOWER);
         registerFlowerbed(generator, HollowBlocks.BLUE_WILDFLOWER);
         registerFlowerbed(generator, HollowBlocks.WHITE_WILDFLOWER);
         registerFlowerbed(generator, HollowBlocks.PURPLE_WILDFLOWER);
@@ -267,7 +268,7 @@ public class ModelProvider extends FabricModelProvider {
     );
 
     private static void registerFlowerbed(BlockStateModelGenerator generator, Block flowerbed) {
-        generator.registerItemModel(flowerbed);
+        generator.registerItemModel(flowerbed.asItem());
         Identifier one = FLOWERBED_1.upload(flowerbed, generator.modelCollector);
         Identifier two = FLOWERBED_2.upload(flowerbed, generator.modelCollector);
         Identifier three = FLOWERBED_3.upload(flowerbed, generator.modelCollector);

@@ -44,6 +44,7 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(HollowBlocks.PURPLE_WILDFLOWER, this.flowerbedDrops(HollowBlocks.PURPLE_WILDFLOWER));
         this.addDrop(HollowBlocks.WHITE_WILDFLOWER, this.flowerbedDrops(HollowBlocks.WHITE_WILDFLOWER));
         this.addDrop(HollowBlocks.BLUE_WILDFLOWER, this.flowerbedDrops(HollowBlocks.BLUE_WILDFLOWER));
+        this.addDrop(HollowBlocks.PINK_WILDFLOWER, this.flowerbedDrops(HollowBlocks.PINK_WILDFLOWER));
 
         this.addDrop(HollowBlocks.PAEONIA);
         this.addPottedPlantDrops(HollowBlocks.POTTED_PAEONIA);

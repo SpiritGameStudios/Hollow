@@ -38,11 +38,15 @@ public class HollowClient implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? 0x208030 : 0x71C35C, HollowBlocks.GIANT_LILYPAD);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x71C35C : -1, HollowItems.GIANT_LILYPAD);
 
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
-            return tintIndex != 0 ?
-                    world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor() :
-                    -1;
-        }, HollowBlocks.BLUE_WILDFLOWER, HollowBlocks.WHITE_WILDFLOWER, HollowBlocks.PURPLE_WILDFLOWER);
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                        tintIndex != 0 ?
+                                world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor() :
+                                -1,
+                HollowBlocks.BLUE_WILDFLOWER,
+                HollowBlocks.WHITE_WILDFLOWER,
+                HollowBlocks.PURPLE_WILDFLOWER,
+                HollowBlocks.PINK_WILDFLOWER
+        );
 
         ParticleFactoryRegistry.getInstance().register(HollowParticleTypes.FIREFLY_JAR, FireflyJarParticle.Factory::new);
 
