@@ -19,6 +19,7 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(PlacedFeatureProvider::new);
         pack.addProvider(BlockMetatagProvider::new);
         pack.addProvider(BlockTagProvider::new);
+        pack.addProvider(ClientBlockMetatagProvider::new);
     }
 
     @Override
@@ -27,4 +28,6 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
                 .addRegistry(RegistryKeys.CONFIGURED_FEATURE, HollowConfiguredFeatures::bootstrap)
                 .addRegistry(RegistryKeys.PLACED_FEATURE, HollowPlacedFeatures::bootstrap);
     }
+
+
 }

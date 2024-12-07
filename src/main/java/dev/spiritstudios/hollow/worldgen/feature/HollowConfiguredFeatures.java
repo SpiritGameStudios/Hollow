@@ -31,7 +31,6 @@ public final class HollowConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> CATTAILS = of("cattails");
 
-
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> featureRegisterable) {
         featureRegisterable.register(
                 FALLEN_OAK,

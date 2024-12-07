@@ -17,6 +17,13 @@ group = mod.group
 
 base.archivesName = "${mod.id}-${mod.version}"
 
+
+fabricApi {
+    configureDataGeneration {
+        client = true
+    }
+}
+
 loom {
     splitEnvironmentSourceSets()
     accessWidenerPath = file("src/main/resources/hollow.accesswidener")
@@ -37,10 +44,6 @@ repositories {
         forRepository { maven("https://api.modrinth.com/maven/") }
         filter { includeGroup("maven.modrinth") }
     }
-}
-
-fabricApi {
-    configureDataGeneration()
 }
 
 dependencies {

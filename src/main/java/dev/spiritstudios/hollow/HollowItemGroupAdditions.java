@@ -67,7 +67,6 @@ public final class HollowItemGroupAdditions {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(HollowItems.MUSIC_DISC_POSTMORTEM);
 
-
             entries.addAfter(
                     Items.GOAT_HORN,
                     Arrays.stream(CopperInstrument.values()).map(instrument -> new ItemStack(
