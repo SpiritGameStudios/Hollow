@@ -36,7 +36,7 @@ loom {
 
 repositories {
     mavenCentral()
-    maven("https://maven.spiritstudios.dev/snapshots/")
+    maven("https://maven.spiritstudios.dev/releases/")
     maven("https://maven.terraformersmc.com/releases/")
     maven("https://maven.gegy.dev/")
 

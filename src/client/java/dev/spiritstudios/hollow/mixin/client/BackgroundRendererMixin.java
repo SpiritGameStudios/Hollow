@@ -57,13 +57,13 @@ public class BackgroundRendererMixin {
         } else if (transitionProgress > 0.0F) transitionProgress -= tickDelta;
 
         if (transitionProgress > 0.0F) {
-            fogData.fogStart = (float) Easing.SINE.inOut(
+            fogData.fogStart = (float) Easing.QUINT.out(
                     transitionProgress,
                     prevStart, viewDistance * 0.05F,
                     DURATION
             );
 
-            fogData.fogEnd = (float) Easing.SINE.inOut(
+            fogData.fogEnd = (float) Easing.QUINT.out(
                     transitionProgress,
                     prevEnd, Math.min(viewDistance, 148) * 0.5F,
                     DURATION
