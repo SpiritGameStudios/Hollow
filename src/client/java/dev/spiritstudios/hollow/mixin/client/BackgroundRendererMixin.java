@@ -2,10 +2,9 @@ package dev.spiritstudios.hollow.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.spiritstudios.hollow.HollowConfig;
-import dev.spiritstudios.hollow.HollowTags;
+import dev.spiritstudios.hollow.data.HollowBiomeTags;
 import dev.spiritstudios.specter.api.core.math.Easing;
 import net.minecraft.block.enums.CameraSubmersionType;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.FogShape;
@@ -18,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BackgroundRenderer.class)
-public class BackgroundRendererMixin {
+public abstract class BackgroundRendererMixin {
     @Unique
     private static float prevEnd;
 
@@ -44,7 +43,7 @@ public class BackgroundRendererMixin {
     ) {
         if (!HollowConfig.INSTANCE.closerFog.get()) return;
         if (camera.getSubmersionType() == CameraSubmersionType.WATER) return;
-        boolean closerFog = entity.getWorld().getBiome(entity.getBlockPos()).isIn(HollowTags.CLOSER_FOG);
+        boolean closerFog = entity.getWorld().getBiome(entity.getBlockPos()).isIn(HollowBiomeTags.HAS_CLOSER_FOG);
 
         if (closerFog) {
             if (prevStart == 0.0F && prevEnd == 0.0F) {

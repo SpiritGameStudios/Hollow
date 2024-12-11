@@ -1,31 +1,21 @@
 package dev.spiritstudios.hollow.block;
 
-import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.HollowTags;
 import dev.spiritstudios.hollow.registry.HollowDamageTypes;
+import dev.spiritstudios.hollow.registry.HollowEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-
-import java.util.Set;
 
 public class SculkJawBlock extends SculkBlock {
     public static final BooleanProperty ACTIVE = BooleanProperty.of("active");
@@ -42,7 +32,7 @@ public class SculkJawBlock extends SculkBlock {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (world.isClient() || entity.getType().isIn(HollowTags.IMMUNE_TO_SCULK_JAW)) {
+        if (world.isClient() || entity.getType().isIn(HollowEntityTypes.Tags.IMMUNE_TO_SCULK_JAW)) {
             super.onSteppedOn(world, pos, state, entity);
             return;
         }

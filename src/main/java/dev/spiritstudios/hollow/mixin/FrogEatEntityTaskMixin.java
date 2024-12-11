@@ -1,8 +1,8 @@
 package dev.spiritstudios.hollow.mixin;
 
 import dev.spiritstudios.hollow.HollowGameRules;
-import dev.spiritstudios.hollow.HollowTags;
 import dev.spiritstudios.hollow.registry.HollowCriteria;
+import dev.spiritstudios.hollow.registry.HollowEntityTypes;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.brain.task.FrogEatEntityTask;
@@ -25,7 +25,7 @@ public abstract class FrogEatEntityTaskMixin {
 
         Optional<Entity> target = frog.getFrogTarget();
         if (target.isEmpty()) return;
-        if (!target.get().getType().isIn(HollowTags.POISONS_FROG) || world.random.nextFloat() <= 0.75F) return;
+        if (!target.get().getType().isIn(HollowEntityTypes.Tags.POISONS_FROG) || world.random.nextFloat() <= 0.75F) return;
 
         StatusEffectInstance statusEffectInstance = new StatusEffectInstance(
                 StatusEffects.POISON,

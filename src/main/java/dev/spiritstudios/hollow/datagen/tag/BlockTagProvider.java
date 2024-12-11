@@ -1,6 +1,5 @@
-package dev.spiritstudios.hollow.datagen;
+package dev.spiritstudios.hollow.datagen.tag;
 
-import dev.spiritstudios.hollow.HollowTags;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
@@ -19,7 +18,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        FabricTagProvider<Block>.FabricTagBuilder hollowLogs = getOrCreateTagBuilder(HollowTags.HOLLOW_LOGS);
+        FabricTagProvider<Block>.FabricTagBuilder hollowLogs = getOrCreateTagBuilder(HollowBlocks.Tags.HOLLOW_LOGS);
         FabricTagProvider<Block>.FabricTagBuilder axeMineable = getOrCreateTagBuilder(BlockTags.AXE_MINEABLE);
 
         ReflectionHelper.getStaticFields(
@@ -57,5 +56,9 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.TALL_FLOWERS)
                 .add(HollowBlocks.CAMPION);
+
+        getOrCreateTagBuilder(HollowBlocks.Tags.POLYPORE_PLACEABLE_ON)
+                .forceAddTag(BlockTags.LOGS)
+                .addTag(HollowBlocks.Tags.HOLLOW_LOGS);
     }
 }

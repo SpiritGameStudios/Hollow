@@ -1,11 +1,14 @@
 package dev.spiritstudios.hollow.registry;
 
+import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.*;
 import dev.spiritstudios.specter.api.registry.annotations.NoBlockItem;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 
 @SuppressWarnings("unused")
@@ -195,6 +198,7 @@ public final class HollowBlocks {
                     .sounds(BlockSoundGroup.DEEPSLATE)
     );
 
+    // region Copper Pillar
     public static final Block COPPER_PILLAR = new OxidizablePillarBlock(
             Oxidizable.OxidationLevel.UNAFFECTED,
             AbstractBlock.Settings.create()
@@ -224,6 +228,7 @@ public final class HollowBlocks {
     public static final Block WAXED_EXPOSED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(EXPOSED_COPPER_PILLAR));
     public static final Block WAXED_WEATHERED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(WEATHERED_COPPER_PILLAR));
     public static final Block WAXED_OXIDIZED_COPPER_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(OXIDIZED_COPPER_PILLAR));
+    // endregion
 
     @NoBlockItem
     public static final Block POTTED_PAEONIA = Blocks.createFlowerPotBlock(PAEONIA);
@@ -231,6 +236,7 @@ public final class HollowBlocks {
     @NoBlockItem
     public static final Block POTTED_ROOTED_ORCHID = Blocks.createFlowerPotBlock(ROOTED_ORCHID);
 
+    // region Wildflowers
     public static final Block PINK_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
             .mapColor(MapColor.PINK)
             .noCollision()
@@ -254,4 +260,11 @@ public final class HollowBlocks {
             .noCollision()
             .sounds(BlockSoundGroup.PINK_PETALS)
             .pistonBehavior(PistonBehavior.DESTROY));
+    // endregion
+
+    public static final class Tags {
+        public static final TagKey<Block> HOLLOW_LOGS = TagKey.of(RegistryKeys.BLOCK, Hollow.id("hollow_logs"));
+
+        public static final TagKey<Block> POLYPORE_PLACEABLE_ON = TagKey.of(RegistryKeys.BLOCK, Hollow.id("polypore_placeable_on"));
+    }
 }
