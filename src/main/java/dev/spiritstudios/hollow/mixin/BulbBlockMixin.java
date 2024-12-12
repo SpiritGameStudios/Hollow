@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.HollowConfig;
+import dev.spiritstudios.hollow.HollowGameRules;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BulbBlock;
@@ -24,7 +25,7 @@ public abstract class BulbBlockMixin extends Block {
 
     @WrapOperation(method = "neighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BulbBlock;update(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;)V"))
     private void updateRedirect(BulbBlock instance, BlockState state, ServerWorld world, BlockPos pos, Operation<Void> original) {
-        if (HollowConfig.INSTANCE.revertCopperBulb.get())
+        if (world.getGameRules().getBoolean(HollowGameRules.COPPER_BULB_DELAY))
             world.scheduleBlockTick(pos, instance, 1);
         else
             original.call(instance, state, world, pos);

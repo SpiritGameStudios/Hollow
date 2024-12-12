@@ -10,10 +10,6 @@ public final class HollowConfig extends Config<HollowConfig> {
     ).build();
     public static final HollowConfig INSTANCE = HOLDER.get();
 
-    public final Value<Boolean> revertCopperBulb = booleanValue(true)
-            .comment("Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this.")
-            .build();
-
     public final Value<Boolean> music = booleanValue(true)
             .comment("Whether to enable Hollow's custom music.")
             .build();

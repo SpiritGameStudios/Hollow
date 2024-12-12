@@ -11,6 +11,12 @@ public final class HollowGameRules {
             GameRuleFactory.createBooleanRule(true)
     );
 
+    public static final GameRules.Key<GameRules.BooleanRule> COPPER_BULB_DELAY = GameRuleRegistry.register(
+            "copperBulbDelay",
+            GameRules.Category.UPDATES,
+            GameRuleFactory.createBooleanRule(true)
+    );
+
     public static void init() {
         // NO-OP
     }
