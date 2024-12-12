@@ -44,8 +44,8 @@ public final class HollowConfiguredFeatures {
                                         .add(Blocks.MOSS_CARPET.getDefaultState(), 5)
                                         .build()),
                                 new WeightedBlockStateProvider(DataPool.<BlockState>builder()
-                                        .add(Blocks.AIR.getDefaultState(), 8)
-                                        .add(Blocks.VINE.getDefaultState(), 2)
+                                        .add(Blocks.AIR.getDefaultState(), 6)
+                                        .add(Blocks.VINE.getDefaultState(), 4)
                                         .build())
                         )
                 )

@@ -6,9 +6,11 @@ import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.core.exception.UnreachableException;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -50,13 +52,13 @@ public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
 
         for (int i = 0; i < size; i++) {
             BlockPos pos = origin.offset(axis, i);
-            world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
+            world.setBlockState(pos, state, Block.NOTIFY_ALL);
 
             if (world.isAir(pos.up())) {
                 BlockState top = config.topBlockProvider().get(random, pos.up());
-                world.setBlockState(pos.up(), top, Block.NOTIFY_LISTENERS);
+                world.setBlockState(pos.up(), top, Block.NOTIFY_ALL);
                 if (top.isOf(Blocks.MOSS_CARPET))
-                    world.setBlockState(pos, state.withIfExists(HollowLogBlock.MOSSY, true), Block.NOTIFY_LISTENERS);
+                    world.setBlockState(pos, state.withIfExists(HollowLogBlock.MOSSY, true), Block.NOTIFY_ALL);
             }
 
             Direction direction = switch (axis) {
@@ -66,13 +68,19 @@ public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
             };
 
             BlockPos sidePos = pos.offset(direction);
-            if (!world.isAir(sidePos) && !world.getBlockState(sidePos).isReplaceable()) continue;
+            BlockState sideState = world.getBlockState(sidePos);
+            if (!sideState.isAir() && !sideState.isReplaceable()) continue;
+            if (sideState.isOf(Blocks.TALL_GRASS) || sideState.isIn(BlockTags.TALL_FLOWERS)) continue;
 
             world.setBlockState(
                     sidePos,
                     config.sideBlockProvider.get(random, sidePos)
-                            .withIfExists(Properties.HORIZONTAL_FACING, direction),
-                    Block.NOTIFY_LISTENERS
+                            .withIfExists(Properties.HORIZONTAL_FACING, direction)
+                            .withIfExists(Properties.NORTH, direction == Direction.SOUTH)
+                            .withIfExists(Properties.SHORT, direction == Direction.NORTH)
+                            .withIfExists(Properties.EAST, direction == Direction.WEST)
+                            .withIfExists(Properties.WEST, direction == Direction.EAST),
+                    Block.NOTIFY_ALL
             );
         }
 
