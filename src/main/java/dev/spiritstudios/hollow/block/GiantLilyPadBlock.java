@@ -1,7 +1,14 @@
 package dev.spiritstudios.hollow.block;
 
-import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.LilyPadBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -11,6 +18,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +36,41 @@ public class GiantLilyPadBlock extends LilyPadBlock {
     }
 
     @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        for (BlockPos blockPos : getBlocks(pos, state)) {
-            BlockState blockState = world.getBlockState(blockPos);
-            if (blockState.getBlock() == this) world.breakBlock(blockPos, blockPos.equals(pos));
-        }
+    public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
+        World world = ctx.getWorld();
+        BlockPos pos = ctx.getBlockPos();
 
-        return super.onBreak(world, pos, state, player);
+        if (posInvalid(world, pos) || posInvalid(world, pos.east()) || posInvalid(world, pos.south()) || posInvalid(world, pos.east().south())
+        ) return null;
+
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
+
+    private boolean posInvalid(World world, BlockPos pos) {
+        return (!world.isWater(pos.down()) && !world.getBlockState(pos.down()).isIn(BlockTags.ICE)) || !world.isAir(pos);
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (world.isClient() || state.get(PIECE) != Piece.NORTH_WEST) return;
+
+        world.setBlockState(pos.south(), state.with(PIECE, Piece.SOUTH_WEST));
+        world.setBlockState(pos.east(), state.with(PIECE, Piece.NORTH_EAST));
+        world.setBlockState(pos.south().east(), state.with(PIECE, Piece.SOUTH_EAST));
+    }
+
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        super.onStateReplaced(state, world, pos, newState, moved);
+        if (newState.isOf(this)) return;
+
+        for (BlockPos blockPos : getBlocks(pos, state)) {
+            if (blockPos.equals(pos)) continue;
+            BlockState blockState = world.getBlockState(blockPos);
+            if (blockState.isOf(this)) world.breakBlock(blockPos, false);
+        }
+    }
+
 
     public List<BlockPos> getBlocks(BlockPos pos, BlockState state) {
         List<BlockPos> blocks = new ArrayList<>();
@@ -67,7 +102,6 @@ public class GiantLilyPadBlock extends LilyPadBlock {
         NORTH_EAST,
         SOUTH_WEST,
         SOUTH_EAST;
-
 
         @Override
         public String asString() { return this.name().toLowerCase(Locale.ROOT); }
