@@ -57,37 +57,16 @@ public final class HollowBlocks {
     public static final FlowerBlock PAEONIA = new FlowerBlock(
             StatusEffects.GLOWING,
             5,
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .noCollision()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.GRASS)
-                    .offset(AbstractBlock.OffsetType.XZ)
-                    .pistonBehavior(PistonBehavior.DESTROY)
+            AbstractBlock.Settings.copy(Blocks.ALLIUM)
     );
 
     public static final FlowerBlock ROOTED_ORCHID = new FlowerBlock(
             StatusEffects.SATURATION,
             0.35F,
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .noCollision()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.GRASS)
-                    .offset(AbstractBlock.OffsetType.XZ)
-                    .pistonBehavior(PistonBehavior.DESTROY)
+            AbstractBlock.Settings.copy(Blocks.BLUE_ORCHID)
     );
 
-    public static final TallFlowerBlock CAMPION = new CampionBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .noCollision()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.GRASS)
-                    .offset(AbstractBlock.OffsetType.XZ)
-                    .burnable()
-                    .pistonBehavior(PistonBehavior.DESTROY)
-    );
+    public static final TallFlowerBlock CAMPION = new CampionBlock(AbstractBlock.Settings.copy(Blocks.PEONY));
 
     public static final TwigBlock TWIG = new TwigBlock(
             AbstractBlock.Settings.create()
@@ -112,36 +91,13 @@ public final class HollowBlocks {
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
-    public static final CattailBlock CATTAIL = new CattailBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.WATER_BLUE)
-                    .replaceable()
-                    .noCollision()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.WET_GRASS)
-                    .offset(AbstractBlock.OffsetType.XZ)
-                    .pistonBehavior(PistonBehavior.DESTROY)
-    );
+    public static final CattailBlock CATTAIL = new CattailBlock(AbstractBlock.Settings.copy(CATTAIL_STEM));
 
     @NoBlockItem
-    public static final LilyPadBlock LOTUS_LILYPAD = new LilyPadBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.LILY_PAD)
-                    .nonOpaque()
-                    .pistonBehavior(PistonBehavior.DESTROY)
-    );
+    public static final LilyPadBlock LOTUS_LILYPAD = new LilyPadBlock(AbstractBlock.Settings.copy(Blocks.LILY_PAD));
 
     @NoBlockItem
-    public static final Block GIANT_LILYPAD = new GiantLilyPadBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.LILY_PAD)
-                    .nonOpaque()
-                    .pistonBehavior(PistonBehavior.DESTROY)
-    );
+    public static final Block GIANT_LILYPAD = new GiantLilyPadBlock(AbstractBlock.Settings.copy(Blocks.LILY_PAD));
 
     public static final PolyporeBlock POLYPORE = new PolyporeBlock(
             AbstractBlock.Settings.create()
@@ -170,15 +126,8 @@ public final class HollowBlocks {
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
-    public static final Block FIREFLY_JAR = new FireflyJarBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.OAK_TAN)
-                    .strength(0.2F)
-                    .sounds(BlockSoundGroup.GLASS)
-                    .nonOpaque()
-                    .pistonBehavior(PistonBehavior.DESTROY)
-                    .luminance(state -> 15)
-    );
+    public static final Block FIREFLY_JAR = new FireflyJarBlock(AbstractBlock.Settings.copy(JAR)
+            .luminance(state -> 15));
 
     public static final Block STONE_CHEST = new StoneChestBlock(
             AbstractBlock.Settings.create()
@@ -189,14 +138,8 @@ public final class HollowBlocks {
                     .sounds(BlockSoundGroup.DEEPSLATE)
     );
 
-    public static final Block STONE_CHEST_LID = new StoneChestLidBlock(
-            AbstractBlock.Settings.create()
-                    .mapColor(MapColor.DEEPSLATE_GRAY)
-                    .requiresTool()
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .strength(3.0F, 6.0F)
-                    .sounds(BlockSoundGroup.DEEPSLATE)
-    );
+    public static final Block STONE_CHEST_LID = new StoneChestLidBlock(AbstractBlock.Settings.copy(STONE_CHEST)
+            .strength(3.0F, 6.0F));
 
     // region Copper Pillar
     public static final Block COPPER_PILLAR = new OxidizablePillarBlock(
