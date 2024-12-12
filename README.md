@@ -18,6 +18,9 @@ Hollow adds in as many missing features as it can, fulfilling Mojang's "hollow" 
 * Forge? <br/>
   No. Do not ask us for forge or neoforge support. It isn't happening.
 
+* Can I use this mod in a Mod Pack? <br/>
+  Yes! Go ahead! Just make sure we are credited somewhere and don't reupload our .jar file. If you make a pack with one of our mods, we would love to know! Join our discord and tell us!
+
 * Do you plan to add `X`? <br/>
   If it's in one of the concept art images, probably. Some features take longer than others. If you want to suggest something, join the [discord](https://discord.gg/TTmx7d2axf).
 
