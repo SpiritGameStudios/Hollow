@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.render.block;
 
 import dev.spiritstudios.hollow.block.entity.EchoingPotBlockEntity;
+import dev.spiritstudios.specter.api.render.block.BlockModelBlockEntityRenderer;
 import net.minecraft.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
@@ -14,11 +15,10 @@ import net.minecraft.util.math.RotationAxis;
 
 import java.util.Objects;
 
-public class EchoingPotBlockEntityRenderer implements BlockEntityRenderer<EchoingPotBlockEntity> {
-    private final BlockRenderManager renderManager;
+public class EchoingPotBlockEntityRenderer extends BlockModelBlockEntityRenderer<EchoingPotBlockEntity> {
 
     public EchoingPotBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-        this.renderManager = context.getRenderManager();
+        super(context);
     }
 
     @Override
@@ -48,20 +48,7 @@ public class EchoingPotBlockEntityRenderer implements BlockEntityRenderer<Echoin
             }
         }
 
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayers.getBlockLayer(entity.getCachedState()));
-
-        renderManager.getModelRenderer().render(
-                entity.getWorld(),
-                renderManager.getModel(entity.getCachedState()),
-                entity.getCachedState(),
-                entity.getPos(),
-                matrices,
-                vertexConsumer,
-                true,
-                Objects.requireNonNull(entity.getWorld()).getRandom(),
-                light,
-                overlay
-        );
+        renderBlockModel(entity, matrices, vertexConsumers, light, overlay);
 
         matrices.pop();
     }
