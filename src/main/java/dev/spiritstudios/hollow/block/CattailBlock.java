@@ -45,7 +45,7 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
 
     @Override
     protected boolean chooseStemState(BlockState state) {
-        return true;
+        return state.isAir() || state.isOf(Blocks.WATER);
     }
 
     @Override
