@@ -36,6 +36,7 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
         this.addDropWithSilkTouch(HollowBlocks.STONE_CHEST_LID);
         this.addDrop(HollowBlocks.STONE_CHEST, this.nameableContainerDrops(HollowBlocks.STONE_CHEST));
 
+        this.addDrop(HollowBlocks.CATTAIL);
         this.addDrop(HollowBlocks.CATTAIL_STEM, HollowBlocks.CATTAIL);
         this.addDrop(HollowBlocks.TWIG);
         this.addDrop(HollowBlocks.LOTUS_LILYPAD);
