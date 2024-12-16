@@ -87,7 +87,7 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
 
     @Override
     protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (state.get(AGE) >= 25 || !(random.nextDouble() < 0.14)) return;
+        if (state.get(AGE) >= 25 || random.nextDouble() >= 0.25) return;
         int outOfWater = 0;
         BlockPos waterPos = pos;
         while (!world.isWater(waterPos)) {
