@@ -5,21 +5,25 @@ import dev.spiritstudios.hollow.loot.HollowLootTableModifications;
 import dev.spiritstudios.hollow.loot.SetCopperInstrumentFunction;
 import dev.spiritstudios.hollow.registry.*;
 import dev.spiritstudios.hollow.worldgen.HollowBiomeModifications;
-import dev.spiritstudios.specter.api.registry.registration.Registrar;
+import dev.spiritstudios.specter.api.registry.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.advancement.criterion.Criterion;
 import net.minecraft.loot.function.LootFunctionType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 
-public class Hollow implements ModInitializer {
+public final class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
@@ -27,19 +31,23 @@ public class Hollow implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Registrar.process(HollowSoundEventRegistrar.class, MODID);
-        Registrar.process(HollowBlockRegistrar.class, MODID);
-        Registrar.process(HollowItemRegistrar.class, MODID);
-        Registrar.process(HollowEntityTypeRegistrar.class, MODID);
-        Registrar.process(HollowFeatureRegistrar.class, MODID);
-        Registrar.process(HollowTreeDecoratorRegistrar.class, MODID);
-        Registrar.process(HollowBlockEntityRegistrar.class, MODID);
-        Registrar.process(HollowParticleRegistrar.class, MODID);
-        Registrar.process(HollowDataComponentRegistrar.class, MODID);
+        RegistryHelper.registerSoundEvents(HollowSoundEvents.class, MODID);
+        RegistryHelper.registerBlocks(HollowBlocks.class, MODID);
+        RegistryHelper.registerItems(HollowItems.class, MODID);
+        RegistryHelper.registerEntityTypes(HollowEntityTypes.class, MODID);
+        RegistryHelper.registerFields(Registries.FEATURE, RegistryHelper.fixGenerics(Feature.class), HollowFeatures.class, MODID);
+        RegistryHelper.registerFields(Registries.TREE_DECORATOR_TYPE, RegistryHelper.fixGenerics(TreeDecoratorType.class), HollowTreeDecoratorTypes.class, MODID);
+        RegistryHelper.registerBlockEntityTypes(HollowBlockEntityTypes.class, MODID);
+        RegistryHelper.registerParticleTypes(HollowParticleTypes.class, MODID);
+        RegistryHelper.registerDataComponentTypes(HollowDataComponentTypes.class, MODID);
+        RegistryHelper.registerFields(Registries.FOLIAGE_PLACER_TYPE, RegistryHelper.fixGenerics(FoliagePlacerType.class), HollowFoliagePlacerTypes.class, MODID);
+        RegistryHelper.registerFields(Registries.CRITERION, RegistryHelper.fixGenerics(Criterion.class), HollowCriteria.class, MODID);
+
+        HollowGameRules.init();
 
         Registry.register(
                 Registries.LOOT_FUNCTION_TYPE,
-                Identifier.of(MODID, "set_copper_instrument"),
+                id("set_copper_instrument"),
                 SET_COPPER_INSTRUMENT
         );
 
@@ -49,7 +57,7 @@ public class Hollow implements ModInitializer {
                 "bass"
         ).forEach(name -> {
             for (int i = 0; i < 10; i++) {
-                Identifier id = Identifier.of(MODID, "horn.%s.%d".formatted(name, i));
+                Identifier id = id("horn.%s.%d".formatted(name, i));
                 Registry.register(
                         Registries.SOUND_EVENT,
                         id,
@@ -58,9 +66,14 @@ public class Hollow implements ModInitializer {
             }
         });
 
-        FabricDefaultAttributeRegistry.register(HollowEntityTypeRegistrar.FIREFLY, FireflyEntity.createFireflyAttributes());
+        FabricDefaultAttributeRegistry.register(HollowEntityTypes.FIREFLY, FireflyEntity.createFireflyAttributes());
 
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
+        HollowItemGroupAdditions.init();
+    }
+
+    public static Identifier id(String path) {
+        return Identifier.of(MODID, path);
     }
 }

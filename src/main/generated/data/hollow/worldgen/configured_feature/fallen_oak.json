@@ -1,0 +1,57 @@
+{
+  "type": "hollow:fallen_tree",
+  "config": {
+    "side_block_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:air"
+          },
+          "weight": 6
+        },
+        {
+          "data": {
+            "Name": "minecraft:vine",
+            "Properties": {
+              "east": "false",
+              "north": "false",
+              "south": "false",
+              "up": "false",
+              "west": "false"
+            }
+          },
+          "weight": 4
+        }
+      ]
+    },
+    "state_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hollow:oak_hollow_log",
+        "Properties": {
+          "axis": "y",
+          "mossy": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "top_block_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:air"
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "minecraft:moss_carpet"
+          },
+          "weight": 5
+        }
+      ]
+    }
+  }
+}

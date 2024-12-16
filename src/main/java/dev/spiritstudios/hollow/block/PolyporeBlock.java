@@ -1,8 +1,8 @@
 package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.HollowTags;
-import dev.spiritstudios.specter.api.core.util.VoxelShapeHelper;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ import net.minecraft.world.WorldView;
 
 public class PolyporeBlock extends PlantBlock implements Fertilizable {
     public static final IntProperty POLYPORE_AMOUNT = IntProperty.of("amount", 1, 3);
-    
+
     public static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(1, 1, 8, 15, 15, 16);
     public static final VoxelShape SHAPE_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_NORTH);
     public static final VoxelShape SHAPE_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_NORTH);
@@ -35,7 +35,7 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
                 .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
                 .with(POLYPORE_AMOUNT, 1));
     }
-    
+
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -51,29 +51,36 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos());
         if (blockState.isOf(this)) return blockState.cycle(POLYPORE_AMOUNT);
-        
+
         for (Direction direction : ctx.getPlacementDirections()) {
             if (direction.getAxis().isHorizontal()) {
                 BlockState blockState2 = getDefaultState().with(Properties.HORIZONTAL_FACING, direction.getOpposite());
                 if (blockState2.canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) return blockState2;
             }
         }
-        
+
         return null;
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) { return true; }
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
+    }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) { return true; }
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+        return true;
+    }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) { return true; }
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        return true;
+    }
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        if (state.get(POLYPORE_AMOUNT) < 3) world.setBlockState(pos, state.cycle(POLYPORE_AMOUNT), Block.NOTIFY_LISTENERS);
+        if (state.get(POLYPORE_AMOUNT) < 3)
+            world.setBlockState(pos, state.cycle(POLYPORE_AMOUNT), Block.NOTIFY_LISTENERS);
         else dropStack(world, pos, new ItemStack(this));
     }
 
@@ -93,11 +100,13 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
         Direction direction = state.get(Properties.HORIZONTAL_FACING);
         BlockPos blockPos = pos.offset(direction.getOpposite());
         BlockState blockState = world.getBlockState(blockPos);
-        
+
         return blockState.isSideSolidFullSquare(world, blockPos, direction) &&
-                (blockState.isIn(BlockTags.LOGS) || blockState.isIn(HollowTags.HOLLOW_LOGS));
+                blockState.isIn(HollowBlocks.Tags.POLYPORE_PLACEABLE_ON);
     }
 
     @Override
-    protected MapCodec<? extends PlantBlock> getCodec() { return CODEC; }
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
+    }
 }

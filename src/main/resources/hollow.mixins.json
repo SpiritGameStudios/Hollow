@@ -5,10 +5,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BulbBlockMixin",
-    "EntityMixin",
     "FrogEatEntityTaskMixin",
     "SaplingGeneratorMixin",
     "SculkBlockMixin",
+    "SculkVeinBlockMixin",
     "SculkVeinGrowCheckerMixin"
   ],
   "injectors": {

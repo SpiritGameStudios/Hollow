@@ -1,45 +1,38 @@
 {
 	"credit": "Made with Blockbench",
-	"texture_size": [64, 64],
 	"parent": "block/block",
+	"texture_size": [64, 64],
 	"textures": {
-		"3": "hollow:block/stone_chest",
-		"particle": "minecraft:block/chiseled_deepslate"
+		"0": "hollow:block/stone_chest_single",
+		"particle": "block/chiseled_deepslate"
 	},
 	"elements": [
 		{
 			"name": "chest",
 			"from": [1, 1, 1],
 			"to": [15, 16, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
 			"faces": {
-				"north": {"uv": [4, 0, 7.5, 3.75], "texture": "#3"},
-				"east": {"uv": [4, 3.75, 7.5, 7.5], "texture": "#3"},
-				"south": {"uv": [7.5, 0, 11, 3.75], "texture": "#3"},
-				"west": {"uv": [7.5, 3.75, 11, 7.5], "texture": "#3"},
-				"up": {"uv": [7.5, 11, 4, 7.5], "texture": "#3"},
-				"down": {"uv": [11, 7.5, 7.5, 11], "texture": "#3"}
+				"north": {"uv": [3.5, 3.5, 7, 7.25], "texture": "#0"},
+				"east": {"uv": [0, 3.5, 3.5, 7.25], "texture": "#0"},
+				"south": {"uv": [7, 3.5, 10.5, 7.25], "texture": "#0"},
+				"west": {"uv": [10.5, 3.5, 14, 7.25], "texture": "#0"},
+				"up": {"uv": [7, 3.5, 3.5, 0], "texture": "#0", "cullface": "up"}
 			}
 		},
 		{
 			"name": "base",
 			"from": [0, 0, 0],
 			"to": [16, 1, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 8, 4, 8.25], "texture": "#3"},
-				"east": {"uv": [0, 8.25, 4, 8.5], "texture": "#3"},
-				"south": {"uv": [0, 8.5, 4, 8.75], "texture": "#3"},
-				"west": {"uv": [0, 8.75, 4, 9], "texture": "#3"},
-				"up": {"uv": [4, 4, 0, 0], "texture": "#3"},
-				"down": {"uv": [4, 4, 0, 8], "texture": "#3"}
+				"north": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "north"},
+				"east": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "east"},
+				"south": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "south"},
+				"west": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "west"},
+				"up": {"uv": [4, 12, 0, 8], "texture": "#0"},
+				"down": {"uv": [4, 12, 0, 16], "texture": "#0", "cullface": "down"}
 			}
-		}
-	],
-	"groups": [
-		{
-			"name": "stone_chest",
-			"origin": [0, 0, 0],
-			"color": 0,
-			"children": [0, 1]
 		}
 	]
 }

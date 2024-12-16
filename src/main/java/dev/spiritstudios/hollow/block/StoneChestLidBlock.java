@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.block;
 
-import dev.spiritstudios.specter.api.core.util.VoxelShapeHelper;
+import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.fluid.FluidState;
@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +25,8 @@ public class StoneChestLidBlock extends Block {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final EnumProperty<ChestType> CHEST_TYPE = Properties.CHEST_TYPE;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    
+
+    // region VoxelShapes
     public static final VoxelShape SHAPE_SINGLE = Block.createCuboidShape(1, 0, 1, 15, 4, 15);
     
     public static final VoxelShape SHAPE_LEFT_NORTH = Block.createCuboidShape(1, 0, 1, 16, 4, 15);
@@ -36,6 +38,7 @@ public class StoneChestLidBlock extends Block {
     public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
     public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
     public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    // endregion
     
     public StoneChestLidBlock(Settings settings) {
         super(settings);
@@ -81,12 +84,6 @@ public class StoneChestLidBlock extends Block {
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(FACING, CHEST_TYPE, WATERLOGGED); }
-
-    @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) { return state.with(FACING, rotation.rotate(state.get(FACING))); }
 
     @Override
@@ -98,7 +95,9 @@ public class StoneChestLidBlock extends Block {
     ) {
         if (state.get(WATERLOGGED)) world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 
-        if (neighborState.isOf(this) && direction.getAxis().isHorizontal()) {
+        if (!neighborState.isOf(this) || !direction.getAxis().isHorizontal()) {
+            if (getFacing(state) == direction) return state.with(CHEST_TYPE, ChestType.SINGLE);
+        } else {
             ChestType chestType = neighborState.get(CHEST_TYPE);
             if (state.get(CHEST_TYPE) == ChestType.SINGLE
                     && chestType != ChestType.SINGLE
@@ -106,9 +105,21 @@ public class StoneChestLidBlock extends Block {
                     && getFacing(neighborState) == direction.getOpposite()) {
                 return state.with(CHEST_TYPE, chestType.getOpposite());
             }
-        } else if (getFacing(state) == direction) return state.with(CHEST_TYPE, ChestType.SINGLE);
+        }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        super.onStateReplaced(state, world, pos, newState, moved);
+        if (state.isOf(newState.getBlock())) return;
+        ChestType type = state.get(CHEST_TYPE);
+        if (type == ChestType.SINGLE) return;
+
+        Direction facing = state.get(FACING);
+        BlockPos otherPos =  pos.offset(type == ChestType.LEFT ? facing.rotateYClockwise() : facing.rotateYCounterclockwise());
+        world.breakBlock(otherPos, false);
     }
 
     public static Direction getFacing(BlockState state) {
@@ -145,4 +156,12 @@ public class StoneChestLidBlock extends Block {
                 return SHAPE_SINGLE;
         }
     }
+
+    // region Settings
+    @Override
+    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(FACING, CHEST_TYPE, WATERLOGGED); }
+    // endregion
 }

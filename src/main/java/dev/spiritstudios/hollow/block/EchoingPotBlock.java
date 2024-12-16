@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.EchoingPotBlockEntity;
-import dev.spiritstudios.hollow.registry.HollowBlockEntityRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -32,10 +32,10 @@ public class EchoingPotBlock extends BlockWithEntity {
         super(settings);
         setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
     }
-    
+
     public static final VoxelShape SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(1, 0, 1, 15, 13, 15),
-            Block.createCuboidShape(3, 13, 3, 13, 15, 13)
+            Block.createCuboidShape(1, 0, 1, 15, 14, 15),
+            Block.createCuboidShape(4, 14, 4, 12, 16, 12)
     );
 
     @Override
@@ -44,7 +44,9 @@ public class EchoingPotBlock extends BlockWithEntity {
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -62,12 +64,11 @@ public class EchoingPotBlock extends BlockWithEntity {
         return new EchoingPotBlockEntity(pos, state);
     }
 
-
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) return ItemActionResult.SUCCESS;
 
-        EchoingPotBlockEntity blockEntity = (EchoingPotBlockEntity)world.getBlockEntity(pos);
+        EchoingPotBlockEntity blockEntity = (EchoingPotBlockEntity) world.getBlockEntity(pos);
         Objects.requireNonNull(blockEntity).use(player, hand);
         return ItemActionResult.CONSUME;
     }
@@ -75,9 +76,11 @@ public class EchoingPotBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, HollowBlockEntityRegistrar.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
+        return validateTicker(type, HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
     }
 
     @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() { return CODEC; }
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
 }

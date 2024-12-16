@@ -2,9 +2,10 @@ package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.OxidizablePillarBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
-import dev.spiritstudios.hollow.registry.HollowDataComponentRegistrar;
-import dev.spiritstudios.hollow.registry.HollowItemRegistrar;
+import dev.spiritstudios.hollow.component.CopperInstrument;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.registry.HollowDataComponentTypes;
+import dev.spiritstudios.hollow.registry.HollowItems;
 import dev.spiritstudios.specter.api.item.datagen.SpecterShapedRecipeJsonBuilder;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -38,16 +39,16 @@ public class RecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.OAK_HOLLOW_LOG, ItemTags.OAK_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.SPRUCE_HOLLOW_LOG, ItemTags.SPRUCE_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.BIRCH_HOLLOW_LOG, ItemTags.BIRCH_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.JUNGLE_HOLLOW_LOG, ItemTags.JUNGLE_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.ACACIA_HOLLOW_LOG, ItemTags.ACACIA_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.DARK_OAK_HOLLOW_LOG, ItemTags.DARK_OAK_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.CRIMSON_HOLLOW_STEM, ItemTags.CRIMSON_STEMS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.WARPED_HOLLOW_STEM, ItemTags.WARPED_STEMS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.MANGROVE_HOLLOW_LOG, ItemTags.MANGROVE_LOGS);
-        createHollowLogRecipe(exporter, HollowBlockRegistrar.CHERRY_HOLLOW_LOG, ItemTags.CHERRY_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.OAK_HOLLOW_LOG, ItemTags.OAK_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.SPRUCE_HOLLOW_LOG, ItemTags.SPRUCE_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.BIRCH_HOLLOW_LOG, ItemTags.BIRCH_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.JUNGLE_HOLLOW_LOG, ItemTags.JUNGLE_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.ACACIA_HOLLOW_LOG, ItemTags.ACACIA_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.DARK_OAK_HOLLOW_LOG, ItemTags.DARK_OAK_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.CRIMSON_HOLLOW_STEM, ItemTags.CRIMSON_STEMS);
+        createHollowLogRecipe(exporter, HollowBlocks.WARPED_HOLLOW_STEM, ItemTags.WARPED_STEMS);
+        createHollowLogRecipe(exporter, HollowBlocks.MANGROVE_HOLLOW_LOG, ItemTags.MANGROVE_LOGS);
+        createHollowLogRecipe(exporter, HollowBlocks.CHERRY_HOLLOW_LOG, ItemTags.CHERRY_LOGS);
 
         HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach(
                 (unWaxed, waxed) -> {
@@ -62,25 +63,25 @@ public class RecipeProvider extends FabricRecipeProvider {
                 }
         );
 
-        createCopperHornRecipe(exporter, Instruments.PONDER_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.GREAT_SKY_FALLING);
-        createCopperHornRecipe(exporter, Instruments.SING_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.OLD_HYMN_RESTING);
-        createCopperHornRecipe(exporter, Instruments.SEEK_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.PURE_WATER_DESIRE);
-        createCopperHornRecipe(exporter, Instruments.FEEL_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.HUMBLE_FIRE_MEMORY);
-        createCopperHornRecipe(exporter, Instruments.ADMIRE_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.DRY_URGE_ANGER);
-        createCopperHornRecipe(exporter, Instruments.CALL_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.CLEAR_TEMPER_JOURNEY);
-        createCopperHornRecipe(exporter, Instruments.YEARN_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.FRESH_NEST_THOUGHT);
-        createCopperHornRecipe(exporter, Instruments.DREAM_GOAT_HORN, HollowDataComponentRegistrar.CopperInstrument.SECRET_LAKE_TEAR);
+        createCopperHornRecipe(exporter, Instruments.PONDER_GOAT_HORN, CopperInstrument.GREAT_SKY_FALLING);
+        createCopperHornRecipe(exporter, Instruments.SING_GOAT_HORN, CopperInstrument.OLD_HYMN_RESTING);
+        createCopperHornRecipe(exporter, Instruments.SEEK_GOAT_HORN, CopperInstrument.PURE_WATER_DESIRE);
+        createCopperHornRecipe(exporter, Instruments.FEEL_GOAT_HORN, CopperInstrument.HUMBLE_FIRE_MEMORY);
+        createCopperHornRecipe(exporter, Instruments.ADMIRE_GOAT_HORN, CopperInstrument.DRY_URGE_ANGER);
+        createCopperHornRecipe(exporter, Instruments.CALL_GOAT_HORN, CopperInstrument.CLEAR_TEMPER_JOURNEY);
+        createCopperHornRecipe(exporter, Instruments.YEARN_GOAT_HORN, CopperInstrument.FRESH_NEST_THOUGHT);
+        createCopperHornRecipe(exporter, Instruments.DREAM_GOAT_HORN, CopperInstrument.SECRET_LAKE_TEAR);
 
         Map.of(
-                HollowBlockRegistrar.COPPER_PILLAR, Blocks.CUT_COPPER_SLAB,
-                HollowBlockRegistrar.EXPOSED_COPPER_PILLAR, Blocks.EXPOSED_CUT_COPPER_SLAB,
-                HollowBlockRegistrar.WEATHERED_COPPER_PILLAR, Blocks.WEATHERED_CUT_COPPER_SLAB,
-                HollowBlockRegistrar.OXIDIZED_COPPER_PILLAR, Blocks.OXIDIZED_CUT_COPPER_SLAB,
+                HollowBlocks.COPPER_PILLAR, Blocks.CUT_COPPER_SLAB,
+                HollowBlocks.EXPOSED_COPPER_PILLAR, Blocks.EXPOSED_CUT_COPPER_SLAB,
+                HollowBlocks.WEATHERED_COPPER_PILLAR, Blocks.WEATHERED_CUT_COPPER_SLAB,
+                HollowBlocks.OXIDIZED_COPPER_PILLAR, Blocks.OXIDIZED_CUT_COPPER_SLAB,
 
-                HollowBlockRegistrar.WAXED_COPPER_PILLAR, Blocks.WAXED_CUT_COPPER_SLAB,
-                HollowBlockRegistrar.WAXED_EXPOSED_COPPER_PILLAR, Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB,
-                HollowBlockRegistrar.WAXED_WEATHERED_COPPER_PILLAR, Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB,
-                HollowBlockRegistrar.WAXED_OXIDIZED_COPPER_PILLAR, Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB
+                HollowBlocks.WAXED_COPPER_PILLAR, Blocks.WAXED_CUT_COPPER_SLAB,
+                HollowBlocks.WAXED_EXPOSED_COPPER_PILLAR, Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB,
+                HollowBlocks.WAXED_WEATHERED_COPPER_PILLAR, Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB,
+                HollowBlocks.WAXED_OXIDIZED_COPPER_PILLAR, Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB
         ).forEach(
                 (pillar, slab) -> ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, pillar)
                         .input('#', slab)
@@ -100,12 +101,12 @@ public class RecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter);
     }
 
-    public void createCopperHornRecipe(RecipeExporter exporter, RegistryKey<Instrument> goat, HollowDataComponentRegistrar.CopperInstrument copper) {
+    public void createCopperHornRecipe(RecipeExporter exporter, RegistryKey<Instrument> goat, CopperInstrument copper) {
         SpecterShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, new ItemStack(
-                        Registries.ITEM.getEntry(HollowItemRegistrar.COPPER_HORN),
+                        Registries.ITEM.getEntry(HollowItems.COPPER_HORN),
                         1,
                         ComponentChanges.builder()
-                                .add(HollowDataComponentRegistrar.COPPER_INSTRUMENT, copper)
+                                .add(HollowDataComponentTypes.COPPER_INSTRUMENT, copper)
                                 .build()
                 ))
                 .group("hollow_copper_horn")

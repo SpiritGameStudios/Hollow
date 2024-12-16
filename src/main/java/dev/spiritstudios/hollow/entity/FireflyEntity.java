@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.entity;
 
-import dev.spiritstudios.hollow.registry.HollowBlockRegistrar;
+import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
@@ -101,15 +101,14 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.getItem() == HollowBlockRegistrar.JAR.asItem() && this.isAlive()) {
-            player.setStackInHand(hand, itemStack.copyWithCount(itemStack.getCount() - 1));
-            player.getInventory().offerOrDrop(new ItemStack(HollowBlockRegistrar.FIREFLY_JAR));
-
-            this.discard();
-            return ActionResult.success(player.getWorld().isClient);
-        } else {
+        if (itemStack.getItem() != HollowBlocks.JAR.asItem() || !this.isAlive())
             return super.interactMob(player, hand);
-        }
+
+        player.setStackInHand(hand, itemStack.copyWithCount(itemStack.getCount() - 1));
+        player.getInventory().offerOrDrop(new ItemStack(HollowBlocks.FIREFLY_JAR));
+
+        this.discard();
+        return ActionResult.success(player.getWorld().isClient);
     }
 
     @Override

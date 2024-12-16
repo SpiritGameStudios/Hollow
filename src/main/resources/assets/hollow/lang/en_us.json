@@ -41,7 +41,6 @@
   "block.hollow.echoing_pot": "Echoing Pot",
   "block.hollow.stone_chest": "Stone Chest",
   "block.hollow.stone_chest_lid": "Stone Chest Lid",
-  "block.hollow.root_vines": "Root Vines",
   "block.hollow.cattail": "Cattail",
   "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
@@ -50,8 +49,6 @@
   "item.hollow.copper_horn": "Copper Horn",
   "jukebox_song.hollow.postmortem": "WorldWidePixel - Postmortem",
   "subtitles.block.sculk_jaw.bite": "Sculk Jaw bites",
-  "advancements.adventure.diversity_win.title": "Diversity Win",
-  "advancements.adventure.diversity_win.description": "Get one of every dye.",
   "config.hollow.hollow.title": "Hollow",
   "config.hollow.hollow.revertCopperBulb": "Revert Copper Bulb",
   "config.hollow.hollow.revertCopperBulb.tooltip": "Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this.",
@@ -96,5 +93,9 @@
   "subtitles.copper_horn.gift": "Gift",
   "subtitles.copper_horn.sweet": "Sweet",
   "subtitles.copper_horn.moon": "Moon",
-  "subtitles.copper_horn.love": "Love"
+  "subtitles.copper_horn.love": "Love",
+  "gamerule.doFrogPoisoning": "Allow Frog poisoning",
+  "advancements.husbandry.witnessed_frog_poisoning.title": "Poisonous To Frogs",
+  "advancements.husbandry.witnessed_frog_poisoning.description": "Witness a Frog be poisoned upon eating a Firefly",
+  "entity.hollow.firefly": "Firefly"
 }

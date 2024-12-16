@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.StoneChestBlockEntity;
-import dev.spiritstudios.specter.api.core.util.VoxelShapeHelper;
+import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
@@ -163,7 +163,7 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) return ItemActionResult.SUCCESS;
+        if (world.isClient) return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         StoneChestBlockEntity blockEntity = (StoneChestBlockEntity) world.getBlockEntity(pos);
         return Objects.requireNonNull(blockEntity).use(player, hand, hit.getSide());

@@ -13,9 +13,9 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
     protected FireflyJarParticle(ClientWorld clientWorld, double x, double y, double z) {
         super(clientWorld, x, y, z);
         this.maxAge = 400;
-        this.red = 0.101960786f;
-        this.green = 0.11764706f;
-        this.blue = 0.105882354f;
+        this.red = 26 / 255F;
+        this.green = 30 / 255F;
+        this.blue = 27 / 255F;
         
         xMover = clientWorld.random.nextBoolean();
         counterClockwise = clientWorld.random.nextBoolean();
