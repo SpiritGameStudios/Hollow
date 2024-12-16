@@ -81,11 +81,11 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     }
 
     public ItemActionResult use(PlayerEntity player, Hand hand, Direction side) {
-        if (world == null) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        if (world == null) return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (player.getStackInHand(hand).isEmpty() || player.getStackInHand(hand).isOf(HollowBlocks.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP))
-            return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
-        if (!world.isAir(pos.up())) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        if (!world.isAir(pos.up())) return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
 
         int slot = -1;
@@ -96,7 +96,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
             }
         }
 
-        if (slot == -1) return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        if (slot == -1) return ItemActionResult.FAIL;
 
         setStack(slot, player.getStackInHand(hand));
         player.setStackInHand(hand, ItemStack.EMPTY);

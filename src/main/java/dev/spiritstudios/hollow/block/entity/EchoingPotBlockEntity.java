@@ -39,62 +39,22 @@ public class EchoingPotBlockEntity extends BlockEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, EchoingPotBlockEntity blockEntity) {
-        if (blockEntity.activeTime <= 0) return;
 
-        if (!world.isClient) {
-            blockEntity.activeTime--;
-            blockEntity.markDirty();
-            world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
-
-            List<WardenEntity> wardens = world.getEntitiesByClass(
-                    WardenEntity.class,
-                    Box.from(pos.toCenterPos()).expand(16),
-                    warden -> true
-            );
-
-            wardens.forEach(warden -> {
-                WardenAngerManager angerManager = warden.getAngerManager();
-
-                Optional<LivingEntity> target = angerManager.getPrimeSuspect();
-                if (target.isEmpty()) return;
-
-                angerManager.removeSuspect(target.get());
-            });
-        } else {
-            Random random = world.getRandom();
-            for (int i = 0; i < 2; ++i) {
-                float x = 2.0F * random.nextFloat() - 1.0F;
-                float y = 2.0F * random.nextFloat() - 1.0F;
-                float z = 2.0F * random.nextFloat() - 1.0F;
-                world.addParticle(
-                        ParticleTypes.SCULK_SOUL,
-                        (double) pos.getX() + 0.5 + (x * 0.25),
-                        (double) pos.getY() + 1,
-                        (double) pos.getZ() + 0.5 + (z * 0.25),
-                        (x * 0.0075F),
-                        (y * 0.075F),
-                        (z * 0.0075F)
-                );
-            }
-
-            if (world.random.nextInt(5) == 0)
-                world.playSoundAtBlockCenter(pos, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.BLOCKS, 0.5F, 1.0F, false);
-        }
     }
 
     public void use(PlayerEntity player, Hand hand) {
-        if (!player.getStackInHand(hand).isOf(Items.ECHO_SHARD) || activeTime > 0) {
+//        if (!player.getStackInHand(hand).isOf(Items.ECHO_SHARD) || activeTime > 0) {
             wobble(DecoratedPotBlockEntity.WobbleType.NEGATIVE);
             player.getWorld().playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT_FAIL, SoundCategory.BLOCKS, 1.0F, 1.0F);
             player.getWorld().emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
             return;
-        }
-
-        activeTime += 300;
-        player.getStackInHand(hand).decrement(1);
-        wobble(DecoratedPotBlockEntity.WobbleType.POSITIVE);
-        player.getWorld().emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-        player.getWorld().playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+//        }
+//
+//        activeTime += 300;
+//        player.getStackInHand(hand).decrement(1);
+//        wobble(DecoratedPotBlockEntity.WobbleType.POSITIVE);
+//        player.getWorld().emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+//        player.getWorld().playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT, SoundCategory.BLOCKS, 1.0F, 1.0F);
     }
 
     public void wobble(DecoratedPotBlockEntity.WobbleType wobbleType) {

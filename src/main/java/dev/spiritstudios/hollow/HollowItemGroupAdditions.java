@@ -28,13 +28,13 @@ public final class HollowItemGroupAdditions {
 
             baseToHollow.forEach(helper::addAfter);
 
-            helper.addAfter(
-                    Items.PINK_PETALS,
-                    HollowBlocks.PINK_WILDFLOWER,
-                    HollowBlocks.PURPLE_WILDFLOWER,
-                    HollowBlocks.BLUE_WILDFLOWER,
-                    HollowBlocks.WHITE_WILDFLOWER
-            );
+//            helper.addAfter(
+//                    Items.PINK_PETALS,
+//                    HollowBlocks.PINK_WILDFLOWER,
+//                    HollowBlocks.PURPLE_WILDFLOWER,
+//                    HollowBlocks.BLUE_WILDFLOWER,
+//                    HollowBlocks.WHITE_WILDFLOWER
+//            );
             helper.addAfter(Items.ALLIUM, HollowBlocks.PAEONIA);
             helper.addAfter(Items.BLUE_ORCHID, HollowBlocks.ROOTED_ORCHID);
             helper.addAfter(Items.PEONY, HollowBlocks.CAMPION);

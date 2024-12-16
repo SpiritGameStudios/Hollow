@@ -51,15 +51,15 @@ public class HollowClient implements ClientModInitializer {
         );
 
 
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
-                        tintIndex != 0 ?
-                                world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor() :
-                                -1,
-                HollowBlocks.BLUE_WILDFLOWER,
-                HollowBlocks.WHITE_WILDFLOWER,
-                HollowBlocks.PURPLE_WILDFLOWER,
-                HollowBlocks.PINK_WILDFLOWER
-        );
+//        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+//                        tintIndex != 0 ?
+//                                world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor() :
+//                                -1,
+//                HollowBlocks.BLUE_WILDFLOWER,
+//                HollowBlocks.WHITE_WILDFLOWER,
+//                HollowBlocks.PURPLE_WILDFLOWER,
+//                HollowBlocks.PINK_WILDFLOWER
+//        );
         // endregion
 
         // region Block Entity Renderers

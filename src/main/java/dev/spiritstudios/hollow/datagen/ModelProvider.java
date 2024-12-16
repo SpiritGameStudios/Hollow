@@ -89,10 +89,10 @@ public class ModelProvider extends FabricModelProvider {
         generator.registerItemModel(HollowBlocks.FIREFLY_JAR.asItem());
         generator.registerStateWithModelReference(HollowBlocks.FIREFLY_JAR, HollowBlocks.JAR);
 
-        registerFlowerbed(generator, HollowBlocks.PINK_WILDFLOWER);
-        registerFlowerbed(generator, HollowBlocks.BLUE_WILDFLOWER);
-        registerFlowerbed(generator, HollowBlocks.WHITE_WILDFLOWER);
-        registerFlowerbed(generator, HollowBlocks.PURPLE_WILDFLOWER);
+//        registerFlowerbed(generator, HollowBlocks.PINK_WILDFLOWER);
+//        registerFlowerbed(generator, HollowBlocks.BLUE_WILDFLOWER);
+//        registerFlowerbed(generator, HollowBlocks.WHITE_WILDFLOWER);
+//        registerFlowerbed(generator, HollowBlocks.PURPLE_WILDFLOWER);
     }
 
     @Override

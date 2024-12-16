@@ -180,29 +180,29 @@ public final class HollowBlocks {
     public static final Block POTTED_ROOTED_ORCHID = Blocks.createFlowerPotBlock(ROOTED_ORCHID);
 
     // region Wildflowers
-    public static final Block PINK_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
-            .mapColor(MapColor.PINK)
-            .noCollision()
-            .sounds(BlockSoundGroup.PINK_PETALS)
-            .pistonBehavior(PistonBehavior.DESTROY));
-
-    public static final Block BLUE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
-            .mapColor(MapColor.TERRACOTTA_BLUE)
-            .noCollision()
-            .sounds(BlockSoundGroup.PINK_PETALS)
-            .pistonBehavior(PistonBehavior.DESTROY));
-
-    public static final Block PURPLE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
-            .mapColor(MapColor.PURPLE)
-            .noCollision()
-            .sounds(BlockSoundGroup.PINK_PETALS)
-            .pistonBehavior(PistonBehavior.DESTROY));
-
-    public static final Block WHITE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
-            .mapColor(MapColor.WHITE_GRAY)
-            .noCollision()
-            .sounds(BlockSoundGroup.PINK_PETALS)
-            .pistonBehavior(PistonBehavior.DESTROY));
+//    public static final Block PINK_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
+//            .mapColor(MapColor.PINK)
+//            .noCollision()
+//            .sounds(BlockSoundGroup.PINK_PETALS)
+//            .pistonBehavior(PistonBehavior.DESTROY));
+//
+//    public static final Block BLUE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
+//            .mapColor(MapColor.TERRACOTTA_BLUE)
+//            .noCollision()
+//            .sounds(BlockSoundGroup.PINK_PETALS)
+//            .pistonBehavior(PistonBehavior.DESTROY));
+//
+//    public static final Block PURPLE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
+//            .mapColor(MapColor.PURPLE)
+//            .noCollision()
+//            .sounds(BlockSoundGroup.PINK_PETALS)
+//            .pistonBehavior(PistonBehavior.DESTROY));
+//
+//    public static final Block WHITE_WILDFLOWER = new FlowerbedBlock(AbstractBlock.Settings.create()
+//            .mapColor(MapColor.WHITE_GRAY)
+//            .noCollision()
+//            .sounds(BlockSoundGroup.PINK_PETALS)
+//            .pistonBehavior(PistonBehavior.DESTROY));
     // endregion
 
     public static final class Tags {

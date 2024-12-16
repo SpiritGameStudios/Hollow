@@ -29,10 +29,10 @@ public class ClientBlockMetatagProvider extends MetatagProvider<Block> {
         ).forEach(pair ->
                 renderLayer.put(pair.value(), BlockRenderLayer.CUTOUT_MIPPED));
 
-        renderLayer.put(HollowBlocks.BLUE_WILDFLOWER, BlockRenderLayer.CUTOUT);
-        renderLayer.put(HollowBlocks.WHITE_WILDFLOWER, BlockRenderLayer.CUTOUT);
-        renderLayer.put(HollowBlocks.PURPLE_WILDFLOWER, BlockRenderLayer.CUTOUT);
-        renderLayer.put(HollowBlocks.PINK_WILDFLOWER, BlockRenderLayer.CUTOUT);
+//        renderLayer.put(HollowBlocks.BLUE_WILDFLOWER, BlockRenderLayer.CUTOUT);
+//        renderLayer.put(HollowBlocks.WHITE_WILDFLOWER, BlockRenderLayer.CUTOUT);
+//        renderLayer.put(HollowBlocks.PURPLE_WILDFLOWER, BlockRenderLayer.CUTOUT);
+//        renderLayer.put(HollowBlocks.PINK_WILDFLOWER, BlockRenderLayer.CUTOUT);
         renderLayer.put(HollowBlocks.PAEONIA, BlockRenderLayer.CUTOUT);
         renderLayer.put(HollowBlocks.POTTED_PAEONIA, BlockRenderLayer.CUTOUT);
         renderLayer.put(HollowBlocks.ROOTED_ORCHID, BlockRenderLayer.CUTOUT);
