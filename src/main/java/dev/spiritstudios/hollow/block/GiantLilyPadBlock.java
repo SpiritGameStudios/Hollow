@@ -62,7 +62,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
     @Override
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         super.onStateReplaced(state, world, pos, newState, moved);
-        if (newState.isOf(this)) return;
+        if (state.isOf(newState.getBlock())) return;
 
         for (BlockPos blockPos : getBlocks(pos, state)) {
             if (blockPos.equals(pos)) continue;
