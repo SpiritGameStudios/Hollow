@@ -1,0 +1,38 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "hollow:block/stone_chest_single",
+		"particle": "block/chiseled_deepslate"
+	},
+	"elements": [
+		{
+			"name": "chest",
+			"from": [1, 1, 1],
+			"to": [15, 16, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"north": {"uv": [3.5, 3.5, 7, 7.25], "texture": "#0"},
+				"east": {"uv": [0, 3.5, 3.5, 7.25], "texture": "#0"},
+				"south": {"uv": [7, 3.5, 10.5, 7.25], "texture": "#0"},
+				"west": {"uv": [10.5, 3.5, 14, 7.25], "texture": "#0"},
+				"up": {"uv": [7, 3.5, 3.5, 0], "texture": "#0", "cullface": "up"}
+			}
+		},
+		{
+			"name": "base",
+			"from": [0, 0, 0],
+			"to": [16, 1, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "north"},
+				"east": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "east"},
+				"south": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "south"},
+				"west": {"uv": [0, 8, 4, 8.25], "texture": "#0", "cullface": "west"},
+				"up": {"uv": [4, 12, 0, 8], "texture": "#0"},
+				"down": {"uv": [4, 12, 0, 16], "texture": "#0", "cullface": "down"}
+			}
+		}
+	]
+}

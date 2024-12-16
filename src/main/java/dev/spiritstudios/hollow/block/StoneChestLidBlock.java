@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,6 +108,18 @@ public class StoneChestLidBlock extends Block {
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        super.onStateReplaced(state, world, pos, newState, moved);
+        if (state.isOf(newState.getBlock())) return;
+        ChestType type = state.get(CHEST_TYPE);
+        if (type == ChestType.SINGLE) return;
+
+        Direction facing = state.get(FACING);
+        BlockPos otherPos =  pos.offset(type == ChestType.LEFT ? facing.rotateYClockwise() : facing.rotateYCounterclockwise());
+        world.breakBlock(otherPos, false);
     }
 
     public static Direction getFacing(BlockState state) {

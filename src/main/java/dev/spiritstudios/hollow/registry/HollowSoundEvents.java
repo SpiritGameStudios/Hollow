@@ -19,4 +19,7 @@ public final class HollowSoundEvents {
 
     @Name("block.sculk_jaw.bite")
     public static final SoundEvent SCULK_JAW_BITE = SoundEvent.of(Hollow.id("block.sculk_jaw.bite"));
+
+    @Name("block.stone_chest.extract")
+    public static final SoundEvent STONE_CHEST_EXTRACT = SoundEvent.of(Hollow.id("block.stone_chest.extract"));
 }

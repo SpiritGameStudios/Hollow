@@ -57,6 +57,26 @@
       }
     ]
   },
+  "block.stone_chest.extract": {
+    "sounds": [
+      {
+        "name": "block/decorated_pot/insert1",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert2",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert3",
+        "volume": 0.9
+      },
+      {
+        "name": "block/decorated_pot/insert4",
+        "volume": 0.9
+      }
+    ]
+  },
   "block.sculk_jaw.bite": {
     "subtitle": "subtitles.block.sculk_jaw.bite",
     "sounds": [
