@@ -32,6 +32,10 @@
       "burn": 5,
       "spread": 5
     },
+    "hollow:pale_oak_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
     "hollow:spruce_hollow_log": {
       "burn": 5,
       "spread": 5
@@ -65,6 +69,10 @@
       "spread": 5
     },
     "hollow:stripped_oak_hollow_log": {
+      "burn": 5,
+      "spread": 5
+    },
+    "hollow:stripped_pale_oak_hollow_log": {
       "burn": 5,
       "spread": 5
     },

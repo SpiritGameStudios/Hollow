@@ -41,7 +41,7 @@ public class BigBranchTreeDecorator extends TreeDecorator {
         for (BlockPos pos : logs) {
             if (pos.getY() < (logs.getFirst().getY() + logs.getLast().getY()) / 2) continue;
 
-            Direction direction = Direction.fromHorizontal(random.nextInt(4));
+            Direction direction = Direction.fromHorizontalQuarterTurns(random.nextInt(4));
             BlockPos branch = pos.offset(direction);
 
             if (!generator.isAir(branch)) continue;

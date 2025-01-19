@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "block.minecraft.oxidized_cut_copper_slab": {
+    "has_oxidized_cut_copper_slab": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "block.minecraft.oxidized_cut_copper_slab"
+      "has_oxidized_cut_copper_slab"
     ]
   ],
   "rewards": {

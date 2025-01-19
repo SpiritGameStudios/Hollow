@@ -32,9 +32,11 @@ public final class Hollow implements ModInitializer {
     @Override
     public void onInitialize() {
         RegistryHelper.registerSoundEvents(HollowSoundEvents.class, MODID);
-        RegistryHelper.registerBlocks(HollowBlocks.class, MODID);
-        RegistryHelper.registerItems(HollowItems.class, MODID);
-        RegistryHelper.registerEntityTypes(HollowEntityTypes.class, MODID);
+
+        HollowBlocks.init();
+        HollowItems.init();
+        HollowEntityTypes.init();
+
         RegistryHelper.registerFields(Registries.FEATURE, RegistryHelper.fixGenerics(Feature.class), HollowFeatures.class, MODID);
         RegistryHelper.registerFields(Registries.TREE_DECORATOR_TYPE, RegistryHelper.fixGenerics(TreeDecoratorType.class), HollowTreeDecoratorTypes.class, MODID);
         RegistryHelper.registerBlockEntityTypes(HollowBlockEntityTypes.class, MODID);

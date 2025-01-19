@@ -54,7 +54,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(HollowBlocks.ROOTED_ORCHID)
                 .add(HollowBlocks.LOTUS_LILYPAD);
 
-        getOrCreateTagBuilder(BlockTags.TALL_FLOWERS)
+        getOrCreateTagBuilder(BlockTags.FLOWERS)
                 .add(HollowBlocks.CAMPION);
 
         getOrCreateTagBuilder(HollowBlocks.Tags.POLYPORE_PLACEABLE_ON)

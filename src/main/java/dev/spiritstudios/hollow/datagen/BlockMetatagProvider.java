@@ -47,7 +47,8 @@ public class BlockMetatagProvider extends MetatagProvider<Block> {
                 .put(HollowBlocks.CRIMSON_HOLLOW_STEM, HollowBlocks.STRIPPED_CRIMSON_HOLLOW_STEM)
                 .put(HollowBlocks.WARPED_HOLLOW_STEM, HollowBlocks.STRIPPED_WARPED_HOLLOW_STEM)
                 .put(HollowBlocks.MANGROVE_HOLLOW_LOG, HollowBlocks.STRIPPED_MANGROVE_HOLLOW_LOG)
-                .put(HollowBlocks.CHERRY_HOLLOW_LOG, HollowBlocks.STRIPPED_CHERRY_HOLLOW_LOG));
+                .put(HollowBlocks.CHERRY_HOLLOW_LOG, HollowBlocks.STRIPPED_CHERRY_HOLLOW_LOG)
+                .put(HollowBlocks.PALE_OAK_HOLLOW_LOG, HollowBlocks.STRIPPED_PALE_OAK_HOLLOW_LOG));
 
         provider.accept(create(BlockMetatags.OXIDIZABLE)
                 .put(HollowBlocks.COPPER_PILLAR, HollowBlocks.EXPOSED_COPPER_PILLAR)

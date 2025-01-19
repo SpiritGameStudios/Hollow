@@ -1,7 +1,6 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.worldgen.feature.HollowConfiguredFeatures;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.block.Blocks;
@@ -14,8 +13,18 @@ import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.WeightedListIntProvider;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placementmodifier.*;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
+import net.minecraft.world.gen.feature.VegetationConfiguredFeatures;
+import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
+import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
+import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
+import net.minecraft.world.gen.placementmodifier.SurfaceWaterDepthFilterPlacementModifier;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -27,7 +36,7 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-        RegistryWrapper<PlacedFeature> lookup = registries.getWrapperOrThrow(RegistryKeys.PLACED_FEATURE);
+        RegistryWrapper<PlacedFeature> lookup = registries.getOrThrow(RegistryKeys.PLACED_FEATURE);
 
         lookup.streamKeys()
                 .filter(key ->
@@ -37,7 +46,7 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
 
         // region Replacements
         PlacedFeatureDatagenHelper helper = new PlacedFeatureDatagenHelper(
-                registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE),
+                registries.getOrThrow(RegistryKeys.CONFIGURED_FEATURE),
                 entries
         );
 

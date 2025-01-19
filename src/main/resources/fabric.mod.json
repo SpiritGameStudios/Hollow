@@ -26,7 +26,7 @@
       "dev.spiritstudios.hollow.datagen.HollowDatagen"
     ],
     "dynamiclights": [
-      "dev.spiritstudios.hollow.HollowDynamicLights"
+      "dev.spiritstudios.hollow.lambdynamiclights.HollowDynamicLights"
     ]
   },
   "mixins": [

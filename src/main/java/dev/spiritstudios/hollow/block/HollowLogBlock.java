@@ -1,20 +1,32 @@
 package dev.spiritstudios.hollow.block;
 
 import dev.spiritstudios.hollow.data.LogTypeData;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.PillarBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
+
+import java.util.function.Function;
 
 public class HollowLogBlock extends PillarBlock implements Waterloggable {
     public static final VoxelShape SHAPE_X = VoxelShapes.union(
@@ -39,7 +51,7 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     );
     
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final BooleanProperty MOSSY = BooleanProperty.of("mossy");
+    public static final EnumProperty<Layer> LAYER = EnumProperty.of("layer", Layer.class);
     
     public final LogTypeData typeData;
     
@@ -49,26 +61,26 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
         setDefaultState(getDefaultState()
                 .with(AXIS, Direction.Axis.Y)
                 .with(WATERLOGGED, false)
-                .with(MOSSY, false));
+                .with(LAYER, Layer.NONE));
     }
 
-    public static HollowLogBlock of(Block block) {
-        return new HollowLogBlock(
-                AbstractBlock.Settings.copy(block),
+    public static Function<AbstractBlock.Settings, Block> of(Block block) {
+        return settings -> new HollowLogBlock(
+                settings,
                 LogTypeData.byId(Registries.BLOCK.getId(block))
         );
     }
 
-    public static HollowLogBlock ofStripped(Block block) {
-        return new HollowLogBlock(
-                AbstractBlock.Settings.copy(block),
+    public static Function<AbstractBlock.Settings, Block> ofStripped(Block block) {
+        return settings -> new HollowLogBlock(
+                settings,
                 LogTypeData.byIdStripped(Registries.BLOCK.getId(block))
         );
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(Properties.AXIS, WATERLOGGED, MOSSY);
+        builder.add(Properties.AXIS, WATERLOGGED, LAYER);
     }
 
     @Override
@@ -77,17 +89,17 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+    protected boolean isTransparent(BlockState state) {
         return !state.get(WATERLOGGED) && state.get(AXIS) == Direction.Axis.Y;
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Block above = ctx.getWorld().getBlockState(ctx.getBlockPos().up()).getBlock();
+        BlockState above = ctx.getWorld().getBlockState(ctx.getBlockPos().up());
         return this.getDefaultState()
                 .with(Properties.AXIS, ctx.getSide().getAxis())
                 .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).isOf(Fluids.WATER))
-                .with(MOSSY, (above == Blocks.MOSS_CARPET) || (above == Blocks.MOSS_BLOCK));
+                .with(LAYER, Layer.get(above));
     }
 
     @Override
@@ -96,16 +108,13 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         if (state.get(WATERLOGGED))
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 
-        if (direction == Direction.UP) {
-            Block above = neighborState.getBlock();
-            return state.with(MOSSY, (above == Blocks.MOSS_CARPET) || (above == Blocks.MOSS_BLOCK));
-        }
+        if (direction == Direction.UP) return state.with(LAYER, Layer.get(neighborState));
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
@@ -115,5 +124,36 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
             case Y -> SHAPE_Y;
             default -> SHAPE_Z;
         };
+    }
+
+    public enum Layer implements StringIdentifiable {
+        NONE("none"),
+        MOSS("moss"),
+        PALE_MOSS("pale_moss"),
+        SNOW("snow");
+
+        private final String name;
+
+        Layer(String name) {
+            this.name = name;
+        }
+
+        public static Layer get(BlockState aboveState) {
+            if (aboveState.isOf(Blocks.MOSS_BLOCK) || aboveState.isOf(Blocks.MOSS_CARPET))
+                return MOSS;
+
+            if (aboveState.isOf(Blocks.PALE_MOSS_BLOCK) || aboveState.isOf(Blocks.PALE_MOSS_CARPET))
+                return PALE_MOSS;
+
+            if (aboveState.isOf(Blocks.SNOW_BLOCK) || aboveState.isOf(Blocks.SNOW))
+                return SNOW;
+
+            return NONE;
+        }
+
+        @Override
+        public String asString() {
+            return name;
+        }
     }
 }

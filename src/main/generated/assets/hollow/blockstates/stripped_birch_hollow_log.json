@@ -1,27 +1,51 @@
 {
   "variants": {
-    "axis=x,mossy=false": {
+    "axis=x,layer=moss": {
+      "model": "hollow:block/stripped_birch_hollow_log_horizontal_moss",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,layer=none": {
       "model": "hollow:block/stripped_birch_hollow_log_horizontal",
       "x": 90,
       "y": 90
     },
-    "axis=x,mossy=true": {
-      "model": "hollow:block/stripped_birch_hollow_log_horizontal_mossy",
+    "axis=x,layer=pale_moss": {
+      "model": "hollow:block/stripped_birch_hollow_log_horizontal_pale_moss",
       "x": 90,
       "y": 90
     },
-    "axis=y,mossy=false": {
+    "axis=x,layer=snow": {
+      "model": "hollow:block/stripped_birch_hollow_log_horizontal_snow",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,layer=moss": {
       "model": "hollow:block/stripped_birch_hollow_log"
     },
-    "axis=y,mossy=true": {
+    "axis=y,layer=none": {
       "model": "hollow:block/stripped_birch_hollow_log"
     },
-    "axis=z,mossy=false": {
+    "axis=y,layer=pale_moss": {
+      "model": "hollow:block/stripped_birch_hollow_log"
+    },
+    "axis=y,layer=snow": {
+      "model": "hollow:block/stripped_birch_hollow_log"
+    },
+    "axis=z,layer=moss": {
+      "model": "hollow:block/stripped_birch_hollow_log_horizontal_moss",
+      "x": 90
+    },
+    "axis=z,layer=none": {
       "model": "hollow:block/stripped_birch_hollow_log_horizontal",
       "x": 90
     },
-    "axis=z,mossy=true": {
-      "model": "hollow:block/stripped_birch_hollow_log_horizontal_mossy",
+    "axis=z,layer=pale_moss": {
+      "model": "hollow:block/stripped_birch_hollow_log_horizontal_pale_moss",
+      "x": 90
+    },
+    "axis=z,layer=snow": {
+      "model": "hollow:block/stripped_birch_hollow_log_horizontal_snow",
       "x": 90
     }
   }
