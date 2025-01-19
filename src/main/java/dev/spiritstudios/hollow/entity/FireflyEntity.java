@@ -77,15 +77,15 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
 
         birdNavigation.setCanPathThroughDoors(false);
         birdNavigation.setCanSwim(false);
-        birdNavigation.setCanEnterOpenDoors(true);
+        birdNavigation.setCanPathThroughDoors(true);
         return birdNavigation;
     }
 
     public static DefaultAttributeContainer.Builder createFireflyAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.1F)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5F);
+                .add(EntityAttributes.MAX_HEALTH, 0.1F)
+                .add(EntityAttributes.FLYING_SPEED, 0.5F)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.5F);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
         player.getInventory().offerOrDrop(new ItemStack(HollowBlocks.FIREFLY_JAR));
 
         this.discard();
-        return ActionResult.success(player.getWorld().isClient);
+        return ActionResult.SUCCESS;
     }
 
     @Override

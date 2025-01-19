@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": "minecraft:chiseled_deepslate",
+    "E": "minecraft:echo_shard",
+    "P": "minecraft:polished_deepslate"
+  },
+  "pattern": [
+    "P P",
+    "CEC",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "hollow:echoing_pot"
+  }
+}

@@ -3,10 +3,13 @@ package dev.spiritstudios.hollow.block;
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
@@ -63,7 +66,7 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+    protected boolean isTransparent(BlockState state) {
         return true;
     }
 

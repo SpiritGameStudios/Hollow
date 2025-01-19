@@ -2,15 +2,15 @@
 fabric_loom = "1.9-SNAPSHOT"
 minotaur = "2.+"
 
-minecraft = "1.21"
-yarn = "1.21+build.9"
+minecraft = "1.21.4"
+yarn = "1.21.4+build.8"
 
-fabric_loader = "0.16.5"
-fabric_api = "0.109.0+1.21.1"
+fabric_loader = "0.16.10"
+fabric_api = "0.114.3+1.21.4"
 
-specter = "1.1.1"
+specter = "1.1.2"
 
-lambdynamiclights = "3.1.2+1.21.1"
+lambdynamiclights = "4.0.1+1.21.4"
 
 [plugins]
 fabric_loom = { id = "fabric-loom", version.ref = "fabric_loom" }
@@ -28,6 +28,7 @@ specter_block = { group = "dev.spiritstudios.specter", name = "specter-block", v
 specter_config = { group = "dev.spiritstudios.specter", name = "specter-config", version.ref = "specter" }
 specter_core = { group = "dev.spiritstudios.specter", name = "specter-core", version.ref = "specter" }
 specter_serialization = { group = "dev.spiritstudios.specter", name = "specter-serialization", version.ref = "specter" }
+specter_gui = { group = "dev.spiritstudios.specter", name = "specter-gui", version.ref = "specter" }
 specter_entity = { group = "dev.spiritstudios.specter", name = "specter-entity", version.ref = "specter" }
 specter_item = { group = "dev.spiritstudios.specter", name = "specter-item", version.ref = "specter" }
 specter_registry = { group = "dev.spiritstudios.specter", name = "specter-registry", version.ref = "specter" }
@@ -45,5 +46,6 @@ specter = [
     "specter_item",
     "specter_registry",
     "specter_render",
+    "specter_gui",
     "specter_serialization"
 ]

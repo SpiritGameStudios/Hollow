@@ -62,7 +62,7 @@ public class SculkJawBlock extends SculkBlock {
             return;
         }
 
-        entity.damage(world.getDamageSources().create(HollowDamageTypes.SCULK_JAW), 1F);
+        entity.damage((ServerWorld) world, world.getDamageSources().create(HollowDamageTypes.SCULK_JAW), 1F);
 
         if (world.getTime() % 5 == 0) {
             world.playSound(

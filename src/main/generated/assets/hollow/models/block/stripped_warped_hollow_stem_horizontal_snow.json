@@ -1,0 +1,9 @@
+{
+  "parent": "hollow:block/hollow_log_horizontal_layer_template",
+  "textures": {
+    "end": "minecraft:block/stripped_warped_stem_top",
+    "inside": "minecraft:block/stripped_warped_stem",
+    "layer0": "hollow:block/snow_overlay",
+    "side": "minecraft:block/stripped_warped_stem"
+  }
+}

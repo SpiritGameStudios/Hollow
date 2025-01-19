@@ -92,7 +92,7 @@ modrinth {
     projectId.set(mod.id)
     versionNumber.set(mod.version)
     uploadFile.set(tasks.remapJar)
-    gameVersions.addAll(libs.versions.minecraft.get(), "1.21.1")
+    gameVersions.addAll(libs.versions.minecraft.get())
     loaders.addAll("fabric", "quilt")
     syncBodyFrom.set(rootProject.file("README.md").readText())
     dependencies {

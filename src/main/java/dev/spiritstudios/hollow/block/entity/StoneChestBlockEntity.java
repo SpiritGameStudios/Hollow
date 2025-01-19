@@ -11,9 +11,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryWrapper;
@@ -22,8 +22,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -45,7 +45,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
             Criteria.PLAYER_GENERATES_CONTAINER_LOOT.trigger(serverPlayer, this.lootTable);
         this.lootTable = null;
 
-        LootContextParameterSet.Builder builder = new LootContextParameterSet.Builder((ServerWorld)this.world)
+        LootWorldContext.Builder builder = new LootWorldContext.Builder((ServerWorld)this.world)
                 .add(LootContextParameters.ORIGIN, Vec3d.ofCenter(this.pos));
 
         if (player != null) builder.luck(player.getLuck()).add(LootContextParameters.THIS_ENTITY, player);
@@ -80,12 +80,12 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
         inventory.clear();
     }
 
-    public ItemActionResult use(PlayerEntity player, Hand hand, Direction side) {
-        if (world == null) return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    public ActionResult use(PlayerEntity player, Hand hand, Direction side) {
+        if (world == null) return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         if (player.getStackInHand(hand).isEmpty() || player.getStackInHand(hand).isOf(HollowBlocks.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP))
-            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
 
-        if (!world.isAir(pos.up())) return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!world.isAir(pos.up())) return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
 
 
         int slot = -1;
@@ -96,7 +96,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
             }
         }
 
-        if (slot == -1) return ItemActionResult.FAIL;
+        if (slot == -1) return ActionResult.FAIL;
 
         setStack(slot, player.getStackInHand(hand));
         player.setStackInHand(hand, ItemStack.EMPTY);
@@ -110,7 +110,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
                 ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F
         );
 
-        return ItemActionResult.SUCCESS;
+        return ActionResult.SUCCESS;
     }
 
     @Override

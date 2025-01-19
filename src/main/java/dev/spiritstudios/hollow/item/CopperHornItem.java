@@ -6,16 +6,16 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
@@ -28,19 +28,19 @@ public class CopperHornItem extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
 
         Optional<CopperInstrument> instrument = this.getInstrument(itemStack);
-        if (instrument.isEmpty()) return TypedActionResult.fail(itemStack);
+        if (instrument.isEmpty()) return ActionResult.FAIL;
 
         user.setCurrentHand(hand);
         playSound(world, user, instrument.get());
 
-        user.getItemCooldownManager().set(this, 80);
+        user.getItemCooldownManager().set(itemStack, 80);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
 
-        return TypedActionResult.consume(itemStack);
+        return ActionResult.CONSUME;
     }
 
     // region Settings
@@ -89,7 +89,7 @@ public class CopperHornItem extends Item {
         else sound = instrument.melody;
 
 
-        world.playSoundFromEntity(player, player, sound, SoundCategory.HOSTILE, volume, pitch);
+        world.playSoundFromEntity(player, player, sound, SoundCategory.PLAYERS, volume, pitch);
         world.emitGameEvent(GameEvent.INSTRUMENT_PLAY, player.getPos(), GameEvent.Emitter.of(player));
     }
 }
