@@ -1,8 +1,6 @@
 package dev.spiritstudios.hollow.datagen;
 
-import dev.spiritstudios.hollow.datagen.tag.BiomeTagProvider;
-import dev.spiritstudios.hollow.datagen.tag.BlockTagProvider;
-import dev.spiritstudios.hollow.datagen.tag.EntityTypeTagProvider;
+import dev.spiritstudios.hollow.registry.HollowDamageTypes;
 import dev.spiritstudios.hollow.worldgen.feature.HollowConfiguredFeatures;
 import dev.spiritstudios.hollow.worldgen.feature.HollowPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -29,17 +27,16 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(BlockMetatagProvider::new);
         pack.addProvider(ItemMetatagProvider::new);
 
-        pack.addProvider(BlockTagProvider::new);
-        pack.addProvider(BiomeTagProvider::new);
-        pack.addProvider(EntityTypeTagProvider::new);
+        pack.addProvider(DamageTypeProvider::new);
+
+        TagProviders.addAll(pack);
     }
 
     @Override
     public void buildRegistry(RegistryBuilder registryBuilder) {
         registryBuilder
                 .addRegistry(RegistryKeys.CONFIGURED_FEATURE, HollowConfiguredFeatures::bootstrap)
-                .addRegistry(RegistryKeys.PLACED_FEATURE, HollowPlacedFeatures::bootstrap);
+                .addRegistry(RegistryKeys.PLACED_FEATURE, HollowPlacedFeatures::bootstrap)
+                .addRegistry(RegistryKeys.DAMAGE_TYPE, HollowDamageTypes::bootstrap);
     }
-
-
 }
