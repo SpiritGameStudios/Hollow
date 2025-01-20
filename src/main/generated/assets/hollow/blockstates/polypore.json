@@ -2,50 +2,48 @@
   "variants": {
     "amount=1,facing=east": {
       "model": "hollow:block/one_polypore",
-      "y": 180
+      "y": 90
     },
     "amount=1,facing=north": {
-      "model": "hollow:block/one_polypore",
-      "y": 90
+      "model": "hollow:block/one_polypore"
     },
     "amount=1,facing=south": {
       "model": "hollow:block/one_polypore",
-      "y": 270
-    },
-    "amount=1,facing=west": {
-      "model": "hollow:block/one_polypore"
-    },
-
-    "amount=2,facing=east": {
-      "model": "hollow:block/two_polypore",
       "y": 180
     },
-    "amount=2,facing=north": {
+    "amount=1,facing=west": {
+      "model": "hollow:block/one_polypore",
+      "y": 270
+    },
+    "amount=2,facing=east": {
       "model": "hollow:block/two_polypore",
       "y": 90
+    },
+    "amount=2,facing=north": {
+      "model": "hollow:block/two_polypore"
     },
     "amount=2,facing=south": {
       "model": "hollow:block/two_polypore",
-      "y": 270
-    },
-    "amount=2,facing=west": {
-      "model": "hollow:block/two_polypore"
-    },
-
-    "amount=3,facing=east": {
-      "model": "hollow:block/three_polypore",
       "y": 180
     },
-    "amount=3,facing=north": {
+    "amount=2,facing=west": {
+      "model": "hollow:block/two_polypore",
+      "y": 270
+    },
+    "amount=3,facing=east": {
       "model": "hollow:block/three_polypore",
       "y": 90
     },
+    "amount=3,facing=north": {
+      "model": "hollow:block/three_polypore"
+    },
     "amount=3,facing=south": {
       "model": "hollow:block/three_polypore",
-      "y": 270
+      "y": 180
     },
     "amount=3,facing=west": {
-      "model": "hollow:block/three_polypore"
+      "model": "hollow:block/three_polypore",
+      "y": 270
     }
   }
 }

@@ -20,8 +20,6 @@ public abstract class SaplingGeneratorMixin {
 
     @WrapMethod(method = "getSmallTreeFeature")
     protected @Nullable RegistryKey<ConfiguredFeature<?, ?>> getSmallTreeFeature(Random random, boolean flowersNearby, Operation<RegistryKey<ConfiguredFeature<?, ?>>> original) {
-        return !this.id.equals("birch") ?
-                original.call(random, flowersNearby) :
-                TreeConfiguredFeatures.BIRCH_BEES_0002;
+        return this.id.equals("birch") ? TreeConfiguredFeatures.BIRCH_BEES_0002 : original.call(random, flowersNearby);
     }
 }

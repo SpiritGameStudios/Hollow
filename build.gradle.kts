@@ -1,3 +1,5 @@
+import com.modrinth.minotaur.ModrinthExtension
+
 plugins {
     java
     alias(libs.plugins.fabric.loom)
