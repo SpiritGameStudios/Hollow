@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hollow:block/cattail_middle"
+    "cross": "hollow:block/cattail_stem_bottom"
   }
 }
