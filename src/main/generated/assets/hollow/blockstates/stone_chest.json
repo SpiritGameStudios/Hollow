@@ -13,16 +13,13 @@
       "y": 90
     },
     "facing=north,type=left": {
-      "model": "hollow:block/stone_chest_left",
-      "y": 0
+      "model": "hollow:block/stone_chest_left"
     },
     "facing=north,type=right": {
-      "model": "hollow:block/stone_chest_right",
-      "y": 0
+      "model": "hollow:block/stone_chest_right"
     },
     "facing=north,type=single": {
-      "model": "hollow:block/stone_chest",
-      "y": 0
+      "model": "hollow:block/stone_chest"
     },
     "facing=south,type=left": {
       "model": "hollow:block/stone_chest_left",

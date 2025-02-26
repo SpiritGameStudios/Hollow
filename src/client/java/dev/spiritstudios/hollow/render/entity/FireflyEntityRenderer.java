@@ -33,11 +33,7 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity, Firefly
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(LAYER);
 
-        float delta = MathHelper.clampedLerp(
-                0.0F,
-                1.0F,
-                1.0F - state.lightTicks / 10.0F
-        );
+        float delta = MathHelper.clamp(1.0F - state.lightTicks / 10.0F, 0, 1);
 
         float r = !state.isJeb ?
                 MathHelper.lerp(delta, 146, 48) :
@@ -85,14 +81,10 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity, Firefly
     private void renderVertex(
             VertexConsumer vertexConsumer,
             MatrixStack.Entry entry,
-            float x,
-            float y,
-            float u,
-            float v,
+            float x, float y,
+            float u, float v,
             int light,
-            float r,
-            float g,
-            float b
+            float r, float g, float b
     ) {
         vertexConsumer.vertex(entry, x - 0.5F, y - 0.25F, 0.0F)
                 .color(r, g, b, 1.0F)

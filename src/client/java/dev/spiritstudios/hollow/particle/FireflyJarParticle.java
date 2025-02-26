@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.particle;
 
+import dev.spiritstudios.specter.api.core.math.Easing;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
@@ -47,8 +48,7 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
         this.z += xMover ? newXZ : -newXZ;
         this.y += counterClockwise ? newY : -newY;
 
-        if (this.age < 20 && this.alpha < 1.0F) this.alpha += 0.05f;
-        if (this.age > this.maxAge - 20 && this.alpha > 0.0F) this.alpha -= 0.05f;
+        this.alpha = (float) Easing.QUART.yoyoOutIn(age, 0, 1, getMaxAge());
 
         if (this.age >= this.maxAge) this.markDead();
 

@@ -114,6 +114,6 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
 
     @Override
     public String getName() {
-        return "Hollow/Configured Features";
+        return "Configured Features";
     }
 }

@@ -17,7 +17,8 @@ import java.util.List;
 
 public class SetCopperInstrumentFunction extends ConditionalLootFunction {
     public static final MapCodec<SetCopperInstrumentFunction> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> addConditionsField(instance).apply(instance, SetCopperInstrumentFunction::new)
+            instance -> addConditionsField(instance)
+                    .apply(instance, SetCopperInstrumentFunction::new)
     );
 
     private SetCopperInstrumentFunction(List<LootCondition> conditions) {

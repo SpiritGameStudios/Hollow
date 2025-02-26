@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.render.entity;
+package dev.spiritstudios.hollow.render.block;
 
 import dev.spiritstudios.hollow.block.entity.JarBlockEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -9,6 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 
@@ -30,10 +31,30 @@ public class JarBlockEntityRenderer implements BlockEntityRenderer<JarBlockEntit
         matrices.scale(0.45F, 0.45F, 0.45F);
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
 
+        int index = 0;
+        float deg = 0;
+
         for (ItemStack item : items) {
             matrices.translate(0.0F, 0.0F, -0.0625F);
-            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(22.5F));
-            this.itemRenderer.renderItem(item, ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, world, (int) blockEntity.getPos().asLong());
+            long hashCode = MathHelper.hashCode(blockEntity.getPos().getX(), index, blockEntity.getPos().getY());
+            float max = 0.05F;
+
+            double x = MathHelper.clamp(((double)((float)(hashCode & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
+            double z = MathHelper.clamp(((double)((float)(hashCode >> 8 & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
+
+            deg += MathHelper.clamp(((double)((float)(hashCode >> 16 & 15L) / 15.0F) - 0.5) * 0.5, -max, max) * 5000;
+
+            matrices.push();
+
+            matrices.translate(x, z, 0);
+
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) deg));
+
+            this.itemRenderer.renderItem(item, ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, world, (int) blockEntity.getPos().asLong() + index);
+
+            matrices.pop();
+
+            index++;
         }
 
         matrices.pop();

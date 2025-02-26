@@ -7,7 +7,7 @@ import dev.spiritstudios.hollow.registry.HollowEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
 import dev.spiritstudios.hollow.render.block.EchoingPotBlockEntityRenderer;
 import dev.spiritstudios.hollow.render.entity.FireflyEntityRenderer;
-import dev.spiritstudios.hollow.render.entity.JarBlockEntityRenderer;
+import dev.spiritstudios.hollow.render.block.JarBlockEntityRenderer;
 import dev.spiritstudios.specter.api.config.ModMenuHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -27,25 +27,11 @@ public class HollowClient implements ClientModInitializer {
                 FireflyJarParticle.Factory::new
         );
 
-
-        // region Color Providers
         ColorProviderRegistry.BLOCK.register(
                 (state, world, pos, tintIndex) ->
                         world != null && pos != null ? 0x208030 : 0x71C35C,
                 HollowBlocks.GIANT_LILYPAD, HollowBlocks.LOTUS_LILYPAD
         );
-
-
-//        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
-//                        tintIndex != 0 ?
-//                                world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor() :
-//                                -1,
-//                HollowBlocks.BLUE_WILDFLOWER,
-//                HollowBlocks.WHITE_WILDFLOWER,
-//                HollowBlocks.PURPLE_WILDFLOWER,
-//                HollowBlocks.PINK_WILDFLOWER
-//        );
-        // endregion
 
         // region Block Entity Renderers
         BlockEntityRendererFactories.register(
