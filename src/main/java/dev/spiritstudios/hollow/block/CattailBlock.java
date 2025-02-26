@@ -76,7 +76,8 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
         BlockState below = ctx.getWorld().getBlockState(ctx.getBlockPos().down());
 
         return (fluidState.isIn(FluidTags.WATER) && fluidState.getLevel() == 8) || below.isOf(this) ?
-                super.getPlacementState(ctx).with(WATERLOGGED, fluidState.isIn(FluidTags.WATER))
+                super.getPlacementState(ctx)
+                        .with(WATERLOGGED, fluidState.isIn(FluidTags.WATER))
                         .withIfExists(CattailStemBlock.BOTTOM, !below.isOf(this) && !below.isOf(getPlant()))
                 :
                 null;

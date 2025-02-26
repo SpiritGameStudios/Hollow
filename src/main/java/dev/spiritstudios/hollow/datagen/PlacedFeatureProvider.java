@@ -96,6 +96,6 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
 
     @Override
     public String getName() {
-        return "Hollow/Placed Features";
+        return "Placed Features";
     }
 }

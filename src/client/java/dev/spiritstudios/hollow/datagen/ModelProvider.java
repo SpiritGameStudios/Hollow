@@ -143,7 +143,6 @@ public class ModelProvider extends FabricModelProvider {
 
         generator.registerFlowerPotPlantAndItem(HollowBlocks.ROOTED_ORCHID, HollowBlocks.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.CrossType.NOT_TINTED);
 
-
         generator.registerDoubleBlock(HollowBlocks.CAMPION, BlockStateModelGenerator.CrossType.NOT_TINTED);
         generator.registerItemModel(HollowBlocks.CAMPION.asItem());
 
@@ -162,12 +161,12 @@ public class ModelProvider extends FabricModelProvider {
                 ModelIds.getBlockModelId(HollowBlocks.STONE_CHEST)
         );
 
+        registerStoneChest(HollowBlocks.STONE_CHEST_LID, generator);
         generator.registerItemModel(
                 HollowBlocks.STONE_CHEST_LID.asItem(),
                 ModelIds.getBlockModelId(HollowBlocks.STONE_CHEST_LID)
         );
 
-        registerStoneChest(HollowBlocks.STONE_CHEST_LID, generator);
 
         registerGiantLilypad(generator);
         registerCattailStem(generator);
@@ -304,28 +303,7 @@ public class ModelProvider extends FabricModelProvider {
                                         .put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, "_right"))
                         )
                 )
-                .coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_FACING)
-                        .register(
-                                Direction.NORTH,
-                                BlockStateVariant.create()
-                                        .put(VariantSettings.Y, VariantSettings.Rotation.R0)
-                        )
-                        .register(
-                                Direction.EAST,
-                                BlockStateVariant.create()
-                                        .put(VariantSettings.Y, VariantSettings.Rotation.R90)
-                        )
-                        .register(
-                                Direction.SOUTH,
-                                BlockStateVariant.create()
-                                        .put(VariantSettings.Y, VariantSettings.Rotation.R180)
-                        )
-                        .register(
-                                Direction.WEST,
-                                BlockStateVariant.create()
-                                        .put(VariantSettings.Y, VariantSettings.Rotation.R270)
-                        )
-                ));
+                .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
     }
 
     public final void registerCattailStem(BlockStateModelGenerator generator) {
@@ -377,12 +355,19 @@ public class ModelProvider extends FabricModelProvider {
         );
     }
 
-    private static void registerGiantLilypad(BlockStateModelGenerator blockStateModelGenerator) {
+    private static void registerGiantLilypad(BlockStateModelGenerator generator) {
         Identifier[] modelIds = new Identifier[4];
         for (int i = 0; i < 4; i++) {
-            TextureMap textureMap = new TextureMap().put(TextureKey.TEXTURE, Identifier.of(MODID, "block/giant_lilypad_" + i));
-            Model model = new Model(Optional.of(Identifier.of(MODID, "block/giant_lilypad_template")), Optional.of("_" + i), TextureKey.TEXTURE);
-            modelIds[i] = model.upload(HollowBlocks.GIANT_LILYPAD, textureMap, blockStateModelGenerator.modelCollector);
+            TextureMap textureMap = TextureMap.texture(TextureMap.getSubId(
+                    HollowBlocks.GIANT_LILYPAD, "_" + i
+            ));
+            Model model = new Model(
+                    Optional.of(Identifier.of(MODID, "block/giant_lilypad_template")),
+                    Optional.of("_" + i),
+                    TextureKey.TEXTURE
+            );
+
+            modelIds[i] = model.upload(HollowBlocks.GIANT_LILYPAD, textureMap, generator.modelCollector);
         }
 
         Map<GiantLilyPadBlock.Piece, Identifier> north = ImmutableMap.of(
@@ -413,8 +398,8 @@ public class ModelProvider extends FabricModelProvider {
                 GiantLilyPadBlock.Piece.SOUTH_WEST, modelIds[1]
         );
 
-        BlockStateSupplier supplier = VariantsBlockStateSupplier.create(HollowBlocks.GIANT_LILYPAD).coordinate(
-                BlockStateVariantMap.create(GiantLilyPadBlock.FACING, GiantLilyPadBlock.PIECE).register(
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(HollowBlocks.GIANT_LILYPAD)
+                .coordinate(BlockStateVariantMap.create(GiantLilyPadBlock.FACING, GiantLilyPadBlock.PIECE).register(
                         (direction, piece) -> {
                             BlockStateVariant variant = BlockStateVariant.create();
                             switch (direction) {
@@ -423,12 +408,10 @@ public class ModelProvider extends FabricModelProvider {
                                     variant.put(VariantSettings.MODEL, south.get(piece));
                                     variant.put(VariantSettings.Y, VariantSettings.Rotation.R180);
                                 }
-
                                 case EAST -> {
                                     variant.put(VariantSettings.MODEL, east.get(piece));
                                     variant.put(VariantSettings.Y, VariantSettings.Rotation.R90);
                                 }
-
                                 case WEST -> {
                                     variant.put(VariantSettings.MODEL, west.get(piece));
                                     variant.put(VariantSettings.Y, VariantSettings.Rotation.R270);
@@ -437,10 +420,7 @@ public class ModelProvider extends FabricModelProvider {
 
                             return variant;
                         }
-                )
-        );
-
-        blockStateModelGenerator.blockStateCollector.accept(supplier);
+                )));
     }
 
     private static BlockStateSupplier createAxisRotatedBlockStateWithLayer(Block block, Identifier verticalModelId, Identifier horizontalModelId, Identifier horizontalMossModelId, Identifier horizontalPaleMossModelId, Identifier horizontalSnowModelId) {

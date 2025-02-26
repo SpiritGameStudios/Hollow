@@ -27,6 +27,6 @@ public class DamageTypeProvider extends FabricDynamicRegistryProvider {
 
     @Override
     public String getName() {
-        return "Hollow/Damage Types";
+        return "Damage Types";
     }
 }

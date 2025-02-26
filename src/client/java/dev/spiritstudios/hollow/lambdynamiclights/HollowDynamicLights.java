@@ -14,11 +14,9 @@ public class HollowDynamicLights implements DynamicLightsInitializer {
 
     @Override
     public void onInitializeDynamicLights(DynamicLightsContext context) {
-        context.entityLightSourceManager().onRegisterEvent().register(registerContext -> {
-            registerContext.register(
-                    HollowEntityTypes.FIREFLY,
-                    FireflyEntityLuminance.INSTANCE
-            );
-        });
+        context.entityLightSourceManager().onRegisterEvent().register(registerContext -> registerContext.register(
+                HollowEntityTypes.FIREFLY,
+                FireflyEntityLuminance.INSTANCE
+        ));
     }
 }

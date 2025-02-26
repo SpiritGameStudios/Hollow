@@ -31,8 +31,8 @@ public final class HollowConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> CATTAILS = of("cattails");
 
-    public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> featureRegisterable) {
-        featureRegisterable.register(
+    public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> registerable) {
+        registerable.register(
                 FALLEN_OAK,
                 new ConfiguredFeature<>(
                         HollowFeatures.FALLEN_TREE,
@@ -51,7 +51,7 @@ public final class HollowConfiguredFeatures {
                 )
         );
 
-        featureRegisterable.register(
+        registerable.register(
                 FALLEN_BIRCH,
                 new ConfiguredFeature<>(
                         HollowFeatures.FALLEN_TREE,
@@ -72,9 +72,9 @@ public final class HollowConfiguredFeatures {
                 )
         );
 
-        featureRegisterable.register(PATCH_TWIG, createRandomPatch(HollowBlocks.TWIG, 10));
-        featureRegisterable.register(PATCH_CAMPION, createRandomPatch(HollowBlocks.CAMPION, 96));
-        featureRegisterable.register(
+        registerable.register(PATCH_TWIG, createRandomPatch(HollowBlocks.TWIG, 10));
+        registerable.register(PATCH_CAMPION, createRandomPatch(HollowBlocks.CAMPION, 96));
+        registerable.register(
                 PATCH_GIANT_LILYPAD,
                 createRandomPatch(
                         PlacedFeatures.createEntry(HollowFeatures.GIANT_LILYPAD, new DefaultFeatureConfig()),
@@ -82,7 +82,7 @@ public final class HollowConfiguredFeatures {
                 )
         );
 
-        featureRegisterable.register(
+        registerable.register(
                 CATTAILS,
                 new ConfiguredFeature<>(
                         HollowFeatures.CATTAILS,

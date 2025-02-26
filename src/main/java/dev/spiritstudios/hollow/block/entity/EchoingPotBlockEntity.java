@@ -32,18 +32,10 @@ public class EchoingPotBlockEntity extends BlockEntity {
     }
 
     public void use(PlayerEntity player, Hand hand) {
-//        if (!player.getStackInHand(hand).isOf(Items.ECHO_SHARD) || activeTime > 0) {
-            wobble(DecoratedPotBlockEntity.WobbleType.NEGATIVE);
-            player.getWorld().playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT_FAIL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            player.getWorld().emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            return;
-//        }
-//
-//        activeTime += 300;
-//        player.getStackInHand(hand).decrement(1);
-//        wobble(DecoratedPotBlockEntity.WobbleType.POSITIVE);
-//        player.getWorld().emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-//        player.getWorld().playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        wobble(DecoratedPotBlockEntity.WobbleType.NEGATIVE);
+        player.getWorld().playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT_FAIL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        player.getWorld().emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+
     }
 
     public void wobble(DecoratedPotBlockEntity.WobbleType wobbleType) {

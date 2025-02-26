@@ -43,8 +43,8 @@ public abstract class BackgroundRendererMixin {
             @Local(ordinal = 0, argsOnly = true) float viewDistance,
             @Local(ordinal = 1, argsOnly = true) float tickDelta
     ) {
-        if (!HollowConfig.INSTANCE.closerFog.get()) return original.call(fogStart, fogEnd, fogShape, r, g, b, a);
-        if (camera.getSubmersionType() == CameraSubmersionType.WATER) return original.call(fogStart, fogEnd, fogShape, r, g, b, a);
+        if (camera.getSubmersionType() == CameraSubmersionType.WATER || !HollowConfig.INSTANCE.closerFog.get())
+            return original.call(fogStart, fogEnd, fogShape, r, g, b, a);
 
         Entity entity = camera.getFocusedEntity();
         boolean closerFog = entity.getWorld().getBiome(entity.getBlockPos()).isIn(HollowBiomeTags.HAS_CLOSER_FOG);
