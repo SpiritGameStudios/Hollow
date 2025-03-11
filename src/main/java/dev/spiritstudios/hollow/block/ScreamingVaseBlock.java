@@ -26,10 +26,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntityProvider {
-    public static final MapCodec<EchoingVaseBlock> CODEC = createCodec(EchoingVaseBlock::new);
+public class ScreamingVaseBlock extends VerticalDoubleBlock implements BlockEntityProvider {
+    public static final MapCodec<ScreamingVaseBlock> CODEC = createCodec(ScreamingVaseBlock::new);
 
-    public EchoingVaseBlock(Settings settings) {
+    public ScreamingVaseBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
     }
@@ -38,7 +38,7 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
             Block.createCuboidShape(2, 0, 2, 14, 16, 14);
 
     public static final VoxelShape UPPER_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(2, 0, 2, 14, 4, 14),
+            Block.createCuboidShape(2, 0, 2, 14, 9, 14),
             Block.createCuboidShape(4, 4, 4, 12, 8, 12)
     );
 
@@ -84,7 +84,7 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
     }
 
     @Override
-    protected MapCodec<EchoingVaseBlock> getCodec() {
+    protected MapCodec<ScreamingVaseBlock> getCodec() {
         return CODEC;
     }
 }

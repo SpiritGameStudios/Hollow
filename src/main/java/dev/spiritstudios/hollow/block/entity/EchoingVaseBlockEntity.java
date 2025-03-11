@@ -14,7 +14,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,10 +26,6 @@ public class EchoingVaseBlockEntity extends BlockEntity {
         super(HollowBlockEntityTypes.ECHOING_VASE, pos, state);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, EchoingVaseBlockEntity blockEntity) {
-
-    }
-
     public void use(PlayerEntity player, Hand hand) {
         wobble(DecoratedPotBlockEntity.WobbleType.NEGATIVE);
         player.getWorld().playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT_FAIL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -39,8 +34,11 @@ public class EchoingVaseBlockEntity extends BlockEntity {
     }
 
     public void wobble(DecoratedPotBlockEntity.WobbleType wobbleType) {
-        if (this.world != null && !this.world.isClient())
-            this.world.addSyncedBlockEvent(this.getPos(), this.getCachedState().getBlock(), 1, wobbleType.ordinal());
+        if (this.world == null || this.world.isClient()) return;
+
+        this.world.addSyncedBlockEvent(this.getPos(), this.getCachedState().getBlock(), 1, wobbleType.ordinal());
+
+        this.world.addSyncedBlockEvent(this.getPos().up(), this.getCachedState().getBlock(), 1, wobbleType.ordinal());
     }
 
     @Override

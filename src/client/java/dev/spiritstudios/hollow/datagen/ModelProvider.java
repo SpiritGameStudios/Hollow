@@ -8,6 +8,7 @@ import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
 import dev.spiritstudios.hollow.block.SculkJawBlock;
 import dev.spiritstudios.hollow.block.StoneChestBlock;
+import dev.spiritstudios.hollow.block.VerticalDoubleBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.hollow.registry.HollowItems;
 import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
@@ -16,6 +17,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.ChestType;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.BlockStateVariant;
@@ -163,7 +165,8 @@ public class ModelProvider extends FabricModelProvider {
         );
 
         generator.registerNorthDefaultHorizontalRotation(HollowBlocks.ECHOING_POT);
-        generator.registerNorthDefaultHorizontalRotation(HollowBlocks.ECHOING_VASE);
+        registerDoubleTallRotated(HollowBlocks.ECHOING_VASE, generator);
+        registerDoubleTallRotated(HollowBlocks.SCREAMING_VASE, generator);
 
         registerSculkJaw(generator);
 
@@ -253,6 +256,23 @@ public class ModelProvider extends FabricModelProvider {
                                 3,
                                 BlockStateVariant.create()
                                         .put(VariantSettings.MODEL, Hollow.id("block/three_polypore"))
+                        )
+                )
+                .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
+    }
+
+    public final void registerDoubleTallRotated(Block block, BlockStateModelGenerator generator) {
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
+                .coordinate(BlockStateVariantMap.create(VerticalDoubleBlock.HALF)
+                        .register(
+                                DoubleBlockHalf.LOWER,
+                                BlockStateVariant.create()
+                                        .put(VariantSettings.MODEL, ModelIds.getBlockModelId(block))
+                        )
+                        .register(
+                                DoubleBlockHalf.UPPER,
+                                BlockStateVariant.create()
+                                        .put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, "_upper"))
                         )
                 )
                 .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));

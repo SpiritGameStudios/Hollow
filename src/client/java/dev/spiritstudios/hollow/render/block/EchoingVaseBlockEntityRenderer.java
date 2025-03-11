@@ -3,11 +3,9 @@ package dev.spiritstudios.hollow.render.block;
 import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
 import dev.spiritstudios.specter.api.render.block.BlockModelBlockEntityRenderer;
 import net.minecraft.block.entity.DecoratedPotBlockEntity;
-import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
@@ -18,9 +16,6 @@ public class EchoingVaseBlockEntityRenderer extends BlockModelBlockEntityRendere
 
     @Override
     public void render(EchoingVaseBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if (entity.getCachedState().get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER)
-            return;
-
         matrices.push();
 
         DecoratedPotBlockEntity.WobbleType wobbleType = entity.lastWobbleType;

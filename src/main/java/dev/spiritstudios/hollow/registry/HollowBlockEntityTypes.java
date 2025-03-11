@@ -9,7 +9,7 @@ import net.minecraft.block.entity.BlockEntityType;
 public final class HollowBlockEntityTypes {
     public static final BlockEntityType<JarBlockEntity> JAR = BlockEntityType.Builder.create(JarBlockEntity::new, HollowBlocks.JAR).build();
 
-    public static final BlockEntityType<EchoingVaseBlockEntity> ECHOING_VASE = BlockEntityType.Builder.create(EchoingVaseBlockEntity::new, HollowBlocks.ECHOING_VASE).build();
+    public static final BlockEntityType<EchoingVaseBlockEntity> ECHOING_VASE = BlockEntityType.Builder.create(EchoingVaseBlockEntity::new, HollowBlocks.ECHOING_VASE, HollowBlocks.SCREAMING_VASE).build();
 
     public static final BlockEntityType<EchoingPotBlockEntity> ECHOING_POT = BlockEntityType.Builder.create(EchoingPotBlockEntity::new, HollowBlocks.ECHOING_POT).build();
 

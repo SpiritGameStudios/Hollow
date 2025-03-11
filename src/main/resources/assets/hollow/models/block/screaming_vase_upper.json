@@ -1,0 +1,51 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [48, 32],
+	"textures": {
+		"all": "hollow:block/screaming_vase",
+		"particle": "block/chiseled_deepslate"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [2, 0, 2],
+			"to": [14, 13, 14],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -1.5, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 6.5], "texture": "#all"},
+				"east": {"uv": [4, 0, 8, 6.5], "texture": "#all"},
+				"south": {"uv": [0, 0, 4, 6.5], "texture": "#all"},
+				"west": {"uv": [4, 0, 8, 6.5], "texture": "#all"},
+				"up": {"uv": [12, 6, 8, 0], "texture": "#all"}
+			}
+		},
+		{
+			"name": "handles",
+			"from": [0, 7, 7],
+			"to": [16, 10, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8.5, 8]},
+			"faces": {
+				"north": {"uv": [8, 12, 13.33333, 13.5], "texture": "#all"},
+				"east": {"uv": [4, 14.5, 4.66667, 16], "texture": "#all", "cullface": "east"},
+				"south": {"uv": [8, 12, 13.33333, 13.5], "texture": "#all"},
+				"west": {"uv": [6.66667, 14.5, 7.33333, 16], "texture": "#all", "cullface": "west"},
+				"up": {"uv": [13.33333, 14.5, 8, 13.5], "texture": "#all"},
+				"down": {"uv": [13.33333, 13.5, 8, 14.5], "texture": "#all"}
+			}
+		},
+		{
+			"name": "cap",
+			"from": [5, 13, 5],
+			"to": [11, 16, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14.5, 8]},
+			"faces": {
+				"north": {"uv": [0, 14.5, 2, 16], "texture": "#all"},
+				"east": {"uv": [2, 14.5, 4, 16], "texture": "#all"},
+				"south": {"uv": [4.66667, 14.5, 6.66667, 16], "texture": "#all"},
+				"west": {"uv": [4.66667, 14.5, 6.66667, 16], "texture": "#all"},
+				"up": {"uv": [11, 4.5, 9, 1.5], "texture": "#all", "cullface": "up"}
+			}
+		}
+	]
+}

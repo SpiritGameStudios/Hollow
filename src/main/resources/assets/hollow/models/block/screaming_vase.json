@@ -1,0 +1,25 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"texture_size": [48, 32],
+	"textures": {
+		"5": "hollow:block/screaming_vase",
+		"particle": "block/chiseled_deepslate"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [2, 0, 2],
+			"to": [14, 16, 14],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14.5, 8]},
+			"faces": {
+				"north": {"uv": [0, 6.5, 4, 14.5], "texture": "#5"},
+				"east": {"uv": [4, 6.5, 8, 14.5], "texture": "#5"},
+				"south": {"uv": [0, 6.5, 4, 14.5], "texture": "#5"},
+				"west": {"uv": [4, 6.5, 8, 14.5], "texture": "#5"},
+				"down": {"uv": [12, 6, 8, 12], "texture": "#5", "cullface": "down"}
+			}
+		}
+	]
+}

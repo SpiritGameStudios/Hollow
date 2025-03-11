@@ -1,38 +1,31 @@
 {
-	"parent": "minecraft:block/block",
 	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "hollow:block/echoing_vase",
-		"particle": "minecraft:block/chiseled_deepslate"
+		"particle": "block/chiseled_deepslate"
 	},
 	"elements": [
 		{
 			"name": "base",
 			"from": [2, 0, 2],
-			"to": [14, 20, 14],
+			"to": [14, 16, 14],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 8, 0]},
 			"faces": {
-				"north": {"uv": [0, 0, 6, 10], "texture": "#0"},
-				"east": {"uv": [6, 0, 12, 10], "texture": "#0"},
-				"south": {"uv": [0, 0, 6, 10], "texture": "#0"},
-				"west": {"uv": [6, 0, 12, 10], "texture": "#0"},
-				"up": {"uv": [0, 10, 6, 16], "texture": "#0"},
-				"down": {"uv": [6, 10, 12, 16], "texture": "#0"}
-			}
-		},
-		{
-			"name": "top",
-			"from": [4, 20, 4],
-			"to": [12, 24, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7, 20, 7]},
-			"faces": {
-				"north": {"uv": [12, 0, 16, 2], "texture": "#0"},
-				"east": {"uv": [12, 2, 16, 4], "texture": "#0"},
-				"south": {"uv": [12, 4, 16, 6], "texture": "#0"},
-				"west": {"uv": [12, 6, 16, 8], "texture": "#0"},
-				"up": {"uv": [12, 8, 16, 12], "texture": "#0"}
+				"north": {"uv": [0, 2, 6, 10], "texture": "#0"},
+				"east": {"uv": [6, 2, 12, 10], "texture": "#0"},
+				"south": {"uv": [0, 2, 6, 10], "texture": "#0"},
+				"west": {"uv": [6, 2, 12, 10], "texture": "#0"},
+				"down": {"uv": [6, 10, 12, 16], "texture": "#0", "cullface": "down"}
 			}
 		}
-	]
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [0, -1.5, 0],
+			"scale": [0.525, 0.525, 0.525]
+		}
+	}
 }
