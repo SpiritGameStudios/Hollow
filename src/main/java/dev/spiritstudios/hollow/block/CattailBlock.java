@@ -2,7 +2,12 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractPlantStemBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidFillable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -19,8 +24,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 public class CattailBlock extends AbstractPlantStemBlock implements FluidFillable {
@@ -61,10 +64,10 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         BlockState below = world.getBlockState(pos.down());
 
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random)
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
                 .withIfExists(WATERLOGGED, world.isWater(pos))
                 .withIfExists(CattailStemBlock.BOTTOM, !below.isOf(this) && !below.isOf(getPlant()));
     }

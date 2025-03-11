@@ -36,7 +36,7 @@ public class PolyporeTreeDecorator extends TreeDecorator {
         List<BlockPos> logs = generator.getLogPositions();
         
         for (BlockPos pos : logs) {
-            Direction direction = Direction.fromHorizontalQuarterTurns(random.nextInt(4));
+            Direction direction = Direction.fromHorizontal(random.nextInt(4));
             BlockPos polyporePos = pos.offset(direction);
             
             if (!generator.isAir(polyporePos)) continue;

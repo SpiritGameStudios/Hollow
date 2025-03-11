@@ -10,7 +10,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
 public class EchoingPotBlockEntityRenderer extends BlockModelBlockEntityRenderer<EchoingPotBlockEntity> {
-
     public EchoingPotBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
         super(context);
     }

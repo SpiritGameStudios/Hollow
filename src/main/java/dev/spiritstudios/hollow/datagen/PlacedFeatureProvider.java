@@ -36,7 +36,7 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-        RegistryWrapper<PlacedFeature> lookup = registries.getOrThrow(RegistryKeys.PLACED_FEATURE);
+        RegistryWrapper<PlacedFeature> lookup = registries.getWrapperOrThrow(RegistryKeys.PLACED_FEATURE);
 
         lookup.streamKeys()
                 .filter(key ->
@@ -46,7 +46,7 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
 
         // region Replacements
         PlacedFeatureDatagenHelper helper = new PlacedFeatureDatagenHelper(
-                registries.getOrThrow(RegistryKeys.CONFIGURED_FEATURE),
+                registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE),
                 entries
         );
 

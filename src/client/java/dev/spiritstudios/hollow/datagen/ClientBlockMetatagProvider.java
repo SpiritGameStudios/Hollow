@@ -9,7 +9,6 @@ import dev.spiritstudios.specter.api.render.RenderMetatags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataOutput;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,7 +16,7 @@ import java.util.function.Consumer;
 
 public class ClientBlockMetatagProvider extends MetatagProvider<Block> {
     protected ClientBlockMetatagProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(dataOutput, RegistryKeys.BLOCK, registriesFuture, DataOutput.OutputType.RESOURCE_PACK);
+        super(dataOutput, registriesFuture, DataOutput.OutputType.RESOURCE_PACK);
     }
 
     @Override

@@ -58,7 +58,7 @@ public class BranchTreeDecorator extends TreeDecorator {
 
             if (pos.getY() < (logs.getFirst().getY() + logs.getLast().getY()) / 2) continue;
 
-            Direction direction = Direction.fromHorizontalQuarterTurns(random.nextInt(4));
+            Direction direction = Direction.fromHorizontal(random.nextInt(4));
             BlockPos branch = pos.offset(direction);
 
             if (branches.contains(pos.getY() + 1) || branches.contains(pos.getY() - 1)) continue;

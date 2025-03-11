@@ -15,15 +15,15 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     public StoneChestBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityTypes.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
+        super(HollowBlockEntityTypes.STONE_CHEST, pos, state, 27);
     }
 
     public void aboveBroken() {
@@ -50,14 +50,14 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
         inventory.clear();
     }
 
-    public ActionResult use(PlayerEntity player, Hand hand, Direction side) {
-        if (world == null) return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+    public ItemActionResult use(PlayerEntity player, Hand hand, Direction side) {
+        if (world == null) return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (player.getStackInHand(hand).isEmpty() || player.getStackInHand(hand).isOf(HollowBlocks.STONE_CHEST_LID.asItem()) && side.equals(Direction.UP))
-            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
-        if (!world.isAir(pos.up())) return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        if (!world.isAir(pos.up())) return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
-        if (world.isClient()) return ActionResult.SUCCESS;
+        if (world.isClient()) return ItemActionResult.SUCCESS;
 
         int slot = -1;
         for (int i = 0; i < inventory.size(); i++) {
@@ -67,7 +67,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
             }
         }
 
-        if (slot == -1) return ActionResult.FAIL;
+        if (slot == -1) return ItemActionResult.FAIL;
 
         setStack(slot, player.getStackInHand(hand));
         player.setStackInHand(hand, ItemStack.EMPTY);
@@ -81,7 +81,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
                 ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F
         );
 
-        return ActionResult.SUCCESS;
+        return ItemActionResult.SUCCESS;
     }
 
     @Override

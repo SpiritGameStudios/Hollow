@@ -16,7 +16,7 @@ public class DamageTypeProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup, Entries entries) {
-        RegistryWrapper<DamageType> lookup = wrapperLookup.getOrThrow(RegistryKeys.DAMAGE_TYPE);
+        RegistryWrapper<DamageType> lookup = wrapperLookup.getWrapperOrThrow(RegistryKeys.DAMAGE_TYPE);
 
         lookup.streamKeys()
                 .filter(key ->

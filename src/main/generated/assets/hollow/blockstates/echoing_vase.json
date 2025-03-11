@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hollow:block/echoing_vase",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hollow:block/echoing_vase"
+    },
+    "facing=south": {
+      "model": "hollow:block/echoing_vase",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hollow:block/echoing_vase",
+      "y": 270
+    }
+  }
+}

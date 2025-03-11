@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#minecraft:crimson_stems"
+    "#": {
+      "tag": "minecraft:crimson_stems"
+    }
   },
   "pattern": [
     "###",

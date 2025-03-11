@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 
 public class JarBlockEntity extends InventoryBlockEntity {
     public JarBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityTypes.JAR_BLOCK_ENTITY, pos, state, 17);
+        super(HollowBlockEntityTypes.JAR, pos, state, 17);
     }
 
     public void use(World world, BlockPos pos, PlayerEntity player, Hand hand) {

@@ -29,6 +29,7 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         this.addDropWithSilkTouch(HollowBlocks.ECHOING_POT);
+        this.addDropWithSilkTouch(HollowBlocks.ECHOING_VASE);
         this.addDropWithSilkTouch(HollowBlocks.SCULK_JAW);
 
         this.addDropWithSilkTouch(HollowBlocks.STONE_CHEST_LID);

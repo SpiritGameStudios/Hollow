@@ -18,7 +18,11 @@ import java.util.function.Function;
 public final class HollowItems {
     public static final Item FIREFLY_SPAWN_EGG = register(
             "firefly_spawn_egg",
-            settings -> new SpawnEggItem(HollowEntityTypes.FIREFLY, settings)
+            settings -> new SpawnEggItem(
+                    HollowEntityTypes.FIREFLY,
+                    0x102F4E, 0xCAAF94,
+                    settings
+            )
     );
 
     public static final Item LOTUS_LILYPAD = register(
@@ -70,7 +74,7 @@ public final class HollowItems {
     }
 
     public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
-        Item item = factory.apply(settings.registryKey(key));
+        Item item = factory.apply(settings);
         if (item instanceof BlockItem blockItem) {
             blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
         }

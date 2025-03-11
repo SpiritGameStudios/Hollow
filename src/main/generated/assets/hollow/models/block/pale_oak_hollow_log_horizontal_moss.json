@@ -1,9 +1,0 @@
-{
-  "parent": "hollow:block/hollow_log_horizontal_layer_template",
-  "textures": {
-    "end": "minecraft:block/pale_oak_log_top",
-    "inside": "minecraft:block/stripped_pale_oak_log",
-    "layer0": "hollow:block/moss_overlay",
-    "side": "minecraft:block/pale_oak_log"
-  }
-}

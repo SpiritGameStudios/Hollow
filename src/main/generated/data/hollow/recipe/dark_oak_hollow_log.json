@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#minecraft:dark_oak_logs"
+    "#": {
+      "tag": "minecraft:dark_oak_logs"
+    }
   },
   "pattern": [
     "###",

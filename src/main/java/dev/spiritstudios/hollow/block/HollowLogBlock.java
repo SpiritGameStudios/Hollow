@@ -19,12 +19,10 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.world.WorldAccess;
 
 import java.util.function.Function;
 
@@ -89,7 +87,7 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     }
 
     @Override
-    protected boolean isTransparent(BlockState state) {
+    protected boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
         return !state.get(WATERLOGGED) && state.get(AXIS) == Direction.Axis.Y;
     }
 
@@ -108,13 +106,13 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED))
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 
         if (direction == Direction.UP) return state.with(LAYER, Layer.get(neighborState));
 
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -129,7 +127,6 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
     public enum Layer implements StringIdentifiable {
         NONE("none"),
         MOSS("moss"),
-        PALE_MOSS("pale_moss"),
         SNOW("snow");
 
         private final String name;
@@ -141,9 +138,6 @@ public class HollowLogBlock extends PillarBlock implements Waterloggable {
         public static Layer get(BlockState aboveState) {
             if (aboveState.isOf(Blocks.MOSS_BLOCK) || aboveState.isOf(Blocks.MOSS_CARPET))
                 return MOSS;
-
-            if (aboveState.isOf(Blocks.PALE_MOSS_BLOCK) || aboveState.isOf(Blocks.PALE_MOSS_CARPET))
-                return PALE_MOSS;
 
             if (aboveState.isOf(Blocks.SNOW_BLOCK) || aboveState.isOf(Blocks.SNOW))
                 return SNOW;

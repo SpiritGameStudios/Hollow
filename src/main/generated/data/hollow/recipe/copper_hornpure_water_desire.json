@@ -3,10 +3,14 @@
   "category": "equipment",
   "group": "hollow_copper_horn",
   "key": {
-    "#": "minecraft:copper_ingot",
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
     "G": {
       "fabric:type": "fabric:components",
-      "base": "minecraft:goat_horn",
+      "base": {
+        "item": "minecraft:goat_horn"
+      },
       "components": {
         "minecraft:instrument": "minecraft:seek_goat_horn"
       }

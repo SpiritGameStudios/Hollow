@@ -4,10 +4,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.specter.api.core.exception.UnreachableException;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -67,7 +67,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeature.Config> {
             BlockPos sidePos = pos.offset(direction);
             BlockState sideState = world.getBlockState(sidePos);
             if (!sideState.isAir() && !sideState.isReplaceable()) continue;
-            if (sideState.isOf(Blocks.TALL_GRASS) || sideState.isIn(ConventionalBlockTags.TALL_FLOWERS)) continue;
+            if (sideState.isOf(Blocks.TALL_GRASS) || sideState.isIn(BlockTags.TALL_FLOWERS)) continue;
 
             world.setBlockState(
                     sidePos,

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "hollow:paeonia"
+    {
+      "item": "hollow:paeonia"
+    }
   ],
   "result": {
     "count": 1,

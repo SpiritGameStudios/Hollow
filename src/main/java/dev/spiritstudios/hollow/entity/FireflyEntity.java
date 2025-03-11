@@ -83,9 +83,9 @@ public class FireflyEntity extends PathAwareEntity implements Flutterer {
 
     public static DefaultAttributeContainer.Builder createFireflyAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 0.1F)
-                .add(EntityAttributes.FLYING_SPEED, 0.5F)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.5F);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.1F)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5F);
     }
 
     @Override

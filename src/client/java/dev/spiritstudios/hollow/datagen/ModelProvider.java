@@ -11,26 +11,25 @@ import dev.spiritstudios.hollow.block.StoneChestBlock;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.hollow.registry.HollowItems;
 import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
-import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.ChestType;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.BlockStateSupplier;
-import net.minecraft.client.data.BlockStateVariant;
-import net.minecraft.client.data.BlockStateVariantMap;
-import net.minecraft.client.data.ItemModelGenerator;
-import net.minecraft.client.data.ItemModels;
-import net.minecraft.client.data.Model;
-import net.minecraft.client.data.ModelIds;
-import net.minecraft.client.data.Models;
-import net.minecraft.client.data.TextureKey;
-import net.minecraft.client.data.TextureMap;
-import net.minecraft.client.data.TexturedModel;
-import net.minecraft.client.data.VariantSettings;
-import net.minecraft.client.data.VariantsBlockStateSupplier;
-import net.minecraft.registry.Registries;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.BlockStateSupplier;
+import net.minecraft.data.client.BlockStateVariant;
+import net.minecraft.data.client.BlockStateVariantMap;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.ModelIds;
+import net.minecraft.data.client.Models;
+import net.minecraft.data.client.SimpleModelSupplier;
+import net.minecraft.data.client.TextureKey;
+import net.minecraft.data.client.TextureMap;
+import net.minecraft.data.client.TexturedModel;
+import net.minecraft.data.client.VariantSettings;
+import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -139,36 +138,41 @@ public class ModelProvider extends FabricModelProvider {
         ReflectionHelper.getStaticFields(HollowBlocks.class, HollowLogBlock.class)
                 .forEach(pair -> registerHollowLog(generator, pair.value()));
 
-        generator.registerFlowerPotPlantAndItem(HollowBlocks.PAEONIA, HollowBlocks.POTTED_PAEONIA, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerFlowerPotPlant(HollowBlocks.PAEONIA, HollowBlocks.POTTED_PAEONIA, BlockStateModelGenerator.TintType.NOT_TINTED);
 
-        generator.registerFlowerPotPlantAndItem(HollowBlocks.ROOTED_ORCHID, HollowBlocks.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerFlowerPotPlant(HollowBlocks.ROOTED_ORCHID, HollowBlocks.POTTED_ROOTED_ORCHID, BlockStateModelGenerator.TintType.NOT_TINTED);
 
-        generator.registerDoubleBlock(HollowBlocks.CAMPION, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerDoubleBlock(
+                HollowBlocks.CAMPION,
+                generator.createSubModel(HollowBlocks.CAMPION, "_top", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross),
+                generator.createSubModel(HollowBlocks.CAMPION, "_bottom",  BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross)
+        );
         generator.registerItemModel(HollowBlocks.CAMPION.asItem());
 
         generator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.TWIG, ModelIds.getBlockModelId(HollowBlocks.TWIG)));
         generator.registerItemModel(HollowBlocks.TWIG);
 
         generator.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithRandomHorizontalRotations(HollowBlocks.LOTUS_LILYPAD, ModelIds.getBlockModelId(HollowBlocks.LOTUS_LILYPAD)));
+        Models.GENERATED_TWO_LAYERS.upload(
+                ModelIds.getItemModelId(HollowItems.LOTUS_LILYPAD),
+                TextureMap.layered(
+                        TextureMap.getId(Blocks.LILY_PAD),
+                        TextureMap.getId(HollowItems.LOTUS_LILYPAD)
+                ),
+                generator.modelCollector
+        );
 
         generator.registerNorthDefaultHorizontalRotation(HollowBlocks.ECHOING_POT);
+        generator.registerNorthDefaultHorizontalRotation(HollowBlocks.ECHOING_VASE);
 
         registerSculkJaw(generator);
 
         registerStoneChest(HollowBlocks.STONE_CHEST, generator);
-        generator.registerItemModel(
-                HollowBlocks.STONE_CHEST.asItem(),
-                ModelIds.getBlockModelId(HollowBlocks.STONE_CHEST)
-        );
-
         registerStoneChest(HollowBlocks.STONE_CHEST_LID, generator);
-        generator.registerItemModel(
-                HollowBlocks.STONE_CHEST_LID.asItem(),
-                ModelIds.getBlockModelId(HollowBlocks.STONE_CHEST_LID)
-        );
-
 
         registerGiantLilypad(generator);
+        generator.registerItemModel(HollowItems.GIANT_LILYPAD);
+
         registerCattailStem(generator);
 
         registerPolypore(generator);
@@ -176,7 +180,7 @@ public class ModelProvider extends FabricModelProvider {
 
         generator.registerTintableCross(
                 HollowBlocks.CATTAIL,
-                BlockStateModelGenerator.CrossType.NOT_TINTED,
+                BlockStateModelGenerator.TintType.NOT_TINTED,
                 TextureMap.cross(HollowBlocks.CATTAIL)
         );
 
@@ -201,39 +205,9 @@ public class ModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator generator) {
         generator.register(HollowItems.MUSIC_DISC_POSTMORTEM, Models.GENERATED);
 
-        generator.registerSpawnEgg(
-                HollowItems.FIREFLY_SPAWN_EGG,
-                0x102F4E, 0xCAAF94
-        );
-
-        generator.registerCondition(
-                HollowItems.COPPER_HORN,
-                ItemModels.usingItemProperty(),
-                ItemModels.basic(Registries.ITEM.getId(HollowItems.COPPER_HORN).withPrefixedPath("item/tooting_")),
-                ItemModels.basic(ModelIds.getItemModelId(HollowItems.COPPER_HORN))
-        );
-
-        generator.output.accept(
-                HollowItems.GIANT_LILYPAD,
-                ItemModels.tinted(
-                        generator.upload(
-                                HollowItems.GIANT_LILYPAD,
-                                Models.GENERATED
-                        ),
-                        ItemModels.constantTintSource(0x71C35C), ItemModels.constantTintSource(-1)
-                )
-        );
-
-        generator.output.accept(
-                HollowItems.LOTUS_LILYPAD,
-                ItemModels.tinted(
-                        generator.uploadTwoLayers(
-                                HollowItems.LOTUS_LILYPAD,
-                                TextureMap.getId(Blocks.LILY_PAD),
-                                TextureMap.getId(HollowItems.LOTUS_LILYPAD)
-                        ),
-                        ItemModels.constantTintSource(0x71C35C), ItemModels.constantTintSource(-1)
-                )
+        generator.writer.accept(
+                ModelIds.getItemModelId(HollowItems.FIREFLY_SPAWN_EGG),
+                new SimpleModelSupplier(ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
         );
     }
 
@@ -430,54 +404,35 @@ public class ModelProvider extends FabricModelProvider {
                                 .register(Direction.Axis.Y, HollowLogBlock.Layer.NONE, BlockStateVariant.create()
                                         .put(VariantSettings.MODEL, verticalModelId))
                                 .register(Direction.Axis.Z, HollowLogBlock.Layer.NONE, BlockStateVariant.create()
-                                        .put(VariantSettings.MODEL, horizontalModelId)
-                                        .put(VariantSettings.X, VariantSettings.Rotation.R90))
+                                        .put(VariantSettings.MODEL, horizontalModelId))
                                 .register(
                                         Direction.Axis.X,
                                         HollowLogBlock.Layer.NONE,
                                         BlockStateVariant.create()
                                                 .put(VariantSettings.MODEL, horizontalModelId)
-                                                .put(VariantSettings.X, VariantSettings.Rotation.R90)
                                                 .put(VariantSettings.Y, VariantSettings.Rotation.R90)
                                 )
                                 .register(Direction.Axis.Y, HollowLogBlock.Layer.MOSS, BlockStateVariant.create()
                                         .put(VariantSettings.MODEL, verticalModelId))
                                 .register(Direction.Axis.Z, HollowLogBlock.Layer.MOSS, BlockStateVariant.create()
-                                        .put(VariantSettings.MODEL, horizontalMossModelId)
-                                        .put(VariantSettings.X, VariantSettings.Rotation.R90))
+                                        .put(VariantSettings.MODEL, horizontalMossModelId))
                                 .register(
                                         Direction.Axis.X,
                                         HollowLogBlock.Layer.MOSS,
                                         BlockStateVariant.create()
                                                 .put(VariantSettings.MODEL, horizontalMossModelId)
-                                                .put(VariantSettings.X, VariantSettings.Rotation.R90)
-                                                .put(VariantSettings.Y, VariantSettings.Rotation.R90)
-                                )
-                                .register(Direction.Axis.Y, HollowLogBlock.Layer.PALE_MOSS, BlockStateVariant.create()
-                                        .put(VariantSettings.MODEL, verticalModelId))
-                                .register(Direction.Axis.Z, HollowLogBlock.Layer.PALE_MOSS, BlockStateVariant.create()
-                                        .put(VariantSettings.MODEL, horizontalPaleMossModelId)
-                                        .put(VariantSettings.X, VariantSettings.Rotation.R90))
-                                .register(
-                                        Direction.Axis.X,
-                                        HollowLogBlock.Layer.PALE_MOSS,
-                                        BlockStateVariant.create()
-                                                .put(VariantSettings.MODEL, horizontalPaleMossModelId)
-                                                .put(VariantSettings.X, VariantSettings.Rotation.R90)
                                                 .put(VariantSettings.Y, VariantSettings.Rotation.R90)
                                 )
                                 .register(Direction.Axis.Y, HollowLogBlock.Layer.SNOW, BlockStateVariant.create()
                                         .put(VariantSettings.MODEL, verticalModelId))
                                 .register(Direction.Axis.Z, HollowLogBlock.Layer.SNOW, BlockStateVariant.create()
-                                        .put(VariantSettings.MODEL, horizontalSnowModelId)
-                                        .put(VariantSettings.X, VariantSettings.Rotation.R90))
+                                        .put(VariantSettings.MODEL, horizontalSnowModelId))
                                 .register(
                                         Direction.Axis.X,
                                         HollowLogBlock.Layer.SNOW,
                                         BlockStateVariant.create()
-                                                .put(VariantSettings.MODEL, horizontalSnowModelId)
-                                                .put(VariantSettings.X, VariantSettings.Rotation.R90)
                                                 .put(VariantSettings.Y, VariantSettings.Rotation.R90)
+                                                .put(VariantSettings.MODEL, horizontalSnowModelId)
                                 )
                 );
     }

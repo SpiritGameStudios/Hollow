@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "C": "minecraft:chiseled_deepslate",
-    "E": "minecraft:echo_shard",
-    "P": "minecraft:polished_deepslate"
+    "C": {
+      "item": "minecraft:chiseled_deepslate"
+    },
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "P": {
+      "item": "minecraft:polished_deepslate"
+    }
   },
   "pattern": [
     "P P",

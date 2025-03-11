@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "hollow:campion"
+    {
+      "item": "hollow:campion"
+    }
   ],
   "result": {
     "count": 2,

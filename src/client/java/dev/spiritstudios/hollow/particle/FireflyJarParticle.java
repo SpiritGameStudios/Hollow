@@ -52,11 +52,11 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
 
         if (this.age >= this.maxAge) this.markDead();
 
-        int color = ColorHelper.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - lightTicks / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF1A1E1B);
+        int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - lightTicks / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF1A1E1B);
 
-        this.red = ColorHelper.getRed(color) / 255f;
-        this.green = ColorHelper.getGreen(color) / 255f;
-        this.blue = ColorHelper.getBlue(color) / 255f;
+        this.red = ColorHelper.Argb.getRed(color) / 255f;
+        this.green = ColorHelper.Argb.getGreen(color) / 255f;
+        this.blue = ColorHelper.Argb.getBlue(color) / 255f;
     }
     
     public static class Factory implements ParticleFactory<SimpleParticleType> {

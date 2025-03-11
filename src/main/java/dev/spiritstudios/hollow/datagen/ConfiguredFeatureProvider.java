@@ -30,7 +30,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-        RegistryWrapper<ConfiguredFeature<?, ?>> lookup = registries.getOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+        RegistryWrapper<ConfiguredFeature<?, ?>> lookup = registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE);
 
         lookup.streamKeys()
                 .filter(key ->

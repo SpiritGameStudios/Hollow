@@ -19,8 +19,6 @@
     "hollow:mangrove_hollow_log",
     "hollow:stripped_mangrove_hollow_log",
     "hollow:cherry_hollow_log",
-    "hollow:stripped_cherry_hollow_log",
-    "hollow:pale_oak_hollow_log",
-    "hollow:stripped_pale_oak_hollow_log"
+    "hollow:stripped_cherry_hollow_log"
   ]
 }

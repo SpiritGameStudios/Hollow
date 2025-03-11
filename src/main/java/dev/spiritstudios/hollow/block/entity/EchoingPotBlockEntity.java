@@ -24,7 +24,7 @@ public class EchoingPotBlockEntity extends BlockEntity {
     public DecoratedPotBlockEntity.WobbleType lastWobbleType;
 
     public EchoingPotBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY, pos, state);
+        super(HollowBlockEntityTypes.ECHOING_POT, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, EchoingPotBlockEntity blockEntity) {

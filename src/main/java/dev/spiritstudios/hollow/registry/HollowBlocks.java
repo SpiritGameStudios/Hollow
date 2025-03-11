@@ -5,6 +5,7 @@ import dev.spiritstudios.hollow.block.CampionBlock;
 import dev.spiritstudios.hollow.block.CattailBlock;
 import dev.spiritstudios.hollow.block.CattailStemBlock;
 import dev.spiritstudios.hollow.block.EchoingPotBlock;
+import dev.spiritstudios.hollow.block.EchoingVaseBlock;
 import dev.spiritstudios.hollow.block.FireflyJarBlock;
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
@@ -71,14 +72,22 @@ public final class HollowBlocks {
 
     public static final Block CHERRY_HOLLOW_LOG = registerHollowLog("cherry_hollow_log", Blocks.CHERRY_LOG);
     public static final Block STRIPPED_CHERRY_HOLLOW_LOG = registerStrippedHollowLog("stripped_cherry_hollow_log", Blocks.STRIPPED_CHERRY_LOG);
-
-    public static final Block PALE_OAK_HOLLOW_LOG = registerHollowLog("pale_oak_hollow_log", Blocks.PALE_OAK_LOG);
-    public static final Block STRIPPED_PALE_OAK_HOLLOW_LOG = registerStrippedHollowLog("stripped_pale_oak_hollow_log", Blocks.STRIPPED_PALE_OAK_LOG);
     // endregion
 
     public static final Block ECHOING_POT = register(
             "echoing_pot",
             EchoingPotBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DECORATED_POT)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .nonOpaque()
+    );
+
+    public static final Block ECHOING_VASE = register(
+            "echoing_vase",
+            EchoingVaseBlock::new,
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(3.0F, 6.0F)
@@ -272,14 +281,14 @@ public final class HollowBlocks {
     public static final Block POTTED_PAEONIA = register(
             "potted_paeonia",
             settings -> new FlowerPotBlock(PAEONIA, settings),
-            Blocks.createFlowerPotSettings(),
+            AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY),
             false
     );
 
     public static final Block POTTED_ROOTED_ORCHID = register(
             "potted_rooted_orchid",
             settings -> new FlowerPotBlock(ROOTED_ORCHID, settings),
-            Blocks.createFlowerPotSettings(),
+            AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY),
             false
     );
 
@@ -290,10 +299,10 @@ public final class HollowBlocks {
     }
 
     public static  <T extends Block> T register(RegistryKey<Block> key, Function<AbstractBlock.Settings, T> factory, AbstractBlock.Settings settings, boolean item) {
-        T block = factory.apply(settings.registryKey(key));
+        T block = factory.apply(settings);
         if (item) {
             RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, key.getValue());
-            BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey));
+            BlockItem blockItem = new BlockItem(block, new Item.Settings());
             Registry.register(
                     Registries.ITEM,
                     itemKey,

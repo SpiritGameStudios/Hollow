@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#minecraft:cherry_logs"
+    "#": {
+      "tag": "minecraft:cherry_logs"
+    }
   },
   "pattern": [
     "###",

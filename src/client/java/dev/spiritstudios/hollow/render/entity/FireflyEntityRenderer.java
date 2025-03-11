@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
-public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity, FireflyEntityRenderState> {
+public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
     private static final Identifier TEXTURE = Hollow.id("textures/entity/firefly.png");
     private static final RenderLayer LAYER = RenderLayer.getEntityCutoutNoCull(TEXTURE);
 
@@ -24,8 +24,8 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity, Firefly
     }
 
     @Override
-    public void render(FireflyEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        super.render(state, matrices, vertexConsumers, light);
+    public void render(FireflyEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
 
         matrices.push();
         matrices.multiply(this.dispatcher.getRotation());
@@ -33,19 +33,23 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity, Firefly
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(LAYER);
 
-        float delta = MathHelper.clamp(1.0F - state.lightTicks / 10.0F, 0, 1);
+        int lightTicks = entity.getLightTicks();
+        boolean isJeb = "jeb_".equals(Formatting.strip(entity.getName().getString()));
+        int age = entity.age;
 
-        float r = !state.isJeb ?
+        float delta = MathHelper.clamp(1.0F - lightTicks / 10.0F, 0, 1);
+
+        float r = !isJeb ?
                 MathHelper.lerp(delta, 146, 48) :
-                MathHelper.sin(state.age * 0.1F) * 128F + 128F;
+                MathHelper.sin(age * 0.1F) * 128F + 128F;
 
-        float g = !state.isJeb ?
+        float g = !isJeb ?
                 MathHelper.lerp(delta, 207, 53) :
-                MathHelper.sin(state.age * 0.1F + (240.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
+                MathHelper.sin(age * 0.1F + (240.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
 
-        float b = !state.isJeb ?
+        float b = !isJeb ?
                 MathHelper.lerp(delta, 64, 47) :
-                MathHelper.sin(state.age * 0.1F + (120.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
+                MathHelper.sin(age * 0.1F + (120.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
 
         r /= 255F;
         g /= 255F;
@@ -66,16 +70,8 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity, Firefly
     }
 
     @Override
-    public FireflyEntityRenderState createRenderState() {
-        return new FireflyEntityRenderState();
-    }
-
-    @Override
-    public void updateRenderState(FireflyEntity entity, FireflyEntityRenderState state, float tickDelta) {
-        super.updateRenderState(entity, state, tickDelta);
-
-        state.lightTicks = entity.getLightTicks();
-        state.isJeb = "jeb_".equals(Formatting.strip(entity.getName().getString()));
+    public Identifier getTexture(FireflyEntity entity) {
+        return TEXTURE;
     }
 
     private void renderVertex(

@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataOutput;
 import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
@@ -26,7 +25,7 @@ public class MetatagProviders {
 
     public static class BlockMetatagProvider extends MetatagProvider<Block> {
         protected BlockMetatagProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-            super(dataOutput, RegistryKeys.BLOCK, registriesFuture, DataOutput.OutputType.DATA_PACK);
+            super(dataOutput, registriesFuture, DataOutput.OutputType.DATA_PACK);
         }
 
         @Override
@@ -62,8 +61,7 @@ public class MetatagProviders {
                     .put(HollowBlocks.CRIMSON_HOLLOW_STEM, HollowBlocks.STRIPPED_CRIMSON_HOLLOW_STEM)
                     .put(HollowBlocks.WARPED_HOLLOW_STEM, HollowBlocks.STRIPPED_WARPED_HOLLOW_STEM)
                     .put(HollowBlocks.MANGROVE_HOLLOW_LOG, HollowBlocks.STRIPPED_MANGROVE_HOLLOW_LOG)
-                    .put(HollowBlocks.CHERRY_HOLLOW_LOG, HollowBlocks.STRIPPED_CHERRY_HOLLOW_LOG)
-                    .put(HollowBlocks.PALE_OAK_HOLLOW_LOG, HollowBlocks.STRIPPED_PALE_OAK_HOLLOW_LOG));
+                    .put(HollowBlocks.CHERRY_HOLLOW_LOG, HollowBlocks.STRIPPED_CHERRY_HOLLOW_LOG));
         }
 
         @Override
@@ -74,7 +72,7 @@ public class MetatagProviders {
 
     public static class ItemMetatagProvider extends MetatagProvider<Item> {
         protected ItemMetatagProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-            super(dataOutput, RegistryKeys.ITEM, registriesFuture, DataOutput.OutputType.DATA_PACK);
+            super(dataOutput, registriesFuture, DataOutput.OutputType.DATA_PACK);
         }
 
         @Override

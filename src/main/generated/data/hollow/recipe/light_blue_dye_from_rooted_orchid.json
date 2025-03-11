@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "hollow:rooted_orchid"
+    {
+      "item": "hollow:rooted_orchid"
+    }
   ],
   "result": {
     "count": 1,

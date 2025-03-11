@@ -66,7 +66,7 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    protected boolean isTransparent(BlockState state) {
+    protected boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
         return true;
     }
 

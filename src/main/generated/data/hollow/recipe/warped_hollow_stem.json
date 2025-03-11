@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#minecraft:warped_stems"
+    "#": {
+      "tag": "minecraft:warped_stems"
+    }
   },
   "pattern": [
     "###",

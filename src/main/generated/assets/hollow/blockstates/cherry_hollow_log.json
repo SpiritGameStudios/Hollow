@@ -2,22 +2,14 @@
   "variants": {
     "axis=x,layer=moss": {
       "model": "hollow:block/cherry_hollow_log_horizontal_moss",
-      "x": 90,
       "y": 90
     },
     "axis=x,layer=none": {
       "model": "hollow:block/cherry_hollow_log_horizontal",
-      "x": 90,
-      "y": 90
-    },
-    "axis=x,layer=pale_moss": {
-      "model": "hollow:block/cherry_hollow_log_horizontal_pale_moss",
-      "x": 90,
       "y": 90
     },
     "axis=x,layer=snow": {
       "model": "hollow:block/cherry_hollow_log_horizontal_snow",
-      "x": 90,
       "y": 90
     },
     "axis=y,layer=moss": {
@@ -26,27 +18,17 @@
     "axis=y,layer=none": {
       "model": "hollow:block/cherry_hollow_log"
     },
-    "axis=y,layer=pale_moss": {
-      "model": "hollow:block/cherry_hollow_log"
-    },
     "axis=y,layer=snow": {
       "model": "hollow:block/cherry_hollow_log"
     },
     "axis=z,layer=moss": {
-      "model": "hollow:block/cherry_hollow_log_horizontal_moss",
-      "x": 90
+      "model": "hollow:block/cherry_hollow_log_horizontal_moss"
     },
     "axis=z,layer=none": {
-      "model": "hollow:block/cherry_hollow_log_horizontal",
-      "x": 90
-    },
-    "axis=z,layer=pale_moss": {
-      "model": "hollow:block/cherry_hollow_log_horizontal_pale_moss",
-      "x": 90
+      "model": "hollow:block/cherry_hollow_log_horizontal"
     },
     "axis=z,layer=snow": {
-      "model": "hollow:block/cherry_hollow_log_horizontal_snow",
-      "x": 90
+      "model": "hollow:block/cherry_hollow_log_horizontal_snow"
     }
   }
 }

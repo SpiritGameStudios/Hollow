@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "G": "#c:glass_blocks",
-    "P": "hollow:polypore"
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "P": {
+      "item": "hollow:polypore"
+    }
   },
   "pattern": [
     " P ",

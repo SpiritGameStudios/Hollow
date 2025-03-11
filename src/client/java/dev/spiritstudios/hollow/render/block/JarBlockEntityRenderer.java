@@ -5,9 +5,9 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
@@ -42,7 +42,7 @@ public class JarBlockEntityRenderer implements BlockEntityRenderer<JarBlockEntit
             double x = MathHelper.clamp(((double)((float)(hashCode & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
             double z = MathHelper.clamp(((double)((float)(hashCode >> 8 & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
 
-            deg += MathHelper.clamp(((double)((float)(hashCode >> 16 & 15L) / 15.0F) - 0.5) * 0.5, -max, max) * 5000;
+            deg += (float) (MathHelper.clamp(((double)((float)(hashCode >> 16 & 15L) / 15.0F) - 0.5) * 0.5, -max, max) * 5000);
 
             matrices.push();
 

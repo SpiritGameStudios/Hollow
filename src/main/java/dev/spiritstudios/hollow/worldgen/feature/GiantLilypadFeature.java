@@ -32,7 +32,7 @@ public class GiantLilypadFeature extends Feature<DefaultFeatureConfig> {
 
         if (!canPlaceAt(world, pos)) return false;
 
-        Direction facing = Direction.fromHorizontalQuarterTurns(random.nextInt(4));
+        Direction facing = Direction.fromHorizontal(random.nextInt(4));
         BlockState lilypadState = HollowBlocks.GIANT_LILYPAD.getDefaultState().with(GiantLilyPadBlock.FACING, facing);
 
         world.setBlockState(pos, lilypadState.with(GiantLilyPadBlock.PIECE, GiantLilyPadBlock.Piece.NORTH_WEST), Block.NOTIFY_ALL_AND_REDRAW);

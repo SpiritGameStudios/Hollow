@@ -6,16 +6,16 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.consume.UseAction;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
@@ -28,19 +28,19 @@ public class CopperHornItem extends Item {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
 
         Optional<CopperInstrument> instrument = this.getInstrument(itemStack);
-        if (instrument.isEmpty()) return ActionResult.FAIL;
+        if (instrument.isEmpty()) return TypedActionResult.fail(itemStack);
 
         user.setCurrentHand(hand);
         playSound(world, user, instrument.get());
 
-        user.getItemCooldownManager().set(itemStack, 80);
+        user.getItemCooldownManager().set(itemStack.getItem(), 80);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
 
-        return ActionResult.CONSUME;
+        return TypedActionResult.consume(itemStack);
     }
 
     // region Settings

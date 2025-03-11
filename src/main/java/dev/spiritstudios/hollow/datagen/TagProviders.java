@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageType;
@@ -63,6 +62,7 @@ public class TagProviders {
 
             getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                     .add(HollowBlocks.ECHOING_POT)
+                    .add(HollowBlocks.ECHOING_VASE)
                     .add(HollowBlocks.STONE_CHEST)
                     .add(HollowBlocks.STONE_CHEST_LID)
                     .add(HollowBlocks.COPPER_PILLAR)
@@ -89,7 +89,7 @@ public class TagProviders {
             getOrCreateTagBuilder(BlockTags.FLOWERS)
                     .add(HollowBlocks.CAMPION);
 
-            getOrCreateTagBuilder(ConventionalBlockTags.TALL_FLOWERS)
+            getOrCreateTagBuilder(BlockTags.TALL_FLOWERS)
                     .add(HollowBlocks.CAMPION);
 
             getOrCreateTagBuilder(HollowBlocks.Tags.POLYPORE_PLACEABLE_ON)
