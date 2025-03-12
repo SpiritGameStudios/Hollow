@@ -84,7 +84,20 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
     }
 
     @Override
-    protected MapCodec<EchoingVaseBlock> getCodec() {
+    protected MapCodec<? extends EchoingVaseBlock> getCodec() {
         return CODEC;
+    }
+
+    public static class ObaboBlock extends EchoingVaseBlock {
+        public static final MapCodec<ObaboBlock> CODEC = createCodec(ObaboBlock::new);
+
+        public ObaboBlock(Settings settings) {
+            super(settings);
+        }
+
+        @Override
+        protected MapCodec<ObaboBlock> getCodec() {
+            return CODEC;
+        }
     }
 }

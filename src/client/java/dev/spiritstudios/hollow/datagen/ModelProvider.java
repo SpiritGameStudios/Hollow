@@ -147,7 +147,7 @@ public class ModelProvider extends FabricModelProvider {
         generator.registerDoubleBlock(
                 HollowBlocks.CAMPION,
                 generator.createSubModel(HollowBlocks.CAMPION, "_top", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross),
-                generator.createSubModel(HollowBlocks.CAMPION, "_bottom",  BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross)
+                generator.createSubModel(HollowBlocks.CAMPION, "_bottom", BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel(), TextureMap::cross)
         );
         generator.registerItemModel(HollowBlocks.CAMPION.asItem());
 
@@ -166,6 +166,7 @@ public class ModelProvider extends FabricModelProvider {
 
         generator.registerNorthDefaultHorizontalRotation(HollowBlocks.ECHOING_POT);
         registerDoubleTallRotated(HollowBlocks.ECHOING_VASE, generator);
+        registerDoubleTallRotated(HollowBlocks.OBABO, generator);
         registerDoubleTallRotated(HollowBlocks.SCREAMING_VASE, generator);
 
         registerSculkJaw(generator);

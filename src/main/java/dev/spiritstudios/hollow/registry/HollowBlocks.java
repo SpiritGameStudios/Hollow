@@ -97,6 +97,17 @@ public final class HollowBlocks {
                     .nonOpaque()
     );
 
+    public static final Block OBABO = register(
+            "obabo",
+            EchoingVaseBlock.ObaboBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DECORATED_POT)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .nonOpaque()
+    );
+
     public static final Block SCREAMING_VASE = register(
             "screaming_vase",
             ScreamingVaseBlock::new,
@@ -310,7 +321,7 @@ public final class HollowBlocks {
         public static final TagKey<Block> POLYPORE_PLACEABLE_ON = TagKey.of(RegistryKeys.BLOCK, Hollow.id("polypore_placeable_on"));
     }
 
-    public static  <T extends Block> T register(RegistryKey<Block> key, Function<AbstractBlock.Settings, T> factory, AbstractBlock.Settings settings, boolean item) {
+    public static <T extends Block> T register(RegistryKey<Block> key, Function<AbstractBlock.Settings, T> factory, AbstractBlock.Settings settings, boolean item) {
         T block = factory.apply(settings);
         if (item) {
             RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, key.getValue());
