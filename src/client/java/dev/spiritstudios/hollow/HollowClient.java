@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow;
 
 import dev.spiritstudios.hollow.particle.FireflyJarParticle;
+import dev.spiritstudios.hollow.particle.ScreamParticle;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.hollow.registry.HollowEntityTypes;
@@ -29,6 +30,11 @@ public class HollowClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(
                 HollowParticleTypes.FIREFLY_JAR,
                 FireflyJarParticle.Factory::new
+        );
+
+        ParticleFactoryRegistry.getInstance().register(
+                HollowParticleTypes.SCREAM,
+                ScreamParticle.Factory::new
         );
 
         ColorProviderRegistry.BLOCK.register(

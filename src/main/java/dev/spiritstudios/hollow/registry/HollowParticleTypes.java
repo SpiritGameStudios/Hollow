@@ -5,4 +5,5 @@ import net.minecraft.particle.SimpleParticleType;
 
 public final class HollowParticleTypes {
     public static final SimpleParticleType FIREFLY_JAR = FabricParticleTypes.simple();
+    public static final SimpleParticleType SCREAM = FabricParticleTypes.simple(true);
 }

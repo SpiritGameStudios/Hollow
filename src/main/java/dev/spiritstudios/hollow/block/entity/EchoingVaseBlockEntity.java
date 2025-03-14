@@ -3,6 +3,7 @@ package dev.spiritstudios.hollow.block.entity;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -26,8 +27,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class EchoingVaseBlockEntity extends BlockEntity {
-    public static int TILT_TIME = 60;
-    public static int FALL_TIME = 80;
+    public static int TILT_TIME = 15;
+    public static int FALL_TIME = 25;
 
     public int activeTime = 0;
     public long lastWobbleTime;
@@ -63,10 +64,36 @@ public class EchoingVaseBlockEntity extends BlockEntity {
         }
     }
 
+    public static void tick(World world, BlockPos pos, BlockState state, EchoingVaseBlockEntity entity) {
+        if (entity.fallTime == 0) return;
+        entity.fallTime++;
+
+        if (entity.fallTime <= EchoingVaseBlockEntity.FALL_TIME || entity.fallen) return;
+
+        world.playSoundAtBlockCenter(pos, SoundEvents.BLOCK_DECORATED_POT_SHATTER, SoundCategory.BLOCKS, 1, 1, true);
+
+        world.setBlockState(pos.up(), Blocks.AIR.getDefaultState());
+        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+
+        world.addBlockBreakParticles(pos.offset(entity.fallDirection), state);
+        world.addBlockBreakParticles(pos.offset(entity.fallDirection, 2), state);
+    }
+
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (state.isOf(HollowBlocks.SCREAMING_VASE) && this.fallTime == 0 && this.getCachedState().get(Properties.DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.LOWER)) {
-            this.setFalling(Direction.getFacing(pos.toCenterPos().subtract(entity.getPos())), true, world, pos);
-        }
+        if (!state.isOf(HollowBlocks.SCREAMING_VASE) ||
+                this.fallTime != 0 ||
+                state.get(Properties.DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.UPPER) ||
+                !world.getBlockState(pos.up()).isOf(HollowBlocks.SCREAMING_VASE)
+        ) return;
+
+        Direction fallDirection = Direction.getFacing(pos.toCenterPos().subtract(entity.getPos()));
+
+        BlockPos lowerPos = pos.offset(fallDirection);
+        BlockPos upperPos = pos.offset(fallDirection, 2);
+
+        if (!world.getBlockState(lowerPos).isAir() || !world.getBlockState(upperPos).isAir()) return;
+
+        this.setFalling(Direction.getFacing(pos.toCenterPos().subtract(entity.getPos())), true, world, pos);
     }
 
     @Override

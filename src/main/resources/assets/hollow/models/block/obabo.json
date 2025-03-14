@@ -6,7 +6,7 @@
     32
   ],
   "textures": {
-    "0": "obabo",
+    "0": "hollow:block/obabo",
     "particle": "obabo"
   },
   "elements": [

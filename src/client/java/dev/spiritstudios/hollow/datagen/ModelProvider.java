@@ -167,7 +167,7 @@ public class ModelProvider extends FabricModelProvider {
         generator.registerNorthDefaultHorizontalRotation(HollowBlocks.ECHOING_POT);
         registerDoubleTallRotated(HollowBlocks.ECHOING_VASE, generator);
         registerDoubleTallRotated(HollowBlocks.OBABO, generator);
-        registerDoubleTallRotated(HollowBlocks.SCREAMING_VASE, generator);
+        registerDoubleTallRotatedUp(HollowBlocks.SCREAMING_VASE, generator);
 
         registerSculkJaw(generator);
 
@@ -278,6 +278,24 @@ public class ModelProvider extends FabricModelProvider {
                 )
                 .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
     }
+
+    public final void registerDoubleTallRotatedUp(Block block, BlockStateModelGenerator generator) {
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
+                .coordinate(BlockStateVariantMap.create(VerticalDoubleBlock.HALF)
+                        .register(
+                                DoubleBlockHalf.LOWER,
+                                BlockStateVariant.create()
+                                        .put(VariantSettings.MODEL, ModelIds.getBlockModelId(block))
+                        )
+                        .register(
+                                DoubleBlockHalf.UPPER,
+                                BlockStateVariant.create()
+                                        .put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, "_upper"))
+                        )
+                )
+                .coordinate(BlockStateModelGenerator.createNorthDefaultRotationStates()));
+    }
+
 
     public final void registerStoneChest(Block block, BlockStateModelGenerator generator) {
         generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
