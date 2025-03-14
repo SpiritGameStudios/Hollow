@@ -34,7 +34,13 @@ public class EchoingVaseBlockEntityRenderer extends BlockModelBlockEntityRendere
             return;
         }
 
-        if (entity.fallTime > 0) {
+        if (entity.fallen) {
+            Direction axis = entity.fallDirection.rotateYCounterclockwise();
+            matrices.multiply(
+                    RotationAxis.of(axis.getUnitVector()).rotation(MathHelper.PI / 2),
+                    0.5f, 0.5f, 0.5f
+            );
+        } else if (entity.fallTime > 0) {
             Vector3f fallDir = entity.fallDirection.getUnitVector();
 
             if (entity.fallTime >= EchoingVaseBlockEntity.TILT_TIME) {
