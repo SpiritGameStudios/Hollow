@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.render.block;
 
-import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
 import dev.spiritstudios.specter.api.core.math.Easing;
 import dev.spiritstudios.specter.api.render.block.BlockModelBlockEntityRenderer;
@@ -38,9 +37,8 @@ public class EchoingVaseBlockEntityRenderer extends BlockModelBlockEntityRendere
         if (entity.fallTime > 0) {
             Vector3f fallDir = entity.fallDirection.getUnitVector();
 
-            Hollow.LOGGER.info(String.valueOf(entity.fallTime));
             if (entity.fallTime >= EchoingVaseBlockEntity.TILT_TIME) {
-                float pct = (float) Math.min(1, Easing.EXP.in((entity.fallTime - EchoingVaseBlockEntity.TILT_TIME + tickDelta) / (EchoingVaseBlockEntity.FALL_TIME - EchoingVaseBlockEntity.TILT_TIME)));
+                float pct = (float) Math.min(1, Easing.QUART.in((entity.fallTime - EchoingVaseBlockEntity.TILT_TIME + tickDelta) / (EchoingVaseBlockEntity.FALL_TIME - EchoingVaseBlockEntity.TILT_TIME)));
 
                 float angle = Math.min(
                         tiltAngle + fallAngle * pct,
@@ -53,7 +51,7 @@ public class EchoingVaseBlockEntityRenderer extends BlockModelBlockEntityRendere
                 );
             } else {
                 float pct = (entity.fallTime + tickDelta) / EchoingVaseBlockEntity.TILT_TIME;
-                float angle = (float) (tiltAngle * Easing.QUAD.inOut(pct));
+                float angle = (float) (tiltAngle * Easing.SINE.inOut(pct));
 
                 matrices.multiply(
                         RotationAxis.of(entity.fallDirection.rotateCounterclockwise(Direction.Axis.Y).getUnitVector()).rotation(angle),

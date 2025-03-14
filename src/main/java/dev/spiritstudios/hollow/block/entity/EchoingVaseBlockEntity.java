@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.block.entity;
 
+import dev.spiritstudios.hollow.block.ScreamingVaseBlock;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.BlockState;
@@ -27,11 +28,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class EchoingVaseBlockEntity extends BlockEntity {
-    public static int TILT_TIME = 15;
-    public static int FALL_TIME = 25;
+    public static int TILT_TIME = 10;
+    public static int FALL_TIME = 20;
 
     public int activeTime = 0;
     public long lastWobbleTime;
+    public Entity fallCauser;
     public int fallTime = 0;
     public boolean fallen = false;
     public Direction fallDirection = Direction.NORTH;
@@ -56,11 +58,12 @@ public class EchoingVaseBlockEntity extends BlockEntity {
         this.world.addSyncedBlockEvent(this.getPos().up(), this.getCachedState().getBlock(), 1, wobbleType.ordinal());
     }
 
-    public void setFalling(Direction dir, boolean top, World world, BlockPos pos) {
+    public void setFalling(Direction dir, boolean top, World world, BlockPos pos, Entity fallCauser) {
         this.fallTime = 1;
         this.fallDirection = dir;
+        this.fallCauser = fallCauser;
         if (top) {
-            Objects.requireNonNull((EchoingVaseBlockEntity) world.getBlockEntity(pos.up())).setFalling(dir, false, world, pos);
+            Objects.requireNonNull((EchoingVaseBlockEntity) world.getBlockEntity(pos.up())).setFalling(dir, false, world, pos, fallCauser);
         }
     }
 
@@ -77,6 +80,8 @@ public class EchoingVaseBlockEntity extends BlockEntity {
 
         world.addBlockBreakParticles(pos.offset(entity.fallDirection), state);
         world.addBlockBreakParticles(pos.offset(entity.fallDirection, 2), state);
+
+        ScreamingVaseBlock.onBreakLower(world, pos, state, entity.fallCauser);
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
@@ -93,7 +98,7 @@ public class EchoingVaseBlockEntity extends BlockEntity {
 
         if (!world.getBlockState(lowerPos).isAir() || !world.getBlockState(upperPos).isAir()) return;
 
-        this.setFalling(Direction.getFacing(pos.toCenterPos().subtract(entity.getPos())), true, world, pos);
+        this.setFalling(Direction.getFacing(pos.toCenterPos().subtract(entity.getPos())), true, world, pos, entity);
     }
 
     @Override

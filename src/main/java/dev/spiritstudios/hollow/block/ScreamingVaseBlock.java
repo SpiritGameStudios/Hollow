@@ -162,7 +162,7 @@ public class ScreamingVaseBlock extends BlockWithEntity {
         return super.onBreak(world, pos, state, player);
     }
 
-    private static void onBreakLower(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public static void onBreakLower(World world, BlockPos pos, BlockState state, Entity causer) {
         if (world.isClient()) return;
 
         ((ServerWorld) world).spawnParticles(
@@ -172,7 +172,7 @@ public class ScreamingVaseBlock extends BlockWithEntity {
         );
 
         world.playSound(null, pos, SoundEvents.BLOCK_SCULK_SHRIEKER_SHRIEK, SoundCategory.BLOCKS);
-        world.emitGameEvent(GameEvent.SCULK_SENSOR_TENDRILS_CLICKING, pos, GameEvent.Emitter.of(player));
+        world.emitGameEvent(GameEvent.SCULK_SENSOR_TENDRILS_CLICKING, pos, GameEvent.Emitter.of(causer));
     }
 
     @Override
