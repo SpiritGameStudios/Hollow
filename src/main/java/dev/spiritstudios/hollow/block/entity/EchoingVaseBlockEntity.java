@@ -96,16 +96,16 @@ public class EchoingVaseBlockEntity extends BlockEntity {
 
         ScreamingVaseBlock.onBreakLower(world, pos, state, entity.fallCauser);
 
-        //chain reaction
-        BlockPos victimPos = newTopPos.add((int) d2.x, (int) d2.y, (int) d2.z);
-        BlockEntity nextVictim = world.getBlockEntity(victimPos);
-        if (nextVictim instanceof EchoingVaseBlockEntity fool && world.getBlockState(newTopPos.add((int) d2.x, (int) d2.y, (int) d2.z)).get(Properties.DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.LOWER)) {
-            fool.setFalling(entity.fallDirection, false, world, victimPos, entity.fallCauser);
-            // bandaid, change this to real logic
-            if (world.isClient && world.getBlockEntity(victimPos.up()) instanceof EchoingVaseBlockEntity) {
-                fool.setFalling(entity.fallDirection, true, world, victimPos.up(), entity.fallCauser);
-            }
-        }
+        //chain reaction (broken)
+//        BlockPos victimPos = newTopPos.add((int) d2.x, (int) d2.y, (int) d2.z);
+//        BlockEntity nextVictim = world.getBlockEntity(victimPos);
+//        if (nextVictim instanceof EchoingVaseBlockEntity fool && world.getBlockState(newTopPos.add((int) d2.x, (int) d2.y, (int) d2.z)).get(Properties.DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.LOWER)) {
+//            fool.setFalling(entity.fallDirection, false, world, victimPos, entity.fallCauser);
+//            // bandaid, change this to real logic
+//            if (world.isClient && world.getBlockEntity(victimPos.up()) instanceof EchoingVaseBlockEntity) {
+//                fool.setFalling(entity.fallDirection, true, world, victimPos.up(), entity.fallCauser);
+//            }
+//        }
     }
 
     private static EchoingVaseBlockEntity moveToNewPos(World world, BlockPos oldPos, BlockPos newPos) {
