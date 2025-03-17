@@ -44,6 +44,7 @@
   "block.hollow.stone_chest": "Stone Chest",
   "block.hollow.stone_chest_lid": "Stone Chest Lid",
   "block.hollow.cattail": "Cattail",
+  "block.hollow.cattail_stem": "Cattail Stem",
   "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
   "item.hollow.firefly_spawn_egg": "Firefly Spawn Egg",
