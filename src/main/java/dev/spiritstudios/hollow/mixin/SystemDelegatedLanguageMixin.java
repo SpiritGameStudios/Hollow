@@ -17,7 +17,7 @@ public abstract class SystemDelegatedLanguageMixin implements TextTranslationSup
     @ModifyReturnValue(method = "get*", at = @At("RETURN"))
     private String get(String original) {
         if (!(vanilla instanceof TextTranslationSupplier supplier))
-            return null;
+            return original;
 
         Text text = supplier.specter_serialization$getText(original);
         return text != null ? text.getString() : original;
