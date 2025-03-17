@@ -27,7 +27,7 @@ public final class HollowEntityTypes {
     }
 
     private static <T extends Entity> EntityType<T> register(String key, EntityType.Builder<T> type) {
-        return Registry.register(Registries.ENTITY_TYPE, key, type.build());
+        return Registry.register(Registries.ENTITY_TYPE, Hollow.id(key), type.build());
     }
 
     public static void init() {
