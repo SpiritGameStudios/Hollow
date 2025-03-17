@@ -153,10 +153,10 @@ public class RecipeProvider extends FabricRecipeProvider {
         return new ShapedRecipeJsonBuilder(recipeCategory, item, count);
     }
 
-    private void createHollowLogRecipe(Block block, TagKey<Item> LogBlock, RecipeExporter exporter) {
+    private void createHollowLogRecipe(Block block, TagKey<Item> logBlock, RecipeExporter exporter) {
         createShaped(RecipeCategory.DECORATIONS, block, 8)
-                .criterion("has_logs", conditionsFromTag(LogBlock))
-                .input('#', LogBlock)
+                .criterion("has_logs", conditionsFromTag(logBlock))
+                .input('#', logBlock)
                 .pattern("###")
                 .pattern("# #")
                 .pattern("###")

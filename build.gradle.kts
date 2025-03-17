@@ -41,6 +41,7 @@ repositories {
     maven("https://maven.spiritstudios.dev/releases/")
     maven("https://maven.terraformersmc.com/releases/")
     maven("https://maven.gegy.dev/")
+    maven("https://maven.nucleoid.xyz")
 
     exclusiveContent {
         forRepository { maven("https://api.modrinth.com/maven/") }
@@ -61,6 +62,7 @@ dependencies {
     modRuntimeOnly(libs.specter.debug)
 
     modImplementation(libs.lambdynamiclights)
+    modCompileOnly(libs.stapi)
 }
 
 tasks.processResources {

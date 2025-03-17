@@ -9,7 +9,8 @@
     "SaplingGeneratorMixin",
     "SculkBlockMixin",
     "SculkVeinBlockMixin",
-    "SculkVeinGrowCheckerMixin"
+    "SculkVeinGrowCheckerMixin",
+    "SystemDelegatedLanguageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
