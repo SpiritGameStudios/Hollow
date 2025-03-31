@@ -24,7 +24,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
+
+import java.util.Objects;
 
 public class EchoingVaseBlockEntity extends BlockEntity {
     public static int TILT_TIME = 10;
@@ -61,8 +62,8 @@ public class EchoingVaseBlockEntity extends BlockEntity {
         this.fallTime = 1;
         this.fallDirection = dir;
         this.fallCauser = fallCauser;
-        if (top && world.getBlockEntity(pos.up()) instanceof EchoingVaseBlockEntity topBlock) {
-            topBlock.setFalling(dir, false, world, pos, fallCauser);
+        if (top) {
+            Objects.requireNonNull((EchoingVaseBlockEntity) world.getBlockEntity(pos.up())).setFalling(dir, false, world, pos, fallCauser);
         }
     }
 
@@ -71,57 +72,16 @@ public class EchoingVaseBlockEntity extends BlockEntity {
         entity.fallTime++;
 
         if (entity.fallTime <= EchoingVaseBlockEntity.FALL_TIME || entity.fallen) return;
-        entity.fallen = true;
 
         world.playSoundAtBlockCenter(pos, SoundEvents.BLOCK_DECORATED_POT_SHATTER, SoundCategory.BLOCKS, 1, 1, true);
 
-        Vector3f d = entity.fallDirection.getUnitVector().mul(2);
-        BlockPos newTopPos = pos.add((int) d.x, (int) d.y, (int) d.z);
-        EchoingVaseBlockEntity newTopBE = moveToNewPos(world, pos.up(), newTopPos);
-        if (newTopBE != null) {
-            newTopBE.fallen = entity.fallen;
-            newTopBE.fallDirection = entity.fallDirection;
-        }
-
-        Vector3f d2 = entity.fallDirection.getUnitVector();
-        BlockPos newBottomPos = pos.add((int) d2.x, (int) d2.y, (int) d2.z);
-        EchoingVaseBlockEntity newBottomBE = moveToNewPos(world, pos, newBottomPos);
-        if (newBottomBE != null) {
-            newBottomBE.fallen = entity.fallen;
-            newBottomBE.fallDirection = entity.fallDirection;
-        }
+        world.setBlockState(pos.up(), Blocks.AIR.getDefaultState());
+        world.setBlockState(pos, Blocks.AIR.getDefaultState());
 
         world.addBlockBreakParticles(pos.offset(entity.fallDirection), state);
         world.addBlockBreakParticles(pos.offset(entity.fallDirection, 2), state);
 
         ScreamingVaseBlock.onBreakLower(world, pos, state, entity.fallCauser);
-
-        //chain reaction (broken)
-//        BlockPos victimPos = newTopPos.add((int) d2.x, (int) d2.y, (int) d2.z);
-//        BlockEntity nextVictim = world.getBlockEntity(victimPos);
-//        if (nextVictim instanceof EchoingVaseBlockEntity fool && world.getBlockState(newTopPos.add((int) d2.x, (int) d2.y, (int) d2.z)).get(Properties.DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.LOWER)) {
-//            fool.setFalling(entity.fallDirection, false, world, victimPos, entity.fallCauser);
-//            // bandaid, change this to real logic
-//            if (world.isClient && world.getBlockEntity(victimPos.up()) instanceof EchoingVaseBlockEntity) {
-//                fool.setFalling(entity.fallDirection, true, world, victimPos.up(), entity.fallCauser);
-//            }
-//        }
-    }
-
-    private static EchoingVaseBlockEntity moveToNewPos(World world, BlockPos oldPos, BlockPos newPos) {
-        EchoingVaseBlockEntity oldBE = (EchoingVaseBlockEntity) world.getBlockEntity(oldPos);
-        NbtCompound nbt = new NbtCompound();
-        if (oldBE != null) {
-            oldBE.writeNbt(nbt, world.getRegistryManager());
-        }
-        BlockState state = world.getBlockState(oldPos);
-        world.setBlockState(oldPos, Blocks.AIR.getDefaultState());
-        world.setBlockState(newPos, state);
-        EchoingVaseBlockEntity newTopBE = (EchoingVaseBlockEntity) world.getBlockEntity(newPos);
-        if (newTopBE != null) {
-            newTopBE.read(nbt, world.getRegistryManager());
-        }
-        return newTopBE;
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {

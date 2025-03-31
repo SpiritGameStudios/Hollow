@@ -39,7 +39,7 @@ public final class HollowItemGroupAdditions {
             helper.addAfter(Items.DECORATED_POT, HollowBlocks.JAR, HollowBlocks.FIREFLY_JAR);
 
             helper.addAfter(Items.SCULK_CATALYST, HollowBlocks.SCULK_JAW);
-            helper.addAfter(Items.VAULT, HollowBlocks.ECHOING_POT, HollowBlocks.ECHOING_VASE);
+            helper.addAfter(Items.VAULT, HollowBlocks.ECHOING_POT, HollowBlocks.ECHOING_VASE, HollowBlocks.SCREAMING_VASE);
             helper.addAfter(Items.CHEST, HollowBlocks.STONE_CHEST, HollowBlocks.STONE_CHEST_LID);
 
             helper.addAfter(Items.CHISELED_COPPER, HollowBlocks.COPPER_PILLAR);

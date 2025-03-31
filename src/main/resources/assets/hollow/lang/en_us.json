@@ -100,5 +100,7 @@
   "gamerule.doFrogPoisoning": "Allow Frog poisoning",
   "advancements.husbandry.witnessed_frog_poisoning.title": "Poisonous To Frogs",
   "advancements.husbandry.witnessed_frog_poisoning.description": "Witness a Frog be poisoned upon eating a Firefly",
-  "entity.hollow.firefly": "Firefly"
+  "entity.hollow.firefly": "Firefly",
+  "block.hollow.screaming_vase": "Screaming Vase",
+  "block.hollow.echoing_vase": "Echoing Vase"
 }

@@ -42,6 +42,7 @@ repositories {
     maven("https://maven.terraformersmc.com/releases/")
     maven("https://maven.gegy.dev/")
     maven("https://maven.nucleoid.xyz")
+    maven("https://maven.bawnorton.com/releases")
 
     exclusiveContent {
         forRepository { maven("https://api.modrinth.com/maven/") }
@@ -63,6 +64,9 @@ dependencies {
 
     modImplementation(libs.lambdynamiclights)
     modCompileOnly(libs.stapi)
+    include("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
+    implementation("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
+    annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
 }
 
 tasks.processResources {

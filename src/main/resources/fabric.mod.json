@@ -27,6 +27,9 @@
     ],
     "dynamiclights": [
       "dev.spiritstudios.hollow.lambdynamiclights.HollowDynamicLights"
+    ],
+    "mixinsquared": [
+      "dev.spiritstudios.hollow.SpecterMixinCanceller"
     ]
   },
   "mixins": [
