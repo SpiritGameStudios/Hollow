@@ -76,8 +76,22 @@ public class HollowModelProvider extends FabricModelProvider {
 
         generator.registerNorthDefaultHorizontalRotation(HollowBlocks.ECHOING_POT);
         registerDoubleTallRotated(HollowBlocks.ECHOING_VASE, generator);
-        registerDoubleTallRotated(HollowBlocks.OBABO, generator);
         registerDoubleTallRotatedUp(HollowBlocks.SCREAMING_VASE, generator);
+
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(HollowBlocks.OBABO)
+                .coordinate(BlockStateVariantMap.create(VerticalDoubleBlock.HALF)
+                        .register(
+                                DoubleBlockHalf.LOWER,
+                                BlockStateVariant.create()
+                                        .put(VariantSettings.MODEL, ModelIds.getBlockModelId(HollowBlocks.OBABO))
+                        )
+                        .register(
+                                DoubleBlockHalf.UPPER,
+                                BlockStateVariant.create()
+                                        .put(VariantSettings.MODEL, ModelIds.getBlockModelId(Blocks.AIR))
+                        )
+                )
+                .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
 
         registerSculkJaw(generator);
 

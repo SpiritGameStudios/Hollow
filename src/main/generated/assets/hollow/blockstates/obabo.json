@@ -5,21 +5,21 @@
       "y": 90
     },
     "facing=east,half=upper": {
-      "model": "hollow:block/obabo_upper",
+      "model": "minecraft:block/air",
       "y": 90
     },
     "facing=north,half=lower": {
       "model": "hollow:block/obabo"
     },
     "facing=north,half=upper": {
-      "model": "hollow:block/obabo_upper"
+      "model": "minecraft:block/air"
     },
     "facing=south,half=lower": {
       "model": "hollow:block/obabo",
       "y": 180
     },
     "facing=south,half=upper": {
-      "model": "hollow:block/obabo_upper",
+      "model": "minecraft:block/air",
       "y": 180
     },
     "facing=west,half=lower": {
@@ -27,7 +27,7 @@
       "y": 270
     },
     "facing=west,half=upper": {
-      "model": "hollow:block/obabo_upper",
+      "model": "minecraft:block/air",
       "y": 270
     }
   }

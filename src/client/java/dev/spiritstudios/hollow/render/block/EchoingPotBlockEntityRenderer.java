@@ -3,11 +3,13 @@ package dev.spiritstudios.hollow.render.block;
 import dev.spiritstudios.hollow.block.entity.EchoingPotBlockEntity;
 import dev.spiritstudios.specter.api.render.block.BlockModelBlockEntityRenderer;
 import net.minecraft.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.random.Random;
 
 public class EchoingPotBlockEntityRenderer extends BlockModelBlockEntityRenderer<EchoingPotBlockEntity> {
     public EchoingPotBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
@@ -44,5 +46,21 @@ public class EchoingPotBlockEntityRenderer extends BlockModelBlockEntityRenderer
         renderBlockModel(entity, matrices, vertexConsumers, light, overlay);
 
         matrices.pop();
+    }
+
+    @Override
+    protected void renderBlockModel(EchoingPotBlockEntity entity, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        this.renderManager.getModelRenderer().render(
+                entity.getWorld(),
+                this.renderManager.getModel(entity.getCachedState()),
+                entity.getCachedState(),
+                entity.getPos(),
+                matrices,
+                vertexConsumers.getBuffer(RenderLayers.getBlockLayer(entity.getCachedState())),
+                true,
+                Random.create(),
+                entity.getCachedState().getRenderingSeed(entity.getPos()),
+                overlay
+        );
     }
 }

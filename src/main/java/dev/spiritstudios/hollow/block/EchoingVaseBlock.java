@@ -96,6 +96,11 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
         }
 
         @Override
+        protected BlockRenderType getRenderType(BlockState state) {
+            return state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER ? BlockRenderType.INVISIBLE : super.getRenderType(state);
+        }
+
+        @Override
         protected MapCodec<ObaboBlock> getCodec() {
             return CODEC;
         }

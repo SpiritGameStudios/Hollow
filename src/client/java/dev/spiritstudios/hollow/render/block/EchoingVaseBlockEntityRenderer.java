@@ -5,6 +5,7 @@ import dev.spiritstudios.specter.api.core.math.Easing;
 import dev.spiritstudios.specter.api.render.block.BlockModelBlockEntityRenderer;
 import net.minecraft.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
@@ -12,6 +13,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.random.Random;
 import org.joml.Vector3f;
 
 public class EchoingVaseBlockEntityRenderer extends BlockModelBlockEntityRenderer<EchoingVaseBlockEntity> {
@@ -83,6 +85,22 @@ public class EchoingVaseBlockEntityRenderer extends BlockModelBlockEntityRendere
         renderBlockModel(entity, matrices, vertexConsumers, light, overlay);
 
         matrices.pop();
+    }
+
+    @Override
+    protected void renderBlockModel(EchoingVaseBlockEntity entity, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        this.renderManager.getModelRenderer().render(
+                entity.getWorld(),
+                this.renderManager.getModel(entity.getCachedState()),
+                entity.getCachedState(),
+                entity.getPos(),
+                matrices,
+                vertexConsumers.getBuffer(RenderLayers.getBlockLayer(entity.getCachedState())),
+                true,
+                Random.create(),
+                entity.getCachedState().getRenderingSeed(entity.getPos()),
+                overlay
+        );
     }
 
     @Override
