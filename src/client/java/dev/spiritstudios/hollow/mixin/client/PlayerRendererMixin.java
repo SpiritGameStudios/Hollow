@@ -27,7 +27,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     )
     public void skin(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if (HollowClient.prosopagnosia() && player != null && player.isOnGround()) {
+        if (HollowClient.prosopagnosia() && player != null) {
             cir.setReturnValue(player.getSkinTextures().texture());
             cir.cancel();
         }
