@@ -92,7 +92,7 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
     }
 
     public static class ObaboBlock extends EchoingVaseBlock {
-        public static final Pattern DIRE_CURSE = Pattern.compile("o(?:[^0-9a-zA-Z]*|\\s)*b(?:[^0-9a-zA-Z]*|\\s)*a(?:[^0-9a-zA-Z]*|\\s)*b(?:[^0-9a-zA-Z]*|\\s)*o");
+        public static final Pattern DIRE_CURSE = Pattern.compile("[oO](?:[^0-9a-zA-Z]*|\\s)*[bB](?:[^0-9a-zA-Z]*|\\s)*[aA](?:[^0-9a-zA-Z]*|\\s)[bB](?:[^0-9a-zA-Z]*|\\s)*[oO]");
         public static final MapCodec<ObaboBlock> CODEC = createCodec(ObaboBlock::new);
 
         public static void invokeCurse(ServerPlayerEntity player) {
