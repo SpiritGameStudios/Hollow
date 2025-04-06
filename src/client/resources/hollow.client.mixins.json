@@ -4,7 +4,8 @@
   "package": "dev.spiritstudios.hollow.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "BackgroundRendererMixin"
+    "BackgroundRendererMixin",
+    "PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow;
 
+import dev.spiritstudios.hollow.block.EchoingVaseBlock;
 import dev.spiritstudios.hollow.particle.FireflyJarParticle;
 import dev.spiritstudios.hollow.particle.ScreamParticle;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
@@ -13,11 +14,16 @@ import dev.spiritstudios.hollow.render.block.JarBlockEntityRenderer;
 import dev.spiritstudios.hollow.render.entity.FireflyEntityRenderer;
 import dev.spiritstudios.specter.api.config.ModMenuHelper;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class HollowClient implements ClientModInitializer {
@@ -76,5 +82,32 @@ public class HollowClient implements ClientModInitializer {
                 EchoingVaseBlockEntityRenderer::new
         );
         // endregion
+
+        EchoingVaseBlock.ObaboBlock.cb = (blockState, world, blockPos, random) -> {
+            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            if (player != null && player.squaredDistanceTo(blockPos.getX(), blockPos.getY(), blockPos.getZ()) <= 9) {
+                if (!prosopagnosia()) {
+                    player.sendMessage(Text.translatable("message.hollow.prosopagnosia"));
+                }
+                prosopagnosiaTicks = 20 * 300;
+            }
+            return true;
+        };
+
+        ClientTickEvents.START_CLIENT_TICK.register(client -> {
+            prosopagnosiaTicks--;
+        });
+
+        ClientEntityEvents.ENTITY_LOAD.register((entity, clientWorld) -> {
+            if (MinecraftClient.getInstance().player == entity) {
+                prosopagnosiaTicks = 0;
+            }
+        });
+    }
+
+    private static int prosopagnosiaTicks = 0;
+
+    public static boolean prosopagnosia() {
+        return prosopagnosiaTicks > 0;
     }
 }

@@ -107,5 +107,6 @@
   "entity.hollow.firefly": "Firefly",
   "block.hollow.screaming_vase": "Screaming Vase",
   "block.hollow.echoing_vase": "Echoing Vase",
-  "block.hollow.obabo": "Obabo"
+  "block.hollow.obabo": "Obabo",
+  "message.hollow.prosopagnosia": "Something terrible happens."
 }

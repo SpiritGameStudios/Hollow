@@ -130,6 +130,9 @@ public class TagProviders {
 
             getOrCreateTagBuilder(DamageTypeTags.NO_KNOCKBACK)
                     .add(HollowDamageTypes.SCULK_JAW);
+
+            getOrCreateTagBuilder(DamageTypeTags.BYPASSES_INVULNERABILITY)
+                    .add(HollowDamageTypes.DIRE_CURSE);
         }
     }
 }

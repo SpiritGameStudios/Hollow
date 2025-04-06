@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.block;
 
+import com.mojang.datafixers.util.Function4;
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
 import dev.spiritstudios.hollow.registry.HollowDamageTypes;
@@ -20,6 +21,7 @@ import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -92,8 +94,9 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
     }
 
     public static class ObaboBlock extends EchoingVaseBlock {
-        public static final Pattern DIRE_CURSE = Pattern.compile("[oO](?:[^0-9a-zA-Z]*|\\s)*[bB](?:[^0-9a-zA-Z]*|\\s)*[aA](?:[^0-9a-zA-Z]*|\\s)[bB](?:[^0-9a-zA-Z]*|\\s)*[oO]");
+        public static final Pattern DIRE_CURSE = Pattern.compile("[oO0](?:[^0-9a-zA-Z]*|\\s)*[bB](?:[^0-9a-zA-Z]*|\\s)*[aA](?:[^0-9a-zA-Z]*|\\s)[bB](?:[^0-9a-zA-Z]*|\\s)*[oO0]");
         public static final MapCodec<ObaboBlock> CODEC = createCodec(ObaboBlock::new);
+        public static Function4<BlockState, World, BlockPos, Random, Boolean> cb = null;
 
         public static void invokeCurse(ServerPlayerEntity player) {
             player.damage(player.getDamageSources().create(HollowDamageTypes.DIRE_CURSE), 100);
@@ -111,6 +114,11 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
         @Override
         protected MapCodec<ObaboBlock> getCodec() {
             return CODEC;
+        }
+
+        @Override
+        public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+            if (cb != null) cb.apply(state, world, pos, random);
         }
     }
 }
