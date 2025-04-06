@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
+import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
@@ -49,7 +50,7 @@ public class ScreamingVaseBlock extends BlockWithEntity {
 
     public static final DirectionProperty FACING = Properties.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
-    
+
     public ScreamingVaseBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState()
@@ -67,7 +68,6 @@ public class ScreamingVaseBlock extends BlockWithEntity {
     );
 
     public static final VoxelShape UPPER_SHAPE_EW = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, UPPER_SHAPE_NS);
-
 
 
     @Override
@@ -98,6 +98,10 @@ public class ScreamingVaseBlock extends BlockWithEntity {
     @Override
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         EchoingVaseBlockEntity blockEntity = (EchoingVaseBlockEntity) world.getBlockEntity(pos);
+        if (blockEntity == null) {
+            Hollow.LOGGER.error("Failed to find BE at " + state);
+            return;
+        }
         Objects.requireNonNull(blockEntity).onEntityCollision(state, world, pos, entity);
     }
 
@@ -129,7 +133,7 @@ public class ScreamingVaseBlock extends BlockWithEntity {
 
         return pos.getY() < world.getTopY() - 1 && world.getBlockState(pos.up()).canReplace(ctx) ?
                 getDefaultState()
-                        .with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()): null;
+                        .with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()) : null;
     }
 
     @Override
@@ -162,7 +166,7 @@ public class ScreamingVaseBlock extends BlockWithEntity {
         return super.onBreak(world, pos, state, player);
     }
 
-    public static void onBreakLower(World world, BlockPos pos, BlockState state, Entity causer) {
+    public static void onBreakLower(World world, BlockPos pos, BlockState state, @Nullable Entity causer) {
         if (world.isClient()) return;
 
         ((ServerWorld) world).spawnParticles(

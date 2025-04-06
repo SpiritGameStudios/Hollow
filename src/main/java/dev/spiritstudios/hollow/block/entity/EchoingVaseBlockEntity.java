@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.block.entity;
 
+import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.ScreamingVaseBlock;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
@@ -15,6 +16,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
@@ -24,8 +26,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 public class EchoingVaseBlockEntity extends BlockEntity {
     public static int TILT_TIME = 10;
@@ -58,12 +58,17 @@ public class EchoingVaseBlockEntity extends BlockEntity {
         this.world.addSyncedBlockEvent(this.getPos().up(), this.getCachedState().getBlock(), 1, wobbleType.ordinal());
     }
 
-    public void setFalling(Direction dir, boolean top, World world, BlockPos pos, Entity fallCauser) {
+    public void setFalling(Direction dir, boolean top, World world, BlockPos pos, @Nullable Entity fallCauser) {
         this.fallTime = 1;
         this.fallDirection = dir;
         this.fallCauser = fallCauser;
         if (top) {
-            Objects.requireNonNull((EchoingVaseBlockEntity) world.getBlockEntity(pos.up())).setFalling(dir, false, world, pos, fallCauser);
+            BlockEntity be = world.getBlockEntity(pos.up());
+            if (be instanceof EchoingVaseBlockEntity echoing) {
+                echoing.setFalling(dir, false, world, pos, fallCauser);
+            } else {
+                Hollow.LOGGER.error("Missing top block entity for echoing vase at " + pos.up());
+            }
         }
     }
 
@@ -99,6 +104,9 @@ public class EchoingVaseBlockEntity extends BlockEntity {
         if (!world.getBlockState(lowerPos).isAir() || !world.getBlockState(upperPos).isAir()) return;
 
         this.setFalling(Direction.getFacing(pos.toCenterPos().subtract(entity.getPos())), true, world, pos, entity);
+        if (!world.isClient) {
+            ((ServerWorld) world).getChunkManager().markForUpdate(this.getPos());
+        }
     }
 
     @Override
@@ -126,6 +134,9 @@ public class EchoingVaseBlockEntity extends BlockEntity {
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         nbt.putInt("ActiveTime", activeTime);
+        if (this.fallDirection != null && this.fallTime > 0) {
+            nbt.putInt("FallDir", this.fallDirection.ordinal());
+        }
         super.writeNbt(nbt, registryLookup);
     }
 
@@ -133,6 +144,12 @@ public class EchoingVaseBlockEntity extends BlockEntity {
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
         activeTime = nbt.getInt("ActiveTime");
+        if (nbt.contains("FallDir")) {
+            this.fallDirection = Direction.values()[nbt.getInt("FallDir")];
+            if (this.world != null && this.fallTime == 0 && this.getCachedState().get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
+                this.setFalling(this.fallDirection, true, this.world, this.getPos(), null);
+            }
+        }
     }
     // endregion
 }

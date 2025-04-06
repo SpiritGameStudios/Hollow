@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,piece=north_east": {
+      "model": "hollow:block/super_giant_lilypad_1",
+      "y": 90
+    },
+    "facing=east,piece=north_west": {
+      "model": "hollow:block/super_giant_lilypad_2",
+      "y": 90
+    },
+    "facing=east,piece=south_east": {
+      "model": "hollow:block/super_giant_lilypad_0",
+      "y": 90
+    },
+    "facing=east,piece=south_west": {
+      "model": "hollow:block/super_giant_lilypad_3",
+      "y": 90
+    },
+    "facing=north,piece=north_east": {
+      "model": "hollow:block/super_giant_lilypad_0"
+    },
+    "facing=north,piece=north_west": {
+      "model": "hollow:block/super_giant_lilypad_1"
+    },
+    "facing=north,piece=south_east": {
+      "model": "hollow:block/super_giant_lilypad_3"
+    },
+    "facing=north,piece=south_west": {
+      "model": "hollow:block/super_giant_lilypad_2"
+    },
+    "facing=south,piece=north_east": {
+      "model": "hollow:block/super_giant_lilypad_2",
+      "y": 180
+    },
+    "facing=south,piece=north_west": {
+      "model": "hollow:block/super_giant_lilypad_3",
+      "y": 180
+    },
+    "facing=south,piece=south_east": {
+      "model": "hollow:block/super_giant_lilypad_1",
+      "y": 180
+    },
+    "facing=south,piece=south_west": {
+      "model": "hollow:block/super_giant_lilypad_0",
+      "y": 180
+    },
+    "facing=west,piece=north_east": {
+      "model": "hollow:block/super_giant_lilypad_3",
+      "y": 270
+    },
+    "facing=west,piece=north_west": {
+      "model": "hollow:block/super_giant_lilypad_0",
+      "y": 270
+    },
+    "facing=west,piece=south_east": {
+      "model": "hollow:block/super_giant_lilypad_2",
+      "y": 270
+    },
+    "facing=west,piece=south_west": {
+      "model": "hollow:block/super_giant_lilypad_1",
+      "y": 270
+    }
+  }
+}

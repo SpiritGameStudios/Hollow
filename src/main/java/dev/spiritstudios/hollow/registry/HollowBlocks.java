@@ -192,6 +192,13 @@ public final class HollowBlocks {
             false
     );
 
+    public static final Block SUPER_GIANT_LILYPAD = register(
+            "super_giant_lilypad",
+            GiantLilyPadBlock.SuperGiantLilyPadBlock::new,
+            AbstractBlock.Settings.copy(Blocks.LILY_PAD),
+            false
+    );
+
     public static final Block POLYPORE = register(
             "polypore",
             PolyporeBlock::new,

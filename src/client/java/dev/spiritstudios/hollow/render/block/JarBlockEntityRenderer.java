@@ -25,7 +25,7 @@ public class JarBlockEntityRenderer implements BlockEntityRenderer<JarBlockEntit
         World world = blockEntity.getWorld();
         DefaultedList<ItemStack> items = blockEntity.getItems();
         if (items.isEmpty() || world == null) return;
-        
+
         matrices.push();
         matrices.translate(0.5F, 0.05F, 0.5F);
         matrices.scale(0.45F, 0.45F, 0.45F);
@@ -39,10 +39,10 @@ public class JarBlockEntityRenderer implements BlockEntityRenderer<JarBlockEntit
             long hashCode = MathHelper.hashCode(blockEntity.getPos().getX(), index, blockEntity.getPos().getY());
             float max = 0.05F;
 
-            double x = MathHelper.clamp(((double)((float)(hashCode & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
-            double z = MathHelper.clamp(((double)((float)(hashCode >> 8 & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
+            double x = MathHelper.clamp(((double) ((float) (hashCode & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
+            double z = MathHelper.clamp(((double) ((float) (hashCode >> 8 & 15L) / 15.0F) - 0.5) * 0.5, -max, max);
 
-            deg += (float) (MathHelper.clamp(((double)((float)(hashCode >> 16 & 15L) / 15.0F) - 0.5) * 0.5, -max, max) * 5000);
+            deg += (float) (MathHelper.clamp(((double) ((float) (hashCode >> 16 & 15L) / 15.0F) - 0.5) * 0.5, -max, max) * 5000);
 
             matrices.push();
 

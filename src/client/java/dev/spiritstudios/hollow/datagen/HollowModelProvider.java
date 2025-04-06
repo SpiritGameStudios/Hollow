@@ -98,8 +98,11 @@ public class HollowModelProvider extends FabricModelProvider {
         registerStoneChest(HollowBlocks.STONE_CHEST, generator);
         registerStoneChest(HollowBlocks.STONE_CHEST_LID, generator);
 
-        registerGiantLilypad(generator);
+        registerGiantLilypad(generator, HollowBlocks.GIANT_LILYPAD);
         generator.registerItemModel(HollowItems.GIANT_LILYPAD);
+
+        registerGiantLilypad(generator, HollowBlocks.SUPER_GIANT_LILYPAD);
+        generator.registerItemModel(HollowItems.SUPER_GIANT_LILYPAD);
 
         registerCattailStem(generator);
 
@@ -282,11 +285,11 @@ public class HollowModelProvider extends FabricModelProvider {
         );
     }
 
-    private static void registerGiantLilypad(BlockStateModelGenerator generator) {
+    private static void registerGiantLilypad(BlockStateModelGenerator generator, Block block) {
         Identifier[] modelIds = new Identifier[4];
         for (int i = 0; i < 4; i++) {
             TextureMap textureMap = TextureMap.texture(TextureMap.getSubId(
-                    HollowBlocks.GIANT_LILYPAD, "_" + i
+                    block, "_" + i
             ));
             Model model = new Model(
                     Optional.of(Identifier.of(MODID, "block/giant_lilypad_template")),
@@ -294,7 +297,7 @@ public class HollowModelProvider extends FabricModelProvider {
                     TextureKey.TEXTURE
             );
 
-            modelIds[i] = model.upload(HollowBlocks.GIANT_LILYPAD, textureMap, generator.modelCollector);
+            modelIds[i] = model.upload(block, textureMap, generator.modelCollector);
         }
 
         Map<GiantLilyPadBlock.Piece, Identifier> north = ImmutableMap.of(
@@ -325,7 +328,7 @@ public class HollowModelProvider extends FabricModelProvider {
                 GiantLilyPadBlock.Piece.SOUTH_WEST, modelIds[1]
         );
 
-        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(HollowBlocks.GIANT_LILYPAD)
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
                 .coordinate(BlockStateVariantMap.create(GiantLilyPadBlock.FACING, GiantLilyPadBlock.PIECE).register(
                         (direction, piece) -> {
                             BlockStateVariant variant = BlockStateVariant.create();

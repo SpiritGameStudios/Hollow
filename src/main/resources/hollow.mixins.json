@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BulbBlockMixin",
+    "DireCurseMixin",
+    "EntityMixin",
     "FrogEatEntityTaskMixin",
     "SaplingGeneratorMixin",
     "SculkBlockMixin",

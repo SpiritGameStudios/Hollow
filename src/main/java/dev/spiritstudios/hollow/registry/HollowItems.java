@@ -35,6 +35,11 @@ public final class HollowItems {
             settings -> new PlaceableOnWaterItem(HollowBlocks.GIANT_LILYPAD, settings)
     );
 
+    public static final Item SUPER_GIANT_LILYPAD = register(
+            "super_giant_lilypad",
+            settings -> new PlaceableOnWaterItem(HollowBlocks.SUPER_GIANT_LILYPAD, settings)
+    );
+
     public static final Item MUSIC_DISC_POSTMORTEM = register(
             "music_disc_postmortem",
             new Item.Settings()

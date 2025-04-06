@@ -2,6 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
+import dev.spiritstudios.hollow.registry.HollowDamageTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
@@ -11,6 +12,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Hand;
@@ -25,6 +27,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntityProvider {
     public static final MapCodec<EchoingVaseBlock> CODEC = createCodec(EchoingVaseBlock::new);
@@ -89,7 +92,12 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements BlockEntity
     }
 
     public static class ObaboBlock extends EchoingVaseBlock {
+        public static final Pattern DIRE_CURSE = Pattern.compile("o(?:[^0-9a-zA-Z]*|\\s)*b(?:[^0-9a-zA-Z]*|\\s)*a(?:[^0-9a-zA-Z]*|\\s)*b(?:[^0-9a-zA-Z]*|\\s)*o");
         public static final MapCodec<ObaboBlock> CODEC = createCodec(ObaboBlock::new);
+
+        public static void invokeCurse(ServerPlayerEntity player) {
+            player.damage(player.getDamageSources().create(HollowDamageTypes.DIRE_CURSE), 100);
+        }
 
         public ObaboBlock(Settings settings) {
             super(settings);

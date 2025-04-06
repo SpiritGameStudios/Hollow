@@ -277,5 +277,11 @@
       "hollow:horn/bass/9"
     ],
     "subtitle": "subtitles.copper_horn.love"
+  },
+  "block.boioioioing": {
+    "sounds": [
+      "hollow:block/boioioioing"
+    ],
+    "subtitle": "subtitles.block.boioioioing"
   }
 }

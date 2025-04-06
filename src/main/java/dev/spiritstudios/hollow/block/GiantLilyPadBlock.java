@@ -1,14 +1,17 @@
 package dev.spiritstudios.hollow.block;
 
+import dev.spiritstudios.hollow.registry.HollowSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.LilyPadBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.StringIdentifiable;
@@ -91,10 +94,14 @@ public class GiantLilyPadBlock extends LilyPadBlock {
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(PIECE, FACING); }
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(PIECE, FACING);
+    }
 
     @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) { return SHAPE; }
+    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return SHAPE;
+    }
 
     public enum Piece implements StringIdentifiable {
         NORTH_WEST,
@@ -103,6 +110,20 @@ public class GiantLilyPadBlock extends LilyPadBlock {
         SOUTH_EAST;
 
         @Override
-        public String asString() { return this.name().toLowerCase(Locale.ROOT); }
+        public String asString() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
+    }
+
+    public static class SuperGiantLilyPadBlock extends GiantLilyPadBlock {
+        public SuperGiantLilyPadBlock(Settings settings) {
+            super(settings);
+        }
+
+        @Override
+        public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+            world.playSound(entity, pos, HollowSoundEvents.BOIOIOIOING, SoundCategory.BLOCKS, 1, 1);
+            entity.setVelocity(entity.getVelocity().withAxis(Direction.Axis.Y, 10).add(world.getRandom().nextFloat() * 2 - 1, 0, world.getRandom().nextFloat() * 2 - 1));
+        }
     }
 }

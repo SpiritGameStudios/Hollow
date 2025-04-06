@@ -36,6 +36,7 @@
   "block.hollow.polypore": "Polypore",
   "block.hollow.lotus_lilypad": "Flowering Lily Pad",
   "block.hollow.giant_lilypad": "Giant Lily Pad",
+  "block.hollow.super_giant_lilypad": "Super Giant Lily Pad",
   "block.hollow.twig": "Twig",
   "block.hollow.sculk_jaw": "Sculk Jaw",
   "block.hollow.jar": "Jar",
@@ -47,11 +48,14 @@
   "block.hollow.cattail_stem": "Cattail Stem",
   "death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
   "death.attack.sculk_jaw": "%1$s was ripped to shreds",
+  "death.attack.dire_curse.player": "%1$s succumbed to the dire curse",
+  "death.attack.dire_curse": "%1$s succumbed to the dire curse",
   "item.hollow.firefly_spawn_egg": "Firefly Spawn Egg",
   "item.hollow.music_disc_postmortem": "Music Disc",
   "item.hollow.copper_horn": "Copper Horn",
   "jukebox_song.hollow.postmortem": "WorldWidePixel - Postmortem",
   "subtitles.block.sculk_jaw.bite": "Sculk Jaw bites",
+  "subtitles.block.boioioioing": "Super Giant Lilypad bounces",
   "config.hollow.hollow.title": "Hollow",
   "config.hollow.hollow.revertCopperBulb": "Revert Copper Bulb",
   "config.hollow.hollow.revertCopperBulb.tooltip": "Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this.",
@@ -102,5 +106,6 @@
   "advancements.husbandry.witnessed_frog_poisoning.description": "Witness a Frog be poisoned upon eating a Firefly",
   "entity.hollow.firefly": "Firefly",
   "block.hollow.screaming_vase": "Screaming Vase",
-  "block.hollow.echoing_vase": "Echoing Vase"
+  "block.hollow.echoing_vase": "Echoing Vase",
+  "block.hollow.obabo": "Obabo"
 }

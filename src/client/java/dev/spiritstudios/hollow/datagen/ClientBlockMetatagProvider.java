@@ -37,6 +37,7 @@ public class ClientBlockMetatagProvider extends MetatagProvider<Block> {
 
         renderLayer.put(HollowBlocks.LOTUS_LILYPAD, BlockRenderLayer.CUTOUT);
         renderLayer.put(HollowBlocks.GIANT_LILYPAD, BlockRenderLayer.CUTOUT);
+        renderLayer.put(HollowBlocks.SUPER_GIANT_LILYPAD, BlockRenderLayer.CUTOUT);
 
         renderLayer.put(HollowBlocks.TWIG, BlockRenderLayer.CUTOUT);
         renderLayer.put(HollowBlocks.POLYPORE, BlockRenderLayer.CUTOUT);

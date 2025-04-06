@@ -125,7 +125,8 @@ public class TagProviders {
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR)
-                    .add(HollowDamageTypes.SCULK_JAW);
+                    .add(HollowDamageTypes.SCULK_JAW)
+                    .add(HollowDamageTypes.DIRE_CURSE);
 
             getOrCreateTagBuilder(DamageTypeTags.NO_KNOCKBACK)
                     .add(HollowDamageTypes.SCULK_JAW);
