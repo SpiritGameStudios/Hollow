@@ -64,6 +64,9 @@ dependencies {
 
     modImplementation(libs.lambdynamiclights)
     modCompileOnly(libs.stapi)
+
+    modImplementation(libs.arealib)
+
     include("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
     implementation("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
     annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")

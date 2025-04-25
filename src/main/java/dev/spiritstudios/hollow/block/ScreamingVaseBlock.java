@@ -2,6 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.Hollow;
+import dev.spiritstudios.hollow.HollowShowcaseComponent;
 import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
@@ -97,6 +98,9 @@ public class ScreamingVaseBlock extends BlockWithEntity {
 
     @Override
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        HollowShowcaseComponent showcase = Hollow.getShowcase(world, pos);
+        if (!showcase.potsEnabled()) return;
+
         EchoingVaseBlockEntity blockEntity = (EchoingVaseBlockEntity) world.getBlockEntity(pos);
         if (blockEntity == null) {
             Hollow.LOGGER.error("Failed to find BE at " + state);

@@ -1,6 +1,8 @@
 package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
+import dev.spiritstudios.hollow.Hollow;
+import dev.spiritstudios.hollow.HollowShowcaseComponent;
 import dev.spiritstudios.hollow.block.entity.JarBlockEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
@@ -56,6 +58,9 @@ public class JarBlock extends BlockWithEntity {
 
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        HollowShowcaseComponent showcase = Hollow.getShowcase(world, pos);
+        if (!showcase.jarsEnabled()) return ItemActionResult.FAIL;
+
         if (world.isClient) return ItemActionResult.SUCCESS;
 
         BlockEntity blockEntity = world.getBlockEntity(pos);

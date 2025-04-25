@@ -12,6 +12,7 @@ specter = "1.1.1"
 
 lambdynamiclights = "4.0.2+1.21.1"
 stapi = "2.3.1+1.21-pre2"
+arealib = "0.2.6"
 
 [plugins]
 fabric_loom = { id = "fabric-loom", version.ref = "fabric_loom" }
@@ -35,6 +36,8 @@ specter_item = { group = "dev.spiritstudios.specter", name = "specter-item", ver
 specter_registry = { group = "dev.spiritstudios.specter", name = "specter-registry", version.ref = "specter" }
 specter_render = { group = "dev.spiritstudios.specter", name = "specter-render", version.ref = "specter" }
 specter_debug = { group = "dev.spiritstudios.specter", name = "specter-debug", version.ref = "specter" }
+
+arealib = { group = "maven.modrinth", name = "area_lib", version.ref = "arealib" }
 
 lambdynamiclights = { group = "dev.lambdaurora.lambdynamiclights", name = "lambdynamiclights-runtime", version.ref = "lambdynamiclights" }
 
