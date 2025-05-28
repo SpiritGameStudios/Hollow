@@ -13,6 +13,11 @@
         "name": "hollow:music/game/wildflower",
         "stream": true,
         "volume": 0.4
+      },
+      {
+        "name": "hollow:music/game/floraison",
+        "stream": true,
+        "volume": 0.4
       }
     ]
   },
