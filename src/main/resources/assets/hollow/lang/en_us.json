@@ -50,6 +50,10 @@
   "item.hollow.music_disc_postmortem": "Music Disc",
   "item.hollow.copper_horn": "Copper Horn",
   "jukebox_song.hollow.postmortem": "WorldWidePixel - Postmortem",
+  "music.game.wildflower": "WorldWidePixel - Wildflower",
+  "music.game.waterlily": "WorldWidePixel - Waterlily",
+  "music.game.echo": "WorldWidePixel - Echo",
+  "music.game.floraison": "WorldWidePixel - Floraison",
   "subtitles.block.sculk_jaw.bite": "Sculk Jaw bites",
   "config.hollow.hollow.title": "Hollow",
   "config.hollow.hollow.revertCopperBulb": "Revert Copper Bulb",
@@ -97,6 +101,7 @@
   "subtitles.copper_horn.moon": "Moon",
   "subtitles.copper_horn.love": "Love",
   "gamerule.doFrogPoisoning": "Allow Frog poisoning",
+  "gamerule.copperBulbDelay": "Copper bulb delay",
   "advancements.husbandry.witnessed_frog_poisoning.title": "Poisonous To Frogs",
   "advancements.husbandry.witnessed_frog_poisoning.description": "Witness a Frog be poisoned upon eating a Firefly",
   "entity.hollow.firefly": "Firefly"
