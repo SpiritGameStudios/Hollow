@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.StringIdentifiable;
@@ -58,10 +59,10 @@ public class GiantLilyPadBlock extends LilyPadBlock {
         world.setBlockState(pos.south().east(), state.with(PIECE, Piece.SOUTH_EAST));
     }
 
+
     @Override
-    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        super.onStateReplaced(state, world, pos, newState, moved);
-        if (state.isOf(newState.getBlock())) return;
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        super.onStateReplaced(state, world, pos, moved);
 
         for (BlockPos blockPos : getBlocks(pos, state)) {
             if (blockPos.equals(pos)) continue;
@@ -69,7 +70,6 @@ public class GiantLilyPadBlock extends LilyPadBlock {
             if (blockState.isOf(this)) world.breakBlock(blockPos, false);
         }
     }
-
 
     public List<BlockPos> getBlocks(BlockPos pos, BlockState state) {
         List<BlockPos> blocks = new ArrayList<>();

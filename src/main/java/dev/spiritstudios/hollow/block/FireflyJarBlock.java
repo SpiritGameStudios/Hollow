@@ -20,15 +20,15 @@ public class FireflyJarBlock extends Block {
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (random.nextInt(15) == 0)
-            world.addParticle(
-                    HollowParticleTypes.FIREFLY_JAR,
-                    (pos.getX() + 0.5) + (random.nextDouble() - 0.5) / 5.0F,
-                    (pos.getY() + 0.5) + (2 * random.nextDouble() - 1) / 5.0F,
-                    (pos.getZ() + 0.5) + (random.nextDouble() - 0.5) / 5.0F,
-                    0,
-                    0,
-                    0);
+        if (random.nextInt(15) == 0) {
+			world.addParticleClient(
+					HollowParticleTypes.FIREFLY_JAR,
+					(pos.getX() + 0.5) + (random.nextDouble() - 0.5) / 5.0F,
+					(pos.getY() + 0.5) + (2 * random.nextDouble() - 1) / 5.0F,
+					(pos.getZ() + 0.5) + (random.nextDouble() - 0.5) / 5.0F,
+					0, 0, 0
+			);
+		}
     }
 
     @Override

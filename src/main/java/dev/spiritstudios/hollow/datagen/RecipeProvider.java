@@ -15,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.component.ComponentChanges;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.InstrumentComponent;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.HoneycombItem;
@@ -160,7 +161,7 @@ public class RecipeProvider extends FabricRecipeProvider {
                         .input('G', DefaultCustomIngredients.components(
                                 Ingredient.ofItems(Items.GOAT_HORN),
                                 ComponentChanges.builder()
-                                        .add(DataComponentTypes.INSTRUMENT, instrumentLookup.getOrThrow(goat))
+                                        .add(DataComponentTypes.INSTRUMENT, new InstrumentComponent(instrumentLookup.getOrThrow(goat)))
                                         .build()
                         ))
                         .pattern("#G#")

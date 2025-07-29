@@ -1,14 +1,16 @@
 package dev.spiritstudios.hollow;
 
 import dev.spiritstudios.hollow.particle.FireflyJarParticle;
+import dev.spiritstudios.hollow.particle.ScreamParticle;
 import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowBlocks;
 import dev.spiritstudios.hollow.registry.HollowEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
 import dev.spiritstudios.hollow.render.block.EchoingPotBlockEntityRenderer;
-import dev.spiritstudios.hollow.render.entity.FireflyEntityRenderer;
+import dev.spiritstudios.hollow.render.block.EchoingVaseBlockEntityRenderer;
 import dev.spiritstudios.hollow.render.block.JarBlockEntityRenderer;
-import dev.spiritstudios.specter.api.config.ModMenuHelper;
+import dev.spiritstudios.hollow.render.entity.FireflyEntityRenderer;
+import dev.spiritstudios.specter.api.config.client.ModMenuHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -22,10 +24,8 @@ public class HollowClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(HollowEntityTypes.FIREFLY, FireflyEntityRenderer::new);
 
-        ParticleFactoryRegistry.getInstance().register(
-                HollowParticleTypes.FIREFLY_JAR,
-                FireflyJarParticle.Factory::new
-        );
+        ParticleFactoryRegistry.getInstance().register(HollowParticleTypes.FIREFLY_JAR, FireflyJarParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(HollowParticleTypes.SCREAM, ScreamParticle.Factory::new);
 
         ColorProviderRegistry.BLOCK.register(
                 (state, world, pos, tintIndex) ->
@@ -35,13 +35,18 @@ public class HollowClient implements ClientModInitializer {
 
         // region Block Entity Renderers
         BlockEntityRendererFactories.register(
-                HollowBlockEntityTypes.JAR_BLOCK_ENTITY,
+                HollowBlockEntityTypes.JAR,
                 JarBlockEntityRenderer::new
         );
 
         BlockEntityRendererFactories.register(
-                HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY,
+                HollowBlockEntityTypes.ECHOING_POT,
                 EchoingPotBlockEntityRenderer::new
+        );
+
+        BlockEntityRendererFactories.register(
+                HollowBlockEntityTypes.ECHOING_VASE,
+                EchoingVaseBlockEntityRenderer::new
         );
         // endregion
     }

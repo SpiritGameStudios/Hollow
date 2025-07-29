@@ -5,12 +5,14 @@ import dev.spiritstudios.hollow.block.CampionBlock;
 import dev.spiritstudios.hollow.block.CattailBlock;
 import dev.spiritstudios.hollow.block.CattailStemBlock;
 import dev.spiritstudios.hollow.block.EchoingPotBlock;
+import dev.spiritstudios.hollow.block.EchoingVaseBlock;
 import dev.spiritstudios.hollow.block.FireflyJarBlock;
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.JarBlock;
 import dev.spiritstudios.hollow.block.OxidizablePillarBlock;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
+import dev.spiritstudios.hollow.block.ScreamingVaseBlock;
 import dev.spiritstudios.hollow.block.SculkJawBlock;
 import dev.spiritstudios.hollow.block.StoneChestBlock;
 import dev.spiritstudios.hollow.block.StoneChestLidBlock;
@@ -79,6 +81,39 @@ public final class HollowBlocks {
     public static final Block ECHOING_POT = register(
             "echoing_pot",
             EchoingPotBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DECORATED_POT)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .nonOpaque()
+    );
+
+    public static final Block ECHOING_VASE = register(
+            "echoing_vase",
+            EchoingVaseBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DECORATED_POT)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .nonOpaque()
+    );
+
+    public static final Block OBABO = register(
+            "obabo",
+            EchoingVaseBlock.ObaboBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.DECORATED_POT)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .nonOpaque()
+    );
+
+    public static final Block SCREAMING_VASE = register(
+            "screaming_vase",
+            ScreamingVaseBlock::new,
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(3.0F, 6.0F)

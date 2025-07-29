@@ -24,7 +24,7 @@ public class EchoingPotBlockEntity extends BlockEntity {
     public DecoratedPotBlockEntity.WobbleType lastWobbleType;
 
     public EchoingPotBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY, pos, state);
+        super(HollowBlockEntityTypes.ECHOING_POT, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, EchoingPotBlockEntity blockEntity) {
@@ -74,7 +74,7 @@ public class EchoingPotBlockEntity extends BlockEntity {
     @Override
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        activeTime = nbt.getInt("ActiveTime");
+        activeTime = nbt.getInt("ActiveTime", 0);
     }
     // endregion
 }

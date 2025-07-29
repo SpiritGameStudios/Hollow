@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:light_blue_dye_from_rooted_orchid"
+        "recipe": "hollow:light_blue_dye_from_rooted_orchid"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:light_blue_dye_from_rooted_orchid"
+      "hollow:light_blue_dye_from_rooted_orchid"
     ]
   }
 }

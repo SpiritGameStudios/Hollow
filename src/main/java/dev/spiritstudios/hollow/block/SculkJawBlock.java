@@ -42,13 +42,13 @@ public class SculkJawBlock extends SculkBlock {
 
         world.setBlockState(pos, state.with(ACTIVE, true));
 
-        if (world.isClient) {
+        if (world.isClient()) {
             Random random = world.getRandom();
             for (int i = 0; i < 2; ++i) {
                 float x = 2.0F * random.nextFloat() - 1.0F;
                 float y = 2.0F * random.nextFloat() - 1.0F;
                 float z = 2.0F * random.nextFloat() - 1.0F;
-                world.addParticle(
+                world.addParticleClient(
                         ParticleTypes.SCULK_SOUL,
                         (double) pos.getX() + 0.5 + (x * 0.45),
                         (double) pos.getY() + 1,

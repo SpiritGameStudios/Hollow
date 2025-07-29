@@ -1,5 +1,5 @@
 {
-  "parent": "hollow:block/hollow_log_template",
+  "parent": "hollow:block/hollow_log",
   "textures": {
     "end": "minecraft:block/jungle_log_top",
     "inside": "minecraft:block/stripped_jungle_log",

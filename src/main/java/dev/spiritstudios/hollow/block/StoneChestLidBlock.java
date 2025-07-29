@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.block;
 
-import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -20,11 +19,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class StoneChestLidBlock extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
@@ -33,16 +35,11 @@ public class StoneChestLidBlock extends Block {
 
     // region VoxelShapes
     public static final VoxelShape SHAPE_SINGLE = Block.createCuboidShape(1, 0, 1, 15, 4, 15);
-    
-    public static final VoxelShape SHAPE_LEFT_NORTH = Block.createCuboidShape(1, 0, 1, 16, 4, 15);
-    public static final VoxelShape SHAPE_LEFT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_LEFT_NORTH);
-    
-    public static final VoxelShape SHAPE_RIGHT_NORTH = Block.createCuboidShape(0, 0, 1, 15, 4, 15);
-    public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
+
+
+    private static final Map<Direction, VoxelShape> DOUBLE_LEFT_SHAPES_BY_DIRECTION = VoxelShapes.createHorizontalFacingShapeMap(createCuboidShape(1, 0, 1, 16, 4, 15));
+
+    private static final Map<Direction, VoxelShape> DOUBLE_RIGHT_SHAPES_BY_DIRECTION = VoxelShapes.createHorizontalFacingShapeMap(createCuboidShape(0, 0, 1, 15, 4, 15));
     // endregion
     
     public StoneChestLidBlock(Settings settings) {
@@ -114,8 +111,8 @@ public class StoneChestLidBlock extends Block {
     }
 
     @Override
-    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        super.onStateReplaced(state, world, pos, newState, moved);
+    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        super.onBlockAdded(state, world, pos, newState, moved);
         if (state.isOf(newState.getBlock())) return;
         ChestType type = state.get(CHEST_TYPE);
         if (type == ChestType.SINGLE) return;
@@ -132,32 +129,11 @@ public class StoneChestLidBlock extends Block {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (state.get(CHEST_TYPE)) {
-            case LEFT:
-                switch (state.get(FACING)) {
-                    case NORTH:
-                        return SHAPE_LEFT_NORTH;
-                    case EAST:
-                        return SHAPE_LEFT_EAST;
-                    case SOUTH:
-                        return SHAPE_LEFT_SOUTH;
-                    case WEST:
-                        return SHAPE_LEFT_WEST;
-                }
-            case RIGHT:
-                switch (state.get(FACING)) {
-                    case NORTH:
-                        return SHAPE_RIGHT_NORTH;
-                    case EAST:
-                        return SHAPE_RIGHT_EAST;
-                    case SOUTH:
-                        return SHAPE_RIGHT_SOUTH;
-                    case WEST:
-                        return SHAPE_RIGHT_WEST;
-                }
-            default:
-                return SHAPE_SINGLE;
-        }
+        return switch (state.get(CHEST_TYPE)) {
+            case LEFT -> DOUBLE_LEFT_SHAPES_BY_DIRECTION.get(state.get(FACING));
+            case RIGHT -> DOUBLE_RIGHT_SHAPES_BY_DIRECTION.get(state.get(FACING));
+            default -> SHAPE_SINGLE;
+        };
     }
 
     // region Settings

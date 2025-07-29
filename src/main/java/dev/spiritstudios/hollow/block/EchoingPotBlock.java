@@ -76,7 +76,7 @@ public class EchoingPotBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
+        return validateTicker(type, HollowBlockEntityTypes.ECHOING_POT, EchoingPotBlockEntity::tick);
     }
 
     @Override

@@ -2,7 +2,6 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.StoneChestBlockEntity;
-import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -17,6 +16,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -38,6 +38,7 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
@@ -52,21 +53,15 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
             createCuboidShape(0, 0, 0, 16, 1, 16)
     );
 
-    public static final VoxelShape SHAPE_LEFT_NORTH = VoxelShapes.union(
+    private static final Map<Direction, VoxelShape> DOUBLE_LEFT_SHAPES_BY_DIRECTION = VoxelShapes.createHorizontalFacingShapeMap(VoxelShapes.union(
             createCuboidShape(1, 1, 1, 16, 16, 15),
             createCuboidShape(0, 0, 0, 16, 1, 16)
-    );
-    public static final VoxelShape SHAPE_LEFT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_LEFT_NORTH);
-    public static final VoxelShape SHAPE_LEFT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_LEFT_NORTH);
+    ));
 
-    public static final VoxelShape SHAPE_RIGHT_NORTH = VoxelShapes.union(
+    private static final Map<Direction, VoxelShape> DOUBLE_RIGHT_SHAPES_BY_DIRECTION = VoxelShapes.createHorizontalFacingShapeMap(VoxelShapes.union(
             createCuboidShape(0, 1, 1, 15, 16, 15),
             createCuboidShape(0, 0, 0, 16, 1, 16)
-    );
-    public static final VoxelShape SHAPE_RIGHT_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_RIGHT_NORTH);
-    public static final VoxelShape SHAPE_RIGHT_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_RIGHT_NORTH);
+    ));
 
     public StoneChestBlock(Settings settings) {
         super(settings);
@@ -178,43 +173,16 @@ public class StoneChestBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (state.get(CHEST_TYPE)) {
-            case LEFT:
-                switch (state.get(FACING)) {
-                    case NORTH:
-                        return SHAPE_LEFT_NORTH;
-                    case EAST:
-                        return SHAPE_LEFT_EAST;
-                    case SOUTH:
-                        return SHAPE_LEFT_SOUTH;
-                    case WEST:
-                        return SHAPE_LEFT_WEST;
-                }
-            case RIGHT:
-                switch (state.get(FACING)) {
-                    case NORTH:
-                        return SHAPE_RIGHT_NORTH;
-                    case EAST:
-                        return SHAPE_RIGHT_EAST;
-                    case SOUTH:
-                        return SHAPE_RIGHT_SOUTH;
-                    case WEST:
-                        return SHAPE_RIGHT_WEST;
-                }
-            default:
-                return SHAPE_SINGLE;
-        }
+		return switch (state.get(CHEST_TYPE)) {
+			case LEFT -> DOUBLE_LEFT_SHAPES_BY_DIRECTION.get(state.get(FACING));
+			case RIGHT -> DOUBLE_RIGHT_SHAPES_BY_DIRECTION.get(state.get(FACING));
+			default -> SHAPE_SINGLE;
+		};
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof StoneChestBlockEntity) {
-                ItemScatterer.spawn(world, pos, (StoneChestBlockEntity) blockEntity);
-            }
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        ItemScatterer.onStateReplaced(state, world, pos);
     }
 
     @Override

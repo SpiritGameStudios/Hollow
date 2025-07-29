@@ -1,0 +1,31 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "hollow:block/echoing_vase",
+		"particle": "block/chiseled_deepslate"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [2, 0, 2],
+			"to": [14, 16, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 8, 0]},
+			"faces": {
+				"north": {"uv": [0, 2, 6, 10], "texture": "#0"},
+				"east": {"uv": [6, 2, 12, 10], "texture": "#0"},
+				"south": {"uv": [0, 2, 6, 10], "texture": "#0"},
+				"west": {"uv": [6, 2, 12, 10], "texture": "#0"},
+				"down": {"uv": [6, 10, 12, 16], "texture": "#0", "cullface": "down"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [0, -1.5, 0],
+			"scale": [0.525, 0.525, 0.525]
+		}
+	}
+}

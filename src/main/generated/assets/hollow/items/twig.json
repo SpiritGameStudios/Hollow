@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "hollow:item/twig"
+    "model": "hollow:block/twig"
   }
 }
