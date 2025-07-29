@@ -13,7 +13,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
@@ -39,11 +39,11 @@ public final class HollowConfiguredFeatures {
                         new FallenTreeFeature.Config(
                                 BlockStateProvider.of(HollowBlocks.OAK_HOLLOW_LOG),
                                 3, 2,
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 5)
                                         .add(Blocks.MOSS_CARPET.getDefaultState(), 5)
                                         .build()),
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 6)
                                         .add(Blocks.VINE.getDefaultState(), 4)
                                         .build())
@@ -58,11 +58,11 @@ public final class HollowConfiguredFeatures {
                         new FallenTreeFeature.Config(
                                 BlockStateProvider.of(HollowBlocks.BIRCH_HOLLOW_LOG),
                                 3, 2,
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 5)
                                         .add(Blocks.MOSS_CARPET.getDefaultState(), 5)
                                         .build()),
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 4)
                                         .add(HollowBlocks.POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_AMOUNT, 1), 2)
                                         .add(HollowBlocks.POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_AMOUNT, 2), 2)

@@ -3,15 +3,24 @@ package dev.spiritstudios.hollow.component;
 import com.mojang.serialization.Codec;
 import dev.spiritstudios.hollow.Hollow;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.component.ComponentsAccess;
+import net.minecraft.item.Item;
+import net.minecraft.item.tooltip.TooltipAppender;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.function.ValueLists;
 
+import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
-public enum CopperInstrument implements StringIdentifiable {
+// TODO: Make this data driven
+public enum CopperInstrument implements StringIdentifiable, TooltipAppender {
     GREAT_SKY_FALLING(0, "great_sky_falling"),
     OLD_HYMN_RESTING(1, "old_hymn_resting"),
     PURE_WATER_DESIRE(2, "pure_water_desire"),
@@ -23,7 +32,7 @@ public enum CopperInstrument implements StringIdentifiable {
     FEARLESS_RIVER_GIFT(8, "fearless_river_gift"),
     SWEET_MOON_LOVE(9, "sweet_moon_love");
 
-    public static final IntFunction<CopperInstrument> ID_TO_VALUE = ValueLists.createIdToValueFunction(
+    public static final IntFunction<CopperInstrument> ID_TO_VALUE = ValueLists.createIndexToValueFunction(
             CopperInstrument::getIndex,
             values(),
             ValueLists.OutOfBoundsHandling.ZERO
@@ -55,5 +64,11 @@ public enum CopperInstrument implements StringIdentifiable {
 
     public int getIndex() {
         return this.index;
+    }
+
+    @Override
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+        MutableText text = Text.translatable("copper_horn.%s".formatted(this.asString()));
+        textConsumer.accept(text.formatted(Formatting.GRAY));
     }
 }

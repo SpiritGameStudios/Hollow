@@ -23,7 +23,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
     public StoneChestBlockEntity(BlockPos pos, BlockState state) {
-        super(HollowBlockEntityTypes.STONE_CHEST_BLOCK_ENTITY, pos, state, 27);
+        super(HollowBlockEntityTypes.STONE_CHEST, pos, state, 27);
     }
 
     public void aboveBroken() {

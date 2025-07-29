@@ -7,6 +7,7 @@ import dev.spiritstudios.hollow.registry.*;
 import dev.spiritstudios.hollow.worldgen.HollowBiomeModifications;
 import dev.spiritstudios.specter.api.registry.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.advancement.criterion.Criterion;
 import net.minecraft.loot.function.LootFunctionType;
@@ -73,6 +74,8 @@ public final class Hollow implements ModInitializer {
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
         HollowItemGroupAdditions.init();
+
+        ComponentTooltipAppenderRegistry.addLast(HollowDataComponentTypes.COPPER_INSTRUMENT);
     }
 
     public static Identifier id(String path) {

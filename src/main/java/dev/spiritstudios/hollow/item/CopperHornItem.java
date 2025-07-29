@@ -7,19 +7,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.consume.UseAction;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-import java.util.List;
 import java.util.Optional;
 
 public class CopperHornItem extends Item {
@@ -54,16 +49,6 @@ public class CopperHornItem extends Item {
         return 80;
     }
     // endregion
-
-    @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
-        CopperInstrument instrument = this.getInstrument(stack).orElse(null);
-        if (instrument == null) return;
-
-        MutableText text = Text.translatable("copper_horn.%s".formatted(instrument.asString()));
-        tooltip.add(text.formatted(Formatting.GRAY));
-    }
 
     private Optional<CopperInstrument> getInstrument(ItemStack stack) {
         return Optional.ofNullable(stack.get(HollowDataComponentTypes.COPPER_INSTRUMENT));

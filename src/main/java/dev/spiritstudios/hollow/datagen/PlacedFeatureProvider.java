@@ -8,7 +8,7 @@ import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.WeightedListIntProvider;
@@ -53,7 +53,7 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
         helper.add(
                 VegetationPlacedFeatures.TREES_BIRCH,
                 TreeConfiguredFeatures.BIRCH_BEES_0002,
-                CountPlacementModifier.of(new WeightedListIntProvider(DataPool.<IntProvider>builder()
+                CountPlacementModifier.of(new WeightedListIntProvider(Pool.<IntProvider>builder()
                         .add(ConstantIntProvider.create(9), 9)
                         .add(ConstantIntProvider.create(8), 1)
                         .build())),
@@ -67,7 +67,7 @@ public class PlacedFeatureProvider extends FabricDynamicRegistryProvider {
         helper.add(
                 VegetationPlacedFeatures.BIRCH_TALL,
                 VegetationConfiguredFeatures.BIRCH_TALL,
-                CountPlacementModifier.of(new WeightedListIntProvider(DataPool.<IntProvider>builder()
+                CountPlacementModifier.of(new WeightedListIntProvider(Pool.<IntProvider>builder()
                         .add(ConstantIntProvider.create(9), 9)
                         .add(ConstantIntProvider.create(8), 1)
                         .build())),
