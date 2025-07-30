@@ -3,9 +3,9 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 
 files:
   - source: '/**/lang/en_us.json'
-    translation: '/**/lang/%locale%.json'
+    translation: '/**/lang/%locale_with_underscore%.json'
     languages_mapping:
-      locale:
+      locale_with_underscore:
         ar: ar_sa
         af: af_za
         be: be_by
