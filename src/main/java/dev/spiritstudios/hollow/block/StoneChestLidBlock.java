@@ -9,6 +9,7 @@ import net.minecraft.block.enums.ChestType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -21,7 +22,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
@@ -111,15 +111,15 @@ public class StoneChestLidBlock extends Block {
     }
 
     @Override
-    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        super.onBlockAdded(state, world, pos, newState, moved);
-        if (state.isOf(newState.getBlock())) return;
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        super.onStateReplaced(state, world, pos, moved);
         ChestType type = state.get(CHEST_TYPE);
         if (type == ChestType.SINGLE) return;
 
         Direction facing = state.get(FACING);
         BlockPos otherPos =  pos.offset(type == ChestType.LEFT ? facing.rotateYClockwise() : facing.rotateYCounterclockwise());
         world.breakBlock(otherPos, false);
+
     }
 
     public static Direction getFacing(BlockState state) {

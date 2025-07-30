@@ -28,12 +28,14 @@ public final class HollowItems {
 
 	public static final Item LOTUS_LILYPAD = register(
 			"lotus_lilypad",
-			settings -> new PlaceableOnWaterItem(HollowBlocks.LOTUS_LILYPAD, settings)
+			settings -> new PlaceableOnWaterItem(HollowBlocks.LOTUS_LILYPAD, settings),
+			new Item.Settings().useBlockPrefixedTranslationKey()
 	);
 
 	public static final Item GIANT_LILYPAD = register(
 			"giant_lilypad",
-			settings -> new PlaceableOnWaterItem(HollowBlocks.GIANT_LILYPAD, settings)
+			settings -> new PlaceableOnWaterItem(HollowBlocks.GIANT_LILYPAD, settings),
+			new Item.Settings().useBlockPrefixedTranslationKey()
 	);
 
 	public static final Item MUSIC_DISC_POSTMORTEM = register(

@@ -312,7 +312,7 @@ public final class HollowBlocks {
         T block = factory.apply(settings.registryKey(key));
         if (item) {
             RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, key.getValue());
-            BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey));
+            BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey());
             Registry.register(
                     Registries.ITEM,
                     itemKey,
