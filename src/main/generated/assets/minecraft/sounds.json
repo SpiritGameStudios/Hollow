@@ -1,0 +1,21 @@
+{
+  "music.overworld.deep_dark": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "hollow:music/game/echo",
+        "stream": true
+      }
+    ]
+  },
+  "music.overworld.swamp": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "hollow:music/game/swamp/waterlily",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  }
+}

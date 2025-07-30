@@ -1,0 +1,23 @@
+package dev.spiritstudios.hollow.entity;
+
+import dev.spiritstudios.hollow.Hollow;
+import net.minecraft.entity.damage.DamageScaling;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+
+public final class HollowDamageTypes {
+    public static final RegistryKey<DamageType> SCULK_JAW = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Hollow.id("sculk_jaw"));
+
+    public static void bootstrap(Registerable<DamageType> registerable) {
+        registerable.register(
+                SCULK_JAW,
+                new DamageType(
+                        "sculk_jaw",
+                        DamageScaling.ALWAYS,
+                        0.1F
+                )
+        );
+    }
+}

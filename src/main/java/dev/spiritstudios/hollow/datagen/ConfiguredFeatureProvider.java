@@ -1,17 +1,17 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.hollow.worldgen.decorator.BigBranchTreeDecorator;
-import dev.spiritstudios.hollow.worldgen.decorator.BranchTreeDecorator;
-import dev.spiritstudios.hollow.worldgen.decorator.PolyporeTreeDecorator;
+import dev.spiritstudios.hollow.block.HollowBlocks;
+import dev.spiritstudios.hollow.worldgen.tree.decorator.BigBranchTreeDecorator;
+import dev.spiritstudios.hollow.worldgen.tree.decorator.BranchTreeDecorator;
+import dev.spiritstudios.hollow.worldgen.tree.decorator.PolyporeTreeDecorator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
@@ -30,7 +30,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-        RegistryWrapper<ConfiguredFeature<?, ?>> lookup = registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+        RegistryWrapper<ConfiguredFeature<?, ?>> lookup = registries.getOrThrow(RegistryKeys.CONFIGURED_FEATURE);
 
         lookup.streamKeys()
                 .filter(key ->
@@ -86,7 +86,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
         entries.add(
                 VegetationConfiguredFeatures.PATCH_WATERLILY,
                 createRandomPatch(
-                        new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                        new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                 .add(Blocks.LILY_PAD.getDefaultState(), 4)
                                 .add(HollowBlocks.LOTUS_LILYPAD.getDefaultState(), 1)
                                 .build()),
@@ -102,7 +102,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                                 64, 6, 2,
                                 PlacedFeatures.createEntry(
                                         Feature.SIMPLE_BLOCK,
-                                        new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                        new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                                 .add(Blocks.BLUE_ORCHID.getDefaultState())
                                                 .add(HollowBlocks.ROOTED_ORCHID.getDefaultState())
                                                 .build()))
@@ -114,6 +114,6 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
 
     @Override
     public String getName() {
-        return "Hollow/Configured Features";
+        return "Configured Features";
     }
 }

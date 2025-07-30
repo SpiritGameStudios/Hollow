@@ -2,19 +2,16 @@ package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.block.HollowBlocks;
 import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SeaPickleBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
@@ -33,22 +30,21 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         this.addDropWithSilkTouch(HollowBlocks.ECHOING_POT);
         this.addDropWithSilkTouch(HollowBlocks.SCULK_JAW);
+
         this.addDropWithSilkTouch(HollowBlocks.STONE_CHEST_LID);
         this.addDrop(HollowBlocks.STONE_CHEST, this.nameableContainerDrops(HollowBlocks.STONE_CHEST));
 
         this.addDrop(HollowBlocks.CATTAIL);
         this.addDrop(HollowBlocks.CATTAIL_STEM, HollowBlocks.CATTAIL);
+
         this.addDrop(HollowBlocks.TWIG);
         this.addDrop(HollowBlocks.LOTUS_LILYPAD);
         this.addDrop(HollowBlocks.GIANT_LILYPAD);
         this.addDrop(HollowBlocks.CAMPION, block -> this.dropsWithProperty(block, TallPlantBlock.HALF, DoubleBlockHalf.LOWER));
-//        this.addDrop(HollowBlocks.PURPLE_WILDFLOWER, this.flowerbedDrops(HollowBlocks.PURPLE_WILDFLOWER));
-//        this.addDrop(HollowBlocks.WHITE_WILDFLOWER, this.flowerbedDrops(HollowBlocks.WHITE_WILDFLOWER));
-//        this.addDrop(HollowBlocks.BLUE_WILDFLOWER, this.flowerbedDrops(HollowBlocks.BLUE_WILDFLOWER));
-//        this.addDrop(HollowBlocks.PINK_WILDFLOWER, this.flowerbedDrops(HollowBlocks.PINK_WILDFLOWER));
 
         this.addDrop(HollowBlocks.PAEONIA);
         this.addPottedPlantDrops(HollowBlocks.POTTED_PAEONIA);
+
         this.addDrop(HollowBlocks.ROOTED_ORCHID);
         this.addPottedPlantDrops(HollowBlocks.POTTED_ROOTED_ORCHID);
 
@@ -67,9 +63,12 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
                         ))))
         );
 
-        this.addDrop(HollowBlocks.FIREFLY_JAR);
-        this.addDrop(HollowBlocks.JAR, this.nameableContainerDrops(HollowBlocks.JAR));
-
+        this.addDropWithSilkTouch(HollowBlocks.FIREFLY_JAR);
+        this.addDrop(
+                HollowBlocks.JAR,
+                this.nameableContainerDrops(HollowBlocks.JAR)
+                        .modifyPools(pool -> pool.conditionally(this.createSilkTouchCondition()))
+        );
 
         ReflectionHelper.getStaticFields(
                 HollowBlocks.class,

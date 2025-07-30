@@ -2,9 +2,8 @@ package dev.spiritstudios.hollow.worldgen.feature;
 
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.hollow.registry.HollowFeatures;
-import dev.spiritstudios.hollow.worldgen.foliage.BlobWithHangingFoliagePlacer;
+import dev.spiritstudios.hollow.block.HollowBlocks;
+import dev.spiritstudios.hollow.worldgen.tree.foliage.BlobWithHangingFoliagePlacer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,7 +12,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
@@ -31,19 +30,19 @@ public final class HollowConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> CATTAILS = of("cattails");
 
-    public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> featureRegisterable) {
-        featureRegisterable.register(
+    public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> registerable) {
+        registerable.register(
                 FALLEN_OAK,
                 new ConfiguredFeature<>(
                         HollowFeatures.FALLEN_TREE,
                         new FallenTreeFeature.Config(
                                 BlockStateProvider.of(HollowBlocks.OAK_HOLLOW_LOG),
                                 3, 2,
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 5)
                                         .add(Blocks.MOSS_CARPET.getDefaultState(), 5)
                                         .build()),
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 6)
                                         .add(Blocks.VINE.getDefaultState(), 4)
                                         .build())
@@ -51,18 +50,18 @@ public final class HollowConfiguredFeatures {
                 )
         );
 
-        featureRegisterable.register(
+        registerable.register(
                 FALLEN_BIRCH,
                 new ConfiguredFeature<>(
                         HollowFeatures.FALLEN_TREE,
                         new FallenTreeFeature.Config(
                                 BlockStateProvider.of(HollowBlocks.BIRCH_HOLLOW_LOG),
                                 3, 2,
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 5)
                                         .add(Blocks.MOSS_CARPET.getDefaultState(), 5)
                                         .build()),
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                         .add(Blocks.AIR.getDefaultState(), 4)
                                         .add(HollowBlocks.POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_AMOUNT, 1), 2)
                                         .add(HollowBlocks.POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_AMOUNT, 2), 2)
@@ -72,9 +71,9 @@ public final class HollowConfiguredFeatures {
                 )
         );
 
-        featureRegisterable.register(PATCH_TWIG, createRandomPatch(HollowBlocks.TWIG, 10));
-        featureRegisterable.register(PATCH_CAMPION, createRandomPatch(HollowBlocks.CAMPION, 96));
-        featureRegisterable.register(
+        registerable.register(PATCH_TWIG, createRandomPatch(HollowBlocks.TWIG, 10));
+        registerable.register(PATCH_CAMPION, createRandomPatch(HollowBlocks.CAMPION, 96));
+        registerable.register(
                 PATCH_GIANT_LILYPAD,
                 createRandomPatch(
                         PlacedFeatures.createEntry(HollowFeatures.GIANT_LILYPAD, new DefaultFeatureConfig()),
@@ -82,7 +81,7 @@ public final class HollowConfiguredFeatures {
                 )
         );
 
-        featureRegisterable.register(
+        registerable.register(
                 CATTAILS,
                 new ConfiguredFeature<>(
                         HollowFeatures.CATTAILS,

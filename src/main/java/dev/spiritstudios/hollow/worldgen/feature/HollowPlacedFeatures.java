@@ -24,6 +24,7 @@ public final class HollowPlacedFeatures {
     public static final RegistryKey<PlacedFeature> FALLEN_OAK = of("fallen_oak");
 
     public static final RegistryKey<PlacedFeature> HUGE_BROWN_MUSHROOM_SWAMP = of("huge_brown_mushroom_swamp");
+    public static final RegistryKey<PlacedFeature> HUGE_RED_MUSHROOM_SWAMP = of("huge_red_mushroom_swamp");
 
     public static void bootstrap(Registerable<PlacedFeature> featureRegisterable) {
         PlacedFeatureHelper helper = new PlacedFeatureHelper(featureRegisterable.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE), featureRegisterable);
@@ -97,6 +98,16 @@ public final class HollowPlacedFeatures {
         helper.add(
                 HUGE_BROWN_MUSHROOM_SWAMP,
                 TreeConfiguredFeatures.HUGE_BROWN_MUSHROOM,
+                CountPlacementModifier.of(1),
+                RarityFilterPlacementModifier.of(2),
+                HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING),
+                BiomePlacementModifier.of(),
+                SquarePlacementModifier.of()
+        );
+
+        helper.add(
+                HUGE_RED_MUSHROOM_SWAMP,
+                TreeConfiguredFeatures.HUGE_RED_MUSHROOM,
                 CountPlacementModifier.of(1),
                 RarityFilterPlacementModifier.of(2),
                 HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING),

@@ -1,0 +1,9 @@
+{
+  "parent": "hollow:block/hollow_log_horizontal_layer",
+  "textures": {
+    "end": "minecraft:block/mangrove_log_top",
+    "inside": "minecraft:block/stripped_mangrove_log",
+    "overlay": "hollow:block/snow_overlay",
+    "side": "minecraft:block/mangrove_log"
+  }
+}

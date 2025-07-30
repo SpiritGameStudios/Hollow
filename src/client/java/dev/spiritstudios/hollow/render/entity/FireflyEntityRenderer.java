@@ -9,12 +9,13 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
-public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
+public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity, FireflyEntityRenderState> {
     private static final Identifier TEXTURE = Hollow.id("textures/entity/firefly.png");
     private static final RenderLayer LAYER = RenderLayer.getEntityCutoutNoCull(TEXTURE);
 
@@ -23,13 +24,8 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
     }
 
     @Override
-    public Identifier getTexture(FireflyEntity entity) {
-        return TEXTURE;
-    }
-
-    @Override
-    public void render(FireflyEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+    public void render(FireflyEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        super.render(state, matrices, vertexConsumers, light);
 
         matrices.push();
         matrices.multiply(this.dispatcher.getRotation());
@@ -37,25 +33,19 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(LAYER);
 
-        boolean isJeb = entity.hasCustomName() && "jeb_".equals(entity.getName().getString());
+        float delta = MathHelper.clamp(1.0F - state.lightTicks / 10.0F, 0, 1);
 
-        float delta = MathHelper.clampedLerp(
-                0.0F,
-                1.0F,
-                1.0F - entity.getLightTicks() / 10.0F
-        );
-
-        float r = !isJeb ?
+        float r = !state.isJeb ?
                 MathHelper.lerp(delta, 146, 48) :
-                MathHelper.sin(entity.age * 0.1F) * 128F + 128F;
+                MathHelper.sin(state.age * 0.1F) * 128F + 128F;
 
-        float g = !isJeb ?
+        float g = !state.isJeb ?
                 MathHelper.lerp(delta, 207, 53) :
-                MathHelper.sin(entity.age * 0.1F + (240.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
+                MathHelper.sin(state.age * 0.1F + (240.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
 
-        float b = !isJeb ?
+        float b = !state.isJeb ?
                 MathHelper.lerp(delta, 64, 47) :
-                MathHelper.sin(entity.age * 0.1F + (120.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
+                MathHelper.sin(state.age * 0.1F + (120.0F * MathHelper.RADIANS_PER_DEGREE)) * 128.0F + 128.0F;
 
         r /= 255F;
         g /= 255F;
@@ -75,17 +65,26 @@ public class FireflyEntityRenderer extends EntityRenderer<FireflyEntity> {
         return 15;
     }
 
+    @Override
+    public FireflyEntityRenderState createRenderState() {
+        return new FireflyEntityRenderState();
+    }
+
+    @Override
+    public void updateRenderState(FireflyEntity entity, FireflyEntityRenderState state, float tickDelta) {
+        super.updateRenderState(entity, state, tickDelta);
+
+        state.lightTicks = entity.getLightTicks();
+        state.isJeb = "jeb_".equals(Formatting.strip(entity.getName().getString()));
+    }
+
     private void renderVertex(
             VertexConsumer vertexConsumer,
             MatrixStack.Entry entry,
-            float x,
-            float y,
-            float u,
-            float v,
+            float x, float y,
+            float u, float v,
             int light,
-            float r,
-            float g,
-            float b
+            float r, float g, float b
     ) {
         vertexConsumer.vertex(entry, x - 0.5F, y - 0.25F, 0.0F)
                 .color(r, g, b, 1.0F)

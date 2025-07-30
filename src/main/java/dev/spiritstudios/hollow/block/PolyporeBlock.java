@@ -1,12 +1,13 @@
 package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.specter.api.core.math.VoxelShapeHelper;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
@@ -15,18 +16,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
+import java.util.Map;
+
 public class PolyporeBlock extends PlantBlock implements Fertilizable {
     public static final IntProperty POLYPORE_AMOUNT = IntProperty.of("amount", 1, 3);
 
-    public static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(1, 1, 8, 15, 15, 16);
-    public static final VoxelShape SHAPE_SOUTH = VoxelShapeHelper.rotateHorizontal(Direction.SOUTH, Direction.NORTH, SHAPE_NORTH);
-    public static final VoxelShape SHAPE_EAST = VoxelShapeHelper.rotateHorizontal(Direction.EAST, Direction.NORTH, SHAPE_NORTH);
-    public static final VoxelShape SHAPE_WEST = VoxelShapeHelper.rotateHorizontal(Direction.WEST, Direction.NORTH, SHAPE_NORTH);
-
+    public static final Map<Direction, VoxelShape> SHAPES_BY_DIRECTION = VoxelShapes.createHorizontalFacingShapeMap(createCuboidShape(1, 1, 8, 15, 15, 16));
     public static final MapCodec<PolyporeBlock> CODEC = createCodec(PolyporeBlock::new);
 
     public PolyporeBlock(Settings settings) {
@@ -63,7 +63,7 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+    protected boolean isTransparent(BlockState state) {
         return true;
     }
 
@@ -86,13 +86,7 @@ public class PolyporeBlock extends PlantBlock implements Fertilizable {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return switch (state.get(Properties.HORIZONTAL_FACING)) {
-            case NORTH -> SHAPE_NORTH;
-            case EAST -> SHAPE_EAST;
-            case SOUTH -> SHAPE_SOUTH;
-            case WEST -> SHAPE_WEST;
-            default -> super.getOutlineShape(state, world, pos, context);
-        };
+        return SHAPES_BY_DIRECTION.get(state.get(Properties.HORIZONTAL_FACING));
     }
 
     @Override

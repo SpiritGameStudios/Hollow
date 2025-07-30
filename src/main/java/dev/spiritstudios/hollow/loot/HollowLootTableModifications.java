@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.loot;
 
-import dev.spiritstudios.hollow.registry.HollowItems;
+import dev.spiritstudios.hollow.item.HollowItems;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -13,22 +13,14 @@ public class HollowLootTableModifications {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             if (!source.isBuiltin()) return;
 
-            if (LootTables.ANCIENT_CITY_CHEST == key) {
-                LootPool.Builder lootPoolBuilder = LootPool.builder()
-                        .with(ItemEntry.builder(HollowItems.MUSIC_DISC_POSTMORTEM))
-                        .conditionally(RandomChanceLootCondition.builder(0.1F));
+            if (key == LootTables.ANCIENT_CITY_CHEST) tableBuilder.pool(LootPool.builder()
+                    .with(ItemEntry.builder(HollowItems.MUSIC_DISC_POSTMORTEM))
+                    .conditionally(RandomChanceLootCondition.builder(0.1F)));
 
-                tableBuilder.pool(lootPoolBuilder);
-            }
-
-            if (LootTables.PILLAGER_OUTPOST_CHEST == key) {
-                LootPool.Builder lootPoolBuilder = LootPool.builder()
-                        .rolls(UniformLootNumberProvider.create(0.0F, 1.0F))
-                        .with(ItemEntry.builder(HollowItems.COPPER_HORN))
-                        .apply(SetCopperInstrumentFunction.builder());
-
-                tableBuilder.pool(lootPoolBuilder);
-            }
+            if (key == LootTables.PILLAGER_OUTPOST_CHEST) tableBuilder.pool(LootPool.builder()
+                    .rolls(UniformLootNumberProvider.create(0.0F, 1.0F))
+                    .with(ItemEntry.builder(HollowItems.COPPER_HORN))
+                    .apply(SetCopperInstrumentFunction.builder()));
         });
     }
 }

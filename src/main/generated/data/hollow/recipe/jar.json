@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": "#c:glass_blocks",
+    "P": "hollow:polypore"
+  },
+  "pattern": [
+    " P ",
+    "G G",
+    " G "
+  ],
+  "result": {
+    "count": 4,
+    "id": "hollow:jar"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "hollow:block/hollow_log_horizontal_layer",
+  "textures": {
+    "end": "minecraft:block/jungle_log_top",
+    "inside": "minecraft:block/stripped_jungle_log",
+    "overlay": "hollow:block/snow_overlay",
+    "side": "minecraft:block/jungle_log"
+  }
+}

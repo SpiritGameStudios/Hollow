@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_paeonia": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollow:paeonia"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hollow:pink_dye_from_paeonia"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_paeonia"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollow:pink_dye_from_paeonia"
+    ]
+  }
+}

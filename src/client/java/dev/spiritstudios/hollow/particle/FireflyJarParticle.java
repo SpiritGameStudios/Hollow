@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.particle;
 
+import dev.spiritstudios.specter.api.core.math.Easing;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
@@ -47,16 +48,15 @@ public class FireflyJarParticle extends SpriteBillboardParticle {
         this.z += xMover ? newXZ : -newXZ;
         this.y += counterClockwise ? newY : -newY;
 
-        if (this.age < 20 && this.alpha < 1.0F) this.alpha += 0.05f;
-        if (this.age > this.maxAge - 20 && this.alpha > 0.0F) this.alpha -= 0.05f;
+        this.alpha = (float) Easing.QUART.yoyoOutIn(age, 0, 1, getMaxAge());
 
         if (this.age >= this.maxAge) this.markDead();
 
-        int color = ColorHelper.Argb.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - lightTicks / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF1A1E1B);
+        int color = ColorHelper.lerp(MathHelper.clampedLerp(0.0F, 15.0F, (1.0F - lightTicks / 10.0F)) / 15.0F, 0xFF92CF40, 0xFF1A1E1B);
 
-        this.red = ColorHelper.Argb.getRed(color) / 255f;
-        this.green = ColorHelper.Argb.getGreen(color) / 255f;
-        this.blue = ColorHelper.Argb.getBlue(color) / 255f;
+        this.red = ColorHelper.getRed(color) / 255f;
+        this.green = ColorHelper.getGreen(color) / 255f;
+        this.blue = ColorHelper.getBlue(color) / 255f;
     }
     
     public static class Factory implements ParticleFactory<SimpleParticleType> {

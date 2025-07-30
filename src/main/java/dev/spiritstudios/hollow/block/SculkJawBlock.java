@@ -1,8 +1,8 @@
 package dev.spiritstudios.hollow.block;
 
-import dev.spiritstudios.hollow.registry.HollowDamageTypes;
-import dev.spiritstudios.hollow.registry.HollowEntityTypes;
-import dev.spiritstudios.hollow.registry.HollowSoundEvents;
+import dev.spiritstudios.hollow.entity.HollowDamageTypes;
+import dev.spiritstudios.hollow.entity.HollowEntityTypes;
+import dev.spiritstudios.hollow.sound.HollowSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkBlock;
@@ -38,17 +38,17 @@ public class SculkJawBlock extends SculkBlock {
         }
 
         if (!world.getBlockState(pos).get(ACTIVE))
-            world.playSound(null, pos.up(), HollowSoundEvents.SCULK_JAW_BITE, SoundCategory.BLOCKS, 1F, 0.6F);
+            world.playSound(null, pos.up(), HollowSoundEvents.BLOCK_SCULK_JAW_BITE, SoundCategory.BLOCKS, 1F, 0.6F);
 
         world.setBlockState(pos, state.with(ACTIVE, true));
 
-        if (world.isClient) {
+        if (world.isClient()) {
             Random random = world.getRandom();
             for (int i = 0; i < 2; ++i) {
                 float x = 2.0F * random.nextFloat() - 1.0F;
                 float y = 2.0F * random.nextFloat() - 1.0F;
                 float z = 2.0F * random.nextFloat() - 1.0F;
-                world.addParticle(
+                world.addParticleClient(
                         ParticleTypes.SCULK_SOUL,
                         (double) pos.getX() + 0.5 + (x * 0.45),
                         (double) pos.getY() + 1,
@@ -62,7 +62,7 @@ public class SculkJawBlock extends SculkBlock {
             return;
         }
 
-        entity.damage(world.getDamageSources().create(HollowDamageTypes.SCULK_JAW), 1F);
+        entity.damage((ServerWorld) world, world.getDamageSources().create(HollowDamageTypes.SCULK_JAW), 1F);
 
         if (world.getTime() % 5 == 0) {
             world.playSound(

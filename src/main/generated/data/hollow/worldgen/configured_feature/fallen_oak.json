@@ -31,7 +31,7 @@
         "Name": "hollow:oak_hollow_log",
         "Properties": {
           "axis": "y",
-          "mossy": "false",
+          "layer": "none",
           "waterlogged": "false"
         }
       }

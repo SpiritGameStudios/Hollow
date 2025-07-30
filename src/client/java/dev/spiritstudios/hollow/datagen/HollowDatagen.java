@@ -1,8 +1,9 @@
 package dev.spiritstudios.hollow.datagen;
 
-import dev.spiritstudios.hollow.datagen.tag.BiomeTagProvider;
-import dev.spiritstudios.hollow.datagen.tag.BlockTagProvider;
-import dev.spiritstudios.hollow.datagen.tag.EntityTypeTagProvider;
+import dev.spiritstudios.hollow.component.CopperInstruments;
+import dev.spiritstudios.hollow.entity.HollowDamageTypes;
+import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.sound.HollowJukeboxSongs;
 import dev.spiritstudios.hollow.worldgen.feature.HollowConfiguredFeatures;
 import dev.spiritstudios.hollow.worldgen.feature.HollowPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -17,28 +18,31 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
 
         pack.addProvider(AdvancementProvider::new);
 
-        pack.addProvider(ModelProvider::new);
-        pack.addProvider(ClientBlockMetatagProvider::new);
+        pack.addProvider(HollowModelProvider::new);
+        pack.addProvider(HollowSoundsProvider::new);
+        pack.addProvider(HollowClientBlockMetatagProvider::new);
 
         pack.addProvider(LootTableProvider::new);
-        pack.addProvider(RecipeProvider::new);
+        pack.addProvider(HollowRecipeProvider::new);
 
         pack.addProvider(ConfiguredFeatureProvider::new);
         pack.addProvider(PlacedFeatureProvider::new);
 
-        pack.addProvider(BlockMetatagProvider::new);
+        pack.addProvider(HollowDamageTypeProvider::new);
+        pack.addProvider(HollowCopperInstrumentProvider::new);
+        pack.addProvider(HollowJukeboxSongProvider::new);
 
-        pack.addProvider(BlockTagProvider::new);
-        pack.addProvider(BiomeTagProvider::new);
-        pack.addProvider(EntityTypeTagProvider::new);
+        MetatagProviders.addAll(pack);
+        TagProviders.addAll(pack);
     }
 
     @Override
     public void buildRegistry(RegistryBuilder registryBuilder) {
         registryBuilder
                 .addRegistry(RegistryKeys.CONFIGURED_FEATURE, HollowConfiguredFeatures::bootstrap)
-                .addRegistry(RegistryKeys.PLACED_FEATURE, HollowPlacedFeatures::bootstrap);
+                .addRegistry(RegistryKeys.PLACED_FEATURE, HollowPlacedFeatures::bootstrap)
+                .addRegistry(RegistryKeys.DAMAGE_TYPE, HollowDamageTypes::bootstrap)
+                .addRegistry(RegistryKeys.JUKEBOX_SONG, HollowJukeboxSongs::bootstrap)
+                .addRegistry(HollowRegistryKeys.COPPER_INSTRUMENT, CopperInstruments::bootstrap);
     }
-
-
 }

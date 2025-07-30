@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.EchoingPotBlockEntity;
-import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
+import dev.spiritstudios.hollow.block.entity.HollowBlockEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -12,8 +12,8 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -44,11 +44,6 @@ public class EchoingPotBlock extends BlockWithEntity {
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
-
-    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
@@ -58,6 +53,11 @@ public class EchoingPotBlock extends BlockWithEntity {
         return getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
+    @Override
+    protected BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.INVISIBLE;
+    }
+
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -65,18 +65,18 @@ public class EchoingPotBlock extends BlockWithEntity {
     }
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) return ItemActionResult.SUCCESS;
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient()) return ActionResult.SUCCESS;
 
         EchoingPotBlockEntity blockEntity = (EchoingPotBlockEntity) world.getBlockEntity(pos);
         Objects.requireNonNull(blockEntity).use(player, hand);
-        return ItemActionResult.CONSUME;
+        return ActionResult.CONSUME;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, HollowBlockEntityTypes.ECHOING_POT_BLOCK_ENTITY, EchoingPotBlockEntity::tick);
+        return validateTicker(type, HollowBlockEntityTypes.ECHOING_POT, EchoingPotBlockEntity::tick);
     }
 
     @Override

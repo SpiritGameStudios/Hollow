@@ -6,8 +6,9 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -51,22 +52,20 @@ public class JarBlock extends BlockWithEntity {
 
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) return ItemActionResult.SUCCESS;
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient) return ActionResult.SUCCESS;
 
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof JarBlockEntity jarBlockEntity) jarBlockEntity.use(world, pos, player, hand);
-        return ItemActionResult.CONSUME;
+        return ActionResult.CONSUME;
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() == newState.getBlock()) return;
-
+    public void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof JarBlockEntity jarBlockEntity) ItemScatterer.spawn(world, pos, jarBlockEntity);
 
-        super.onStateReplaced(state, world, pos, newState, moved);
+        super.onStateReplaced(state, world, pos, moved);
     }
 
     @Override

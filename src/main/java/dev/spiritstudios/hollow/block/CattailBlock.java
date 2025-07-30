@@ -1,9 +1,13 @@
 package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractPlantStemBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidFillable;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -19,6 +23,8 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 public class CattailBlock extends AbstractPlantStemBlock implements FluidFillable {
@@ -59,10 +65,10 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         BlockState below = world.getBlockState(pos.down());
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random)
                 .withIfExists(WATERLOGGED, world.isWater(pos))
                 .withIfExists(CattailStemBlock.BOTTOM, !below.isOf(this) && !below.isOf(getPlant()));
     }
@@ -74,7 +80,8 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
         BlockState below = ctx.getWorld().getBlockState(ctx.getBlockPos().down());
 
         return (fluidState.isIn(FluidTags.WATER) && fluidState.getLevel() == 8) || below.isOf(this) ?
-                super.getPlacementState(ctx).with(WATERLOGGED, fluidState.isIn(FluidTags.WATER))
+                super.getPlacementState(ctx)
+                        .with(WATERLOGGED, fluidState.isIn(FluidTags.WATER))
                         .withIfExists(CattailStemBlock.BOTTOM, !below.isOf(this) && !below.isOf(getPlant()))
                 :
                 null;
@@ -124,7 +131,7 @@ public class CattailBlock extends AbstractPlantStemBlock implements FluidFillabl
     }
 
     @Override
-    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return false;
     }
 

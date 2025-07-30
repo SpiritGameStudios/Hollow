@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.mixin;
 
 import dev.spiritstudios.hollow.HollowGameRules;
 import dev.spiritstudios.hollow.registry.HollowCriteria;
-import dev.spiritstudios.hollow.registry.HollowEntityTypes;
+import dev.spiritstudios.hollow.entity.HollowEntityTypes;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.brain.task.FrogEatEntityTask;

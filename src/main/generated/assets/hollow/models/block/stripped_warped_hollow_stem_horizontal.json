@@ -1,5 +1,5 @@
 {
-  "parent": "hollow:block/hollow_log_horizontal_template",
+  "parent": "hollow:block/hollow_log_horizontal",
   "textures": {
     "end": "minecraft:block/stripped_warped_stem_top",
     "inside": "minecraft:block/stripped_warped_stem",

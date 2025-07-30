@@ -1,19 +1,14 @@
 package dev.spiritstudios.hollow.render.block;
 
 import dev.spiritstudios.hollow.block.entity.EchoingPotBlockEntity;
-import dev.spiritstudios.specter.api.render.block.BlockModelBlockEntityRenderer;
+import dev.spiritstudios.specter.api.render.client.block.BlockModelBlockEntityRenderer;
 import net.minecraft.block.entity.DecoratedPotBlockEntity;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.BlockRenderManager;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
-
-import java.util.Objects;
+import net.minecraft.util.math.Vec3d;
 
 public class EchoingPotBlockEntityRenderer extends BlockModelBlockEntityRenderer<EchoingPotBlockEntity> {
 
@@ -22,12 +17,12 @@ public class EchoingPotBlockEntityRenderer extends BlockModelBlockEntityRenderer
     }
 
     @Override
-    public void render(EchoingPotBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(EchoingPotBlockEntity entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
         matrices.push();
 
         DecoratedPotBlockEntity.WobbleType wobbleType = entity.lastWobbleType;
         if (wobbleType != null && entity.getWorld() != null) {
-            float wobbleProgress = ((float) (entity.getWorld().getTime() - entity.lastWobbleTime) + tickDelta) / (float) wobbleType.lengthInTicks;
+            float wobbleProgress = ((float) (entity.getWorld().getTime() - entity.lastWobbleTime) + tickProgress) / (float) wobbleType.lengthInTicks;
             if (wobbleProgress >= 0.0F && wobbleProgress <= 1.0F) {
                 if (wobbleType == DecoratedPotBlockEntity.WobbleType.POSITIVE) {
                     float progressRadians = wobbleProgress * MathHelper.TAU;
@@ -48,7 +43,7 @@ public class EchoingPotBlockEntityRenderer extends BlockModelBlockEntityRenderer
             }
         }
 
-        renderBlockModel(entity, matrices, vertexConsumers, light, overlay);
+        renderBlockModel(entity, matrices, vertexConsumers, overlay);
 
         matrices.pop();
     }

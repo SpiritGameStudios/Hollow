@@ -1,9 +1,8 @@
 package dev.spiritstudios.hollow.worldgen.feature;
 
-import com.mojang.serialization.Codec;
 import dev.spiritstudios.hollow.block.CattailBlock;
 import dev.spiritstudios.hollow.block.CattailStemBlock;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.block.HollowBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
