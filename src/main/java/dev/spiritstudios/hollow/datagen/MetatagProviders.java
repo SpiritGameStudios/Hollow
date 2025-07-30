@@ -65,11 +65,6 @@ public class MetatagProviders {
                     .put(HollowBlocks.CHERRY_HOLLOW_LOG, HollowBlocks.STRIPPED_CHERRY_HOLLOW_LOG)
                     .put(HollowBlocks.PALE_OAK_HOLLOW_LOG, HollowBlocks.STRIPPED_PALE_OAK_HOLLOW_LOG));
         }
-
-        @Override
-        public String getName() {
-            return super.getName() + " for minecraft:block";
-        }
     }
 
     public static class ItemMetatagProvider extends MetatagProvider<Item> {
@@ -87,11 +82,6 @@ public class MetatagProviders {
                     .put(HollowBlocks.CATTAIL.asItem(), 0.65F)
                     .put(HollowBlocks.LOTUS_LILYPAD.asItem(), 0.75F)
                     .put(HollowBlocks.GIANT_LILYPAD.asItem(), 0.85F));
-        }
-
-        @Override
-        public String getName() {
-            return super.getName() + " for minecraft:item";
         }
     }
 }

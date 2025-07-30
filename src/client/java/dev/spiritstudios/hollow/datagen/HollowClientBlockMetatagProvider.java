@@ -52,6 +52,6 @@ public class HollowClientBlockMetatagProvider extends MetatagProvider<Block> {
 
     @Override
     public String getName() {
-        return super.getName() + " for minecraft:block (Client)";
+        return super.getName() + " (Client)";
     }
 }
