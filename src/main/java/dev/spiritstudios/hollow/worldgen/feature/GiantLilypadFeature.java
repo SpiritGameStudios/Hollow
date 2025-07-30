@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.worldgen.feature;
 
 import dev.spiritstudios.hollow.block.GiantLilyPadBlock;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.block.HollowBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

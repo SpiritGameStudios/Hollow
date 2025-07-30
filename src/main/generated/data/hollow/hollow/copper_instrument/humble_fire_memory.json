@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.memory",
+  "call": "hollow:item.copper_horn.call.humble",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.humble_fire_memory"
+  },
+  "melody": "hollow:item.copper_horn.melody.fire",
+  "range": 256.0,
+  "use_duration": 4.0
+}

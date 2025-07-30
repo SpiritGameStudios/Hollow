@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "hollow_copper_horn",
+  "key": {
+    "#": "minecraft:copper_ingot",
+    "G": {
+      "fabric:type": "fabric:components",
+      "base": "minecraft:goat_horn",
+      "components": {
+        "minecraft:instrument": "minecraft:yearn_goat_horn"
+      }
+    }
+  },
+  "pattern": [
+    "#G#",
+    " # "
+  ],
+  "result": {
+    "components": {
+      "hollow:copper_instrument": "hollow:fresh_nest_thought"
+    },
+    "count": 1,
+    "id": "hollow:copper_horn"
+  }
+}

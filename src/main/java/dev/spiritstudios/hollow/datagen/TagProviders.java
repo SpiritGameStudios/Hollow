@@ -2,9 +2,9 @@ package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.block.HollowLogBlock;
 import dev.spiritstudios.hollow.data.HollowBiomeTags;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.hollow.registry.HollowDamageTypes;
-import dev.spiritstudios.hollow.registry.HollowEntityTypes;
+import dev.spiritstudios.hollow.block.HollowBlocks;
+import dev.spiritstudios.hollow.entity.HollowDamageTypes;
+import dev.spiritstudios.hollow.entity.HollowEntityTypes;
 import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

@@ -2,9 +2,9 @@ package dev.spiritstudios.hollow;
 
 import dev.spiritstudios.hollow.particle.FireflyJarParticle;
 import dev.spiritstudios.hollow.particle.ScreamParticle;
-import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.hollow.registry.HollowEntityTypes;
+import dev.spiritstudios.hollow.block.entity.HollowBlockEntityTypes;
+import dev.spiritstudios.hollow.block.HollowBlocks;
+import dev.spiritstudios.hollow.entity.HollowEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
 import dev.spiritstudios.hollow.render.block.EchoingPotBlockEntityRenderer;
 import dev.spiritstudios.hollow.render.block.EchoingVaseBlockEntityRenderer;

@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.gift",
+  "call": "hollow:item.copper_horn.call.fearless",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.fearless_river_gift"
+  },
+  "melody": "hollow:item.copper_horn.melody.river",
+  "range": 256.0,
+  "use_duration": 4.0
+}

@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.journey",
+  "call": "hollow:item.copper_horn.call.clear",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.clear_temper_journey"
+  },
+  "melody": "hollow:item.copper_horn.melody.temper",
+  "range": 256.0,
+  "use_duration": 4.0
+}

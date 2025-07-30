@@ -1,0 +1,286 @@
+{
+  "block.sculk_jaw.bite": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "minecraft:mob/goat/horn_break1",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:mob/goat/horn_break2",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:mob/goat/horn_break3",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:mob/goat/horn_break4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.hollow.block.sculk_jaw.bite"
+  },
+  "block.stone_chest.extract": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "minecraft:block/decorated_pot/insert1",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:block/decorated_pot/insert2",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:block/decorated_pot/insert3",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:block/decorated_pot/insert4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.hollow.block.stone_chest.extract"
+  },
+  "item.copper_horn.bass.anger": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/anger"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.anger"
+  },
+  "item.copper_horn.bass.desire": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/desire"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.desire"
+  },
+  "item.copper_horn.bass.falling": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/falling"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.falling"
+  },
+  "item.copper_horn.bass.gift": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "hollow:item/copper_horn/bass/gift",
+        "pitch": 1.07
+      }
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.gift"
+  },
+  "item.copper_horn.bass.journey": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/journey"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.journey"
+  },
+  "item.copper_horn.bass.love": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "hollow:item/copper_horn/bass/love",
+        "pitch": 1.7
+      }
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.love"
+  },
+  "item.copper_horn.bass.memory": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/memory"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.memory"
+  },
+  "item.copper_horn.bass.resting": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/resting"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.resting"
+  },
+  "item.copper_horn.bass.tear": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/tear"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.tear"
+  },
+  "item.copper_horn.bass.thought": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/bass/thought"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.bass.thought"
+  },
+  "item.copper_horn.call.clear": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/clear"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.clear"
+  },
+  "item.copper_horn.call.dry": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/dry"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.dry"
+  },
+  "item.copper_horn.call.fearless": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/fearless"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.fearless"
+  },
+  "item.copper_horn.call.fresh": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/fresh"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.fresh"
+  },
+  "item.copper_horn.call.great": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/great"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.great"
+  },
+  "item.copper_horn.call.humble": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/humble"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.humble"
+  },
+  "item.copper_horn.call.old": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/old"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.old"
+  },
+  "item.copper_horn.call.pure": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/pure"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.pure"
+  },
+  "item.copper_horn.call.secret": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/secret"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.secret"
+  },
+  "item.copper_horn.call.sweet": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/call/sweet"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.call.sweet"
+  },
+  "item.copper_horn.melody.fire": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/fire"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.fire"
+  },
+  "item.copper_horn.melody.hymn": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/hymn"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.hymn"
+  },
+  "item.copper_horn.melody.lake": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/lake"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.lake"
+  },
+  "item.copper_horn.melody.moon": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/moon"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.moon"
+  },
+  "item.copper_horn.melody.nest": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/nest"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.nest"
+  },
+  "item.copper_horn.melody.river": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/river"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.river"
+  },
+  "item.copper_horn.melody.sky": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/sky"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.sky"
+  },
+  "item.copper_horn.melody.temper": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/temper"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.temper"
+  },
+  "item.copper_horn.melody.urge": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/urge"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.urge"
+  },
+  "item.copper_horn.melody.water": {
+    "category": "neutral",
+    "sounds": [
+      "hollow:item/copper_horn/melody/water"
+    ],
+    "subtitle": "subtitles.hollow.item.copper_horn.melody.water"
+  },
+  "music.overworld.birch_forest": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "hollow:music/game/birch_forest/wildflower",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "hollow:music/game/birch_forest/floraison",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
+  "music_disc.postmortem": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "hollow:records/postmortem",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -2,8 +2,7 @@ package dev.spiritstudios.hollow.block.entity;
 
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.ScreamingVaseBlock;
-import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.block.HollowBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;

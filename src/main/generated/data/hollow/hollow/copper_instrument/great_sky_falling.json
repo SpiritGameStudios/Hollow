@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.falling",
+  "call": "hollow:item.copper_horn.call.great",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.great_sky_falling"
+  },
+  "melody": "hollow:item.copper_horn.melody.sky",
+  "range": 256.0,
+  "use_duration": 4.0
+}

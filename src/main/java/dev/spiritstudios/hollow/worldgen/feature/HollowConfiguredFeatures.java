@@ -2,9 +2,8 @@ package dev.spiritstudios.hollow.worldgen.feature;
 
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.PolyporeBlock;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.hollow.registry.HollowFeatures;
-import dev.spiritstudios.hollow.worldgen.foliage.BlobWithHangingFoliagePlacer;
+import dev.spiritstudios.hollow.block.HollowBlocks;
+import dev.spiritstudios.hollow.worldgen.tree.foliage.BlobWithHangingFoliagePlacer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

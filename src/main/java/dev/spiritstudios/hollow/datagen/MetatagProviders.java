@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.block.HollowLogBlock;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.block.HollowBlocks;
 import dev.spiritstudios.specter.api.block.BlockMetatags;
 import dev.spiritstudios.specter.api.block.FlammableBlockData;
 import dev.spiritstudios.specter.api.core.reflect.ReflectionHelper;

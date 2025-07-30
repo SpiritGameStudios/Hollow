@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.thought",
+  "call": "hollow:item.copper_horn.call.fresh",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.fresh_nest_thought"
+  },
+  "melody": "hollow:item.copper_horn.melody.nest",
+  "range": 256.0,
+  "use_duration": 4.0
+}

@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.loot;
 
-import dev.spiritstudios.hollow.registry.HollowItems;
+import dev.spiritstudios.hollow.item.HollowItems;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;

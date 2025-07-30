@@ -1,7 +1,6 @@
 package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;

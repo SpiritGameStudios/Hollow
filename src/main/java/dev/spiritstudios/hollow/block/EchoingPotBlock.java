@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.block.entity.EchoingPotBlockEntity;
-import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
+import dev.spiritstudios.hollow.block.entity.HollowBlockEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

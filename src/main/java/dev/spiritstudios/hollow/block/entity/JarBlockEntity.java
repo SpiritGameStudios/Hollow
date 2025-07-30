@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.block.entity;
 
-import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
 import dev.spiritstudios.specter.api.block.entity.InventoryBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -3,7 +3,7 @@ package dev.spiritstudios.hollow.block;
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
-import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
+import dev.spiritstudios.hollow.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
