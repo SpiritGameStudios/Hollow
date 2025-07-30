@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.entity;
 
-import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.block.HollowBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;

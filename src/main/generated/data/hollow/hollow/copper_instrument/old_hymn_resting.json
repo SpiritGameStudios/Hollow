@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.resting",
+  "call": "hollow:item.copper_horn.call.old",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.old_hymn_resting"
+  },
+  "melody": "hollow:item.copper_horn.melody.hymn",
+  "range": 256.0,
+  "use_duration": 4.0
+}

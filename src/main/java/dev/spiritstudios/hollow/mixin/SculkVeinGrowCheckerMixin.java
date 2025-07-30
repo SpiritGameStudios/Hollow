@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
+import dev.spiritstudios.hollow.block.HollowBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

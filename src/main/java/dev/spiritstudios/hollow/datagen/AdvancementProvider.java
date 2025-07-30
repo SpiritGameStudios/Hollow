@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.registry.HollowCriteria;
-import dev.spiritstudios.hollow.registry.HollowItems;
+import dev.spiritstudios.hollow.item.HollowItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;

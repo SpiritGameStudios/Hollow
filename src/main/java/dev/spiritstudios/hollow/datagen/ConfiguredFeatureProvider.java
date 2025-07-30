@@ -1,10 +1,10 @@
 package dev.spiritstudios.hollow.datagen;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.hollow.worldgen.decorator.BigBranchTreeDecorator;
-import dev.spiritstudios.hollow.worldgen.decorator.BranchTreeDecorator;
-import dev.spiritstudios.hollow.worldgen.decorator.PolyporeTreeDecorator;
+import dev.spiritstudios.hollow.block.HollowBlocks;
+import dev.spiritstudios.hollow.worldgen.tree.decorator.BigBranchTreeDecorator;
+import dev.spiritstudios.hollow.worldgen.tree.decorator.BranchTreeDecorator;
+import dev.spiritstudios.hollow.worldgen.tree.decorator.PolyporeTreeDecorator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.block.BlockState;

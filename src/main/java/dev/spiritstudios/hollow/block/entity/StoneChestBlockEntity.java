@@ -1,8 +1,7 @@
 package dev.spiritstudios.hollow.block.entity;
 
-import dev.spiritstudios.hollow.registry.HollowBlockEntityTypes;
-import dev.spiritstudios.hollow.registry.HollowBlocks;
-import dev.spiritstudios.hollow.registry.HollowSoundEvents;
+import dev.spiritstudios.hollow.block.HollowBlocks;
+import dev.spiritstudios.hollow.sound.HollowSoundEvents;
 import dev.spiritstudios.specter.api.block.entity.LootableInventoryBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
@@ -45,7 +44,7 @@ public class StoneChestBlockEntity extends LootableInventoryBlockEntity {
                 7, 0.0, 0.0, 0.0, 0.0
         );
 
-        world.playSound(null, pos, HollowSoundEvents.STONE_CHEST_EXTRACT, SoundCategory.BLOCKS);
+        world.playSound(null, pos, HollowSoundEvents.BLOCK_STONE_CHEST_EXTRACT, SoundCategory.BLOCKS);
         
         inventory.clear();
     }
