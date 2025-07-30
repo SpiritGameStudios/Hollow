@@ -57,7 +57,7 @@
   "subtitles.hollow.block.sculk_jaw.bite": "Sculk Jaw bites",
   "config.hollow.hollow.title": "Hollow",
   "config.hollow.hollow.revertCopperBulb": "Revert Copper Bulb",
-  "config.hollow.hollow.revertCopperBulb.tooltip": "Whether to revert the Copper Bulb to it's original 1-tick delay. If you aren't a redstoner, you can ignore this.",
+  "config.hollow.hollow.revertCopperBulb.tooltip": "Whether to revert the Copper Bulb to its original 1-tick delay. If you aren't a redstoner, you can ignore this.",
   "config.hollow.hollow.music": "Music",
   "config.hollow.hollow.music.tooltip": "Whether to enable Hollow's custom music.",
   "item.hollow.copper_horn.hollow.great_sky_falling": "Great Sky Falling",
