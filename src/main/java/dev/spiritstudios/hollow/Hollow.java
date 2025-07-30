@@ -6,8 +6,8 @@ import dev.spiritstudios.hollow.component.HollowDataComponentTypes;
 import dev.spiritstudios.hollow.entity.FireflyEntity;
 import dev.spiritstudios.hollow.entity.HollowEntityTypes;
 import dev.spiritstudios.hollow.item.HollowItems;
+import dev.spiritstudios.hollow.loot.HollowLootFunctionTypes;
 import dev.spiritstudios.hollow.loot.HollowLootTableModifications;
-import dev.spiritstudios.hollow.loot.SetCopperInstrumentFunction;
 import dev.spiritstudios.hollow.registry.HollowCriteria;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
 import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
@@ -21,9 +21,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.advancement.criterion.Criterion;
-import net.minecraft.loot.function.LootFunctionType;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
@@ -35,8 +33,6 @@ import org.slf4j.LoggerFactory;
 public final class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
-
-    public static final LootFunctionType<SetCopperInstrumentFunction> SET_COPPER_INSTRUMENT = new LootFunctionType<>(SetCopperInstrumentFunction.CODEC);
 
     @Override
     public void onInitialize() {
@@ -57,13 +53,9 @@ public final class Hollow implements ModInitializer {
 
         HollowGameRules.init();
 
-        Registry.register(
-                Registries.LOOT_FUNCTION_TYPE,
-                id("set_copper_instrument"),
-                SET_COPPER_INSTRUMENT
-        );
-
         FabricDefaultAttributeRegistry.register(HollowEntityTypes.FIREFLY, FireflyEntity.createFireflyAttributes());
+
+        HollowLootFunctionTypes.init();
 
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
