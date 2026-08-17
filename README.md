@@ -3,7 +3,6 @@
 A mod about hollow logs and hollow promises
 
 <img alt="fabric" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/supported/fabric_vector.svg">
-<img alt="quilt" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/supported/quilt_vector.svg">
 <img alt="forge" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/unsupported/forge_vector.svg">
 <img alt="Made by Spirit Studios" src="https://raw.githubusercontent.com/SpiritGameStudios/.github/main/assets/brand/badge/compact.svg">
 

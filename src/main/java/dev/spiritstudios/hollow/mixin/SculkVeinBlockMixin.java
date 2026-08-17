@@ -2,45 +2,44 @@ package dev.spiritstudios.hollow.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.spiritstudios.hollow.block.HollowBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MultifaceGrowthBlock;
-import net.minecraft.block.SculkVeinBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MultifaceSpreadeableBlock;
+import net.minecraft.world.level.block.SculkVeinBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(SculkVeinBlock.class)
-public abstract class SculkVeinBlockMixin extends MultifaceGrowthBlock {
-    public SculkVeinBlockMixin(Settings settings) {
+public abstract class SculkVeinBlockMixin extends MultifaceSpreadeableBlock {
+    public SculkVeinBlockMixin(Properties settings) {
         super(settings);
     }
 
-    @WrapOperation(method = "place", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/SculkVeinBlock;canGrowOn(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z"))
-    private static boolean canGrowOn(BlockView blockView, BlockPos blockPos, Direction direction, Operation<Boolean> original) {
+    @WrapOperation(method = "regrow", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/SculkVeinBlock;canAttachTo(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z"))
+    private static boolean canGrowOn(BlockGetter blockView, BlockPos blockPos, Direction direction, Operation<Boolean> original) {
         BlockState blockState = blockView.getBlockState(blockPos);
-        return original.call(blockView, blockPos, direction) && !blockState.isOf(HollowBlocks.SCULK_JAW);
+        return original.call(blockView, blockPos, direction) && !blockState.is(HollowBlocks.SCULK_JAW);
     }
 
     @WrapOperation(
-            method = "spreadAtSamePosition",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 1)
+            method = "onDischarged",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z", ordinal = 1)
     )
-    private boolean spreadAtSamePosition(BlockState instance, Block block, Operation<Boolean> original) {
-        return original.call(instance, block) || original.call(instance, HollowBlocks.SCULK_JAW);
+    private boolean spreadAtSamePosition(BlockState instance, Object o, Operation<Boolean> original) {
+        return original.call(instance, o) || original.call(instance, HollowBlocks.SCULK_JAW);
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (neighborState.isOf(HollowBlocks.SCULK_JAW) && direction == Direction.DOWN) return Blocks.AIR.getDefaultState();
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (neighborState.is(HollowBlocks.SCULK_JAW) && direction == Direction.DOWN) return Blocks.AIR.defaultBlockState();
 
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 }

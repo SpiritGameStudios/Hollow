@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "${mod_id}",
-  "version": "${mod_version}",
+  "id": "hollow",
+  "version": "${version}",
   "name": "Hollow",
   "description": "A mod about hollow logs and hollow promises.",
   "authors": [
@@ -23,10 +23,7 @@
       "dev.spiritstudios.hollow.Hollow"
     ],
     "fabric-datagen": [
-      "dev.spiritstudios.hollow.datagen.HollowDatagen"
-    ],
-    "dynamiclights": [
-      "dev.spiritstudios.hollow.lambdynamiclights.HollowDynamicLights"
+      "dev.spiritstudios.hollow.data.gen.HollowDatagen"
     ]
   },
   "mixins": [
@@ -36,12 +33,20 @@
       "environment": "client"
     }
   ],
-  "accessWidener": "hollow.accesswidener",
+  "accessWidener": "hollow.classtweaker",
   "depends": {
-    "fabricloader": ">=${fabric_loader_version}",
-    "minecraft": "~${minecraft_version}-",
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "~26.2",
     "fabric-api": "*",
-    "java": ">=21",
-    "specter-core": "*"
+    "java": ">=25"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/TTmx7d2axf",
+        "modmenu.github_releases": "https://github.com/SpiritGameStudios/Hollow/releases",
+        "modmenu.modrinth": "https://modrinth.com/mod/hollow"
+      }
+    }
   }
 }

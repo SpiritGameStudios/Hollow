@@ -1,94 +1,88 @@
 package dev.spiritstudios.hollow.render.block;
 
-import dev.spiritstudios.hollow.block.entity.EchoingVaseBlockEntity;
-import dev.spiritstudios.specter.api.core.math.Easing;
-import dev.spiritstudios.specter.api.render.client.block.BlockModelBlockEntityRenderer;
-import net.minecraft.block.entity.DecoratedPotBlockEntity;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
+import dev.spiritstudios.hollow.world.level.block.entity.EchoingVaseBlockEntity;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.block.BlockModelResolver;
+import net.minecraft.client.renderer.block.model.BlockDisplayContext;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.util.Ease;
+import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.util.Mth;
+import com.mojang.math.Axis;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
+import org.jspecify.annotations.Nullable;
 
-public class EchoingVaseBlockEntityRenderer extends BlockModelBlockEntityRenderer<EchoingVaseBlockEntity> {
-	public EchoingVaseBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-		super(context);
-	}
+public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<EchoingVaseBlockEntity, EchoingVaseRenderState> {
+    public static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
+    protected final BlockModelResolver blockModelResolver;
 
-	private static final float tiltAngle = 0.6283f / 2;
-	private static final float fallAngle = MathHelper.HALF_PI - tiltAngle;
+    public EchoingVaseBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        this.blockModelResolver = context.blockModelResolver();
+    }
 
-	@Override
-	public void render(EchoingVaseBlockEntity entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
+    private static final float tiltAngle = 0.6283f / 2;
+    private static final float fallAngle = Mth.HALF_PI - tiltAngle;
 
-		matrices.push();
+    @Override
+    public EchoingVaseRenderState createRenderState() {
+        return new EchoingVaseRenderState();
+    }
 
-		DecoratedPotBlockEntity.WobbleType wobbleType = entity.lastWobbleType;
-		if (entity.getWorld() == null) {
-			renderBlockModel(entity, matrices, vertexConsumers, overlay);
+    @Override
+    public void extractRenderState(EchoingVaseBlockEntity blockEntity, EchoingVaseRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        state.direction = blockEntity.getDirection();
+        DecoratedPotBlockEntity.WobbleStyle wobbleStyle = blockEntity.lastWobbleStyle;
+        if (wobbleStyle != null && blockEntity.getLevel() != null) {
+            state.wobbleProgress = ((float) (blockEntity.getLevel().getGameTime() - blockEntity.wobbleStartedAtTick) + partialTicks) / wobbleStyle.duration;
+        } else {
+            state.wobbleProgress = 0.0F;
+        }
 
-			matrices.pop();
-			return;
-		}
+        state.fallTime = blockEntity.fallTime + partialTicks;
+		state.fallDirection = blockEntity.fallDirection;
+		state.half = blockEntity.getBlockState().getValue(BlockStateProperties.DOUBLE_BLOCK_HALF);
 
-		if (entity.fallTime > 0) {
-			Vector3f fallDir = entity.fallDirection.getUnitVector();
+        blockModelResolver.update(state.model, blockEntity.getBlockState(), BLOCK_DISPLAY_CONTEXT);
+    }
 
-			if (entity.fallTime >= EchoingVaseBlockEntity.TILT_TIME) {
-				float pct = (float) Math.min(1, Easing.QUART.in((entity.fallTime - EchoingVaseBlockEntity.TILT_TIME + tickProgress) / (EchoingVaseBlockEntity.FALL_TIME - EchoingVaseBlockEntity.TILT_TIME)));
+    @Override
+    public void submit(EchoingVaseRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+        poseStack.pushPose();
+
+        if (state.fallTime > 0) {
+			Vector3f fallDir = state.fallDirection.step();
+
+			if (state.fallTime >= EchoingVaseBlockEntity.TILT_TIME) {
+				float pct = Math.min(1, Ease.inQuart((state.fallTime - EchoingVaseBlockEntity.TILT_TIME) / (EchoingVaseBlockEntity.FALL_TIME - EchoingVaseBlockEntity.TILT_TIME)));
 
 				float angle = Math.min(
 						tiltAngle + fallAngle * pct,
-						MathHelper.HALF_PI
+						Mth.HALF_PI
 				);
 
-				matrices.multiply(
-						RotationAxis.of(entity.fallDirection.rotateYCounterclockwise().getUnitVector()).rotation(angle),
-						0.5f + fallDir.x / 2, entity.getCachedState().get(Properties.DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.LOWER) ? 0 : -1, 0.5f + fallDir.z / 2
+				poseStack.rotateAround(
+						Axis.of(state.fallDirection.getCounterClockWise().step()).rotation(angle),
+						0.5f + fallDir.x / 2, state.half.equals(DoubleBlockHalf.LOWER) ? 0 : -1, 0.5f + fallDir.z / 2
 				);
 			} else {
-				float pct = (entity.fallTime + tickProgress) / EchoingVaseBlockEntity.TILT_TIME;
-				float angle = (float) (tiltAngle * Easing.SINE.inOut(pct));
+				float pct = state.fallTime / EchoingVaseBlockEntity.TILT_TIME;
+				float angle = tiltAngle * Ease.inOutSine(pct);
 
-				matrices.multiply(
-						RotationAxis.of(entity.fallDirection.rotateCounterclockwise(Direction.Axis.Y).getUnitVector()).rotation(angle),
-						0.5f + fallDir.x / 2, entity.getCachedState().get(Properties.DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.LOWER) ? 0 : -1, 0.5f + fallDir.z / 2
-				);
-			}
-		} else if (wobbleType != null) {
-			float wobbleProgress = ((float) (entity.getWorld().getTime() - entity.lastWobbleTime) + tickProgress) / (float) wobbleType.lengthInTicks;
-			if (wobbleProgress >= 0.0F && wobbleProgress <= 1.0F) {
-				if (wobbleType == DecoratedPotBlockEntity.WobbleType.POSITIVE) {
-					float progressRadians = wobbleProgress * MathHelper.TAU;
-
-					matrices.multiply(
-							RotationAxis.POSITIVE_X.rotation((-1.5F * (MathHelper.cos(progressRadians) + 0.5F) * MathHelper.sin(progressRadians / 2.0F)) * 0.015625F),
-							0.5F, 0.0F, 0.5F
-					);
-
-					matrices.multiply(
-							RotationAxis.POSITIVE_Z.rotation(MathHelper.sin(progressRadians) * 0.015625F),
-							0.5F, 0.0F, 0.5F
-					);
-				} else matrices.multiply(
-						RotationAxis.POSITIVE_Y.rotation(MathHelper.sin(-wobbleProgress * 3.0F * MathHelper.PI) * 0.125F * (1.0F - wobbleProgress)),
-						0.5F, 0.0F, 0.5F
+				poseStack.rotateAround(
+						Axis.of(state.fallDirection.getCounterClockWise(net.minecraft.core.Direction.Axis.Y).step()).rotation(angle),
+						0.5f + fallDir.x / 2, state.half.equals(DoubleBlockHalf.LOWER) ? 0 : -1, 0.5f + fallDir.z / 2
 				);
 			}
 		}
 
-		renderBlockModel(entity, matrices, vertexConsumers, overlay);
-
-		matrices.pop();
-	}
-
-	@Override
-	public boolean rendersOutsideBoundingBox(EchoingVaseBlockEntity blockEntity) {
-		return true;
-	}
+        poseStack.popPose();
+    }
 }

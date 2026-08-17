@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hollow:block/flowering_lily_pad"
+      },
+      {
+        "model": "hollow:block/flowering_lily_pad",
+        "y": 90
+      },
+      {
+        "model": "hollow:block/flowering_lily_pad",
+        "y": 180
+      },
+      {
+        "model": "hollow:block/flowering_lily_pad",
+        "y": 270
+      }
+    ]
+  }
+}

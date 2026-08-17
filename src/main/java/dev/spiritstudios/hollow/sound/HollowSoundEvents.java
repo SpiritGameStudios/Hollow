@@ -1,15 +1,15 @@
 package dev.spiritstudios.hollow.sound;
 
 import dev.spiritstudios.hollow.Hollow;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.core.Holder;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.resources.Identifier;
 
 public final class HollowSoundEvents {
-    public static final RegistryEntry.Reference<SoundEvent> MUSIC_DISC_POSTMORTEM = registerReference("music_disc.postmortem");
-    public static final RegistryEntry.Reference<SoundEvent> MUSIC_OVERWORLD_BIRCH_FOREST = registerReference("music.overworld.birch_forest");
+    public static final Holder.Reference<SoundEvent> MUSIC_DISC_POSTMORTEM = registerForHolder("music_disc.postmortem");
+    public static final Holder.Reference<SoundEvent> MUSIC_OVERWORLD_BIRCH_FOREST = registerForHolder("music.overworld.birch_forest");
 
     public static final SoundEvent BLOCK_SCULK_JAW_BITE = register("block.sculk_jaw.bite");
     public static final SoundEvent BLOCK_STONE_CHEST_EXTRACT = register("block.stone_chest.extract");
@@ -47,14 +47,17 @@ public final class HollowSoundEvents {
     public static final SoundEvent ITEM_COPPER_HORN_BASS_GIFT = register("item.copper_horn.bass.gift");
     public static final SoundEvent ITEM_COPPER_HORN_BASS_LOVE = register("item.copper_horn.bass.love");
 
-    private static SoundEvent register(String path) {
-        Identifier id = Hollow.id(path);
-        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+    private static SoundEvent register(String name) {
+        Identifier id = Hollow.id(name);
+
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
-    private static RegistryEntry.Reference<SoundEvent> registerReference(String path) {
-        Identifier id = Hollow.id(path);
-        return Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+    private static Holder.Reference<SoundEvent> registerForHolder(String name) {
+        Identifier id = Hollow.id(name);
+
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
+
     }
 
     public static void init() {

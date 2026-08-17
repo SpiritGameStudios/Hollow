@@ -1,21 +1,13 @@
 package dev.spiritstudios.hollow;
 
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.world.GameRules;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
 
 public final class HollowGameRules {
-    public static final GameRules.Key<GameRules.BooleanRule> DO_FROG_POISONING = GameRuleRegistry.register(
-            "doFrogPoisoning",
-            GameRules.Category.MOBS,
-            GameRuleFactory.createBooleanRule(true)
-    );
-
-    public static final GameRules.Key<GameRules.BooleanRule> COPPER_BULB_DELAY = GameRuleRegistry.register(
-            "copperBulbDelay",
-            GameRules.Category.UPDATES,
-            GameRuleFactory.createBooleanRule(true)
-    );
+    public static final GameRule<Boolean> COPPER_BULB_DELAY = GameRuleBuilder.forBoolean(true)
+            .category(GameRuleCategory.UPDATES)
+            .buildAndRegister(Hollow.id("copper_bulb_delay"));
 
     public static void init() {
         // NO-OP

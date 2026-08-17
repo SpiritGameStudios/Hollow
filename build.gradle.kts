@@ -1,23 +1,38 @@
-import com.modrinth.minotaur.ModrinthExtension
-
 plugins {
     java
+
     alias(libs.plugins.fabric.loom)
-    alias(libs.plugins.minotaur)
+    alias(libs.plugins.modpublish)
 }
 
-class ModInfo {
-    val id = property("mod.id").toString()
-    val group = property("mod.group").toString()
-    val version = property("mod.version").toString()
-}
+val modVersion = "1.4.0"
+val modId = "hollow"
+val modName = "Hollow"
 
-val mod = ModInfo()
+val modrinthProject = "hollow"
+val modrinthProjectId = ""
+val githubRepository = "SpiritGameStudios/Hollow"
 
-version = mod.version
-group = mod.group
+group = "dev.spiritstudios"
+base.archivesName = modId
 
-base.archivesName = "${mod.id}-${mod.version}"
+version = "$modVersion+${libs.versions.minecraft.get()}"
+
+val debugArgs = listOf(
+    "-enableassertions",
+
+    // Mixin debugging, should make failures happen quicker
+    "-Dmixin.debug.verify=true",
+    "-Dmixin.debug.strict=true",
+    "-Dmixin.debug.countInjections=true",
+
+    // Memory Usage Optimization
+    "-XX:+UseZGC",
+    "-XX:+UseCompactObjectHeaders",
+    "-XX:+UseStringDeduplication",
+
+    "-XX:+AlwaysPreTouch" // Apparently makes startup faster
+)
 
 
 fabricApi {
@@ -27,78 +42,98 @@ fabricApi {
 }
 
 loom {
-    splitEnvironmentSourceSets()
-    accessWidenerPath = file("src/main/resources/hollow.accesswidener")
+    runtimeOnlyLog4j = true
 
-    mods.create(mod.id) {
-        sourceSet(sourceSets.getByName("main"))
-        sourceSet(sourceSets.getByName("client"))
+    splitEnvironmentSourceSets()
+
+    accessWidenerPath = file("src/main/resources/${modId}.classtweaker")
+
+    mods {
+        create(name) {
+            sourceSet("main")
+            sourceSet("client")
+        }
     }
+
+    runs.configureEach { jvmArguments.addAll(debugArgs) }
 }
 
+@Suppress("UnstableApiUsage")
 repositories {
-    mavenCentral()
-    maven("https://maven.spiritstudios.dev/releases/")
-    maven("https://maven.terraformersmc.com/releases/")
-    maven("https://maven.gegy.dev/")
-
-    exclusiveContent {
-        forRepository { maven("https://api.modrinth.com/maven/") }
-        filter { includeGroup("maven.modrinth") }
+    maven("https://maven.spiritstudios.dev/releases/") {
+        name = "Spirit Studios Releases"
+        content { includeGroupAndSubgroups("dev.spiritstudios") }
     }
+
+    maven("https://maven.spiritstudios.dev/snapshots/") {
+        name = "Spirit Studios Snapshots"
+        content { includeGroupAndSubgroups("dev.spiritstudios") }
+    }
+
+    mavenCentral()
 }
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(variantOf(libs.yarn) { classifier("v2") })
-    modImplementation(libs.fabric.loader)
 
-    modImplementation(libs.fabric.api)
-
-    include(libs.bundles.specter)
-    modImplementation(libs.bundles.specter)
-
-    modRuntimeOnly(libs.specter.debug)
-
-    modImplementation(libs.lambdynamiclights)
+    implementation(libs.fabric.loader)
+    implementation(libs.fabric.api)
 }
 
 tasks.processResources {
     val map = mapOf(
-        "mod_id" to mod.id,
-        "mod_version" to mod.version,
-        "fabric_loader_version" to libs.versions.fabric.loader.get(),
-        "minecraft_version" to libs.versions.minecraft.get()
+        "version" to modVersion,
+        "loader_version" to libs.versions.fabric.loader.get()
     )
 
     inputs.properties(map)
+
     filesMatching("fabric.mod.json") { expand(map) }
 }
 
 java {
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release = 21
+    options.release = 25
 }
 
-tasks.jar { from("LICENSE") { rename { "${it}_${base.archivesName}" } } }
+tasks.jar {
+    inputs.property("archivesName", project.base.archivesName)
+    from("LICENSE") { rename { "${it}_${inputs.properties["archivesName"]}" } }
+}
 
-modrinth {
-    token.set(System.getenv("MODRINTH_TOKEN"))
-    projectId.set(mod.id)
-    versionNumber.set(mod.version)
-    uploadFile.set(tasks.remapJar)
-    gameVersions.addAll(libs.versions.minecraft.get())
-    loaders.addAll("fabric", "quilt")
-    syncBodyFrom.set(rootProject.file("README.md").readText())
-    dependencies {
-        required.version("fabric-api", libs.versions.fabric.api.get())
-        optional.version("lambdynamiclights", libs.versions.lambdynamiclights.get())
+
+publishMods {
+    file = tasks.jar.get().archiveFile
+    modLoaders.add("fabric")
+
+    version = modVersion
+    type = STABLE
+    displayName = "$modName $modVersion for Minecraft ${libs.versions.minecraft.get()}"
+
+    changelog = providers.fileContents(layout.projectDirectory.file("CHANGELOG.md")).asText
+
+    modrinth {
+        accessToken = providers.gradleProperty("secrets.modrinth_token")
+        projectId = modrinthProjectId
+        minecraftVersions.add(libs.versions.minecraft.get())
+
+        projectDescription = providers.fileContents(layout.projectDirectory.file("README.md")).asText
+
+        requires("fabric-api")
+    }
+
+    github {
+        accessToken = providers.gradleProperty("secrets.github_token")
+        repository = githubRepository
+        commitish = "main"
+
+        tagName = modVersion
     }
 }

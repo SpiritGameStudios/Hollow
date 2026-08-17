@@ -1,9 +1,29 @@
 {
   "type": "minecraft:tree",
   "config": {
+    "below_trunk_provider": {
+      "type": "minecraft:rule_based_state_provider",
+      "rules": [
+        {
+          "if_true": {
+            "type": "minecraft:not",
+            "predicate": {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:cannot_replace_below_tree_trunk"
+            }
+          },
+          "then": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "minecraft:dirt"
+            }
+          }
+        }
+      ]
+    },
     "decorators": [
       {
-        "type": "hollow:polypore_tree_decorator",
+        "type": "hollow:polypore",
         "provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
@@ -16,7 +36,7 @@
         }
       },
       {
-        "type": "hollow:branch_tree_decorator",
+        "type": "hollow:branch",
         "max_amount": 5,
         "probability": 0.5,
         "provider": {
@@ -30,14 +50,8 @@
         }
       }
     ],
-    "dirt_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "minecraft:dirt"
-      }
-    },
     "foliage_placer": {
-      "type": "hollow:blob_with_hanging",
+      "type": "hollow:blob_with_hanging_foliage_placer",
       "hanging_leaves_chance": 0.25,
       "hanging_leaves_extension_chance": 0.4,
       "height": 3,
@@ -55,13 +69,9 @@
         }
       }
     },
-    "force_dirt": false,
     "ignore_vines": true,
     "minimum_size": {
-      "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
-      "lower_size": 0,
-      "upper_size": 1
+      "type": "minecraft:two_layers_feature_size"
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",

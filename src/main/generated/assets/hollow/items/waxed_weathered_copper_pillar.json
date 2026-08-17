@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "hollow:block/waxed_weathered_copper_pillar"
+    "model": "hollow:block/weathered_copper_pillar"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "hollow:block/giant_lily_pad_template",
+  "textures": {
+    "texture": "hollow:block/giant_lily_pad_2"
+  }
+}

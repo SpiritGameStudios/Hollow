@@ -3,7 +3,7 @@ package dev.spiritstudios.hollow.data;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 import java.util.function.Function;
 
@@ -21,18 +21,36 @@ public record LogTypeData(Identifier id, Identifier sideTexture, Identifier insi
     public static LogTypeData byId(Identifier id) {
         return new LogTypeData(
                 id,
-                id.withPrefixedPath("block/"),
-                id.withPrefixedPath("block/stripped_"),
-                id.withPrefixedPath("block/").withSuffixedPath("_top")
+                id.withPrefix("block/"),
+                id.withPrefix("block/stripped_"),
+                id.withPrefix("block/").withSuffix("_top")
         );
     }
 
     public static LogTypeData byIdStripped(Identifier id) {
         return new LogTypeData(
                 id,
-                id.withPrefixedPath("block/"),
-                id.withPrefixedPath("block/"),
-                id.withPrefixedPath("block/").withSuffixedPath("_top")
+                id.withPrefix("block/"),
+                id.withPrefix("block/"),
+                id.withPrefix("block/").withSuffix("_top")
+        );
+    }
+
+    public static LogTypeData byIdWood(Identifier id) {
+        return new LogTypeData(
+                id,
+                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log")),
+                id.withPrefix("block/stripped_").withPath(path -> path.replace("_wood", "_log")),
+                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log"))
+        );
+    }
+
+    public static LogTypeData byIdStrippedWood(Identifier id) {
+        return new LogTypeData(
+                id,
+                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log")),
+                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log")),
+                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log"))
         );
     }
 }
