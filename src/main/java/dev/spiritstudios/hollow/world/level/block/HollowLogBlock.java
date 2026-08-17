@@ -26,35 +26,24 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 
+import java.util.Map;
 import java.util.function.Function;
 
 public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock {
-    public static final VoxelShape SHAPE_X = Shapes.or(
-            box(0, 14, 0, 16, 16, 16),
-            box(0, 0, 2, 16, 2, 14),
-            box(0, 0, 0, 16, 14, 2),
-            box(0, 0, 14, 16, 14, 16)
+    public static final Map<Direction.Axis, VoxelShape> SHAPES = Shapes.rotateAllAxis(
+            Shapes.or(
+                    box(0, 14, 0, 16, 16, 16),
+                    box(2, 0, 0, 14, 2, 16),
+                    box(0, 0, 0, 2, 14, 16),
+                    box(14, 0, 0, 16, 14, 16)
+            )
     );
-    
-    public static final VoxelShape SHAPE_Y = Shapes.or(
-            box(0, 0, 0, 2, 16, 16),
-            box(14, 0, 2, 16, 16, 14),
-            box(2, 0, 0, 16, 16, 2),
-            box(2, 0, 14, 16, 16, 16)
-    );
-    
-    public static final VoxelShape SHAPE_Z = Shapes.or(
-            box(0, 14, 0, 16, 16, 16),
-            box(2, 0, 0, 14, 2, 16),
-            box(0, 0, 0, 2, 14, 16),
-            box(14, 0, 0, 16, 14, 16)
-    );
-    
+
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<Layer> LAYER = EnumProperty.create("layer", Layer.class);
-    
+
     public final LogTypeData typeData;
-    
+
     public HollowLogBlock(Properties settings, LogTypeData typeData) {
         super(settings);
         this.typeData = typeData;
@@ -71,24 +60,10 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
         );
     }
 
-    public static Function<BlockBehaviour.Properties, Block> ofWood(Block block) {
-        return settings -> new HollowLogBlock(
-                settings,
-                LogTypeData.byIdWood(BuiltInRegistries.BLOCK.getKey(block))
-        );
-    }
-
     public static Function<BlockBehaviour.Properties, Block> ofStripped(Block block) {
         return settings -> new HollowLogBlock(
                 settings,
                 LogTypeData.byIdStripped(BuiltInRegistries.BLOCK.getKey(block))
-        );
-    }
-
-    public static Function<BlockBehaviour.Properties, Block> ofStrippedWood(Block block) {
-        return settings -> new HollowLogBlock(
-                settings,
-                LogTypeData.byIdStrippedWood(BuiltInRegistries.BLOCK.getKey(block))
         );
     }
 
@@ -123,8 +98,9 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
 
     @Override
     protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-        if (state.getValue(WATERLOGGED))
+        if (state.getValue(WATERLOGGED)) {
             tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+        }
 
         if (direction == Direction.UP) return state.setValue(LAYER, Layer.get(neighborState));
 
@@ -133,11 +109,7 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(AXIS)) {
-            case X -> SHAPE_X;
-            case Y -> SHAPE_Y;
-            default -> SHAPE_Z;
-        };
+        return SHAPES.get(state.getValue(AXIS));
     }
 
     public enum Layer implements StringRepresentable {

@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.data.component;
+package dev.spiritstudios.hollow.world.item;
 
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.registry.HollowRegistryKeys;

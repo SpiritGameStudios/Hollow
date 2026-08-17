@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.sound;
+package dev.spiritstudios.hollow.sounds;
 
 import dev.spiritstudios.hollow.Hollow;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,8 +11,10 @@ public final class HollowSoundEvents {
     public static final Holder.Reference<SoundEvent> MUSIC_DISC_POSTMORTEM = registerForHolder("music_disc.postmortem");
     public static final Holder.Reference<SoundEvent> MUSIC_OVERWORLD_BIRCH_FOREST = registerForHolder("music.overworld.birch_forest");
 
-    public static final SoundEvent BLOCK_SCULK_JAW_BITE = register("block.sculk_jaw.bite");
-    public static final SoundEvent BLOCK_STONE_CHEST_EXTRACT = register("block.stone_chest.extract");
+    public static final SoundEvent SCULK_JAW_BITE = register("block.sculk_jaw.bite");
+    public static final SoundEvent STONE_CHEST_EXTRACT = register("block.stone_chest.extract");
+
+    public static final SoundEvent JAR_USE_FIREFLIES = register("item.jar.use.fireflies");
 
     public static final SoundEvent ITEM_COPPER_HORN_CALL_GREAT = register("item.copper_horn.call.great");
     public static final SoundEvent ITEM_COPPER_HORN_CALL_OLD = register("item.copper_horn.call.old");

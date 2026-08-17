@@ -1,9 +1,9 @@
 package dev.spiritstudios.hollow.data.gen;
 
-import dev.spiritstudios.hollow.data.component.CopperInstruments;
+import dev.spiritstudios.hollow.world.item.CopperInstruments;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
 import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
-import dev.spiritstudios.hollow.sound.HollowJukeboxSongs;
+import dev.spiritstudios.hollow.world.item.HollowJukeboxSongs;
 import dev.spiritstudios.hollow.world.level.gen.feature.HollowConfiguredFeatures;
 import dev.spiritstudios.hollow.world.level.gen.feature.HollowPlacements;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;

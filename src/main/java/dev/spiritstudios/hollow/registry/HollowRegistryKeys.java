@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.registry;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.data.component.CopperInstrument;
+import dev.spiritstudios.hollow.world.item.CopperInstrument;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;

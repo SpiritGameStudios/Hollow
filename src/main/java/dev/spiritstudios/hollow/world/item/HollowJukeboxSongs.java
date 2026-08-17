@@ -1,6 +1,7 @@
-package dev.spiritstudios.hollow.sound;
+package dev.spiritstudios.hollow.world.item;
 
 import dev.spiritstudios.hollow.Hollow;
+import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;

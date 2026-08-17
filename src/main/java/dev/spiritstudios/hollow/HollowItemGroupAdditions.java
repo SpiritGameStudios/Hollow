@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow;
 
-import dev.spiritstudios.hollow.data.component.CopperInstrumentComponent;
-import dev.spiritstudios.hollow.data.component.HollowDataComponents;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
+import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;

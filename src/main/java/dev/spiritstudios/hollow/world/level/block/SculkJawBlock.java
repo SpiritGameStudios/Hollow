@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.world.level.block;
 
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
 import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
-import dev.spiritstudios.hollow.sound.HollowSoundEvents;
+import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -38,7 +38,7 @@ public class SculkJawBlock extends SculkBlock {
         }
 
         if (!world.getBlockState(pos).getValue(ACTIVE))
-            world.playSound(null, pos.above(), HollowSoundEvents.BLOCK_SCULK_JAW_BITE, SoundSource.BLOCKS, 1F, 0.6F);
+            world.playSound(null, pos.above(), HollowSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1F, 0.6F);
 
         world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
 

@@ -35,22 +35,4 @@ public record LogTypeData(Identifier id, Identifier sideTexture, Identifier insi
                 id.withPrefix("block/").withSuffix("_top")
         );
     }
-
-    public static LogTypeData byIdWood(Identifier id) {
-        return new LogTypeData(
-                id,
-                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log")),
-                id.withPrefix("block/stripped_").withPath(path -> path.replace("_wood", "_log")),
-                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log"))
-        );
-    }
-
-    public static LogTypeData byIdStrippedWood(Identifier id) {
-        return new LogTypeData(
-                id,
-                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log")),
-                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log")),
-                id.withPrefix("block/").withPath(path -> path.replace("_wood", "_log"))
-        );
-    }
 }

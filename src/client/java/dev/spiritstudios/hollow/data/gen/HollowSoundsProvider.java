@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.sound.HollowSoundEvents;
+import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import net.fabricmc.fabric.api.client.datagen.v1.builder.SoundTypeBuilder;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricSoundsProvider;
 import net.minecraft.core.HolderLookup;
@@ -33,8 +33,8 @@ public final class HollowSoundsProvider extends FabricSoundsProvider {
 		);
 
 		exporter.add(
-				HollowSoundEvents.BLOCK_STONE_CHEST_EXTRACT,
-				SoundTypeBuilder.of(HollowSoundEvents.BLOCK_STONE_CHEST_EXTRACT)
+				HollowSoundEvents.STONE_CHEST_EXTRACT,
+				SoundTypeBuilder.of(HollowSoundEvents.STONE_CHEST_EXTRACT)
 						.sound(ofVanillaFile("block/decorated_pot/insert1").volume(0.9F))
 						.sound(ofVanillaFile("block/decorated_pot/insert2").volume(0.9F))
 						.sound(ofVanillaFile("block/decorated_pot/insert3").volume(0.9F))
@@ -42,8 +42,8 @@ public final class HollowSoundsProvider extends FabricSoundsProvider {
 		);
 
 		exporter.add(
-				HollowSoundEvents.BLOCK_SCULK_JAW_BITE,
-				SoundTypeBuilder.of(HollowSoundEvents.BLOCK_SCULK_JAW_BITE)
+				HollowSoundEvents.SCULK_JAW_BITE,
+				SoundTypeBuilder.of(HollowSoundEvents.SCULK_JAW_BITE)
 						.sound(ofVanillaFile("mob/goat/horn_break1").volume(0.9F))
 						.sound(ofVanillaFile("mob/goat/horn_break2").volume(0.9F))
 						.sound(ofVanillaFile("mob/goat/horn_break3").volume(0.9F))

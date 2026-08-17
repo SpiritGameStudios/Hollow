@@ -24,78 +24,67 @@ public final class HollowBlocks {
     public static final HollowLogCollection<Block> OAK_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.OAK_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG,
-            Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD
+            Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG
     );
 
     public static final HollowLogCollection<Block> SPRUCE_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.SPRUCE_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG,
-            Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD
+            Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG
     );
 
     public static final HollowLogCollection<Block> BIRCH_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.BIRCH_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG,
-            Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD
+            Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG
     );
 
     public static final HollowLogCollection<Block> JUNGLE_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.JUNGLE_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG,
-            Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD
+            Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG
     );
 
     public static final HollowLogCollection<Block> ACACIA_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.ACACIA_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG,
-            Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD
+            Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG
     );
 
     public static final HollowLogCollection<Block> DARK_OAK_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.DARK_OAK_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG,
-            Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD
+            Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG
     );
 
     public static final HollowLogCollection<Block> CRIMSON_HOLLOW_STEM = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.CRIMSON_HOLLOW_STEM,
             HollowBlocks::register,
-            Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM,
-            Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE
+            Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM
     );
 
     public static final HollowLogCollection<Block> WARPED_HOLLOW_STEM = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.WARPED_HOLLOW_STEM,
             HollowBlocks::register,
-            Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM,
-            Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE
+            Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM
     );
 
     public static final HollowLogCollection<Block> MANGROVE_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.MANGROVE_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG,
-            Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_WOOD
+            Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG
     );
 
     public static final HollowLogCollection<Block> CHERRY_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.CHERRY_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG,
-            Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD
+            Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG
     );
 
     public static final HollowLogCollection<Block> PALE_OAK_HOLLOW_LOG = HollowLogCollection.registerBlocks(
             HollowBlockItemIds.PALE_OAK_HOLLOW_LOG,
             HollowBlocks::register,
-            Blocks.PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_LOG,
-            Blocks.PALE_OAK_WOOD, Blocks.STRIPPED_PALE_OAK_WOOD
+            Blocks.PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_LOG
     );
 
     // endregion

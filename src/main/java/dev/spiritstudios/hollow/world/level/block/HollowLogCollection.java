@@ -34,9 +34,7 @@ public record HollowLogCollection<T>(
             HollowLogCollection<Id> ids,
             TriFunction<Id, Function<BlockBehaviour.Properties, Block>, BlockBehaviour.Properties, Block> register,
             Block log,
-            Block strippedLog,
-            Block wood,
-            Block strippedWood
+            Block strippedLog
     ) {
         return new HollowLogCollection<>(
                 register.apply(

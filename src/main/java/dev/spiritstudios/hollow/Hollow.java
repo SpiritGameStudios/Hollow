@@ -2,14 +2,14 @@ package dev.spiritstudios.hollow;
 
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
-import dev.spiritstudios.hollow.data.component.HollowDataComponents;
+import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootFunctionTypes;
 import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootTableModifications;
 import dev.spiritstudios.hollow.registry.HollowParticleTypes;
 import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
-import dev.spiritstudios.hollow.sound.HollowSoundEvents;
+import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import dev.spiritstudios.hollow.world.level.gen.HollowBiomeModifications;
 import dev.spiritstudios.hollow.world.level.gen.feature.HollowFeatures;
 import dev.spiritstudios.hollow.world.level.gen.tree.decorator.HollowTreeDecoratorTypes;

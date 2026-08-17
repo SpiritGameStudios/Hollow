@@ -1,11 +1,9 @@
 package dev.spiritstudios.hollow.world.item;
 
-import dev.spiritstudios.hollow.data.component.CopperInstrumentComponent;
-import dev.spiritstudios.hollow.data.component.CopperInstruments;
-import dev.spiritstudios.hollow.data.component.HollowDataComponents;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
+import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.references.HollowItemIds;
-import dev.spiritstudios.hollow.sound.HollowJukeboxSongs;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.HollowLogCollection;
 import net.fabricmc.fabric.api.registry.CompostableRegistry;
@@ -130,7 +128,7 @@ public final class HollowItems {
 
     public static final Item SCULK_JAW = registerBlock(HollowBlockItemIds.SCULK_JAW, HollowBlocks.SCULK_JAW);
 
-    public static final Item JAR = registerBlock(HollowBlockItemIds.JAR, HollowBlocks.JAR);
+    public static final Item JAR = registerBlock(HollowBlockItemIds.JAR, HollowBlocks.JAR, JarItem::new);
 
     public static final Item JAR_OF_FIREFLIES = registerBlock(HollowBlockItemIds.JAR_OF_FIREFLIES, HollowBlocks.JAR_OF_FIREFLIES);
 

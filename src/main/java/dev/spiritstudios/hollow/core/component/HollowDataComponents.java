@@ -1,6 +1,7 @@
-package dev.spiritstudios.hollow.data.component;
+package dev.spiritstudios.hollow.core.component;
 
 import dev.spiritstudios.hollow.Hollow;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;

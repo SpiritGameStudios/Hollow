@@ -1,8 +1,7 @@
 package dev.spiritstudios.hollow.world.item;
 
-import dev.spiritstudios.hollow.data.component.CopperInstrument;
-import dev.spiritstudios.hollow.data.component.CopperInstrumentComponent;
-import dev.spiritstudios.hollow.data.component.HollowDataComponents;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
+import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;

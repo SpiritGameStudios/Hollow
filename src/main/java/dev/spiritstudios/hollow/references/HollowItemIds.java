@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.references;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.sound.HollowJukeboxSongs;
+import dev.spiritstudios.hollow.world.item.HollowJukeboxSongs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;

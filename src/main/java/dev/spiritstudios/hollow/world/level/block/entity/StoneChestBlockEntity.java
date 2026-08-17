@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.world.level.block.entity;
 
-import dev.spiritstudios.hollow.sound.HollowSoundEvents;
+import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,7 +48,7 @@ public class StoneChestBlockEntity extends RandomizableNoMenuContainerBlockEntit
                 7, 0.0, 0.0, 0.0, 0.0
         );
 
-        level.playSound(null, worldPosition, HollowSoundEvents.BLOCK_STONE_CHEST_EXTRACT, SoundSource.BLOCKS);
+        level.playSound(null, worldPosition, HollowSoundEvents.STONE_CHEST_EXTRACT, SoundSource.BLOCKS);
         
         items.clear();
     }

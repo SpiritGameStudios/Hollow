@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.data;
+package dev.spiritstudios.hollow.tags;
 
 import dev.spiritstudios.hollow.Hollow;
 import net.minecraft.core.registries.Registries;

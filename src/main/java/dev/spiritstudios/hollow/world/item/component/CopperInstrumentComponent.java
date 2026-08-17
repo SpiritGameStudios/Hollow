@@ -1,6 +1,7 @@
-package dev.spiritstudios.hollow.data.component;
+package dev.spiritstudios.hollow.world.item.component;
 
 import com.mojang.serialization.Codec;
+import dev.spiritstudios.hollow.world.item.CopperInstrument;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;

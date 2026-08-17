@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.data.component;
+package dev.spiritstudios.hollow.world.item;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

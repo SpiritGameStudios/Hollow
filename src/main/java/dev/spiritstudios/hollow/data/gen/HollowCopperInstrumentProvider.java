@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.data.component.CopperInstrument;
+import dev.spiritstudios.hollow.world.item.CopperInstrument;
 import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
