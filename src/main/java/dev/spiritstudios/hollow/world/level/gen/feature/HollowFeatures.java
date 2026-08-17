@@ -9,7 +9,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 
 @SuppressWarnings("unused")
 public final class HollowFeatures {
-    public static final Feature<FallenTreeFeature.Config> FALLEN_TREE = register("fallen_tree", new FallenTreeFeature());
     public static final Feature<NoneFeatureConfiguration> GIANT_LILYPAD = register("giant_lilypad", new GiantLilypadFeature());
     public static final Feature<NoneFeatureConfiguration> CATTAILS = register("cattails", new CattailFeature());
 
