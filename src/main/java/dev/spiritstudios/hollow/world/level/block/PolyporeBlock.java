@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.world.level.block;
 
 import com.mojang.serialization.MapCodec;
+import dev.spiritstudios.hollow.tags.HollowBlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -96,7 +97,7 @@ public class PolyporeBlock extends VegetationBlock implements BonemealableBlock 
         BlockState blockState = world.getBlockState(blockPos);
 
         return blockState.isFaceSturdy(world, blockPos, direction) &&
-                blockState.is(HollowBlocks.Tags.POLYPORE_PLACEABLE_ON);
+                blockState.is(HollowBlockTags.POLYPORE_PLACEABLE_ON);
     }
 
     @Override

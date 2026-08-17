@@ -1,10 +1,11 @@
 package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.data.HollowBiomeTags;
+import dev.spiritstudios.hollow.references.HollowBlockItemIds;
+import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
+import dev.spiritstudios.hollow.tags.HollowBlockTags;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
 import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
-import dev.spiritstudios.hollow.references.HollowBlockItemIds;
-import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.HollowLogCollection;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -16,21 +17,24 @@ import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityTypeIds;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class TagProviders {
     public static void addAll(FabricDataGenerator.Pack pack) {
-        pack.addProvider(TagProviders.BlockTagProvider::new);
         pack.addProvider(TagProviders.BiomeTagProvider::new);
         pack.addProvider(TagProviders.EntityTypeTagProvider::new);
         pack.addProvider(TagProviders.DamageTypeTagProvider::new);
+        BlockTagProvider blockTagProvider = pack.addProvider(BlockTagProvider::new);
+        pack.addProvider(((output, registriesFuture) -> new ItemTagProvider(output, registriesFuture, blockTagProvider)));
     }
 
     private static class BiomeTagProvider extends FabricTagsProvider<Biome> {
@@ -52,7 +56,7 @@ public class TagProviders {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            builder(HollowBlocks.Tags.HOLLOW_LOGS)
+            builder(HollowBlockItemTags.HOLLOW_LOGS.block())
                     .addAll(toIds(HollowBlockItemIds.OAK_HOLLOW_LOG))
                     .addAll(toIds(HollowBlockItemIds.SPRUCE_HOLLOW_LOG))
                     .addAll(toIds(HollowBlockItemIds.BIRCH_HOLLOW_LOG))
@@ -66,7 +70,7 @@ public class TagProviders {
                     .addAll(toIds(HollowBlockItemIds.WARPED_HOLLOW_STEM));
 
             builder(BlockTags.MINEABLE_WITH_AXE)
-                    .addTag(HollowBlocks.Tags.HOLLOW_LOGS);
+                    .addTag(HollowBlockItemTags.HOLLOW_LOGS.block());
 
             builder(BlockTags.MINEABLE_WITH_PICKAXE)
                     .add(HollowBlockItemIds.ECHOING_POT)
@@ -80,9 +84,9 @@ public class TagProviders {
             builder(BlockTags.SMALL_FLOWERS)
                     .add(HollowBlockItemIds.FLOWERING_LILY_PAD);
 
-            builder(HollowBlocks.Tags.POLYPORE_PLACEABLE_ON)
+            builder(HollowBlockTags.POLYPORE_PLACEABLE_ON)
                     .forceAddTag(BlockTags.LOGS)
-                    .addTag(HollowBlocks.Tags.HOLLOW_LOGS);
+                    .addTag(HollowBlockItemTags.HOLLOW_LOGS.block());
         }
 
 
@@ -92,6 +96,20 @@ public class TagProviders {
 
         private static List<ResourceKey<Block>> toIds(final HollowLogCollection<BlockItemId> ids) {
             return ids.map(BlockItemId::block).toList();
+        }
+    }
+
+    private static class ItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
+        public ItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookupFuture, @Nullable BlockTagsProvider blockTagsProvider) {
+            super(output, registryLookupFuture, blockTagsProvider);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider registries) {
+            builder(ItemTags.SULFUR_CUBE_ARCHETYPE_BOUNCY)
+                    .addTag(HollowBlockItemTags.HOLLOW_LOGS.item());
+
+            copy(HollowBlockItemTags.HOLLOW_LOGS.block(), HollowBlockItemTags.HOLLOW_LOGS.item());
         }
     }
 

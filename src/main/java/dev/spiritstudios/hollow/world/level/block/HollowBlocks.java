@@ -1,17 +1,15 @@
 package dev.spiritstudios.hollow.world.level.block;
 
-import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.references.HollowBlockIds;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
+import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -236,12 +234,6 @@ public final class HollowBlocks {
                     .sound(SoundType.COPPER)
     );
 
-    public static final class Tags {
-        public static final TagKey<Block> HOLLOW_LOGS = TagKey.create(Registries.BLOCK, Hollow.id("hollow_logs"));
-
-        public static final TagKey<Block> POLYPORE_PLACEABLE_ON = TagKey.create(Registries.BLOCK, Hollow.id("polypore_placeable_on"));
-    }
-
     private static <T extends Block> T register(final ResourceKey<Block> id, final Function<BlockBehaviour.Properties, T> factory, final BlockBehaviour.Properties properties) {
         T block = factory.apply(properties.setId(id));
         return Registry.register(BuiltInRegistries.BLOCK, id, block);
@@ -268,7 +260,7 @@ public final class HollowBlocks {
     }
 
     public static void init() {
-        FlammableBlockRegistry.getDefaultInstance().add(Tags.HOLLOW_LOGS, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(HollowBlockItemTags.HOLLOW_LOGS.block(), 5, 5);
 
         OxidizableBlocksRegistry.registerWeatheringCopperBlocks(COPPER_PILLAR);
 
