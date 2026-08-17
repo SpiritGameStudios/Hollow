@@ -37,10 +37,10 @@ public class SculkJawBlock extends SculkBlock {
             return;
         }
 
-        if (!world.getBlockState(pos).getValue(ACTIVE))
+        if (!world.getBlockState(pos).getValue(ACTIVE)) {
             world.playSound(null, pos.above(), HollowSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1F, 0.6F);
-
-        world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
+            world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
+        }
 
         if (world.isClientSide()) {
             RandomSource random = world.getRandom();

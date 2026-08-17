@@ -50,6 +50,14 @@ public final class HollowSoundsProvider extends FabricSoundsProvider {
 						.sound(ofVanillaFile("mob/goat/horn_break4").volume(0.9F))
 		);
 
+		exporter.add(
+				HollowSoundEvents.JAR_USE_FIREFLIES,
+				SoundTypeBuilder.of(HollowSoundEvents.JAR_USE_FIREFLIES)
+						.sound(ofFile("item/jar/fill_firefly1"))
+						.sound(ofFile("item/jar/fill_firefly2"))
+						.sound(ofFile("item/jar/fill_firefly3"))
+		);
+
 		// region Copper Horn
 		addCopperHornCall(exporter, HollowSoundEvents.ITEM_COPPER_HORN_CALL_GREAT, "great");
 		addCopperHornCall(exporter, HollowSoundEvents.ITEM_COPPER_HORN_CALL_OLD, "old");

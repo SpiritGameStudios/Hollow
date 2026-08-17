@@ -25,7 +25,7 @@ public class JarItem extends BlockItem {
             return super.useOn(context);
         }
 
-        level.playSound(null, blockPos, HollowSoundEvents.JAR_USE_FIREFLIES, SoundSource.PLAYERS, 1.0F, 1.0F);
+        level.playSound(null, blockPos, HollowSoundEvents.JAR_USE_FIREFLIES, SoundSource.PLAYERS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.2F);
 
         return InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(
                 context.getItemInHand(), context.getPlayer(),

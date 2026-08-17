@@ -1,1 +1,2 @@
 classTweaker v2 official
+extendable method net/minecraft/client/particle/FireflyParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDDDDLnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V

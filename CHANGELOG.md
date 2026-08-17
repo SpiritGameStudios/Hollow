@@ -20,4 +20,6 @@ In the process of this massive overhaul, its quite likely we will have forgotten
   * Using a Jar on a block in this tag will turn it into a Jar of Fireflies 
 
 ### Bug Fixes
+* Probably a lot. Many parts of the codebase were entirely rewritten.
+    * I have gotten a lot better at programming since I first wrote Hollow.
 * Removed Obabo

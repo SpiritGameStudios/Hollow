@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow;
 
+import dev.spiritstudios.hollow.render.particle.JarFireflyParticle;
 import dev.spiritstudios.hollow.render.particle.ScreamParticle;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
@@ -20,6 +21,7 @@ public class HollowClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ParticleProviderRegistry.getInstance().register(HollowParticleTypes.SCREAM, ScreamParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(HollowParticleTypes.JAR_FIREFLY, JarFireflyParticle.Provider::new);
 
         BlockColorRegistry.register(
                 List.of(BlockTintSources.constant(BlockColors.LILY_PAD_DEFAULT, BlockColors.LILY_PAD_IN_WORLD)),

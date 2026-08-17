@@ -185,7 +185,7 @@ public final class HollowBlocks {
     public static final Block JAR_OF_FIREFLIES = register(
             HollowBlockItemIds.JAR_OF_FIREFLIES,
             FireflyJarBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(JAR).lightLevel(state -> 15)
+            BlockBehaviour.Properties.ofFullCopy(JAR).lightLevel(state -> 4)
     );
 
     public static final Block STONE_CHEST = register(

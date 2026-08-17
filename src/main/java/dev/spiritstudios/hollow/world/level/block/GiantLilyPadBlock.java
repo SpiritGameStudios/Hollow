@@ -91,10 +91,14 @@ public class GiantLilyPadBlock extends LilyPadBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) { builder.add(PIECE, FACING); }
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(PIECE, FACING);
+    }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) { return SHAPE; }
+    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
 
     public enum Piece implements StringRepresentable {
         NORTH_WEST,
@@ -103,6 +107,8 @@ public class GiantLilyPadBlock extends LilyPadBlock {
         SOUTH_EAST;
 
         @Override
-        public String getSerializedName() { return this.name().toLowerCase(Locale.ROOT); }
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
     }
 }

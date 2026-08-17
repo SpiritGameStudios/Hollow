@@ -227,6 +227,14 @@
     ],
     "subtitle": "subtitles.hollow.item.copper_horn.melody.water"
   },
+  "item.jar.use.fireflies": {
+    "sounds": [
+      "hollow:item/jar/fill_firefly1",
+      "hollow:item/jar/fill_firefly2",
+      "hollow:item/jar/fill_firefly3"
+    ],
+    "subtitle": "subtitles.hollow.item.jar.use.fireflies"
+  },
   "music.overworld.birch_forest": {
     "sounds": [
       {

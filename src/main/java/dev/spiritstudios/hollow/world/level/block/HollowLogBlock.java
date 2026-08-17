@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.world.level.block;
 
 import dev.spiritstudios.hollow.data.LogTypeData;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -125,14 +126,17 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
         }
 
         public static Layer get(BlockState aboveState) {
-            if (aboveState.is(Blocks.MOSS_BLOCK) || aboveState.is(Blocks.MOSS_CARPET))
+            if (aboveState.is(Blocks.MOSS_BLOCK) || aboveState.is(Blocks.MOSS_CARPET)) {
                 return MOSS;
+            }
 
-            if (aboveState.is(Blocks.PALE_MOSS_BLOCK) || aboveState.is(Blocks.PALE_MOSS_CARPET))
+            if (aboveState.is(Blocks.PALE_MOSS_BLOCK) || aboveState.is(Blocks.PALE_MOSS_CARPET)) {
                 return PALE_MOSS;
+            }
 
-            if (aboveState.is(Blocks.SNOW_BLOCK) || aboveState.is(Blocks.SNOW))
+            if (aboveState.is(BlockTags.SNOW)) {
                 return SNOW;
+            }
 
             return NONE;
         }
