@@ -1,4 +1,3 @@
-// TODO(Ravel): Failed to fully resolve file: null cannot be cast to non-null event com.intellij.psi.PsiJavaCodeReferenceElement
 package dev.spiritstudios.hollow.world.level.block.entity;
 
 import net.minecraft.core.Direction;

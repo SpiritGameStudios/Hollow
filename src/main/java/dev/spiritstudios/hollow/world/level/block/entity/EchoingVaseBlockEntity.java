@@ -1,4 +1,3 @@
-// TODO(Ravel): Failed to fully resolve file: null cannot be cast to non-null type com.intellij.psi.PsiJavaCodeReferenceElement
 package dev.spiritstudios.hollow.world.level.block.entity;
 
 import dev.spiritstudios.hollow.Hollow;

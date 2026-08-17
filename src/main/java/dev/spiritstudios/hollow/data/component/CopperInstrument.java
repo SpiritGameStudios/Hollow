@@ -15,7 +15,6 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 
-// TODO: Make this data driven
 public record CopperInstrument(
         Holder<SoundEvent> call,
         Holder<SoundEvent> melody,

@@ -46,10 +46,6 @@ import java.util.function.Consumer;
 import static dev.spiritstudios.hollow.Hollow.MODID;
 import static dev.spiritstudios.hollow.Hollow.id;
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
-// TODO(Ravel): ambiguous static import, members with name createWeightedVariant have different new names
-// method createWeightedVariant(Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/render/model/json/WeightedVariant; -> plainVariant
-// method createWeightedVariant([Lnet/minecraft/client/render/model/json/ModelVariant;)Lnet/minecraft/client/render/model/json/WeightedVariant; -> variants
-
 
 public class HollowModelProvider extends FabricModelProvider {
     private static final PropertyDispatch<VariantMutator> NORTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
