@@ -1,8 +1,8 @@
 package dev.spiritstudios.hollow.world.level.block;
 
+import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
 import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
-import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -10,15 +10,20 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SculkBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SculkJawBlock extends SculkBlock {
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+    private static final VoxelShape ACTIVE_SHAPE = Block.column(16.0, 0.0, 9.0);
 
     public SculkJawBlock(Properties settings) {
         super(settings);
@@ -84,5 +89,23 @@ public class SculkJawBlock extends SculkBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         world.setBlockAndUpdate(pos, state.setValue(ACTIVE, false));
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+//        return state.getValue(ACTIVE) ?
+//                ACTIVE_SHAPE :
+//                Shapes.block();
+        return ACTIVE_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getBlockSupportShape(final BlockState state, final BlockGetter level, final BlockPos pos) {
+        return Shapes.block();
+    }
+
+    @Override
+    protected VoxelShape getVisualShape(final BlockState state, final BlockGetter level, final BlockPos pos, final CollisionContext context) {
+        return Shapes.block();
     }
 }

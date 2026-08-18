@@ -14,6 +14,8 @@ In the process of this massive overhaul, its quite likely we will have forgotten
     * These have been replaced by an almost identical feature in vanilla.
 * Renamed "Firefly Jar" to "Jar of Fireflies"
 * Renamed all "Hollow Stripped `<name>` Log" to "Stripped Hollow `<name>` Log"
+* Changed the Sculk Jaw to have a shorter collision box (slightly taller than a slab)
+* Disabled the player's step up when inside a Sculk Jaw
 
 ### Features
 * Added the `hollow:contains_collectable_fireflies` block tag

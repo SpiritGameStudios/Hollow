@@ -165,8 +165,9 @@ public final class HollowBlocks {
             HollowBlockItemIds.SCULK_JAW,
             SculkJawBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                    .dynamicShape()
                     .speedFactor(0.25F)
-                    .jumpFactor(0.0F)
+                    .jumpFactor(0.1F)
                     .strength(3.0F, 3.0F)
                     .lightLevel(state -> state.getValue(SculkJawBlock.ACTIVE) ? 6 : 0)
     );

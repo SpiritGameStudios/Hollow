@@ -6,6 +6,8 @@
   "mixins": [
     "AttachedToLogsDecoratorMixin",
     "CopperBulbBlockMixin",
+    "LivingEntityMixin",
+    "PlayerMixin",
     "SculkBlockMixin",
     "SculkVeinBlockMixin",
     "SculkVeinGrowCheckerMixin",
