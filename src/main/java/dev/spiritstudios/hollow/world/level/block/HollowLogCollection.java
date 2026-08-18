@@ -39,12 +39,12 @@ public record HollowLogCollection<T>(
         return new HollowLogCollection<>(
                 register.apply(
                         ids.hollowLog,
-                        HollowLogBlock.of(log),
+                        properties -> new HollowLogBlock(properties, log, false),
                         BlockBehaviour.Properties.ofFullCopy(log)
                 ),
                 register.apply(
                         ids.strippedHollowLog,
-                        HollowLogBlock.ofStripped(strippedLog),
+                        properties -> new HollowLogBlock(properties, strippedLog, true),
                         BlockBehaviour.Properties.ofFullCopy(strippedLog)
                 )
         );

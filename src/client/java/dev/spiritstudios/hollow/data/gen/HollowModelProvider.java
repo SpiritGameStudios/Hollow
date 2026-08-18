@@ -47,7 +47,7 @@ import static dev.spiritstudios.hollow.Hollow.MODID;
 import static dev.spiritstudios.hollow.Hollow.id;
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
-public class HollowModelProvider extends FabricModelProvider {
+public final class HollowModelProvider extends FabricModelProvider {
     private static final PropertyDispatch<VariantMutator> NORTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
             .select(Direction.EAST, Y_ROT_90)
             .select(Direction.SOUTH, Y_ROT_180)

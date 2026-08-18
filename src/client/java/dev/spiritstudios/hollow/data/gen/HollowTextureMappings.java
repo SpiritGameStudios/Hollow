@@ -1,36 +1,30 @@
 package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.world.level.block.HollowLogBlock;
-import net.minecraft.client.resources.model.sprite.Material;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
 
 import static dev.spiritstudios.hollow.data.gen.HollowTextureSlots.OVERLAY;
-import static net.minecraft.client.data.models.model.TextureSlot.END;
-import static net.minecraft.client.data.models.model.TextureSlot.INSIDE;
-import static net.minecraft.client.data.models.model.TextureSlot.SIDE;
+import static net.minecraft.client.data.models.model.TextureSlot.*;
 
 public final class HollowTextureMappings {
-	public static TextureMapping hollowLog(Block block) {
-		if (!(block instanceof HollowLogBlock hollowLog)) {
+    public static TextureMapping hollowLog(Block block) {
+        if (!(block instanceof HollowLogBlock hollowLog)) {
             throw new IllegalArgumentException();
         }
 
-		return new TextureMapping()
-				.put(SIDE, new Material(hollowLog.typeData.sideTexture()))
-				.put(INSIDE, new Material(hollowLog.typeData.insideTexture()))
-				.put(END, new Material(hollowLog.typeData.endTexture()));
-	}
+        Identifier id = BuiltInRegistries.BLOCK.getKey(hollowLog.log);
 
-	public static TextureMapping hollowLogOverlay(Block block, Identifier overlay) {
-		if (!(block instanceof HollowLogBlock hollowLog))
-			throw new IllegalArgumentException();
+        return new TextureMapping()
+                .put(SIDE, TextureMapping.getBlockTexture(hollowLog.log))
+                .put(INSIDE, new Material(id.withPrefix(hollowLog.isStripped ? "block/" : "block/stripped_")))
+                .put(END, TextureMapping.getBlockTexture(hollowLog.log, "_top"));
+    }
 
-		return new TextureMapping()
-				.put(SIDE, new Material(hollowLog.typeData.sideTexture()))
-				.put(INSIDE, new Material(hollowLog.typeData.insideTexture()))
-				.put(END, new Material(hollowLog.typeData.endTexture()))
-				.put(OVERLAY, new Material(overlay));
-	}
+    public static TextureMapping hollowLogOverlay(Block block, Identifier overlay) {
+        return hollowLog(block).put(OVERLAY, new Material(overlay));
+    }
 }

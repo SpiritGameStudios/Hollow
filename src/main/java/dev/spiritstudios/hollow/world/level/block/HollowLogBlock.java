@@ -1,34 +1,30 @@
 package dev.spiritstudios.hollow.world.level.block;
 
-import dev.spiritstudios.hollow.data.LogTypeData;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Map;
-import java.util.function.Function;
 
 public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock {
     public static final Map<Direction.Axis, VoxelShape> SHAPES = Shapes.rotateAllAxis(
@@ -43,28 +39,18 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<Layer> LAYER = EnumProperty.create("layer", Layer.class);
 
-    public final LogTypeData typeData;
+    public final Block log;
+    public final boolean isStripped;
 
-    public HollowLogBlock(Properties settings, LogTypeData typeData) {
+    public HollowLogBlock(Properties settings, Block log, boolean isStripped) {
         super(settings);
-        this.typeData = typeData;
-        registerDefaultState(defaultBlockState()
-                .setValue(AXIS, Direction.Axis.Y)
-                .setValue(WATERLOGGED, false)
-                .setValue(LAYER, Layer.NONE));
-    }
-
-    public static Function<BlockBehaviour.Properties, Block> of(Block block) {
-        return settings -> new HollowLogBlock(
-                settings,
-                LogTypeData.byId(BuiltInRegistries.BLOCK.getKey(block))
-        );
-    }
-
-    public static Function<BlockBehaviour.Properties, Block> ofStripped(Block block) {
-        return settings -> new HollowLogBlock(
-                settings,
-                LogTypeData.byIdStripped(BuiltInRegistries.BLOCK.getKey(block))
+        this.log = log;
+        this.isStripped = isStripped;
+        this.registerDefaultState(
+                this.defaultBlockState()
+                        .setValue(AXIS, Direction.Axis.Y)
+                        .setValue(WATERLOGGED, false)
+                        .setValue(LAYER, Layer.NONE)
         );
     }
 
@@ -98,14 +84,14 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
         if (state.getValue(WATERLOGGED)) {
-            tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        if (direction == Direction.UP) return state.setValue(LAYER, Layer.get(neighborState));
-
-        return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return directionToNeighbour == Direction.UP ?
+                state.setValue(LAYER, Layer.get(neighbourState)) :
+                super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
     }
 
     @Override

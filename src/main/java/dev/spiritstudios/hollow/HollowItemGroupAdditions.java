@@ -1,14 +1,13 @@
 package dev.spiritstudios.hollow;
 
-import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
 import dev.spiritstudios.hollow.world.item.HollowItems;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.HollowLogBlock;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +22,7 @@ public final class HollowItemGroupAdditions {
 
 			Consumer<Block> inserter = block -> {
 				if (!(block instanceof HollowLogBlock log)) throw new IllegalStateException();
-				helper.insertAfter(BuiltInRegistries.ITEM.getValue(log.typeData.id()), block);
+				helper.insertAfter(log.log.asItem(), block);
 			};
 
 			HollowBlocks.OAK_HOLLOW_LOG.forEach(inserter);
