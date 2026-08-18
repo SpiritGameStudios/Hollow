@@ -1,12 +1,11 @@
 package dev.spiritstudios.hollow.world.level.gen.tree.decorator;
 
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.world.level.block.PolyporeBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -43,7 +42,6 @@ public class PolyporeTreeDecorator extends TreeDecorator {
             BlockState state = stateProvider.getState(context.level(), random, polyporePos);
 
             state = state.trySetValue(BlockStateProperties.HORIZONTAL_FACING, direction);
-            state = state.trySetValue(PolyporeBlock.POLYPORE_AMOUNT, random.nextIntBetweenInclusive(1, 3));
 
             context.setBlock(polyporePos, state);
         }

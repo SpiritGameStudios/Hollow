@@ -1,26 +1,34 @@
 package dev.spiritstudios.hollow.data.gen;
 
+import com.google.common.collect.ImmutableList;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
+import dev.spiritstudios.hollow.world.level.block.PolyporeBlock;
 import dev.spiritstudios.hollow.world.level.gen.tree.decorator.BigBranchTreeDecorator;
 import dev.spiritstudios.hollow.world.level.gen.tree.decorator.BranchTreeDecorator;
 import dev.spiritstudios.hollow.world.level.gen.tree.decorator.PolyporeTreeDecorator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.util.random.WeightedList;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FallenTreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLogsDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 
 import java.util.List;
@@ -46,6 +54,14 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
 
         BlockStateProvider belowTrunkProvider = TreeConfiguration.defaultPlaceBelowTreeTrunkProvider(biomes);
 
+        PolyporeTreeDecorator polyporeTreeDecorator = new PolyporeTreeDecorator(
+                new RandomizedIntStateProvider(
+                        BlockStateProvider.simple(HollowBlocks.POLYPORE),
+                        PolyporeBlock.POLYPORE_AMOUNT,
+                        UniformInt.of(1, 3)
+                )
+        );
+
         entries.add(
                 TreeFeatures.BIRCH_BEES_0002,
                 new ConfiguredFeature<>(
@@ -55,7 +71,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                                 8, 5, 0,
                                 2, 0.25F, 0.4F
                         ).decorators(List.of(
-                                new PolyporeTreeDecorator(BlockStateProvider.simple(HollowBlocks.POLYPORE)),
+                                polyporeTreeDecorator,
                                 new BranchTreeDecorator(BlockStateProvider.simple(Blocks.BIRCH_LOG), 0.5F, 2)
                         )).ignoreVines().build()
                 )
@@ -70,7 +86,7 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                                 8, 5, 6,
                                 2, 0.25F, 0.4F
                         ).decorators(List.of(
-                                new PolyporeTreeDecorator(BlockStateProvider.simple(HollowBlocks.POLYPORE)),
+                                polyporeTreeDecorator,
                                 new BranchTreeDecorator(BlockStateProvider.simple(Blocks.BIRCH_LOG), 0.5F, 5)
                         )).ignoreVines().build()
                 )
@@ -103,6 +119,46 @@ public class ConfiguredFeatureProvider extends FabricDynamicRegistryProvider {
                         )
                 )
         );
+
+        entries.add(
+                TreeFeatures.FALLEN_BIRCH_TREE,
+                new ConfiguredFeature<>(
+                        Feature.FALLEN_TREE,
+                        createFallenTree(HollowBlocks.BIRCH_HOLLOW_LOG.hollowLog(), 5, 8).build()
+                )
+        );
+
+        entries.add(
+                TreeFeatures.FALLEN_SUPER_BIRCH_TREE,
+                new ConfiguredFeature<>(
+                        Feature.FALLEN_TREE,
+                        createFallenTree(HollowBlocks.BIRCH_HOLLOW_LOG.hollowLog(), 5, 15).build()
+                )
+        );
+    }
+
+    private FallenTreeConfiguration.FallenTreeConfigurationBuilder createFallenTree(
+            Block logBlock,
+            int minLength, int maxLength
+    ) {
+        return new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
+                BlockStateProvider.simple(logBlock),
+                UniformInt.of(minLength, maxLength)
+        )
+                .logDecorators(
+                        ImmutableList.of(
+                                new AttachedToLogsDecorator(
+                                        0.5F,
+                                        new WeightedStateProvider(
+                                                WeightedList.<BlockState>builder()
+                                                        .add(Blocks.MOSS_CARPET.defaultBlockState(), 10)
+                                                        .add(Blocks.RED_MUSHROOM.defaultBlockState(), 2)
+                                                        .add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1)
+                                        ),
+                                        List.of(Direction.UP)
+                                )
+                        )
+                );
     }
 
     @Override
