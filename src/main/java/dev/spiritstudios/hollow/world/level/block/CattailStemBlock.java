@@ -50,9 +50,8 @@ public class CattailStemBlock extends GrowingPlantBodyBlock implements LiquidBlo
         return HollowBlocks.CATTAIL;
     }
 
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState below = ctx.getLevel().getBlockState(ctx.getClickedPos().below());
 
         return super.getStateForPlacement(ctx)

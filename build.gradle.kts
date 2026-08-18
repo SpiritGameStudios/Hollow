@@ -1,3 +1,13 @@
+import java.nio.file.Files
+import kotlin.io.path.PathWalkOption
+import kotlin.io.path.createDirectories
+import kotlin.io.path.exists
+import kotlin.io.path.isDirectory
+import kotlin.io.path.name
+import kotlin.io.path.walk
+import kotlin.io.path.writer
+import kotlin.use
+
 plugins {
     java
 
@@ -108,6 +118,67 @@ tasks.jar {
     from("LICENSE") { rename { "${it}_${inputs.properties["archivesName"]}" } }
 }
 
+abstract class GeneratePackageInfosTask : DefaultTask() {
+    @SkipWhenEmpty
+    @InputDirectory
+    val root: DirectoryProperty = project.objects.directoryProperty()
+
+    @OutputDirectory
+    val output: DirectoryProperty = project.objects.directoryProperty()
+
+    @TaskAction
+    fun action() {
+        val outputPath = output.get().asFile.toPath()
+        val rootPath = root.get().asFile.toPath()
+
+        rootPath.walk(PathWalkOption.INCLUDE_DIRECTORIES).forEach {
+            if (!it.isDirectory()) return@forEach
+
+            val hasFiles = Files.list(it).use { stream ->
+                stream.anyMatch { file -> !file.isDirectory() && file.name.endsWith(".java") }
+            }
+
+            if (!hasFiles || it.resolve("package-info.java").exists()) {
+                return@forEach
+            }
+
+            val relative = rootPath.relativize(it)
+            val target = outputPath.resolve(relative)
+
+            target.createDirectories()
+
+            val packageName = relative.toString().replace(File.separator, ".")
+            target.resolve("package-info.java").writer().use { writer ->
+                writer.write(
+                    """
+						|@NullMarked
+						|package ${packageName};
+						|
+						|import org.jspecify.annotations.NullMarked;
+					    |""".trimMargin()
+                )
+            }
+        }
+    }
+}
+
+for (sourceSet in arrayOf(sourceSets["main"], sourceSets["client"])) {
+    val task = tasks.register<GeneratePackageInfosTask>(sourceSet.getTaskName("generate", "PackageInfos")) {
+        group = "codegen"
+
+        root = file("src/${sourceSet.name}/java")
+        output = file("src/generated/${sourceSet.name}")
+    }
+
+    sourceSet.java.srcDir(task)
+
+    val cleanTask = tasks.register<Delete>(sourceSet.getTaskName("clean", "PackageInfos")) {
+        group = "codegen"
+        delete(file("src/generated/${sourceSet.name}"))
+    }
+
+    tasks.clean.configure { dependsOn(cleanTask) }
+}
 
 publishMods {
     file = tasks.jar.get().archiveFile
