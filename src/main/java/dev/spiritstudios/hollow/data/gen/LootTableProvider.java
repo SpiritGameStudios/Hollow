@@ -30,6 +30,7 @@ public class LootTableProvider extends FabricBlockLootSubProvider {
         this.dropWhenSilkTouch(HollowBlocks.STONE_CHEST_LID);
         this.add(HollowBlocks.STONE_CHEST, this.createNameableBlockEntityTable(HollowBlocks.STONE_CHEST));
 
+		this.dropSelf(HollowBlocks.SWITCHGRASS);
         this.dropSelf(HollowBlocks.CATTAIL);
         this.dropOther(HollowBlocks.CATTAIL_STEM, HollowBlocks.CATTAIL);
 

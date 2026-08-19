@@ -41,6 +41,8 @@ public final class HollowBlockItemIds {
 
     public static final WeatheringCopperCollection<BlockItemId> COPPER_PILLAR = createSimpleCopper("copper_pillar");
 
+	public static final BlockItemId SWITCHGRASS = create("switchgrass");
+
     private static HollowLogCollection<BlockItemId> createHollowLog(final String baseName) {
         return HollowLogCollection.log(baseName).map(HollowBlockItemIds::create);
     }

@@ -47,6 +47,8 @@ public final class HollowItemGroupAdditions {
 			helper.insertAfter(Items.VAULT, HollowItems.ECHOING_POT);
 			helper.insertAfter(Items.CHEST, HollowItems.STONE_CHEST, HollowItems.STONE_CHEST_LID);
 
+			helper.insertBefore(Items.FIREFLY_BUSH, HollowItems.SWITCHGRASS);
+
 			WeatheringCopperCollection.zipApply(
 					Items.CHISELED_COPPER, HollowItems.COPPER_PILLAR,
 					helper::insertAfter
@@ -74,6 +76,12 @@ public final class HollowItemGroupAdditions {
 			if (group.contains(after.getDefaultInstance())) {
                 entries.insertAfter(after, add);
             }
+		}
+
+		public void insertBefore(Item before, ItemLike... add) {
+			if (group.contains(before.getDefaultInstance())) {
+				entries.insertBefore(before, add);
+			}
 		}
 	}
 }

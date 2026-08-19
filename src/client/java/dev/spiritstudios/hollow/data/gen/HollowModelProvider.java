@@ -112,7 +112,14 @@ public final class HollowModelProvider extends FabricModelProvider {
         registerPolypore(generator);
         generator.registerSimpleFlatItemModel(HollowBlocks.POLYPORE.asItem());
 
-        generator.createCrossBlockWithDefaultItem(
+		generator.registerSimpleItemModel(HollowItems.SWITCHGRASS, generator.createFlatItemModelWithBlockTexture(HollowItems.SWITCHGRASS, Blocks.FIREFLY_BUSH));
+		generator.createCrossBlock(
+				HollowBlocks.SWITCHGRASS,
+				PlantType.NOT_TINTED,
+				TextureMapping.cross(Blocks.FIREFLY_BUSH)
+		);
+
+		generator.createCrossBlockWithDefaultItem(
                 HollowBlocks.CATTAIL,
                 BlockModelGenerators.PlantType.NOT_TINTED,
                 TextureMapping.cross(HollowBlocks.CATTAIL)

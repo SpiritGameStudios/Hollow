@@ -137,6 +137,14 @@ public final class HollowBlocks {
             CATTAIL_STEM
     );
 
+	public static final SwitchgrassBlock SWITCHGRASS = register(
+		HollowBlockItemIds.SWITCHGRASS,
+		SwitchgrassBlock::new,
+		BlockBehaviour.Properties.ofFullCopy(Blocks.FIREFLY_BUSH)
+			.lightLevel(state -> 0)
+			.randomTicks()
+	);
+
     public static final Block FLOWERING_LILY_PAD = registerCopyOf(
             HollowBlockItemIds.FLOWERING_LILY_PAD,
             LilyPadBlock::new,

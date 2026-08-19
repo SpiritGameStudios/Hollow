@@ -121,6 +121,8 @@ public final class HollowItems {
             PlaceOnWaterBlockItem::new
     );
 
+	public static final Item SWITCHGRASS = registerBlock(HollowBlockItemIds.SWITCHGRASS, HollowBlocks.SWITCHGRASS);
+
     public static final Item CATTAIL = registerBlock(HollowBlockItemIds.CATTAIL, HollowBlocks.CATTAIL);
 
     public static final Item POLYPORE = registerBlock(HollowBlockItemIds.POLYPORE, HollowBlocks.POLYPORE);
