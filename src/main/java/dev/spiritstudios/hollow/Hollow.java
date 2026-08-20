@@ -26,6 +26,7 @@ public final class Hollow implements ModInitializer {
 
     @Override
     public void onInitialize() {
+		// axia was here
         HollowRegistryKeys.init();
         HollowSoundEvents.init();
 
