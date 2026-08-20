@@ -26,7 +26,6 @@ public final class Hollow implements ModInitializer {
 
     @Override
     public void onInitialize() {
-		// meow
         HollowRegistryKeys.init();
         HollowSoundEvents.init();
 
