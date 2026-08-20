@@ -17,13 +17,13 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "dev.spiritstudios.hollow.HollowClient"
+      "dev.spiritstudios.hollow.client.HollowClient"
     ],
     "main": [
       "dev.spiritstudios.hollow.Hollow"
     ],
     "fabric-datagen": [
-      "dev.spiritstudios.hollow.data.gen.HollowDatagen"
+      "dev.spiritstudios.hollow.client.data.gen.HollowDatagen"
     ]
   },
   "mixins": [
