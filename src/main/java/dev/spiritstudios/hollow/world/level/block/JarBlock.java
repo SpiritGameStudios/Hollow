@@ -23,15 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class JarBlock extends BaseEntityBlock {
     public static final MapCodec<JarBlock> CODEC = simpleCodec(JarBlock::new);
-    public static final VoxelShape SHAPE = Shapes.or(
-            box(5.5, 12, 5.5, 10.5, 15, 10.5),
-            box(3.5, 0, 3.5, 12.5, 14, 4.5),
-            box(3.5, 0, 4.5, 4.5, 14, 11.5),
-            box(3.5, 0, 11.5, 12.5, 14, 12.5),
-            box(11.5, 0, 4.5, 12.5, 14, 11.5),
-            box(4.5, 13, 4.5, 11.5, 14, 11.5),
-            box(4.5, 0, 4.5, 11.5, 1, 11.5)
-    );
+    public static final VoxelShape SHAPE = Shapes.or(column(8.0, 0.0, 10.0), column(6.0, 10.0, 12.0));
 
     public JarBlock(BlockBehaviour.Properties settings) {
         super(settings);

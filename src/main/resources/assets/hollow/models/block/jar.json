@@ -1,90 +1,37 @@
 {
+	"ambientocclusion": false,
+	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
-	"texture_size": [64, 64],
 	"textures": {
-		"2": "hollow:block/jar",
+		"jar": "hollow:block/jar",
 		"particle": "block/glass"
 	},
 	"elements": [
 		{
-			"name": "cap",
-			"from": [5.5, 12, 5.5],
-			"to": [10.5, 15, 10.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 0]},
+			"from": [4, 0, 4],
+			"to": [12, 10, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
 			"faces": {
-				"north": {"uv": [1.25, 10, 2.5, 10.75], "texture": "#2"},
-				"east": {"uv": [0, 10, 1.25, 10.75], "texture": "#2"},
-				"south": {"uv": [3.75, 10, 5, 10.75], "texture": "#2"},
-				"west": {"uv": [2.5, 10, 3.75, 10.75], "texture": "#2"},
-				"up": {"uv": [2.5, 10, 1.25, 8.75], "texture": "#2", "cullface": "up"},
-				"down": {"uv": [3.75, 8.75, 2.5, 10], "texture": "#2"}
+				"north": {"uv": [0, 6, 8, 16], "texture": "#jar"},
+				"east": {"uv": [0, 6, 8, 16], "texture": "#jar"},
+				"south": {"uv": [0, 6, 8, 16], "texture": "#jar"},
+				"west": {"uv": [0, 6, 8, 16], "texture": "#jar"},
+				"up": {"uv": [8, 8, 16, 16], "texture": "#jar"},
+				"down": {"uv": [16, 8, 8, 16], "texture": "#jar", "cullface": "down"}
 			}
 		},
 		{
-			"name": "wall_north",
-			"from": [3.5, 0, 3.5],
-			"to": [12.5, 14, 4.5],
+			"from": [5, 10, 5],
+			"to": [11, 12, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 10, 7]},
 			"faces": {
-				"north": {"uv": [6.5, 8, 8.75, 11.5], "texture": "#2"},
-				"east": {"uv": [6.25, 8, 6.5, 11.5], "texture": "#2"},
-				"south": {"uv": [9, 8, 11.25, 11.5], "texture": "#2"},
-				"west": {"uv": [8.75, 8, 9, 11.5], "texture": "#2"},
-				"up": {"uv": [8.75, 8, 6.5, 7.75], "texture": "#2"},
-				"down": {"uv": [11, 7.75, 8.75, 8], "texture": "#2", "cullface": "down"}
-			}
-		},
-		{
-			"name": "wall_west",
-			"from": [3.5, 0, 4.5],
-			"to": [4.5, 14, 11.5],
-			"faces": {
-				"east": {"uv": [2.25, 5.25, 4, 8.75], "texture": "#2"},
-				"west": {"uv": [4.25, 5.25, 6, 8.75], "texture": "#2"},
-				"up": {"uv": [4.25, 5.25, 4, 3.5], "texture": "#2"},
-				"down": {"uv": [4.5, 3.5, 4.25, 5.25], "texture": "#2", "cullface": "down"}
-			}
-		},
-		{
-			"name": "wall_south",
-			"from": [3.5, 0, 11.5],
-			"to": [12.5, 14, 12.5],
-			"faces": {
-				"north": {"uv": [6.5, 4.25, 8.75, 7.75], "texture": "#2"},
-				"east": {"uv": [6.25, 4.25, 6.5, 7.75], "texture": "#2"},
-				"south": {"uv": [9, 4.25, 11.25, 7.75], "texture": "#2"},
-				"west": {"uv": [8.75, 4.25, 9, 7.75], "texture": "#2"},
-				"up": {"uv": [8.75, 4.25, 6.5, 4], "texture": "#2"},
-				"down": {"uv": [11, 4, 8.75, 4.25], "texture": "#2", "cullface": "down"}
-			}
-		},
-		{
-			"name": "wall_east",
-			"from": [11.5, 0, 4.5],
-			"to": [12.5, 14, 11.5],
-			"faces": {
-				"east": {"uv": [0, 1.75, 1.75, 5.25], "texture": "#2"},
-				"west": {"uv": [2, 1.75, 3.75, 5.25], "texture": "#2"},
-				"up": {"uv": [2, 1.75, 1.75, 0], "texture": "#2"},
-				"down": {"uv": [2.25, 0, 2, 1.75], "texture": "#2", "cullface": "down"}
-			}
-		},
-		{
-			"name": "wall_top",
-			"from": [4.5, 13, 4.5],
-			"to": [11.5, 14, 11.5],
-			"faces": {
-				"up": {"uv": [8, 3.75, 6.25, 2], "texture": "#2"},
-				"down": {"uv": [9.75, 2, 8, 3.75], "texture": "#2"}
-			}
-		},
-		{
-			"name": "wall_bottom",
-			"from": [4.5, 0, 4.5],
-			"to": [11.5, 1, 11.5],
-			"faces": {
-				"up": {"uv": [7.5, 1.75, 5.75, 0], "texture": "#2"},
-				"down": {"uv": [9.25, 0, 7.5, 1.75], "texture": "#2", "cullface": "down"}
+				"north": {"uv": [10, 0, 16, 2], "texture": "#jar"},
+				"east": {"uv": [10, 0, 16, 2], "texture": "#jar"},
+				"south": {"uv": [10, 0, 16, 2], "texture": "#jar"},
+				"west": {"uv": [10, 0, 16, 2], "texture": "#jar"},
+				"up": {"uv": [16, 8, 10, 2], "texture": "#jar"},
+				"down": {"uv": [16, 2, 10, 8], "texture": "#jar"}
 			}
 		}
 	],
@@ -92,16 +39,19 @@
 		{
 			"name": "jar",
 			"origin": [0, 0, 0],
+			"scope": 0,
 			"color": 0,
 			"children": [
-				0,
 				{
 					"name": "jar_body",
 					"origin": [8, 8, 8],
+					"scope": 0,
 					"color": 0,
-					"children": [1, 2, 3, 4, 5, 6]
+					"children": []
 				}
 			]
-		}
+		},
+		0,
+		1
 	]
 }
