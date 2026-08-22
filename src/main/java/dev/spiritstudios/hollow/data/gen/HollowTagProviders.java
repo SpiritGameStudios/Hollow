@@ -127,6 +127,8 @@ public class HollowTagProviders {
         protected void addTags(HolderLookup.Provider wrapperLookup) {
             tag(HollowEntityTypes.Tags.IMMUNE_TO_SCULK_JAW)
                     .add(EntityTypeIds.WARDEN);
+			tag(HollowEntityTypes.Tags.CAN_CLIMB_HOLLOW_LOGS)
+					.add(EntityTypeIds.PLAYER);
         }
     }
 

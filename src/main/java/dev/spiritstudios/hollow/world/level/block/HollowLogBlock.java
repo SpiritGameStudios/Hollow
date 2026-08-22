@@ -1,10 +1,12 @@
 package dev.spiritstudios.hollow.world.level.block;
 
+import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -20,6 +22,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -27,13 +30,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.Map;
 
 public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock {
+	private static final VoxelShape HOLE_SHAPE = cube(12.0, 12.0, 16.0);
     public static final Map<Direction.Axis, VoxelShape> SHAPES = Shapes.rotateAllAxis(
-            Shapes.or(
-                    box(0, 14, 0, 16, 16, 16),
-                    box(2, 0, 0, 14, 2, 16),
-                    box(0, 0, 0, 2, 14, 16),
-                    box(14, 0, 0, 16, 14, 16)
-            )
+		Shapes.join(Shapes.block(), HOLE_SHAPE, BooleanOp.ONLY_FIRST)
     );
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -98,6 +97,10 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPES.get(state.getValue(AXIS));
     }
+
+	public static boolean isClimbableHollowLog(BlockState state, Entity entity) {
+		return state.getBlock() instanceof HollowLogBlock && state.getValue(AXIS) == Direction.Axis.Y && entity.is(HollowEntityTypes.Tags.CAN_CLIMB_HOLLOW_LOGS);
+	}
 
     public enum Layer implements StringRepresentable {
         NONE("none"),
