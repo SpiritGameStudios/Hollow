@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.client.data.gen;
 
 import dev.spiritstudios.hollow.data.gen.*;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
 import dev.spiritstudios.hollow.world.item.CopperInstruments;
 import dev.spiritstudios.hollow.world.item.HollowJukeboxSongs;
@@ -40,6 +40,6 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
                 .add(Registries.PLACED_FEATURE, HollowPlacements::bootstrap)
                 .add(Registries.DAMAGE_TYPE, HollowDamageTypes::bootstrap)
                 .add(Registries.JUKEBOX_SONG, HollowJukeboxSongs::bootstrap)
-                .add(HollowRegistryKeys.COPPER_INSTRUMENT, CopperInstruments::bootstrap);
+                .add(HollowRegistries.COPPER_INSTRUMENT, CopperInstruments::bootstrap);
     }
 }

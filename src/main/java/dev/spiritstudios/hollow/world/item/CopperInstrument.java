@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.world.item;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -55,12 +55,12 @@ public record CopperInstrument(
 	);
 
 	public static final Codec<Holder<CopperInstrument>> CODEC = RegistryFileCodec.create(
-			HollowRegistryKeys.COPPER_INSTRUMENT,
+			HollowRegistries.COPPER_INSTRUMENT,
 			DIRECT_CODEC
 	);
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, Holder<CopperInstrument>> STREAM_CODEC = ByteBufCodecs.holder(
-			HollowRegistryKeys.COPPER_INSTRUMENT,
+			HollowRegistries.COPPER_INSTRUMENT,
 			DIRECT_STREAM_CODEC
 	);
 }

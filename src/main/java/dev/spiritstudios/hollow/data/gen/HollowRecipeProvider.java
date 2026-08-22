@@ -8,7 +8,7 @@ import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.world.item.CopperInstruments;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.world.item.HollowItems;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import dev.spiritstudios.hollow.world.level.block.HollowLogCollection;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -143,7 +143,7 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
 
             public void createCopperHornRecipe(ResourceKey<Instrument> goat, ResourceKey<CopperInstrument> copper) {
                 HolderGetter<Instrument> instruments = wrapperLookup.lookupOrThrow(Registries.INSTRUMENT);
-                HolderGetter<CopperInstrument> copperInstruments = wrapperLookup.lookupOrThrow(HollowRegistryKeys.COPPER_INSTRUMENT);
+                HolderGetter<CopperInstrument> copperInstruments = wrapperLookup.lookupOrThrow(HollowRegistries.COPPER_INSTRUMENT);
 
 
                 ShapedRecipeBuilderAccessor.create(

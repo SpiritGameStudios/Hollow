@@ -1,8 +1,8 @@
 package dev.spiritstudios.hollow.world.level.block;
 
 import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
+import dev.spiritstudios.hollow.tags.HollowEntityTypeTags;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
-import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -37,7 +37,7 @@ public class SculkJawBlock extends SculkBlock {
 
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        if (world.isClientSide() || entity.is(HollowEntityTypes.Tags.IMMUNE_TO_SCULK_JAW)) {
+        if (world.isClientSide() || entity.is(HollowEntityTypeTags.IMMUNE_TO_SCULK_JAW)) {
             super.stepOn(world, pos, state, entity);
             return;
         }

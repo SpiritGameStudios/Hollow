@@ -4,7 +4,7 @@ import dev.spiritstudios.hollow.client.render.particle.JarFireflyParticle;
 import dev.spiritstudios.hollow.client.render.particle.ScreamParticle;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
-import dev.spiritstudios.hollow.registry.HollowParticleTypes;
+import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.client.render.block.EchoingPotBlockEntityRenderer;
 import dev.spiritstudios.hollow.client.render.block.EchoingVaseBlockEntityRenderer;
 import dev.spiritstudios.hollow.client.render.block.JarBlockEntityRenderer;

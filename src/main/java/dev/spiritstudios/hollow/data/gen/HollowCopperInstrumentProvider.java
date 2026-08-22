@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.world.item.CopperInstrument;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
@@ -16,7 +16,7 @@ public class HollowCopperInstrumentProvider extends FabricDynamicRegistryProvide
 
     @Override
     protected void configure(HolderLookup.Provider wrapperLookup, Entries entries) {
-        HolderLookup<CopperInstrument> lookup = wrapperLookup.lookupOrThrow(HollowRegistryKeys.COPPER_INSTRUMENT);
+        HolderLookup<CopperInstrument> lookup = wrapperLookup.lookupOrThrow(HollowRegistries.COPPER_INSTRUMENT);
 
         lookup.listElementIds()
                 .filter(key ->

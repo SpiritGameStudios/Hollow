@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.world.level.block;
 
-import dev.spiritstudios.hollow.registry.HollowParticleTypes;
+import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

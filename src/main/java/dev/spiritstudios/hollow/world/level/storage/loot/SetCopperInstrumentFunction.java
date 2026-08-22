@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
@@ -34,7 +34,7 @@ public class SetCopperInstrumentFunction extends LootItemConditionalFunction {
 	@Override
 	public ItemStack run(ItemStack stack, LootContext context) {
 		context.getLevel().registryAccess()
-				.lookup(HollowRegistryKeys.COPPER_INSTRUMENT)
+				.lookup(HollowRegistries.COPPER_INSTRUMENT)
 				.flatMap(registry -> registry.getRandom(context.getRandom()))
 				.ifPresent(entry ->
 						stack.set(HollowDataComponents.COPPER_INSTRUMENT, new CopperInstrumentComponent(entry)));

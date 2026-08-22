@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.registry;
+package dev.spiritstudios.hollow.core.particles;
 
 import dev.spiritstudios.hollow.Hollow;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;

@@ -6,5 +6,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
 public final class HollowBiomeTags {
-    public static final TagKey<Biome> HAS_CLOSER_FOG = TagKey.create(Registries.BIOME, Hollow.id("has_closer_fog"));
+    public static final TagKey<Biome> HAS_CLOSER_FOG = create("has_closer_fog");
+
+	private static TagKey<Biome> create(String name) {
+		return TagKey.create(Registries.BIOME, Hollow.id(name));
+	}
 }

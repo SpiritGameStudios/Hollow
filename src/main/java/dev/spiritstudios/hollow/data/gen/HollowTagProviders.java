@@ -4,8 +4,8 @@ import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.tags.HollowBiomeTags;
 import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
 import dev.spiritstudios.hollow.tags.HollowBlockTags;
+import dev.spiritstudios.hollow.tags.HollowEntityTypeTags;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
-import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
 import dev.spiritstudios.hollow.world.level.block.HollowLogCollection;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -125,7 +125,7 @@ public class HollowTagProviders {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            tag(HollowEntityTypes.Tags.IMMUNE_TO_SCULK_JAW)
+            tag(HollowEntityTypeTags.IMMUNE_TO_SCULK_JAW)
                     .add(EntityTypeIds.WARDEN);
         }
     }
