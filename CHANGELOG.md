@@ -21,6 +21,7 @@ In the process of this massive overhaul, its quite likely we will have forgotten
 * Disabled the player's step up when inside a Sculk Jaw
 * Changed the default value of the Delay Copper Bulbs Game Rule from `true` -> `false`
 	* This Game Rule while useful for new redstone contraptions has the potential to break some that work in vanilla.
+* Updated the model and texture of the Jar to be more in line with other vanilla blocks
 
 ### Features
 * Added Switchgrass, a version of the Firefly Bush without any fireflies
