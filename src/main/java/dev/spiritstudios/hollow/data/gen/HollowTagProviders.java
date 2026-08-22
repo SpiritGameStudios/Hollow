@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.references.BlockItemId;
-import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
@@ -70,9 +69,6 @@ public class HollowTagProviders {
                     .addAll(toIds(HollowBlockItemIds.CRIMSON_HOLLOW_STEM))
                     .addAll(toIds(HollowBlockItemIds.WARPED_HOLLOW_STEM));
 
-            builder(HollowBlockItemTags.CONTAINS_COLLECTABLE_FIREFLIES.block())
-                    .add(BlockItemIds.FIREFLY_BUSH);
-
             builder(BlockTags.MINEABLE_WITH_AXE)
                     .addTag(HollowBlockItemTags.HOLLOW_LOGS.block());
 
@@ -114,7 +110,6 @@ public class HollowTagProviders {
                     .addTag(HollowBlockItemTags.HOLLOW_LOGS.item());
 
             copy(HollowBlockItemTags.HOLLOW_LOGS.block(), HollowBlockItemTags.HOLLOW_LOGS.item());
-            copy(HollowBlockItemTags.CONTAINS_COLLECTABLE_FIREFLIES.block(), HollowBlockItemTags.CONTAINS_COLLECTABLE_FIREFLIES.item());
         }
     }
 
