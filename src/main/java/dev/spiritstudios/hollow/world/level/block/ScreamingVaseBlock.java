@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.world.level.block.entity.EchoingVaseBlockEntity;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
-import dev.spiritstudios.hollow.registry.HollowParticleTypes;
+import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;

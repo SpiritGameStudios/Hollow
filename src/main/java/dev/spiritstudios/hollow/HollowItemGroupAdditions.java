@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow;
 
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
@@ -58,7 +58,7 @@ public final class HollowItemGroupAdditions {
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> {
 			entries.insertAfter(Items.MUSIC_DISC_WARD, HollowItems.MUSIC_DISC_POSTMORTEM);
 			entries.getContext().holders()
-					.lookup(HollowRegistryKeys.COPPER_INSTRUMENT)
+					.lookup(HollowRegistries.COPPER_INSTRUMENT)
 					.map(wrapper -> wrapper.listElements().map(entry -> {
 						ItemStack stack = new ItemStack(HollowItems.COPPER_HORN);
 						stack.set(HollowDataComponents.COPPER_INSTRUMENT, new CopperInstrumentComponent(entry));

@@ -4,8 +4,8 @@ import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.tags.HollowBiomeTags;
 import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
 import dev.spiritstudios.hollow.tags.HollowBlockTags;
+import dev.spiritstudios.hollow.tags.HollowEntityTypeTags;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
-import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
 import dev.spiritstudios.hollow.world.level.block.HollowLogCollection;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.references.BlockItemId;
-import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
@@ -70,9 +69,6 @@ public class HollowTagProviders {
                     .addAll(toIds(HollowBlockItemIds.CRIMSON_HOLLOW_STEM))
                     .addAll(toIds(HollowBlockItemIds.WARPED_HOLLOW_STEM));
 
-            builder(HollowBlockItemTags.CONTAINS_COLLECTABLE_FIREFLIES.block())
-                    .add(BlockItemIds.FIREFLY_BUSH);
-
             builder(BlockTags.MINEABLE_WITH_AXE)
                     .addTag(HollowBlockItemTags.HOLLOW_LOGS.block());
 
@@ -114,7 +110,6 @@ public class HollowTagProviders {
                     .addTag(HollowBlockItemTags.HOLLOW_LOGS.item());
 
             copy(HollowBlockItemTags.HOLLOW_LOGS.block(), HollowBlockItemTags.HOLLOW_LOGS.item());
-            copy(HollowBlockItemTags.CONTAINS_COLLECTABLE_FIREFLIES.block(), HollowBlockItemTags.CONTAINS_COLLECTABLE_FIREFLIES.item());
         }
     }
 
@@ -125,7 +120,7 @@ public class HollowTagProviders {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            tag(HollowEntityTypes.Tags.IMMUNE_TO_SCULK_JAW)
+            tag(HollowEntityTypeTags.IMMUNE_TO_SCULK_JAW)
                     .add(EntityTypeIds.WARDEN);
 			tag(HollowEntityTypes.Tags.CAN_CLIMB_HOLLOW_LOGS)
 					.add(EntityTypeIds.PLAYER);

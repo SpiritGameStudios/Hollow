@@ -1,14 +1,14 @@
 package dev.spiritstudios.hollow;
 
+import dev.spiritstudios.hollow.world.level.HollowGameRules;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
-import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootFunctionTypes;
 import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootTableModifications;
-import dev.spiritstudios.hollow.registry.HollowParticleTypes;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import dev.spiritstudios.hollow.world.level.gen.HollowBiomeModifications;
 import dev.spiritstudios.hollow.world.level.gen.feature.HollowFeatures;
@@ -27,12 +27,11 @@ public final class Hollow implements ModInitializer {
     @Override
     public void onInitialize() {
 		// meow
-        HollowRegistryKeys.init();
+        HollowRegistries.init();
         HollowSoundEvents.init();
 
         HollowBlocks.init();
         HollowItems.init();
-        HollowEntityTypes.init();
 
         HollowFeatures.init();
         HollowTreeDecoratorTypes.init();

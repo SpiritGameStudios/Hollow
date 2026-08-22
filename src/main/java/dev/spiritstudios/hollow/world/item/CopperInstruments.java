@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.world.item;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.registry.HollowRegistryKeys;
+import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 
@@ -35,6 +35,6 @@ public final class CopperInstruments {
 	}
 
 	private static ResourceKey<CopperInstrument> ofKey(String id) {
-		return ResourceKey.create(HollowRegistryKeys.COPPER_INSTRUMENT, Hollow.id(id));
+		return ResourceKey.create(HollowRegistries.COPPER_INSTRUMENT, Hollow.id(id));
 	}
 }
