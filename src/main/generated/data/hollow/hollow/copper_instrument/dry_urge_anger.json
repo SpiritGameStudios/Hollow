@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.anger",
+  "call": "hollow:item.copper_horn.call.dry",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.dry_urge_anger"
+  },
+  "melody": "hollow:item.copper_horn.melody.urge",
+  "range": 256.0,
+  "use_duration": 4.0
+}

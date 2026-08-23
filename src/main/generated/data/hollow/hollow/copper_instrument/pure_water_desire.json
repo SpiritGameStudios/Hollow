@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.desire",
+  "call": "hollow:item.copper_horn.call.pure",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.pure_water_desire"
+  },
+  "melody": "hollow:item.copper_horn.melody.water",
+  "range": 256.0,
+  "use_duration": 4.0
+}

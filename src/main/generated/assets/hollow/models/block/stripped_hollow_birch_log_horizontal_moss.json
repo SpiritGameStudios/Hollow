@@ -1,0 +1,9 @@
+{
+  "parent": "hollow:block/hollow_log_horizontal_layer",
+  "textures": {
+    "end": "minecraft:block/stripped_birch_log_top",
+    "inside": "minecraft:block/stripped_birch_log",
+    "overlay": "hollow:block/moss_overlay",
+    "side": "minecraft:block/stripped_birch_log"
+  }
+}

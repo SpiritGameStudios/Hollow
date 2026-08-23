@@ -1,0 +1,15 @@
+{
+  "variants": {
+    "bottom=false": [
+      {
+        "model": "hollow:block/cattail_stem"
+      },
+      {
+        "model": "hollow:block/cattail_stem_2"
+      }
+    ],
+    "bottom=true": {
+      "model": "hollow:block/cattail_stem_bottom"
+    }
+  }
+}

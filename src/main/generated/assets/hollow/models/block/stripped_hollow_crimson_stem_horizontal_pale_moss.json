@@ -1,0 +1,9 @@
+{
+  "parent": "hollow:block/hollow_log_horizontal_layer",
+  "textures": {
+    "end": "minecraft:block/stripped_crimson_stem_top",
+    "inside": "minecraft:block/stripped_crimson_stem",
+    "overlay": "hollow:block/pale_moss_overlay",
+    "side": "minecraft:block/stripped_crimson_stem"
+  }
+}
