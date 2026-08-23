@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.world.level.block;
 
-import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
+import dev.spiritstudios.hollow.tags.HollowEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -99,7 +99,9 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     }
 
 	public static boolean isClimbableHollowLog(BlockState state, Entity entity) {
-		return state.getBlock() instanceof HollowLogBlock && state.getValue(AXIS) == Direction.Axis.Y && entity.is(HollowEntityTypes.Tags.CAN_CLIMB_HOLLOW_LOGS);
+		return state.getBlock() instanceof HollowLogBlock &&
+			state.getValue(AXIS) == Direction.Axis.Y &&
+			entity.is(HollowEntityTypeTags.CAN_CLIMB_HOLLOW_LOGS);
 	}
 
     public enum Layer implements StringRepresentable {
