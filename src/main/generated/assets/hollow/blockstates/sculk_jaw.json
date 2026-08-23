@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "hollow:block/sculk_jaw"
+    },
+    "active=true": {
+      "model": "hollow:block/sculk_jaw_active"
+    }
+  }
+}

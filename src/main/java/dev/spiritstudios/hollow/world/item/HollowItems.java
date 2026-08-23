@@ -59,12 +59,6 @@ public final class HollowItems {
             PlaceOnWaterBlockItem::new
     );
 
-    public static final Item GIANT_LILY_PAD = registerBlock(
-            HollowBlockItemIds.GIANT_LILY_PAD,
-            HollowBlocks.GIANT_LILY_PAD,
-            PlaceOnWaterBlockItem::new
-    );
-
 	public static final Item SWITCHGRASS = registerBlock(HollowBlockItemIds.SWITCHGRASS, HollowBlocks.SWITCHGRASS);
 
     public static final Item CATTAIL = registerBlock(HollowBlockItemIds.CATTAIL, HollowBlocks.CATTAIL);
@@ -149,6 +143,6 @@ public final class HollowItems {
         CompostableRegistry.INSTANCE.add(POLYPORE, 0.65F);
         CompostableRegistry.INSTANCE.add(CATTAIL, 0.65F);
         CompostableRegistry.INSTANCE.add(FLOWERING_LILY_PAD, 0.75F);
-        CompostableRegistry.INSTANCE.add(GIANT_LILY_PAD, 0.85F);
+        // CompostableRegistry.INSTANCE.add(GIANT_LILY_PAD, 0.85F);
     }
 }

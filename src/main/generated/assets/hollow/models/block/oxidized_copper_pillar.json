@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hollow:block/oxidized_copper_pillar_top",
+    "side": "hollow:block/oxidized_copper_pillar"
+  }
+}

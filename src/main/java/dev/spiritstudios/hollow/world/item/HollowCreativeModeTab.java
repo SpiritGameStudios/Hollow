@@ -21,8 +21,8 @@ import java.util.List;
 public final class HollowCreativeModeTab {
 	private static void insertHollowLogs(LogCollection<Block> collection, FabricCreativeModeTabOutput output) {
 		collection.forEach(block -> {
-			if (!(block instanceof HollowLogBlock log)) throw new IllegalStateException();
-			output.insertAfter(log.log.asItem(), block);
+			if (!(block instanceof HollowLogBlock hollowLog)) throw new IllegalStateException();
+			output.insertAfter(hollowLog.log.asItem(), block);
 		});
 	}
 
@@ -49,7 +49,7 @@ public final class HollowCreativeModeTab {
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
 			insertHollowLogs(HollowBlocks.HOLLOW_LOG, output);
 
-			output.insertAfter(Items.LILY_PAD, HollowItems.FLOWERING_LILY_PAD, HollowItems.GIANT_LILY_PAD, HollowItems.CATTAIL);
+			output.insertAfter(Items.LILY_PAD, HollowItems.FLOWERING_LILY_PAD, HollowItems.CATTAIL);
 			output.insertAfter(Items.BROWN_MUSHROOM, HollowItems.POLYPORE);
 			output.insertBefore(Items.FIREFLY_BUSH, HollowItems.SWITCHGRASS);
 

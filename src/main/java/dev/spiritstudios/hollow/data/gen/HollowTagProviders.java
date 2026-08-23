@@ -14,7 +14,9 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.references.BlockItemId;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockItemTagId;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
@@ -78,6 +80,12 @@ public class HollowTagProviders {
 			builder(HollowBlockTags.POLYPORE_PLACEABLE_ON)
 				.forceAddTag(BlockTags.LOGS)
 				.addTag(HollowBlockItemTags.HOLLOW_LOGS.block());
+
+			builder(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block())
+				.add(BlockItemIds.LILY_PAD, HollowBlockItemIds.FLOWERING_LILY_PAD);
+
+			builder(BlockTags.FROG_PREFER_JUMP_TO)
+				.add(HollowBlockItemIds.FLOWERING_LILY_PAD, HollowBlockItemIds.GIANT_LILY_PAD);
 		}
 
 
@@ -100,7 +108,12 @@ public class HollowTagProviders {
 			builder(ItemTags.SULFUR_CUBE_ARCHETYPE_BOUNCY)
 				.addTag(HollowBlockItemTags.HOLLOW_LOGS.item());
 
-			copy(HollowBlockItemTags.HOLLOW_LOGS.block(), HollowBlockItemTags.HOLLOW_LOGS.item());
+			copy(HollowBlockItemTags.HOLLOW_LOGS);
+			copy(HollowBlockItemTags.FORMS_GIANT_LILY_PAD);
+		}
+
+		private void copy(BlockItemTagId tag) {
+			copy(tag.block(), tag.item());
 		}
 	}
 

@@ -1,0 +1,8 @@
+{
+  "comparator_output": 8,
+  "description": {
+    "translate": "jukebox_song.hollow.postmortem"
+  },
+  "length_in_seconds": 84.0,
+  "sound_event": "hollow:music_disc.postmortem"
+}

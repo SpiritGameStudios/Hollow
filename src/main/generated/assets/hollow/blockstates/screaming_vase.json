@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "facing=down,half=lower": {
+      "model": "hollow:block/screaming_vase",
+      "x": 90
+    },
+    "facing=down,half=upper": {
+      "model": "hollow:block/screaming_vase_upper",
+      "x": 90
+    },
+    "facing=east,half=lower": {
+      "model": "hollow:block/screaming_vase",
+      "y": 90
+    },
+    "facing=east,half=upper": {
+      "model": "hollow:block/screaming_vase_upper",
+      "y": 90
+    },
+    "facing=north,half=lower": {
+      "model": "hollow:block/screaming_vase"
+    },
+    "facing=north,half=upper": {
+      "model": "hollow:block/screaming_vase_upper"
+    },
+    "facing=south,half=lower": {
+      "model": "hollow:block/screaming_vase",
+      "y": 180
+    },
+    "facing=south,half=upper": {
+      "model": "hollow:block/screaming_vase_upper",
+      "y": 180
+    },
+    "facing=up,half=lower": {
+      "model": "hollow:block/screaming_vase",
+      "x": 270
+    },
+    "facing=up,half=upper": {
+      "model": "hollow:block/screaming_vase_upper",
+      "x": 270
+    },
+    "facing=west,half=lower": {
+      "model": "hollow:block/screaming_vase",
+      "y": 270
+    },
+    "facing=west,half=upper": {
+      "model": "hollow:block/screaming_vase_upper",
+      "y": 270
+    }
+  }
+}

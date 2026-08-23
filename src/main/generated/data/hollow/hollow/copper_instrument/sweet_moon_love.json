@@ -1,0 +1,10 @@
+{
+  "bass": "hollow:item.copper_horn.bass.love",
+  "call": "hollow:item.copper_horn.call.sweet",
+  "description": {
+    "translate": "item.hollow.copper_horn.hollow.sweet_moon_love"
+  },
+  "melody": "hollow:item.copper_horn.melody.moon",
+  "range": 256.0,
+  "use_duration": 4.0
+}
