@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.WeatheringCopperCollection;
 
 import java.util.function.Consumer;
 
-public final class HollowItemGroupAdditions {
+public final class HollowCreativeModeTab {
 	public static void init() {
 		CreativeModeTabEvents.MODIFY_OUTPUT_ALL.register((itemGroup, entries) -> {
 			ItemGroupHelper helper = new ItemGroupHelper(itemGroup, entries);

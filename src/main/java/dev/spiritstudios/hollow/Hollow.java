@@ -46,7 +46,7 @@ public final class Hollow implements ModInitializer {
 
         HollowBiomeModifications.init();
         HollowLootTableModifications.init();
-        HollowItemGroupAdditions.init();
+        HollowCreativeModeTab.init();
 
         ItemComponentTooltipProviderRegistry.addLast(HollowDataComponents.COPPER_INSTRUMENT);
     }
