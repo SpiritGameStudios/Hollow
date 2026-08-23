@@ -9,6 +9,7 @@ import net.minecraft.resources.Identifier;
 
 public final class HollowSoundEvents {
     public static final Holder.Reference<SoundEvent> MUSIC_DISC_POSTMORTEM = registerForHolder("music_disc.postmortem");
+	public static final Holder.Reference<SoundEvent> MUSIC_DISC_ONLY_YOU = registerForHolder("music_disc.only_you");
     public static final Holder.Reference<SoundEvent> MUSIC_OVERWORLD_BIRCH_FOREST = registerForHolder("music.overworld.birch_forest");
 
     public static final SoundEvent SCULK_JAW_BITE = register("block.sculk_jaw.bite");

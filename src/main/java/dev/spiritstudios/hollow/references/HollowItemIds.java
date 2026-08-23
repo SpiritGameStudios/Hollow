@@ -11,6 +11,7 @@ import net.minecraft.world.item.JukeboxSong;
 public final class HollowItemIds {
     public static final ResourceKey<Item> COPPER_HORN = create("copper_horn");
     public static final ResourceKey<Item> MUSIC_DISC_POSTMORTEM = createMusicDisc(HollowJukeboxSongs.POSTMORTEM);
+	public static final ResourceKey<Item> MUSIC_DISC_ONLY_YOU = createMusicDisc(HollowJukeboxSongs.ONLY_YOU);
 
     private static ResourceKey<Item> create(final String name) {
         return ResourceKey.create(Registries.ITEM, Hollow.id(name));

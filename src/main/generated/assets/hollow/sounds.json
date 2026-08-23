@@ -249,6 +249,14 @@
       }
     ]
   },
+  "music_disc.only_you": {
+    "sounds": [
+      {
+        "name": "hollow:records/only_you",
+        "stream": true
+      }
+    ]
+  },
   "music_disc.postmortem": {
     "sounds": [
       {

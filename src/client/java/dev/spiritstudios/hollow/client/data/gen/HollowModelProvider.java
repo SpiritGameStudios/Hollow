@@ -126,6 +126,7 @@ public final class HollowModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators generator) {
         generator.generateFlatItem(HollowItems.MUSIC_DISC_POSTMORTEM, ModelTemplates.FLAT_ITEM);
+		generator.generateFlatItem(HollowItems.MUSIC_DISC_ONLY_YOU, ModelTemplates.FLAT_ITEM);
 
 //        generator.registerSpawnEgg(
 //                HollowItems.FIREFLY_SPAWN_EGG,

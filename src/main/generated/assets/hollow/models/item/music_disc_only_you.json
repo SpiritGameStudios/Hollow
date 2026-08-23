@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hollow:item/giant_lily_pad"
+    "layer0": "hollow:item/music_disc_only_you"
   }
 }

@@ -26,6 +26,12 @@ public final class HollowSoundsProvider extends FabricSoundsProvider {
 		);
 
 		exporter.add(
+			HollowSoundEvents.MUSIC_DISC_ONLY_YOU,
+			SoundTypeBuilder.of()
+				.sound(ofFile("records/only_you").stream(true))
+		);
+
+		exporter.add(
 				HollowSoundEvents.MUSIC_OVERWORLD_BIRCH_FOREST,
 				SoundTypeBuilder.of()
 						.sound(ofFile("music/game/birch_forest/wildflower").stream(true).volume(0.4F))

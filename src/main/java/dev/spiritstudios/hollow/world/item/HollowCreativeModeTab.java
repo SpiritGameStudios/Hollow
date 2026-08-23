@@ -57,7 +57,7 @@ public final class HollowCreativeModeTab {
 		});
 
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> {
-			entries.insertAfter(Items.MUSIC_DISC_WARD, HollowItems.MUSIC_DISC_POSTMORTEM);
+			entries.insertAfter(Items.MUSIC_DISC_WARD, HollowItems.MUSIC_DISC_POSTMORTEM, HollowItems.MUSIC_DISC_ONLY_YOU);
 
 			entries.getContext().holders()
 				.lookup(HollowRegistries.COPPER_INSTRUMENT)

@@ -17,6 +17,10 @@ public class HollowLootTableModifications {
                     .add(LootItem.lootTableItem(HollowItems.MUSIC_DISC_POSTMORTEM))
                     .when(LootItemRandomChanceCondition.randomChance(0.1F)));
 
+			if (key == BuiltInLootTables.FARMER_GIFT) tableBuilder.withPool(LootPool.lootPool()
+				.add(LootItem.lootTableItem(HollowItems.MUSIC_DISC_ONLY_YOU))
+				.when(LootItemRandomChanceCondition.randomChance(0.1F)));
+
             if (key == BuiltInLootTables.PILLAGER_OUTPOST) tableBuilder.withPool(LootPool.lootPool()
                     .setRolls(UniformGenerator.between(0.0F, 1.0F))
                     .add(LootItem.lootTableItem(HollowItems.COPPER_HORN))

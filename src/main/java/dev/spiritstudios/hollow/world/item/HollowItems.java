@@ -91,6 +91,14 @@ public final class HollowItems {
                     .jukeboxPlayable(HollowJukeboxSongs.POSTMORTEM)
     );
 
+	public static final Item MUSIC_DISC_ONLY_YOU = registerItem(
+		HollowItemIds.MUSIC_DISC_ONLY_YOU,
+		new Item.Properties()
+			.stacksTo(1)
+			.rarity(Rarity.RARE)
+			.jukeboxPlayable(HollowJukeboxSongs.ONLY_YOU)
+	);
+
     public static final Item COPPER_HORN = registerItem(
             HollowItemIds.COPPER_HORN,
             CopperHornItem::new,
