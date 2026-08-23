@@ -26,7 +26,6 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
-import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureSlot;
@@ -40,10 +39,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.core.Direction;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 
-import static dev.spiritstudios.hollow.Hollow.MODID;
 import static dev.spiritstudios.hollow.Hollow.id;
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
@@ -293,16 +290,7 @@ public final class HollowModelProvider extends FabricModelProvider {
     private static void registerGiantLilyPad(BlockModelGenerators generator) {
         MultiVariant[] modelIds = new MultiVariant[4];
         for (int i = 0; i < 4; i++) {
-            TextureMapping textureMap = TextureMapping.defaultTexture(TextureMapping.getBlockTexture(
-                    HollowBlocks.GIANT_LILY_PAD, "_" + i
-            ));
-            ModelTemplate model = new ModelTemplate(
-                    Optional.of(Identifier.fromNamespaceAndPath(MODID, "block/giant_lily_pad_template")),
-                    Optional.of("_" + i),
-                    TextureSlot.TEXTURE
-            );
-
-            modelIds[i] = plainVariant(model.create(HollowBlocks.GIANT_LILY_PAD, textureMap, generator.modelOutput));
+            modelIds[i] = plainVariant(id("block/giant_lily_pad_" + i));
         }
 
         Map<GiantLilyPadBlock.Piece, MultiVariant> north = ImmutableMap.of(

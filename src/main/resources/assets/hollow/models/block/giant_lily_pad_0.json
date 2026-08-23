@@ -1,0 +1,19 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made by axialeaa using Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#texture",
+		"texture": "hollow:block/giant_lily_pad"
+	},
+	"elements": [
+		{
+			"from": [0, 0.25, 0],
+			"to": [16, 0.25, 16],
+			"faces": {
+				"up": {"uv": [8, 0, 16, 8], "texture": "#texture", "tintindex": 0},
+				"down": {"uv": [8, 8, 16, 0], "texture": "#texture", "tintindex": 0}
+			}
+		}
+	]
+}
