@@ -20,74 +20,21 @@ import java.util.function.Function;
 
 @SuppressWarnings("unused")
 public final class HollowBlocks {
-    // region Hollow logs
-    public static final HollowLogCollection<Block> OAK_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.OAK_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG
-    );
+	public static final LogCollection<Block> HOLLOW_LOG = LogCollection.registerBlocks(
+		HollowBlockItemIds.HOLLOW_LOG,
+		LogCollection.LOGS,
+		HollowBlocks::register,
+		(log, properties) -> new HollowLogBlock(properties, log, false),
+		BlockBehaviour.Properties::ofFullCopy
+	);
 
-    public static final HollowLogCollection<Block> SPRUCE_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.SPRUCE_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG
-    );
-
-    public static final HollowLogCollection<Block> BIRCH_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.BIRCH_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG
-    );
-
-    public static final HollowLogCollection<Block> JUNGLE_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.JUNGLE_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG
-    );
-
-    public static final HollowLogCollection<Block> ACACIA_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.ACACIA_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG
-    );
-
-    public static final HollowLogCollection<Block> DARK_OAK_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.DARK_OAK_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG
-    );
-
-    public static final HollowLogCollection<Block> CRIMSON_HOLLOW_STEM = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.CRIMSON_HOLLOW_STEM,
-            HollowBlocks::register,
-            Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM
-    );
-
-    public static final HollowLogCollection<Block> WARPED_HOLLOW_STEM = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.WARPED_HOLLOW_STEM,
-            HollowBlocks::register,
-            Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM
-    );
-
-    public static final HollowLogCollection<Block> MANGROVE_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.MANGROVE_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG
-    );
-
-    public static final HollowLogCollection<Block> CHERRY_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.CHERRY_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG
-    );
-
-    public static final HollowLogCollection<Block> PALE_OAK_HOLLOW_LOG = HollowLogCollection.registerBlocks(
-            HollowBlockItemIds.PALE_OAK_HOLLOW_LOG,
-            HollowBlocks::register,
-            Blocks.PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_LOG
-    );
-
-    // endregion
+	public static final LogCollection<Block> STRIPPED_HOLLOW_LOG = LogCollection.registerBlocks(
+		HollowBlockItemIds.STRIPPED_HOLLOW_LOG,
+		LogCollection.STRIPPED_LOGS,
+		HollowBlocks::register,
+		(log, properties) -> new HollowLogBlock(properties, log, true),
+		BlockBehaviour.Properties::ofFullCopy
+	);
 
     public static final Block ECHOING_POT = register(
             HollowBlockItemIds.ECHOING_POT,
@@ -253,25 +200,10 @@ public final class HollowBlocks {
         return register(id, factory, BlockBehaviour.Properties.ofFullCopy(parent));
     }
 
-    private static void registerStripping(HollowLogCollection<Block> collection) {
-        StrippableBlockRegistry.registerCopyState(collection.hollowLog(), collection.strippedHollowLog());
-    }
-
     public static void init() {
         FlammableBlockRegistry.getDefaultInstance().add(HollowBlockItemTags.HOLLOW_LOGS.block(), 5, 5);
 
         OxidizableBlocksRegistry.registerWeatheringCopperBlocks(COPPER_PILLAR);
-
-        registerStripping(HollowBlocks.OAK_HOLLOW_LOG);
-        registerStripping(HollowBlocks.SPRUCE_HOLLOW_LOG);
-        registerStripping(HollowBlocks.BIRCH_HOLLOW_LOG);
-        registerStripping(HollowBlocks.JUNGLE_HOLLOW_LOG);
-        registerStripping(HollowBlocks.ACACIA_HOLLOW_LOG);
-        registerStripping(HollowBlocks.DARK_OAK_HOLLOW_LOG);
-        registerStripping(HollowBlocks.CRIMSON_HOLLOW_STEM);
-        registerStripping(HollowBlocks.WARPED_HOLLOW_STEM);
-        registerStripping(HollowBlocks.MANGROVE_HOLLOW_LOG);
-        registerStripping(HollowBlocks.CHERRY_HOLLOW_LOG);
-        registerStripping(HollowBlocks.PALE_OAK_HOLLOW_LOG);
+		LogCollection.zipApply(HOLLOW_LOG, STRIPPED_HOLLOW_LOG, StrippableBlockRegistry::registerCopyState);
     }
 }

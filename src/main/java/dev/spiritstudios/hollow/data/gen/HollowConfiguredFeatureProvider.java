@@ -124,7 +124,7 @@ public class HollowConfiguredFeatureProvider extends FabricDynamicRegistryProvid
                 TreeFeatures.FALLEN_BIRCH_TREE,
                 new ConfiguredFeature<>(
                         Feature.FALLEN_TREE,
-                        createFallenTree(HollowBlocks.BIRCH_HOLLOW_LOG.hollowLog(), 5, 8).build()
+                        createFallenTree(HollowBlocks.HOLLOW_LOG.birch(), 5, 8).build()
                 )
         );
 
@@ -132,7 +132,7 @@ public class HollowConfiguredFeatureProvider extends FabricDynamicRegistryProvid
                 TreeFeatures.FALLEN_SUPER_BIRCH_TREE,
                 new ConfiguredFeature<>(
                         Feature.FALLEN_TREE,
-                        createFallenTree(HollowBlocks.BIRCH_HOLLOW_LOG.hollowLog(), 5, 15).build()
+                        createFallenTree(HollowBlocks.HOLLOW_LOG.birch(), 5, 15).build()
                 )
         );
     }

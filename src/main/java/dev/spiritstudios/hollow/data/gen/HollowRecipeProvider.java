@@ -1,34 +1,37 @@
 package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.mixin.accessor.ShapedRecipeBuilderAccessor;
-import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
-import dev.spiritstudios.hollow.world.item.CopperInstrument;
-import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
-import dev.spiritstudios.hollow.world.item.CopperInstruments;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
-import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
-import dev.spiritstudios.hollow.world.level.block.HollowLogCollection;
+import dev.spiritstudios.hollow.mixin.accessor.ShapedRecipeBuilderAccessor;
+import dev.spiritstudios.hollow.world.item.CopperInstrument;
+import dev.spiritstudios.hollow.world.item.CopperInstruments;
+import dev.spiritstudios.hollow.world.item.HollowItems;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
+import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
+import dev.spiritstudios.hollow.world.level.block.LogCollection;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.recipe.v1.ingredient.DefaultCustomIngredients;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.component.InstrumentComponent;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.Instrument;
+import net.minecraft.world.item.Instruments;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.InstrumentComponent;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
 
 import java.util.concurrent.CompletableFuture;
@@ -43,50 +46,8 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(wrapperLookup, output) {
             @Override
             public void buildRecipes() {
-                createHollowLogRecipe(
-                        HollowBlocks.OAK_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.SPRUCE_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.BIRCH_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.JUNGLE_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.ACACIA_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.DARK_OAK_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.CRIMSON_HOLLOW_STEM,
-                        new HollowLogCollection<>(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.WARPED_HOLLOW_STEM,
-                        new HollowLogCollection<>(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.MANGROVE_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.CHERRY_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG)
-                );
-                createHollowLogRecipe(
-                        HollowBlocks.PALE_OAK_HOLLOW_LOG,
-                        new HollowLogCollection<>(Blocks.PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_LOG)
-                );
+				createHollowLogRecipe(HollowBlocks.HOLLOW_LOG, LogCollection.LOGS);
+				createHollowLogRecipe(HollowBlocks.STRIPPED_HOLLOW_LOG, LogCollection.STRIPPED_LOGS);
 
                 waxRecipes(FeatureFlagSet.of());
 
@@ -129,8 +90,8 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
                         .save(this.output);
             }
 
-            private void createHollowLogRecipe(HollowLogCollection<Block> blocks, HollowLogCollection<Block> ingredients) {
-                HollowLogCollection.zipApply(blocks, ingredients, (block, ingredient) -> {
+            private void createHollowLogRecipe(LogCollection<Block> blocks, LogCollection<Block> ingredients) {
+				LogCollection.zipApply(blocks, ingredients, (block, ingredient) -> {
                     shaped(RecipeCategory.DECORATIONS, block, 8)
                             .unlockedBy("has_logs", has(ingredient))
                             .define('#', ingredient)

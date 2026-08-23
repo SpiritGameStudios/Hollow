@@ -1,11 +1,11 @@
 package dev.spiritstudios.hollow.world.item;
 
-import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.references.HollowItemIds;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
-import dev.spiritstudios.hollow.world.level.block.HollowLogCollection;
+import dev.spiritstudios.hollow.world.level.block.LogCollection;
 import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,73 +21,17 @@ import java.util.function.Function;
 
 @SuppressWarnings("unused")
 public final class HollowItems {
-    public static final HollowLogCollection<Item> OAK_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.OAK_HOLLOW_LOG,
-            HollowBlocks.OAK_HOLLOW_LOG,
+    public static final LogCollection<Item> HOLLOW_LOG = LogCollection.registerBlockItems(
+            HollowBlockItemIds.HOLLOW_LOG,
+            HollowBlocks.HOLLOW_LOG,
             HollowItems::registerBlock
     );
 
-    public static final HollowLogCollection<Item> SPRUCE_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.SPRUCE_HOLLOW_LOG,
-            HollowBlocks.SPRUCE_HOLLOW_LOG,
-            HollowItems::registerBlock
-
-    );
-
-    public static final HollowLogCollection<Item> BIRCH_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.BIRCH_HOLLOW_LOG,
-            HollowBlocks.BIRCH_HOLLOW_LOG,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> JUNGLE_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.JUNGLE_HOLLOW_LOG,
-            HollowBlocks.JUNGLE_HOLLOW_LOG,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> ACACIA_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.ACACIA_HOLLOW_LOG,
-            HollowBlocks.ACACIA_HOLLOW_LOG,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> DARK_OAK_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.DARK_OAK_HOLLOW_LOG,
-            HollowBlocks.DARK_OAK_HOLLOW_LOG,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> CRIMSON_HOLLOW_STEM = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.CRIMSON_HOLLOW_STEM,
-            HollowBlocks.CRIMSON_HOLLOW_STEM,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> WARPED_HOLLOW_STEM = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.WARPED_HOLLOW_STEM,
-            HollowBlocks.WARPED_HOLLOW_STEM,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> MANGROVE_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.MANGROVE_HOLLOW_LOG,
-            HollowBlocks.MANGROVE_HOLLOW_LOG,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> CHERRY_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.CHERRY_HOLLOW_LOG,
-            HollowBlocks.CHERRY_HOLLOW_LOG,
-            HollowItems::registerBlock
-    );
-
-    public static final HollowLogCollection<Item> PALE_OAK_HOLLOW_LOG = HollowLogCollection.registerBlockItems(
-            HollowBlockItemIds.PALE_OAK_HOLLOW_LOG,
-            HollowBlocks.PALE_OAK_HOLLOW_LOG,
-            HollowItems::registerBlock
-    );
-
+	public static final LogCollection<Item> STRIPPED_HOLLOW_LOG = LogCollection.registerBlockItems(
+		HollowBlockItemIds.STRIPPED_HOLLOW_LOG,
+		HollowBlocks.STRIPPED_HOLLOW_LOG,
+		HollowItems::registerBlock
+	);
 
     public static final Item ECHOING_POT = registerBlock(
             HollowBlockItemIds.ECHOING_POT,
