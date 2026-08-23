@@ -58,17 +58,9 @@ public class HollowLootTableProvider extends FabricBlockLootSubProvider {
                         .modifyPools(pool -> pool.when(this.hasSilkTouch()))
         );
 
-        HollowBlocks.OAK_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.SPRUCE_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.BIRCH_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.JUNGLE_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.ACACIA_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.CHERRY_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.PALE_OAK_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.DARK_OAK_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.MANGROVE_HOLLOW_LOG.forEach(this::dropSelf);
-        HollowBlocks.CRIMSON_HOLLOW_STEM.forEach(this::dropSelf);
-        HollowBlocks.WARPED_HOLLOW_STEM.forEach(this::dropSelf);
+
+        HollowBlocks.HOLLOW_LOG.forEach(this::dropSelf);
+        HollowBlocks.STRIPPED_HOLLOW_LOG.forEach(this::dropSelf);
 
         HollowBlocks.COPPER_PILLAR.forEach(this::dropSelf);
     }

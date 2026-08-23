@@ -73,17 +73,8 @@ public final class HollowModelProvider extends FabricModelProvider {
             registerHollowLog(generator, log);
         };
 
-        HollowBlocks.OAK_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.SPRUCE_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.BIRCH_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.JUNGLE_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.ACACIA_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.CHERRY_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.PALE_OAK_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.DARK_OAK_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.MANGROVE_HOLLOW_LOG.forEach(hollowLogGen);
-        HollowBlocks.CRIMSON_HOLLOW_STEM.forEach(hollowLogGen);
-        HollowBlocks.WARPED_HOLLOW_STEM.forEach(hollowLogGen);
+		HollowBlocks.HOLLOW_LOG.forEach(hollowLogGen);
+		HollowBlocks.STRIPPED_HOLLOW_LOG.forEach(hollowLogGen);
 
         registerWithRandomHorizontalRotations(generator, HollowBlocks.FLOWERING_LILY_PAD);
 
