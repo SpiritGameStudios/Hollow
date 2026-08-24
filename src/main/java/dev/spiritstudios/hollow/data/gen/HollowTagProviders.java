@@ -1,16 +1,16 @@
 package dev.spiritstudios.hollow.data.gen;
 
+import dev.spiritstudios.hollow.references.HollowBlockIds;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
-import dev.spiritstudios.hollow.tags.HollowBiomeTags;
-import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
-import dev.spiritstudios.hollow.tags.HollowBlockTags;
-import dev.spiritstudios.hollow.tags.HollowEntityTypeTags;
+import dev.spiritstudios.hollow.references.HollowItemIds;
+import dev.spiritstudios.hollow.tags.*;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
 import dev.spiritstudios.hollow.world.level.block.LogCollection;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.references.BlockItemId;
@@ -85,7 +85,7 @@ public class HollowTagProviders {
 				.add(BlockItemIds.LILY_PAD, HollowBlockItemIds.FLOWERING_LILY_PAD);
 
 			builder(BlockTags.FROG_PREFER_JUMP_TO)
-				.add(HollowBlockItemIds.FLOWERING_LILY_PAD, HollowBlockItemIds.GIANT_LILY_PAD);
+				.add(HollowBlockItemIds.FLOWERING_LILY_PAD.block(), HollowBlockIds.GIANT_LILY_PAD);
 		}
 
 
@@ -107,6 +107,13 @@ public class HollowTagProviders {
 		protected void addTags(HolderLookup.Provider registries) {
 			builder(ItemTags.SULFUR_CUBE_ARCHETYPE_BOUNCY)
 				.addTag(HollowBlockItemTags.HOLLOW_LOGS.item());
+
+			builder(ConventionalItemTags.MUSIC_DISCS)
+				.add(HollowItemIds.MUSIC_DISC_POSTMORTEM, HollowItemIds.MUSIC_DISC_ONLY_YOU);
+
+			builder(HollowItemTags.CAN_PUT_IN_JAR)
+				.forceAddTag(ConventionalItemTags.COOKIE_FOODS)
+				.forceAddTag(ConventionalItemTags.MUSIC_DISCS); // will add more
 
 			copy(HollowBlockItemTags.HOLLOW_LOGS);
 			copy(HollowBlockItemTags.FORMS_GIANT_LILY_PAD);

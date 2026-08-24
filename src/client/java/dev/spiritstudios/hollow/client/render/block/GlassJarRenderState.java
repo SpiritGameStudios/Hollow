@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import java.util.Collections;
 import java.util.List;
 
-public class JarRenderState extends BlockEntityRenderState {
+public class GlassJarRenderState extends BlockEntityRenderState {
     public List<ItemStackRenderState> items = Collections.emptyList();
+	public boolean hanging = false;
 }

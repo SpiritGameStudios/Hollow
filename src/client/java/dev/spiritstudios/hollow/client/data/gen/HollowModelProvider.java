@@ -2,14 +2,7 @@ package dev.spiritstudios.hollow.client.data.gen;
 
 import com.google.common.collect.ImmutableMap;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
-import dev.spiritstudios.hollow.world.level.block.CattailStemBlock;
-import dev.spiritstudios.hollow.world.level.block.GiantLilyPadBlock;
-import dev.spiritstudios.hollow.world.level.block.HollowLogBlock;
-import dev.spiritstudios.hollow.world.level.block.PolyporeBlock;
-import dev.spiritstudios.hollow.world.level.block.SculkJawBlock;
-import dev.spiritstudios.hollow.world.level.block.StoneChestBlock;
-import dev.spiritstudios.hollow.world.level.block.VerticalDoubleBlock;
-import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
+import dev.spiritstudios.hollow.world.level.block.*;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -116,11 +109,23 @@ public final class HollowModelProvider extends FabricModelProvider {
         HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed((unwaxed, _) -> generator.createRotatedPillarWithHorizontalVariant(unwaxed, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT));
         HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed(generator::copyModel);
 
-        generator.registerSimpleFlatItemModel(HollowBlocks.JAR.asItem());
-        generator.createNonTemplateModelBlock(HollowBlocks.JAR);
+		generator.registerSimpleFlatItemModel(HollowBlocks.GLASS_JAR.asItem());
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.GLASS_JAR)
+			.with(createBooleanModelDispatch(
+				BaseJarBlock.HANGING,
+				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.GLASS_JAR, "_hanging")),
+				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.GLASS_JAR))
+			))
+		);
 
-        generator.registerSimpleFlatItemModel(HollowBlocks.JAR_OF_FIREFLIES.asItem());
-        generator.createNonTemplateModelBlock(HollowBlocks.JAR_OF_FIREFLIES, HollowBlocks.JAR);
+        generator.registerSimpleFlatItemModel(HollowBlocks.FIREFLY_JAR.asItem());
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.FIREFLY_JAR)
+			.with(createBooleanModelDispatch(
+				BaseJarBlock.HANGING,
+				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.GLASS_JAR, "_hanging")),
+				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.GLASS_JAR))
+			))
+		);
     }
 
     @Override
@@ -187,7 +192,7 @@ public final class HollowModelProvider extends FabricModelProvider {
                 .with(up ? NORTH_DEFAULT_ROTATION_OPERATIONS : NORTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS));
     }
 
-    public void registerPolypore(BlockModelGenerators generator) {
+    public static void registerPolypore(BlockModelGenerators generator) {
         generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.POLYPORE)
                 .with(PropertyDispatch.initial(PolyporeBlock.POLYPORE_AMOUNT)
                         .select(
@@ -228,7 +233,7 @@ public final class HollowModelProvider extends FabricModelProvider {
         generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, createRotatedVariants(modelVariant)));
     }
 
-    public void registerCattailStem(BlockModelGenerators generator) {
+    public static void registerCattailStem(BlockModelGenerators generator) {
         Identifier middle = ModelTemplates.CROSS.create(
                 HollowBlocks.CATTAIL_STEM,
                 TextureMapping.cross(HollowBlocks.CATTAIL_STEM),

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "hollow:block/glass_jar"
+    },
+    "hanging=true": {
+      "model": "hollow:block/glass_jar_hanging"
+    }
+  }
+}

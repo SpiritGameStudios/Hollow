@@ -5,21 +5,6 @@
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
-        },
-        {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "predicates": {
-              "minecraft:enchantments": [
-                {
-                  "enchantments": "minecraft:silk_touch",
-                  "levels": {
-                    "min": 1
-                  }
-                }
-              ]
-            }
-          }
         }
       ],
       "entries": [
@@ -34,7 +19,7 @@
               "source": "block_entity"
             }
           ],
-          "name": "hollow:jar"
+          "name": "hollow:glass_jar"
         }
       ],
       "rolls": 1.0

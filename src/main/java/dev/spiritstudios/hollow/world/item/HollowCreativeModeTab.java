@@ -35,7 +35,7 @@ public final class HollowCreativeModeTab {
 	public static void init() {
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(output -> {
 			output.insertAfter(Items.CHEST, HollowItems.STONE_CHEST, HollowItems.STONE_CHEST_LID);
-			output.insertAfter(Items.DECORATED_POT, HollowItems.ECHOING_POT, HollowItems.JAR, HollowItems.JAR_OF_FIREFLIES);
+			output.insertAfter(Items.DECORATED_POT, HollowItems.ECHOING_POT, HollowItems.GLASS_JAR, HollowItems.FIREFLY_JAR);
 		});
 
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register(output -> {

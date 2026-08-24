@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "hollow:item/jar"
+    "model": "hollow:item/glass_jar"
   }
 }

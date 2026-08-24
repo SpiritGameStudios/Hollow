@@ -37,7 +37,7 @@ public class JarItem extends BlockItem {
 
 	    return InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(
                 context.getItemInHand(), player,
-                new ItemStack(HollowItems.JAR_OF_FIREFLIES)
+                new ItemStack(HollowItems.FIREFLY_JAR)
         ));
     }
 }

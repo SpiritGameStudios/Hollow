@@ -9,8 +9,6 @@ import net.minecraft.world.level.block.WeatheringCopperCollection;
 
 public final class HollowBlockItemIds {
 	public static final BlockItemId FLOWERING_LILY_PAD = create("flowering_lily_pad");
-	public static final BlockItemId GIANT_LILY_PAD = create("giant_lily_pad");
-
 	public static final BlockItemId CATTAIL = create("cattail");
 	public static final BlockItemId POLYPORE = create("polypore");
 
@@ -42,8 +40,8 @@ public final class HollowBlockItemIds {
 		create("stripped_hollow_warped_stem")
 	);
 
-	public static final BlockItemId JAR = create("jar");
-	public static final BlockItemId JAR_OF_FIREFLIES = create("jar_of_fireflies");
+	public static final BlockItemId GLASS_JAR = create("glass_jar");
+	public static final BlockItemId FIREFLY_JAR = create("firefly_jar");
 
 	public static final BlockItemId ECHOING_POT = create("echoing_pot");
 	public static final BlockItemId ECHOING_VASE = create("echoing_vase");

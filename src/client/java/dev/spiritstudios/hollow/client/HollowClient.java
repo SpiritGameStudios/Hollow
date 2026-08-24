@@ -7,7 +7,7 @@ import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.client.render.block.EchoingPotBlockEntityRenderer;
 import dev.spiritstudios.hollow.client.render.block.EchoingVaseBlockEntityRenderer;
-import dev.spiritstudios.hollow.client.render.block.JarBlockEntityRenderer;
+import dev.spiritstudios.hollow.client.render.block.GlassJarBlockEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
@@ -30,8 +30,8 @@ public class HollowClient implements ClientModInitializer {
 
         // region Block Entity Renderers
         BlockEntityRenderers.register(
-                HollowBlockEntityTypes.JAR,
-                JarBlockEntityRenderer::new
+                HollowBlockEntityTypes.GLASS_JAR,
+                GlassJarBlockEntityRenderer::new
         );
 
         BlockEntityRenderers.register(

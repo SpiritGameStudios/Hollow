@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hollow:item/jar_of_fireflies"
+    "layer0": "hollow:item/glass_jar"
   }
 }

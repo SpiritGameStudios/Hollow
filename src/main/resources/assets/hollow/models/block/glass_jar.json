@@ -1,10 +1,10 @@
 {
-	"ambientocclusion": false,
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"ambientocclusion": false,
 	"textures": {
-		"jar": "hollow:block/jar",
+		"jar": "hollow:block/glass_jar",
 		"particle": "block/glass"
 	},
 	"elements": [
@@ -34,24 +34,5 @@
 				"down": {"uv": [16, 2, 10, 8], "texture": "#jar"}
 			}
 		}
-	],
-	"groups": [
-		{
-			"name": "jar",
-			"origin": [0, 0, 0],
-			"scope": 0,
-			"color": 0,
-			"children": [
-				{
-					"name": "jar_body",
-					"origin": [8, 8, 8],
-					"scope": 0,
-					"color": 0,
-					"children": []
-				}
-			]
-		},
-		0,
-		1
 	]
 }

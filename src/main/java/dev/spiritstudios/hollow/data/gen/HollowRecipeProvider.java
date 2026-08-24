@@ -80,7 +80,7 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD))
                         .save(this.output);
 
-                shaped(RecipeCategory.BUILDING_BLOCKS, HollowBlocks.JAR, 4)
+                shaped(RecipeCategory.BUILDING_BLOCKS, HollowBlocks.GLASS_JAR, 4)
                         .define('P', HollowBlocks.POLYPORE)
                         .define('G', ConventionalItemTags.GLASS_BLOCKS)
                         .pattern(" P ")

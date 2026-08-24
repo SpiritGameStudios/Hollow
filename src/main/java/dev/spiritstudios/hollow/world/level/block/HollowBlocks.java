@@ -98,10 +98,10 @@ public final class HollowBlocks {
             Blocks.LILY_PAD
     );
 
-    public static final Block GIANT_LILY_PAD = registerCopyOf(
-            HollowBlockItemIds.GIANT_LILY_PAD,
+    public static final Block GIANT_LILY_PAD = register(
+            HollowBlockIds.GIANT_LILY_PAD,
             GiantLilyPadBlock::new,
-            Blocks.LILY_PAD
+			BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD)
     );
 
     public static final Block POLYPORE = register(
@@ -127,9 +127,9 @@ public final class HollowBlocks {
                     .lightLevel(state -> state.getValue(SculkJawBlock.ACTIVE) ? 6 : 0)
     );
 
-    public static final Block JAR = register(
-            HollowBlockItemIds.JAR,
-            JarBlock::new,
+    public static final Block GLASS_JAR = register(
+            HollowBlockItemIds.GLASS_JAR,
+            GlassJarBlock::new,
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.WOOD)
                     .strength(0.2F)
@@ -138,10 +138,10 @@ public final class HollowBlocks {
                     .pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Block JAR_OF_FIREFLIES = register(
-            HollowBlockItemIds.JAR_OF_FIREFLIES,
+    public static final Block FIREFLY_JAR = register(
+            HollowBlockItemIds.FIREFLY_JAR,
             FireflyJarBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(JAR).lightLevel(state -> 4)
+            BlockBehaviour.Properties.ofFullCopy(GLASS_JAR).lightLevel(state -> 4)
     );
 
     public static final Block STONE_CHEST = register(
