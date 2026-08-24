@@ -3,8 +3,6 @@ package dev.spiritstudios.hollow.world.level.block;
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.entity.JarBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -49,13 +47,13 @@ public class JarBlock extends BaseEntityBlock {
         return InteractionResult.CONSUME;
     }
 
-    @Override
+/*    @Override
     public void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof JarBlockEntity jarBlockEntity) Containers.dropContents(world, pos, jarBlockEntity);
 
         super.affectNeighborsAfterRemoval(state, world, pos, moved);
-    }
+    }*/
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
