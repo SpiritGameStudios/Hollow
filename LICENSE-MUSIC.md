@@ -1,5 +1,5 @@
 The music for **Hollow** was created by the following authors:
-- **WorldWidePixel** _Copyright © (2024 - 2025) WorldWidePixel, All Rights Reserved._
+- **lynndova** _Copyright © (2024 - 2026) lynndova, All Rights Reserved._
   - Floraison (`floraison.ogg`)
   - Wildflower (`wildflower.ogg`)
   - Waterlily (`waterlily.ogg`)
@@ -16,7 +16,7 @@ You are authorised to use Hollow's music, with a few restrictions. In short:
 - You may use this soundtrack under the fair use doctrine including but not limited to the following:
   - Using this soundtrack in videos or streams
 
-WorldWidePixel's music is not free. Please contact WorldWidePixel for licensing at _hello@worldwidepixel.ca_.<br>
+lynndova's music is not free. Please contact lynndova for licensing at _https://lynndova.com/contact_.<br>
 axialeaa's music is free for non-commercial and derivative use. Please contact axialeaa at _axialeaa@gmail.com_ for the following inquiries:
 - Commercial licensing
 - Providing separated stems (e.g. for remixing or mastering)
