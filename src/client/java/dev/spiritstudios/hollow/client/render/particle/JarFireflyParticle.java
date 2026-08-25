@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.client.render.particle;
 
+import net.minecraft.client.color.ColorLerper;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -7,23 +8,21 @@ import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class JarFireflyParticle extends SingleQuadParticle {
-	protected JarFireflyParticle(ClientLevel level, double x, double y, double z, boolean jeb, TextureAtlasSprite sprite) {
+	private final boolean isJeb;
+	private final int ageOffset;
+
+	protected JarFireflyParticle(ClientLevel level, double x, double y, double z, boolean isJeb, TextureAtlasSprite sprite) {
         super(level, x, y, z, sprite);
 		this.quadSize *= 0.75F;
-
-		if (jeb) {
-			Color color = Color.getHSBColor(level.getRandom().nextFloat(), 0.5F, 1.0F);
-
-			this.rCol = color.getRed();
-			this.gCol = color.getGreen();
-			this.bCol = color.getBlue();
-		}
+		this.isJeb = isJeb;
+		this.ageOffset = level.getRandom().nextInt(0, 300);
     }
 
     @Override
@@ -38,8 +37,16 @@ public class JarFireflyParticle extends SingleQuadParticle {
 
     @Override
     public void tick() {
-		if (this.age++ >= this.lifetime)
+		if (this.age++ >= this.lifetime) {
 			this.remove();
+		}
+
+		if (this.isJeb) {
+			int color = ColorLerper.getLerpedColor(ColorLerper.Type.SHEEP, this.age + this.ageOffset);
+			this.rCol = ARGB.redFloat(color);
+			this.gCol = ARGB.greenFloat(color);
+			this.bCol = ARGB.blueFloat(color);
+		}
 
 		this.setAlpha(getFadeAmount(this.getLifetimeProgress((float) this.age), 0.3F, 0.5F));
     }
