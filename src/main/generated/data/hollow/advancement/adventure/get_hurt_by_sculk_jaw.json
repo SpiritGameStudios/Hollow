@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "get_hurt_by_sculk_jaw": {
+      "conditions": {
+        "damage": {
+          "type": {
+            "tags": [
+              {
+                "expected": true,
+                "id": "hollow:is_sculk_jaw"
+              }
+            ]
+          }
+        }
+      },
+      "trigger": "minecraft:entity_hurt_player"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollow.adventure.get_hurt_by_sculk_jaw.description"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "hollow:sculk_jaw"
+    },
+    "title": {
+      "translate": "advancements.hollow.adventure.get_hurt_by_sculk_jaw.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_hurt_by_sculk_jaw"
+    ]
+  ]
+}

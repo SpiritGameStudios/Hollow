@@ -99,5 +99,7 @@
 	"subtitles.hollow.item.copper_horn.melody.water": "Water",
 	"tag.item.hollow.can_put_in_jar": "Can put in jar",
 	"tag.item.hollow.forms_giant_lily_pad": "Forms giant lily pad",
-	"tag.item.hollow.hollow_logs": "Hollow Logs"
+	"tag.item.hollow.hollow_logs": "Hollow Logs",
+	"advancements.hollow.adventure.get_hurt_by_sculk_jaw.title": "Oof Ouch, My Bones",
+	"advancements.hollow.adventure.get_hurt_by_sculk_jaw.description": "Get ensnared by a Sculk Jaw"
 }

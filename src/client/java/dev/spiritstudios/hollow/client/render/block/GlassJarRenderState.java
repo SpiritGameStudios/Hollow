@@ -9,4 +9,5 @@ import java.util.List;
 public class GlassJarRenderState extends BlockEntityRenderState {
     public List<ItemStackRenderState> items = Collections.emptyList();
 	public boolean hanging = false;
+	public long seed;
 }

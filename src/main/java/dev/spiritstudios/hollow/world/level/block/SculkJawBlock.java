@@ -36,24 +36,23 @@ public class SculkJawBlock extends SculkBlock {
     }
 
     @Override
-    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        if (world.isClientSide() || entity.is(HollowEntityTypeTags.IMMUNE_TO_SCULK_JAW)) {
-            super.stepOn(world, pos, state, entity);
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        if (entity.is(HollowEntityTypeTags.IMMUNE_TO_SCULK_JAW)) {
             return;
         }
 
-        if (!world.getBlockState(pos).getValue(ACTIVE)) {
-            world.playSound(null, pos.above(), HollowSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1F, 0.6F);
-            world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
+        if (!level.getBlockState(pos).getValue(ACTIVE)) {
+            level.playSound(null, pos.above(), HollowSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1F, 0.6F);
+            level.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
         }
 
-        if (world.isClientSide()) {
-            RandomSource random = world.getRandom();
+        if (level.isClientSide()) {
+            RandomSource random = level.getRandom();
             for (int i = 0; i < 2; ++i) {
                 float x = 2.0F * random.nextFloat() - 1.0F;
                 float y = 2.0F * random.nextFloat() - 1.0F;
                 float z = 2.0F * random.nextFloat() - 1.0F;
-                world.addParticle(
+                level.addParticle(
                         ParticleTypes.SCULK_SOUL,
                         (double) pos.getX() + 0.5 + (x * 0.45),
                         (double) pos.getY() + 1,
@@ -63,14 +62,14 @@ public class SculkJawBlock extends SculkBlock {
                         (z * 0.0075F)
                 );
             }
+		}
 
-            return;
-        }
+		if (level instanceof ServerLevel serverLevel) {
+			entity.hurtServer(serverLevel, level.damageSources().source(HollowDamageTypes.SCULK_JAW), 1F);
+		}
 
-        entity.hurtServer((ServerLevel) world, world.damageSources().source(HollowDamageTypes.SCULK_JAW), 1F);
-
-        if (world.getGameTime() % 5 == 0) {
-            world.playSound(
+        if (level.getGameTime() % 5 == 0) {
+            level.playSound(
                     null,
                     pos.above(),
                     SoundEvents.SOUL_ESCAPE.value(),
