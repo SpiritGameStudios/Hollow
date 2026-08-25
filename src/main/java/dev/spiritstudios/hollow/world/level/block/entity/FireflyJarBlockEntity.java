@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.world.level.block.entity;
 
+import dev.spiritstudios.hollow.world.level.block.FireflyJarBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentGetter;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.storage.ValueOutput;
 import org.jspecify.annotations.Nullable;
 
 public class FireflyJarBlockEntity extends BlockEntity implements Nameable {
-	private static final String JEB_NAME = "jeb_";
 	private static final String CUSTOM_NAME_KEY = "CustomName";
 	private static final Component DEFAULT_NAME = Component.translatable("block.hollow.firefly_jar");
 
@@ -77,6 +77,6 @@ public class FireflyJarBlockEntity extends BlockEntity implements Nameable {
 	}
 
 	public boolean isJeb() {
-		return this.getPlainTextName().equals(JEB_NAME);
+		return this.getPlainTextName().equals(FireflyJarBlock.JEB_NAME);
 	}
 }

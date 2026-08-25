@@ -1,12 +1,14 @@
 package dev.spiritstudios.hollow.client.data.gen;
 
 import com.google.common.collect.ImmutableMap;
+import dev.spiritstudios.hollow.client.color.item.Jeb;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.world.level.block.*;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.resources.model.sprite.Material;
@@ -51,6 +53,8 @@ public final class HollowModelProvider extends FabricModelProvider {
             .select(Direction.SOUTH, Y_ROT_180)
             .select(Direction.WEST, Y_ROT_270)
             .select(Direction.EAST, Y_ROT_90);
+
+	private static final ItemTintSource BLANK_LAYER = ItemModelUtils.constantTint(-1);
 
     public HollowModelProvider(FabricPackOutput output) {
         super(output);
@@ -118,7 +122,6 @@ public final class HollowModelProvider extends FabricModelProvider {
 			))
 		);
 
-        generator.registerSimpleFlatItemModel(HollowBlocks.FIREFLY_JAR.asItem());
 		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.FIREFLY_JAR)
 			.with(createBooleanModelDispatch(
 				BaseJarBlock.HANGING,
@@ -129,26 +132,34 @@ public final class HollowModelProvider extends FabricModelProvider {
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerators generator) {
-        generator.generateFlatItem(HollowItems.MUSIC_DISC_POSTMORTEM, ModelTemplates.FLAT_ITEM);
-		generator.generateFlatItem(HollowItems.MUSIC_DISC_ONLY_YOU, ModelTemplates.FLAT_ITEM);
+    public void generateItemModels(ItemModelGenerators generators) {
+        generators.generateFlatItem(HollowItems.MUSIC_DISC_POSTMORTEM, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.MUSIC_DISC_ONLY_YOU, ModelTemplates.FLAT_ITEM);
+
+		Identifier model = generators.generateLayeredItem(
+			HollowItems.FIREFLY_JAR,
+			TextureMapping.getItemTexture(HollowItems.GLASS_JAR),
+			TextureMapping.getItemTexture(HollowItems.FIREFLY_JAR, "_overlay")
+		);
+
+		generators.itemModelOutput.accept(HollowItems.FIREFLY_JAR, ItemModelUtils.tintedModel(model, BLANK_LAYER, new Jeb()));
 
 //        generator.registerSpawnEgg(
 //                HollowItems.FIREFLY_SPAWN_EGG,
 //                0x102F4E, 0xCAAF94
 //        );
 
-        generator.generateBooleanDispatch(
+        generators.generateBooleanDispatch(
                 HollowItems.COPPER_HORN,
                 ItemModelUtils.isUsingItem(),
                 ItemModelUtils.plainModel(BuiltInRegistries.ITEM.getKey(HollowItems.COPPER_HORN).withPrefix("item/tooting_")),
                 ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(HollowItems.COPPER_HORN))
         );
 
-        generator.itemModelOutput.accept(
+        generators.itemModelOutput.accept(
                 HollowItems.FLOWERING_LILY_PAD,
                 ItemModelUtils.tintedModel(
-                        generator.generateLayeredItem(
+                        generators.generateLayeredItem(
                                 HollowItems.FLOWERING_LILY_PAD,
                                 TextureMapping.getBlockTexture(Blocks.LILY_PAD),
                                 new Material(HollowBlockItemIds.FLOWERING_LILY_PAD.item().identifier().withPrefix("block/notreallyablockbutitneedstobeintheblockatlas/"))

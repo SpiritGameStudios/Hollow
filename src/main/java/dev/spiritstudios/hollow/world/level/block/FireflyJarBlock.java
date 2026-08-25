@@ -14,6 +14,7 @@ import net.minecraft.world.phys.AABB;
 import org.jspecify.annotations.Nullable;
 
 public class FireflyJarBlock extends BaseJarBlock {
+	public static final String JEB_NAME = "jeb_";
 	public static final MapCodec<FireflyJarBlock> CODEC = simpleCodec(FireflyJarBlock::new);
 
     public FireflyJarBlock(BlockBehaviour.Properties settings) {

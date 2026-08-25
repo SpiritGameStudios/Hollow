@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.client.render.particle;
 
+import dev.spiritstudios.hollow.client.color.item.Jeb;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -11,11 +12,7 @@ import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
-import java.awt.*;
-
 public class JarFireflyParticle extends SingleQuadParticle {
-	private static final float JEB_SATURATION = 0.5F;
-
 	private final boolean isJeb;
 	private final float ageOffset;
 
@@ -45,7 +42,7 @@ public class JarFireflyParticle extends SingleQuadParticle {
 		float lifetimeProgress = this.getLifetimeProgress((float) this.age);
 
 	    if (this.isJeb) {
-			int color = Color.getHSBColor(Mth.frac(lifetimeProgress + this.ageOffset), JEB_SATURATION, 1.0F).getRGB();
+			int color = Jeb.getColor(Mth.frac(lifetimeProgress + this.ageOffset));
 			this.rCol = ARGB.redFloat(color);
 			this.gCol = ARGB.greenFloat(color);
 			this.bCol = ARGB.blueFloat(color);
