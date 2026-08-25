@@ -41,19 +41,18 @@ public class GlassJarBlockEntityRenderer implements BlockEntityRenderer<GlassJar
     public void extractRenderState(GlassJarBlockEntity blockEntity, GlassJarRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
 		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
 
-		int seed = (int) blockEntity.getBlockPos().asLong();
+		state.seed = blockEntity.getBlockState().getSeed(blockEntity.getBlockPos());
 
 		state.items = new ArrayList<>();
 		state.hanging = blockEntity.getBlockState().getValue(BaseJarBlock.HANGING);
 
 		for (int slot = 0; slot < blockEntity.getContainerSize(); slot++) {
 			ItemStackRenderState itemState = new ItemStackRenderState();
-			this.itemModelResolver.updateForTopItem(itemState, blockEntity.getItem(slot), ItemDisplayContext.FIXED, blockEntity.getLevel(), null, seed + slot);
+			this.itemModelResolver.updateForTopItem(itemState, blockEntity.getItem(slot), ItemDisplayContext.FIXED, blockEntity.getLevel(), null, (int) state.seed + slot);
 			state.items.add(itemState);
 		}
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void submit(GlassJarRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
 		List<ItemStackRenderState> items = state.items;
@@ -61,17 +60,14 @@ public class GlassJarBlockEntityRenderer implements BlockEntityRenderer<GlassJar
 		float deg = 0;
 		int translationIndex = 0;
 
-		for (int slot = 0; slot < items.size(); slot++) {
-			ItemStackRenderState itemState = items.get(slot);
-
+		for (ItemStackRenderState itemState : items) {
 			if (itemState.isEmpty()) continue;
 
 			poseStack.pushPose();
-			long hashCode = Mth.getSeed(state.blockPos.atY(slot));
 
-			float x = getRandomOffset(hashCode & 15L);
-			float z = getRandomOffset(hashCode >> 8 & 15L);
-			deg += getRandomOffset(hashCode >> 16 & 15L) * 5000.0F;
+			float x = getRandomOffset(state.seed & 15L);
+			float z = getRandomOffset(state.seed >> 8 & 15L);
+			deg += getRandomOffset(state.seed >> 16 & 15L) * 5000.0F;
 
 			poseStack.translate(0.5F + x, translationIndex * (ITEM_SCALE / 16.0F + ITEM_SPACING) + OFF_BOTTOM, 0.5F + z);
 

@@ -151,6 +151,9 @@ public class HollowTagProviders {
 
 			tag(DamageTypeTags.NO_KNOCKBACK)
 				.add(HollowDamageTypes.SCULK_JAW);
+
+			tag(HollowDamageTypeTags.IS_SCULK_JAW)
+				.add(HollowDamageTypes.SCULK_JAW);
 		}
 	}
 }
