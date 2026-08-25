@@ -16,10 +16,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.references.BlockItemId;
 import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BlockItemTagId;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.*;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityTypeIds;
 import net.minecraft.world.level.biome.Biome;
@@ -77,6 +74,9 @@ public class HollowTagProviders {
 			builder(BlockTags.SMALL_FLOWERS)
 				.add(HollowBlockItemIds.FLOWERING_LILY_PAD);
 
+			builder(BlockItemTags.BEE_FOOD.block())
+				.add(HollowBlockItemIds.FLOWERING_LILY_PAD);
+
 			builder(HollowBlockTags.POLYPORE_PLACEABLE_ON)
 				.forceAddTag(BlockTags.LOGS)
 				.addTag(HollowBlockItemTags.HOLLOW_LOGS.block());
@@ -117,6 +117,7 @@ public class HollowTagProviders {
 
 			copy(HollowBlockItemTags.HOLLOW_LOGS);
 			copy(HollowBlockItemTags.FORMS_GIANT_LILY_PAD);
+			copy(BlockItemTags.BEE_FOOD);
 		}
 
 		private void copy(BlockItemTagId tag) {
