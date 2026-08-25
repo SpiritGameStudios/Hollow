@@ -36,7 +36,7 @@ public final class HollowBlocks {
 		BlockBehaviour.Properties::ofFullCopy
 	);
 
-    public static final Block ECHOING_POT = register(
+    public static final EchoingPotBlock ECHOING_POT = register(
             HollowBlockItemIds.ECHOING_POT,
             EchoingPotBlock::new,
             BlockBehaviour.Properties.of()
@@ -47,25 +47,25 @@ public final class HollowBlocks {
                     .noOcclusion()
     );
 
-    public static final Block ECHOING_VASE = registerCopyOf(
+    public static final EchoingVaseBlock ECHOING_VASE = registerCopyOf(
             HollowBlockItemIds.ECHOING_VASE,
             EchoingVaseBlock::new,
             ECHOING_POT
     );
 
-    public static final Block OBABO = registerCopyOf(
+    public static final EchoingVaseBlock.ObaboBlock OBABO = registerCopyOf(
             HollowBlockItemIds.OBABO,
             EchoingVaseBlock.ObaboBlock::new,
             ECHOING_POT
     );
 
-    public static final Block SCREAMING_VASE = registerCopyOf(
+    public static final ScreamingVaseBlock SCREAMING_VASE = registerCopyOf(
             HollowBlockItemIds.SCREAMING_VASE,
             ScreamingVaseBlock::new,
             ECHOING_POT
     );
 
-    public static final Block CATTAIL_STEM = register(
+    public static final CattailStemBlock CATTAIL_STEM = register(
             HollowBlockIds.CATTAIL_STEM,
             CattailStemBlock::new,
             BlockBehaviour.Properties.of()
@@ -92,19 +92,19 @@ public final class HollowBlocks {
 			.randomTicks()
 	);
 
-    public static final Block FLOWERING_LILY_PAD = registerCopyOf(
+    public static final LilyPadBlock FLOWERING_LILY_PAD = registerCopyOf(
             HollowBlockItemIds.FLOWERING_LILY_PAD,
             LilyPadBlock::new,
             Blocks.LILY_PAD
     );
 
-    public static final Block GIANT_LILY_PAD = register(
+    public static final GiantLilyPadBlock GIANT_LILY_PAD = register(
             HollowBlockIds.GIANT_LILY_PAD,
             GiantLilyPadBlock::new,
 			BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD)
     );
 
-    public static final Block POLYPORE = register(
+    public static final PolyporeBlock POLYPORE = register(
             HollowBlockItemIds.POLYPORE,
             PolyporeBlock::new,
             BlockBehaviour.Properties.of()
@@ -116,7 +116,7 @@ public final class HollowBlocks {
                     .isRedstoneConductor(Blocks::never)
     );
 
-    public static final Block SCULK_JAW = register(
+    public static final SculkJawBlock SCULK_JAW = register(
             HollowBlockItemIds.SCULK_JAW,
             SculkJawBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
@@ -127,7 +127,7 @@ public final class HollowBlocks {
                     .lightLevel(state -> state.getValue(SculkJawBlock.ACTIVE) ? 6 : 0)
     );
 
-    public static final Block GLASS_JAR = register(
+    public static final GlassJarBlock GLASS_JAR = register(
             HollowBlockItemIds.GLASS_JAR,
             GlassJarBlock::new,
             BlockBehaviour.Properties.of()
@@ -138,13 +138,13 @@ public final class HollowBlocks {
                     .pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Block FIREFLY_JAR = register(
+    public static final FireflyJarBlock FIREFLY_JAR = register(
             HollowBlockItemIds.FIREFLY_JAR,
             FireflyJarBlock::new,
             BlockBehaviour.Properties.ofFullCopy(GLASS_JAR).lightLevel(state -> 4)
     );
 
-    public static final Block STONE_CHEST = register(
+    public static final StoneChestBlock STONE_CHEST = register(
             HollowBlockItemIds.STONE_CHEST,
             StoneChestBlock::new,
             BlockBehaviour.Properties.of()
@@ -155,7 +155,7 @@ public final class HollowBlocks {
                     .sound(SoundType.DEEPSLATE)
     );
 
-    public static final Block STONE_CHEST_LID = register(
+    public static final StoneChestLidBlock STONE_CHEST_LID = register(
             HollowBlockItemIds.STONE_CHEST_LID,
             StoneChestLidBlock::new,
             BlockBehaviour.Properties.ofFullCopy(STONE_CHEST).strength(3.0F, 6.0F)

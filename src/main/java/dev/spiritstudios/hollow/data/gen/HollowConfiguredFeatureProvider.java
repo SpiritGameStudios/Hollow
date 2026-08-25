@@ -113,7 +113,7 @@ public class HollowConfiguredFeatureProvider extends FabricDynamicRegistryProvid
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 new WeightedStateProvider(WeightedList.<BlockState>builder()
-                                        .add(Blocks.LILY_PAD.defaultBlockState(), 4)
+                                        .add(Blocks.LILY_PAD.defaultBlockState(), 19)
                                         .add(HollowBlocks.FLOWERING_LILY_PAD.defaultBlockState(), 1)
                                         .build())
                         )

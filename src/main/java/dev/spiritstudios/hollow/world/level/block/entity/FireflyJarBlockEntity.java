@@ -61,6 +61,7 @@ public class FireflyJarBlockEntity extends BlockEntity implements Nameable {
 		components.set(DataComponents.CUSTOM_NAME, this.name);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void removeComponentsFromTag(ValueOutput output) {
 		output.discard(CUSTOM_NAME_KEY);

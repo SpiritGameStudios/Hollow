@@ -13,6 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LevelWriter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.LilyPadBlock;
@@ -48,13 +49,9 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 	public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
 		Level level = ctx.getLevel();
 		BlockPos pos = ctx.getClickedPos();
-
 		BlockState state = this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection());
 
-		return this.canSurvive(state, level, pos) &&
-			this.canSurvive(state, level, pos.east()) &&
-			this.canSurvive(state, level, pos.south()) &&
-			this.canSurvive(state, level, pos.east().south()) ? state : null;
+		return this.isValidPlacementPosition(level, pos, state, Piece.NORTH_WEST) ? state : null;
 	}
 
 	@Override
@@ -64,13 +61,30 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		}
 	}
 
-	public static void placePadBlocks(Level level, BlockPos pos, BlockState state, Piece piece, boolean includeNorthWest) {
+	public boolean isValidPlacementPosition(LevelReader level, BlockPos pos, BlockState state, Piece piece) {
+		for (BlockPos blockPos : piece.getAllPadPositions(pos)) {
+			if (!this.canSurvive(state, level, blockPos) || !level.isEmptyBlock(pos)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public static void placePadBlocks(LevelWriter level, BlockPos pos, BlockState state, Piece piece, boolean includeNorthWest) {
 		BlockPos northWest = piece.getNorthWest(pos);
-		if (includeNorthWest) level.setBlock(northWest, state, UPDATE_ALL_IMMEDIATE);
+
+		if (includeNorthWest) {
+			level.setBlock(northWest, state, UPDATE_ALL_IMMEDIATE);
+		}
 
 		level.setBlock(northWest.east(), state.setValue(PIECE, Piece.NORTH_EAST), UPDATE_ALL_IMMEDIATE);
 		level.setBlock(northWest.south(), state.setValue(PIECE, Piece.SOUTH_WEST), UPDATE_ALL_IMMEDIATE);
 		level.setBlock(northWest.south().east(), state.setValue(PIECE, Piece.SOUTH_EAST), UPDATE_ALL_IMMEDIATE);
+	}
+
+	public static BlockState getBaseState(Direction facing) {
+		return HollowBlocks.GIANT_LILY_PAD.defaultBlockState().setValue(FACING, facing);
 	}
 
 	public static boolean tryForm(BlockPlaceContext context, BlockState placementState) {
@@ -79,7 +93,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 
 		Level level = context.getLevel();
 		BlockPos clickedPos = context.getClickedPos();
-		BlockState giant = HollowBlocks.GIANT_LILY_PAD.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+		BlockState blockState = getBaseState(context.getHorizontalDirection());
 
 		for (Piece piece : Piece.values()) {
 			label1:
@@ -90,7 +104,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 					}
 				}
 
-				placePadBlocks(level, clickedPos, giant, piece, true);
+				placePadBlocks(level, clickedPos, blockState, piece, true);
 
 				return true;
 			}
@@ -130,6 +144,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		return Items.LILY_PAD.getDefaultInstance();
 	}
 
+	@SuppressWarnings("Convert2MethodRef")
 	public enum Piece implements StringRepresentable {
 		NORTH_WEST(pos -> pos),
 		NORTH_EAST(pos -> pos.west()),

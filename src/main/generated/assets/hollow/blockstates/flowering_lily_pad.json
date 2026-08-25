@@ -5,7 +5,14 @@
         "model": "hollow:block/flowering_lily_pad"
       },
       {
+        "model": "hollow:block/flowering_lily_pad_mirrored"
+      },
+      {
         "model": "hollow:block/flowering_lily_pad",
+        "y": 90
+      },
+      {
+        "model": "hollow:block/flowering_lily_pad_mirrored",
         "y": 90
       },
       {
@@ -13,7 +20,15 @@
         "y": 180
       },
       {
+        "model": "hollow:block/flowering_lily_pad_mirrored",
+        "y": 180
+      },
+      {
         "model": "hollow:block/flowering_lily_pad",
+        "y": 270
+      },
+      {
+        "model": "hollow:block/flowering_lily_pad_mirrored",
         "y": 270
       }
     ]

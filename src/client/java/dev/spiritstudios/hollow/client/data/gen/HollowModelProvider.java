@@ -240,8 +240,21 @@ public final class HollowModelProvider extends FabricModelProvider {
     }
 
     private void registerWithRandomHorizontalRotations(BlockModelGenerators generator, Block block) {
-        Variant modelVariant = plainModel(ModelLocationUtils.getModelLocation(block));
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, createRotatedVariants(modelVariant)));
+        Variant normal = plainModel(ModelLocationUtils.getModelLocation(block));
+		Variant mirrored = plainModel(ModelLocationUtils.getModelLocation(block, "_mirrored"));
+
+		MultiVariant variants = variants(
+			normal,
+			mirrored,
+			normal.with(Y_ROT_90),
+			mirrored.with(Y_ROT_90),
+			normal.with(Y_ROT_180),
+			mirrored.with(Y_ROT_180),
+			normal.with(Y_ROT_270),
+			mirrored.with(Y_ROT_270)
+		);
+
+        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variants));
     }
 
     public static void registerCattailStem(BlockModelGenerators generator) {
