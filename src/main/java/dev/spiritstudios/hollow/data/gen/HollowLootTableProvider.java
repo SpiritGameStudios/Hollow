@@ -1,14 +1,11 @@
 package dev.spiritstudios.hollow.data.gen;
 
-import dev.spiritstudios.hollow.world.level.block.FireflyJarBlock;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.PolyporeBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -31,7 +28,7 @@ public class HollowLootTableProvider extends FabricBlockLootSubProvider {
         this.dropWhenSilkTouch(HollowBlocks.SCULK_JAW);
 
         this.dropWhenSilkTouch(HollowBlocks.STONE_CHEST_LID);
-        this.add(HollowBlocks.STONE_CHEST, this.createNameableBlockEntityTable(HollowBlocks.STONE_CHEST));
+        this.add(HollowBlocks.STONE_CHEST, this::createNameableBlockEntityTable);
 
 		this.dropSelf(HollowBlocks.SWITCHGRASS);
         this.dropSelf(HollowBlocks.CATTAIL);
@@ -55,19 +52,7 @@ public class HollowLootTableProvider extends FabricBlockLootSubProvider {
                         ))))
         );
 
-		this.add(
-			HollowBlocks.FIREFLY_JAR,
-			block -> this.applyExplosionDecay(block, LootTable.lootTable()
-				.withPool(LootPool.lootPool()
-					.setRolls(ConstantValue.exactly(1.0F))
-					.add(LootItem.lootTableItem(block))
-					.apply(SetComponentsFunction.setComponent(DataComponents.CUSTOM_NAME, Component.literal("jeb_"))
-						.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FireflyJarBlock.JEB, true)))
-					)
-				)
-			)
-		);
-
+		this.add(HollowBlocks.FIREFLY_JAR, this::createNameableBlockEntityTable);
         this.add(HollowBlocks.GLASS_JAR, this::createNameableBlockEntityTable);
 
         HollowBlocks.HOLLOW_LOG.forEach(this::dropSelf);

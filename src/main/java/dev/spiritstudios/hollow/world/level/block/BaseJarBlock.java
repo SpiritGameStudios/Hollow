@@ -10,6 +10,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -19,13 +20,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
-public abstract class BaseJarBlock extends Block implements SimpleWaterloggedBlock {
+public abstract class BaseJarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
 	public static final VoxelShape BODY_SHAPE = column(8.0, 0.0, 10.0);
 	public static final VoxelShape CORK_SHAPE = column(6.0, 10.0, 12.0);
 
@@ -91,5 +93,10 @@ public abstract class BaseJarBlock extends Block implements SimpleWaterloggedBlo
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED, HANGING);
+	}
+
+	@Override
+	protected boolean isPathfindable(BlockState state, PathComputationType type) {
+		return false;
 	}
 }

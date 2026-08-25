@@ -6,7 +6,7 @@ The music for **Hollow** was created by the following authors:
   - Echo (`echo.ogg`)
   - Postmortem (`postmortem.ogg`)
 - **axialeaa** _Copyright © 2026 axialeaa, [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0)<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">_
-  - Only You (My Firefly) (`only_you.ogg`)
+  - Only You (Original Mix) (`only_you.ogg`)
 
 **Spirit Studios** has full rights to use and profit off this music for any work created that may use this music.
 

@@ -7,16 +7,12 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.TagValueOutput;
@@ -30,9 +26,9 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
         super(HollowBlockEntityTypes.GLASS_JAR, pos, state);
     }
 
-    public boolean tryUse(Level level, BlockPos pos, Player player, InteractionHand hand) {
+    public boolean tryUse(Player player, InteractionHand hand) {
 		ItemStack itemInHand = player.getItemInHand(hand);
-		return itemInHand.isEmpty() ? this.tryTakeItem(level, player, pos, hand) : this.tryInsertItem(itemInHand);
+		return itemInHand.isEmpty() ? this.tryTakeItem(player, hand) : this.tryInsertItem(itemInHand);
     }
 
 	@Override
@@ -40,7 +36,7 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
 		return 1;
 	}
 
-	private boolean tryTakeItem(Level level, Player player, BlockPos pos, InteractionHand hand) {
+	private boolean tryTakeItem(Player player, InteractionHand hand) {
 		int slot = -1;
 
 		for (int i = this.getContainerSize() - 1; i >= 0; i--) {
@@ -50,24 +46,14 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
 			}
 		}
 
-		if (slot == -1)
-			return false;
+		if (slot != -1) {
+			player.setItemInHand(hand, this.getItem(slot).copy());
+			this.removeItem(slot, 1);
 
-		player.setItemInHand(hand, this.getItem(slot).copy());
-		this.removeItem(slot, 1);
-
-		if (!level.isClientSide()) {
-			level.playSound(
-				null,
-				pos,
-				SoundEvents.ITEM_PICKUP,
-				SoundSource.PLAYERS,
-				0.2F,
-				Mth.lerp((float) this.count() / this.getContainerSize(), 1.6F, 0.4F)
-			);
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	private boolean tryInsertItem(ItemStack itemInHand) {
@@ -89,6 +75,10 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
 		}
 
 		return false;
+	}
+
+	public float getFillProgress() {
+		return (float) this.count() / this.getContainerSize();
 	}
 
 	@Override

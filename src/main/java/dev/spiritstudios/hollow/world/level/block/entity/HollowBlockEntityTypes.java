@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public final class HollowBlockEntityTypes {
     public static final BlockEntityType<GlassJarBlockEntity> GLASS_JAR = register("glass_jar", GlassJarBlockEntity::new, HollowBlocks.GLASS_JAR);
+	public static final BlockEntityType<FireflyJarBlockEntity> FIREFLY_JAR = register("firefly_jar", FireflyJarBlockEntity::new, HollowBlocks.FIREFLY_JAR);
 
     public static final BlockEntityType<EchoingVaseBlockEntity> ECHOING_VASE = register(
             "echoing_vase",

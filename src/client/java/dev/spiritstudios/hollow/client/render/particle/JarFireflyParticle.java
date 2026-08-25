@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.client.render.particle;
 
-import net.minecraft.client.color.ColorLerper;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -15,14 +14,16 @@ import net.minecraft.util.RandomSource;
 import java.awt.*;
 
 public class JarFireflyParticle extends SingleQuadParticle {
+	private static final float JEB_SATURATION = 0.5F;
+
 	private final boolean isJeb;
-	private final int ageOffset;
+	private final float ageOffset;
 
 	protected JarFireflyParticle(ClientLevel level, double x, double y, double z, boolean isJeb, TextureAtlasSprite sprite) {
         super(level, x, y, z, sprite);
 		this.quadSize *= 0.75F;
 		this.isJeb = isJeb;
-		this.ageOffset = level.getRandom().nextInt(0, 300);
+		this.ageOffset = level.getRandom().nextFloat();
     }
 
     @Override
@@ -41,14 +42,16 @@ public class JarFireflyParticle extends SingleQuadParticle {
 			this.remove();
 		}
 
-		if (this.isJeb) {
-			int color = ColorLerper.getLerpedColor(ColorLerper.Type.SHEEP, this.age + this.ageOffset);
+		float lifetimeProgress = this.getLifetimeProgress((float) this.age);
+
+	    if (this.isJeb) {
+			int color = Color.getHSBColor(Mth.frac(lifetimeProgress + this.ageOffset), JEB_SATURATION, 1.0F).getRGB();
 			this.rCol = ARGB.redFloat(color);
 			this.gCol = ARGB.greenFloat(color);
 			this.bCol = ARGB.blueFloat(color);
 		}
 
-		this.setAlpha(getFadeAmount(this.getLifetimeProgress((float) this.age), 0.3F, 0.5F));
+		this.setAlpha(getFadeAmount(lifetimeProgress, 0.3F, 0.5F));
     }
 
     private float getLifetimeProgress(float currentAge) {
@@ -58,9 +61,11 @@ public class JarFireflyParticle extends SingleQuadParticle {
     private static float getFadeAmount(float lifetimeProgress, float fadeInTime, float fadeOutTime) {
         if (lifetimeProgress >= 1.0F - fadeInTime) {
             return (1.0F - lifetimeProgress) / fadeInTime;
-        } else {
-            return lifetimeProgress <= fadeOutTime ? lifetimeProgress / fadeOutTime : 1.0F;
-        }
+        } else if (lifetimeProgress <= fadeOutTime) {
+			return lifetimeProgress / fadeOutTime;
+		}
+
+		return 1.0F;
     }
 
 	public record Provider(SpriteSet sprite) implements ParticleProvider<SimpleParticleType> {
