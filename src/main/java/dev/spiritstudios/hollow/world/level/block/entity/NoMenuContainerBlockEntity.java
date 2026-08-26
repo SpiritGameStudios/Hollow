@@ -53,6 +53,7 @@ public abstract class NoMenuContainerBlockEntity extends BlockEntity implements 
         components.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void removeComponentsFromTag(ValueOutput output) {
         output.discard("Items");
