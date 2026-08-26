@@ -1,7 +1,7 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "hollow:item/obabo"
+    "model": "hollow:block/obabo"
   },
   "oversized_in_gui": true
 }

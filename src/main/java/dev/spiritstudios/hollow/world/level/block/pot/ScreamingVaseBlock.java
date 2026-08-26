@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.world.level.block;
+package dev.spiritstudios.hollow.world.level.block.pot;
 
 import com.mojang.math.OctahedralGroup;
 import com.mojang.serialization.MapCodec;

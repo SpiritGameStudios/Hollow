@@ -14,10 +14,11 @@ import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jspecify.annotations.Nullable;
 
 public class PotBlockEntity extends BlockEntity {
 	public long wobbleStartedAtTick;
-	public DecoratedPotBlockEntity.WobbleStyle lastWobbleStyle;
+	public DecoratedPotBlockEntity.@Nullable WobbleStyle lastWobbleStyle;
 
 	public PotBlockEntity(BlockPos pos, BlockState state) {
 		this(HollowBlockEntityTypes.POT, pos, state);

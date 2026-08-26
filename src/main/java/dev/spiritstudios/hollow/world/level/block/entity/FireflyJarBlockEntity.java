@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.world.level.block.entity;
 
-import dev.spiritstudios.hollow.world.level.block.FireflyJarBlock;
+import dev.spiritstudios.hollow.world.level.block.jar.FireflyJarBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentGetter;

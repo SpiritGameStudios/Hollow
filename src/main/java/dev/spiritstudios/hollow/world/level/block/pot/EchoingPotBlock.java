@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.world.level.block;
+package dev.spiritstudios.hollow.world.level.block.pot;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -31,19 +32,24 @@ import org.jetbrains.annotations.Nullable;
 public class EchoingPotBlock extends BaseEntityBlock {
 	public static final MapCodec<EchoingPotBlock> CODEC = simpleCodec(EchoingPotBlock::new);
 
-	public EchoingPotBlock(Properties settings) {
-		super(settings);
-		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
-	}
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public static final VoxelShape SHAPE = Shapes.or(
 		Block.box(1, 0, 1, 15, 14, 15),
 		Block.box(4, 14, 4, 12, 16, 12)
 	);
 
+	public EchoingPotBlock(Properties settings) {
+		super(settings);
+		this.registerDefaultState(
+			this.defaultBlockState()
+				.setValue(FACING, Direction.NORTH)
+		);
+	}
+
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(BlockStateProperties.HORIZONTAL_FACING);
+		builder.add(FACING);
 	}
 
 	@Override
@@ -53,7 +59,8 @@ public class EchoingPotBlock extends BaseEntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-		return defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, ctx.getHorizontalDirection().getOpposite());
+		return defaultBlockState()
+			.setValue(FACING, ctx.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
@@ -69,9 +76,9 @@ public class EchoingPotBlock extends BaseEntityBlock {
 
 	@Override
 	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (level.getBlockEntity(pos) instanceof PotBlockEntity decoratedPot) {
+		if (level.getBlockEntity(pos) instanceof PotBlockEntity pot) {
 			level.playSound(null, pos, SoundEvents.DECORATED_POT_INSERT_FAIL, SoundSource.BLOCKS, 1.0F, 1.0F);
-			decoratedPot.wobble(DecoratedPotBlockEntity.WobbleStyle.NEGATIVE);
+			pot.wobble(DecoratedPotBlockEntity.WobbleStyle.NEGATIVE);
 			level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 			return InteractionResult.SUCCESS;
 		} else {

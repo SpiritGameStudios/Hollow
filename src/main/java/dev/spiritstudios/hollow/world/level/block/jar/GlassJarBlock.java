@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.world.level.block;
+package dev.spiritstudios.hollow.world.level.block.jar;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.entity.GlassJarBlockEntity;

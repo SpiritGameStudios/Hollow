@@ -5,6 +5,7 @@ import dev.spiritstudios.hollow.client.color.item.Jeb;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.world.level.block.*;
+import dev.spiritstudios.hollow.world.level.block.jar.BaseJarBlock;
 import dev.spiritstudios.hollow.world.level.block.state.properties.LilyPadPiece;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -16,7 +17,6 @@ import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.renderer.item.ClientItem;
@@ -175,7 +175,7 @@ public final class HollowModelProvider extends FabricModelProvider {
 
 		generators.itemModelOutput.accept(
 			HollowItems.OBABO,
-			ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(HollowItems.OBABO)),
+			ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(HollowBlocks.OBABO)),
 			new ClientItem.Properties(true, true, 1.0F)
 		);
     }

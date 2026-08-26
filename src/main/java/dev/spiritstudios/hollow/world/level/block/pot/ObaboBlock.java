@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.world.level.block;
+package dev.spiritstudios.hollow.world.level.block.pot;
 
 import com.mojang.datafixers.util.Function4;
 import com.mojang.serialization.MapCodec;
@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class ObaboBlock extends EchoingPotBlock {
 	public static final Pattern DIRE_CURSE = Pattern.compile("[oO0](?:[^0-9a-zA-Z]*|\\s)*[bB](?:[^0-9a-zA-Z]*|\\s)*[aA](?:[^0-9a-zA-Z]*|\\s)[bB](?:[^0-9a-zA-Z]*|\\s)*[oO0]");
-	public static final MapCodec<dev.spiritstudios.hollow.world.level.block.ObaboBlock> CODEC = simpleCodec(dev.spiritstudios.hollow.world.level.block.ObaboBlock::new);
+	public static final MapCodec<ObaboBlock> CODEC = simpleCodec(ObaboBlock::new);
 	public static Function4<BlockState, Level, BlockPos, RandomSource, Boolean> cb = null;
 
 	public static void invokeCurse(ServerPlayer player) {
@@ -30,7 +30,7 @@ public class ObaboBlock extends EchoingPotBlock {
 	}
 
 	@Override
-	protected MapCodec<dev.spiritstudios.hollow.world.level.block.ObaboBlock> codec() {
+	protected MapCodec<ObaboBlock> codec() {
 		return CODEC;
 	}
 

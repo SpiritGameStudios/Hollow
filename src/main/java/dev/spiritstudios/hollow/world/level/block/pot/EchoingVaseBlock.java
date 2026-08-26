@@ -1,6 +1,7 @@
-package dev.spiritstudios.hollow.world.level.block;
+package dev.spiritstudios.hollow.world.level.block.pot;
 
 import com.mojang.serialization.MapCodec;
+import dev.spiritstudios.hollow.world.level.block.VerticalDoubleBlock;
 import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -28,10 +30,11 @@ import java.util.Objects;
 
 public class EchoingVaseBlock extends VerticalDoubleBlock implements EntityBlock {
 	public static final MapCodec<EchoingVaseBlock> CODEC = simpleCodec(EchoingVaseBlock::new);
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public EchoingVaseBlock(Properties settings) {
 		super(settings);
-		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
+		this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
 	}
 
 	public static final VoxelShape LOWER_SHAPE =
