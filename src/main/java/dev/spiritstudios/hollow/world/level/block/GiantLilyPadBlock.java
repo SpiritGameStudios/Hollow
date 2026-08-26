@@ -2,10 +2,10 @@ package dev.spiritstudios.hollow.world.level.block;
 
 import com.mojang.math.OctahedralGroup;
 import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
+import dev.spiritstudios.hollow.world.level.block.state.properties.LilyPadPiece;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,22 +25,19 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.UnaryOperator;
-
 public class GiantLilyPadBlock extends LilyPadBlock {
 	private static final VoxelShape NORTH_WEST_SHAPE = box(2.0, 0.0, 2.0, 16.0, 1.5, 16.0);
 	private static final VoxelShape NORTH_EAST_SHAPE = Shapes.rotate(NORTH_WEST_SHAPE, OctahedralGroup.BLOCK_ROT_Y_90);
 	private static final VoxelShape SOUTH_EAST_SHAPE = Shapes.rotate(NORTH_EAST_SHAPE, OctahedralGroup.BLOCK_ROT_Y_90);
 	private static final VoxelShape SOUTH_WEST_SHAPE = Shapes.rotate(SOUTH_EAST_SHAPE, OctahedralGroup.BLOCK_ROT_Y_90);
 
-	public static final EnumProperty<Piece> PIECE = EnumProperty.create("piece", Piece.class);
+	public static final EnumProperty<LilyPadPiece> PIECE = EnumProperty.create("piece", LilyPadPiece.class);
 	public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
 	public GiantLilyPadBlock(Properties settings) {
 		super(settings);
 		this.registerDefaultState(this.defaultBlockState()
-			.setValue(PIECE, Piece.NORTH_WEST)
+			.setValue(PIECE, LilyPadPiece.NORTH_WEST)
 			.setValue(FACING, Direction.NORTH)
 		);
 	}
@@ -51,19 +48,19 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		BlockPos pos = ctx.getClickedPos();
 		BlockState state = this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection());
 
-		return this.isValidPlacementPosition(level, pos, state, Piece.NORTH_WEST) ? state : null;
+		return isValidPlacementPosition(level, pos, state, LilyPadPiece.NORTH_WEST) ? state : null;
 	}
 
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-		if (state.getValue(PIECE) == Piece.NORTH_WEST) {
-			placePadBlocks(level, pos, state, Piece.NORTH_WEST, false);
+		if (state.getValue(PIECE) == LilyPadPiece.NORTH_WEST) {
+			placePadBlocks(level, pos, state, LilyPadPiece.NORTH_WEST, false);
 		}
 	}
 
-	public boolean isValidPlacementPosition(LevelReader level, BlockPos pos, BlockState state, Piece piece) {
-		for (BlockPos blockPos : piece.getAllPadPositions(pos)) {
-			if (!this.canSurvive(state, level, blockPos) || !level.isEmptyBlock(pos)) {
+	public static boolean isValidPlacementPosition(LevelReader level, BlockPos pos, BlockState state, LilyPadPiece piece) {
+		for (BlockPos blockPos : piece.getAllPositions(pos)) {
+			if (!state.canSurvive(level, blockPos) || !level.isEmptyBlock(pos)) {
 				return false;
 			}
 		}
@@ -71,16 +68,16 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		return true;
 	}
 
-	public static void placePadBlocks(LevelWriter level, BlockPos pos, BlockState state, Piece piece, boolean includeNorthWest) {
+	public static void placePadBlocks(LevelWriter level, BlockPos pos, BlockState state, LilyPadPiece piece, boolean includeNorthWest) {
 		BlockPos northWest = piece.getNorthWest(pos);
 
 		if (includeNorthWest) {
 			level.setBlock(northWest, state, UPDATE_ALL_IMMEDIATE);
 		}
 
-		level.setBlock(northWest.east(), state.setValue(PIECE, Piece.NORTH_EAST), UPDATE_ALL_IMMEDIATE);
-		level.setBlock(northWest.south(), state.setValue(PIECE, Piece.SOUTH_WEST), UPDATE_ALL_IMMEDIATE);
-		level.setBlock(northWest.south().east(), state.setValue(PIECE, Piece.SOUTH_EAST), UPDATE_ALL_IMMEDIATE);
+		level.setBlock(northWest.east(), state.setValue(PIECE, LilyPadPiece.NORTH_EAST), UPDATE_ALL_IMMEDIATE);
+		level.setBlock(northWest.south(), state.setValue(PIECE, LilyPadPiece.SOUTH_WEST), UPDATE_ALL_IMMEDIATE);
+		level.setBlock(northWest.south().east(), state.setValue(PIECE, LilyPadPiece.SOUTH_EAST), UPDATE_ALL_IMMEDIATE);
 	}
 
 	public static BlockState getBaseState(Direction facing) {
@@ -95,10 +92,10 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		BlockPos clickedPos = context.getClickedPos();
 		BlockState blockState = getBaseState(context.getHorizontalDirection());
 
-		for (Piece piece : Piece.values()) {
+		for (LilyPadPiece piece : LilyPadPiece.values()) {
 			label1:
 			for (int i = 0; i < 4; i++) {
-				for (BlockPos blockPos : piece.getAllPadPositions(clickedPos)) {
+				for (BlockPos blockPos : piece.getAllPositions(clickedPos)) {
 					if (!blockPos.equals(clickedPos) && !level.getBlockState(blockPos).is(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block())) {
 						continue label1;
 					}
@@ -117,7 +114,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
 		super.affectNeighborsAfterRemoval(state, world, pos, moved);
 
-		for (BlockPos blockPos : state.getValue(PIECE).getAllPadPositions(pos)) {
+		for (BlockPos blockPos : state.getValue(PIECE).getAllPositions(pos)) {
 			if (!blockPos.equals(pos) && world.getBlockState(blockPos).is(this)) {
 				world.destroyBlock(blockPos, false);
 			}
@@ -142,38 +139,5 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 	@Override
 	protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
 		return Items.LILY_PAD.getDefaultInstance();
-	}
-
-	@SuppressWarnings("Convert2MethodRef")
-	public enum Piece implements StringRepresentable {
-		NORTH_WEST(pos -> pos),
-		NORTH_EAST(pos -> pos.west()),
-		SOUTH_WEST(pos -> pos.north()),
-		SOUTH_EAST(pos -> pos.north().west());
-
-		private final UnaryOperator<BlockPos> northWestOffset;
-
-		Piece(UnaryOperator<BlockPos> northWestOffset) {
-			this.northWestOffset = northWestOffset;
-		}
-
-		public BlockPos getNorthWest(BlockPos pos) {
-			return this.northWestOffset.apply(pos);
-		}
-
-		public BlockPos[] getAllPadPositions(BlockPos pos) {
-			BlockPos northWest = this.getNorthWest(pos);
-			return new BlockPos[] {
-				northWest,
-				northWest.east(),
-				northWest.south(),
-				northWest.south().east()
-			};
-		}
-
-		@Override
-		public String getSerializedName() {
-			return this.name().toLowerCase(Locale.ROOT);
-		}
 	}
 }

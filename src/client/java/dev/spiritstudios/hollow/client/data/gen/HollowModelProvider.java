@@ -5,6 +5,7 @@ import dev.spiritstudios.hollow.client.color.item.Jeb;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.world.level.block.*;
+import dev.spiritstudios.hollow.world.level.block.state.properties.LilyPadPiece;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.color.block.BlockColors;
@@ -28,6 +29,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TexturedModel;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -304,32 +311,32 @@ public final class HollowModelProvider extends FabricModelProvider {
             modelIds[i] = plainVariant(id("block/giant_lily_pad_" + i));
         }
 
-        Map<GiantLilyPadBlock.Piece, MultiVariant> north = ImmutableMap.of(
-                GiantLilyPadBlock.Piece.NORTH_WEST, modelIds[1],
-                GiantLilyPadBlock.Piece.NORTH_EAST, modelIds[0],
-                GiantLilyPadBlock.Piece.SOUTH_EAST, modelIds[3],
-                GiantLilyPadBlock.Piece.SOUTH_WEST, modelIds[2]
+        Map<LilyPadPiece, MultiVariant> north = ImmutableMap.of(
+                LilyPadPiece.NORTH_WEST, modelIds[1],
+                LilyPadPiece.NORTH_EAST, modelIds[0],
+                LilyPadPiece.SOUTH_EAST, modelIds[3],
+                LilyPadPiece.SOUTH_WEST, modelIds[2]
         );
 
-        Map<GiantLilyPadBlock.Piece, MultiVariant> south = ImmutableMap.of(
-                GiantLilyPadBlock.Piece.NORTH_WEST, modelIds[3],
-                GiantLilyPadBlock.Piece.NORTH_EAST, modelIds[2],
-                GiantLilyPadBlock.Piece.SOUTH_EAST, modelIds[1],
-                GiantLilyPadBlock.Piece.SOUTH_WEST, modelIds[0]
+        Map<LilyPadPiece, MultiVariant> south = ImmutableMap.of(
+                LilyPadPiece.NORTH_WEST, modelIds[3],
+                LilyPadPiece.NORTH_EAST, modelIds[2],
+                LilyPadPiece.SOUTH_EAST, modelIds[1],
+                LilyPadPiece.SOUTH_WEST, modelIds[0]
         );
 
-        Map<GiantLilyPadBlock.Piece, MultiVariant> east = ImmutableMap.of(
-                GiantLilyPadBlock.Piece.NORTH_WEST, modelIds[2],
-                GiantLilyPadBlock.Piece.NORTH_EAST, modelIds[1],
-                GiantLilyPadBlock.Piece.SOUTH_EAST, modelIds[0],
-                GiantLilyPadBlock.Piece.SOUTH_WEST, modelIds[3]
+        Map<LilyPadPiece, MultiVariant> east = ImmutableMap.of(
+                LilyPadPiece.NORTH_WEST, modelIds[2],
+                LilyPadPiece.NORTH_EAST, modelIds[1],
+                LilyPadPiece.SOUTH_EAST, modelIds[0],
+                LilyPadPiece.SOUTH_WEST, modelIds[3]
         );
 
-        Map<GiantLilyPadBlock.Piece, MultiVariant> west = ImmutableMap.of(
-                GiantLilyPadBlock.Piece.NORTH_WEST, modelIds[0],
-                GiantLilyPadBlock.Piece.NORTH_EAST, modelIds[3],
-                GiantLilyPadBlock.Piece.SOUTH_EAST, modelIds[2],
-                GiantLilyPadBlock.Piece.SOUTH_WEST, modelIds[1]
+        Map<LilyPadPiece, MultiVariant> west = ImmutableMap.of(
+                LilyPadPiece.NORTH_WEST, modelIds[0],
+                LilyPadPiece.NORTH_EAST, modelIds[3],
+                LilyPadPiece.SOUTH_EAST, modelIds[2],
+                LilyPadPiece.SOUTH_WEST, modelIds[1]
         );
 
         generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.GIANT_LILY_PAD)
