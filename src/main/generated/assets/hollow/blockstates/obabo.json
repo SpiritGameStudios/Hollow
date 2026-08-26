@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hollow:block/obabo",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hollow:block/obabo"
+    },
+    "facing=south": {
+      "model": "hollow:block/obabo",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hollow:block/obabo",
+      "y": 270
+    }
+  }
+}

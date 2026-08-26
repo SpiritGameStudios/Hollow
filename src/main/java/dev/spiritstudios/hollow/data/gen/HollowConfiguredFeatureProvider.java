@@ -30,6 +30,8 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntSt
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLogsDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -120,11 +122,25 @@ public class HollowConfiguredFeatureProvider extends FabricDynamicRegistryProvid
                 )
         );
 
+
+		entries.add(
+			TreeFeatures.FALLEN_OAK_TREE,
+			new ConfiguredFeature<>(
+				Feature.FALLEN_TREE,
+				createFallenTree(HollowBlocks.HOLLOW_LOG.oak(), 4, 7)
+					.stumpDecorators(ImmutableList.of(TrunkVineDecorator.INSTANCE))
+					.logDecorators(ImmutableList.of(vanillaDecorator()))
+					.build()
+			)
+		);
+
         entries.add(
                 TreeFeatures.FALLEN_BIRCH_TREE,
                 new ConfiguredFeature<>(
                         Feature.FALLEN_TREE,
-                        createFallenTree(HollowBlocks.HOLLOW_LOG.birch(), 5, 8).build()
+                        createFallenTree(HollowBlocks.HOLLOW_LOG.birch(), 5, 8)
+							.logDecorators(ImmutableList.of(mossAndMushroomsDecorator()))
+							.build()
                 )
         );
 
@@ -132,9 +148,32 @@ public class HollowConfiguredFeatureProvider extends FabricDynamicRegistryProvid
                 TreeFeatures.FALLEN_SUPER_BIRCH_TREE,
                 new ConfiguredFeature<>(
                         Feature.FALLEN_TREE,
-                        createFallenTree(HollowBlocks.HOLLOW_LOG.birch(), 5, 15).build()
+                        createFallenTree(HollowBlocks.HOLLOW_LOG.birch(), 5, 15)
+							.logDecorators(ImmutableList.of(mossAndMushroomsDecorator()))
+							.build()
                 )
         );
+
+		entries.add(
+			TreeFeatures.FALLEN_SPRUCE_TREE,
+			new ConfiguredFeature<>(
+				Feature.FALLEN_TREE,
+				createFallenTree(HollowBlocks.HOLLOW_LOG.spruce(), 6, 10)
+					.logDecorators(ImmutableList.of(vanillaDecorator()))
+					.build()
+			)
+		);
+
+		entries.add(
+			TreeFeatures.FALLEN_JUNGLE_TREE,
+			new ConfiguredFeature<>(
+				Feature.FALLEN_TREE,
+				createFallenTree(HollowBlocks.HOLLOW_LOG.jungle(), 4, 11)
+					.stumpDecorators(ImmutableList.of(TrunkVineDecorator.INSTANCE))
+					.logDecorators(ImmutableList.of(mossAndMushroomsDecorator()))
+					.build()
+			)
+		);
     }
 
     private FallenTreeConfiguration.FallenTreeConfigurationBuilder createFallenTree(
@@ -144,22 +183,33 @@ public class HollowConfiguredFeatureProvider extends FabricDynamicRegistryProvid
         return new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(logBlock),
                 UniformInt.of(minLength, maxLength)
-        )
-                .logDecorators(
-                        ImmutableList.of(
-                                new AttachedToLogsDecorator(
-                                        0.5F,
-                                        new WeightedStateProvider(
-                                                WeightedList.<BlockState>builder()
-                                                        .add(Blocks.MOSS_CARPET.defaultBlockState(), 10)
-                                                        .add(Blocks.RED_MUSHROOM.defaultBlockState(), 2)
-                                                        .add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1)
-                                        ),
-                                        List.of(Direction.UP)
-                                )
-                        )
-                );
+		);
     }
+
+	private TreeDecorator mossAndMushroomsDecorator() {
+		return new AttachedToLogsDecorator(
+			0.5F,
+			new WeightedStateProvider(
+				WeightedList.<BlockState>builder()
+					.add(Blocks.MOSS_CARPET.defaultBlockState(), 10)
+					.add(Blocks.RED_MUSHROOM.defaultBlockState(), 2)
+					.add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1)
+			),
+			List.of(Direction.UP)
+		);
+	}
+
+	private TreeDecorator vanillaDecorator() {
+		return new AttachedToLogsDecorator(
+			0.1F,
+			new WeightedStateProvider(
+				WeightedList.<BlockState>builder()
+					.add(Blocks.RED_MUSHROOM.defaultBlockState(), 2)
+					.add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1)
+			),
+			List.of(Direction.UP)
+		);
+	}
 
     @Override
     public String getName() {

@@ -3,35 +3,31 @@ package dev.spiritstudios.hollow.client.data.gen;
 import com.google.common.collect.ImmutableMap;
 import dev.spiritstudios.hollow.client.color.item.Jeb;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
-import dev.spiritstudios.hollow.world.level.block.*;
 import dev.spiritstudios.hollow.world.item.HollowItems;
+import dev.spiritstudios.hollow.world.level.block.*;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemTintSource;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.renderer.item.ClientItem;
 import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.ItemModelUtils;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.client.data.models.MultiVariant;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.resources.Identifier;
-import net.minecraft.core.Direction;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -40,11 +36,11 @@ import static dev.spiritstudios.hollow.Hollow.id;
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
 public final class HollowModelProvider extends FabricModelProvider {
-    private static final PropertyDispatch<VariantMutator> NORTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
-            .select(Direction.EAST, Y_ROT_90)
-            .select(Direction.SOUTH, Y_ROT_180)
-            .select(Direction.WEST, Y_ROT_270)
-            .select(Direction.NORTH, NOP);
+	private static final PropertyDispatch<VariantMutator> ROTATION_HORIZONTAL_FACING = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
+		.select(Direction.EAST, Y_ROT_90)
+		.select(Direction.SOUTH, Y_ROT_180)
+		.select(Direction.WEST, Y_ROT_270)
+		.select(Direction.NORTH, NOP);
 
     private static final PropertyDispatch<VariantMutator> NORTH_DEFAULT_ROTATION_OPERATIONS = PropertyDispatch.modify(BlockStateProperties.FACING)
             .select(Direction.DOWN, X_ROT_90)
@@ -75,6 +71,8 @@ public final class HollowModelProvider extends FabricModelProvider {
         generator.createNonTemplateHorizontalBlock(HollowBlocks.ECHOING_POT);
         registerDoubleTallRotated(HollowBlocks.ECHOING_VASE, generator, false);
         registerDoubleTallRotated(HollowBlocks.SCREAMING_VASE, generator, true);
+
+		generator.createNonTemplateHorizontalBlock(HollowBlocks.OBABO);
 
         registerSculkJaw(generator);
 
@@ -167,6 +165,12 @@ public final class HollowModelProvider extends FabricModelProvider {
                         ItemModelUtils.constantTint(BlockColors.LILY_PAD_DEFAULT), ItemModelUtils.constantTint(-1)
                 )
         );
+
+		generators.itemModelOutput.accept(
+			HollowItems.OBABO,
+			ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(HollowItems.OBABO)),
+			new ClientItem.Properties(true, true, 1.0F)
+		);
     }
 
     // region Helpers
@@ -200,7 +204,7 @@ public final class HollowModelProvider extends FabricModelProvider {
                         .select(DoubleBlockHalf.LOWER, plainVariant(ModelLocationUtils.getModelLocation(block)))
                         .select(DoubleBlockHalf.UPPER, plainVariant(ModelLocationUtils.getModelLocation(block, "_upper")))
                 )
-                .with(up ? NORTH_DEFAULT_ROTATION_OPERATIONS : NORTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS));
+                .with(up ? NORTH_DEFAULT_ROTATION_OPERATIONS : ROTATION_HORIZONTAL_FACING));
     }
 
     public static void registerPolypore(BlockModelGenerators generator) {
@@ -218,7 +222,7 @@ public final class HollowModelProvider extends FabricModelProvider {
                                 3,
                                 plainVariant(id("block/three_polypore"))
                         )
-                ).with(NORTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS));
+                ).with(ROTATION_HORIZONTAL_FACING));
     }
 
     public void registerStoneChest(Block block, BlockModelGenerators generator) {
@@ -236,7 +240,7 @@ public final class HollowModelProvider extends FabricModelProvider {
                                 ChestType.RIGHT,
                                 plainVariant(ModelLocationUtils.getModelLocation(block, "_right"))
                         )
-                ).with(NORTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS));
+                ).with(ROTATION_HORIZONTAL_FACING));
     }
 
     private void registerWithRandomHorizontalRotations(BlockModelGenerators generator, Block block) {

@@ -7,8 +7,8 @@ import dev.spiritstudios.hollow.client.render.particle.ScreamParticle;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
-import dev.spiritstudios.hollow.client.render.block.EchoingPotBlockEntityRenderer;
-import dev.spiritstudios.hollow.client.render.block.EchoingVaseBlockEntityRenderer;
+import dev.spiritstudios.hollow.client.render.block.pot.PotRenderer;
+import dev.spiritstudios.hollow.client.render.block.pot.FallingPotRenderer;
 import dev.spiritstudios.hollow.client.render.block.GlassJarBlockEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
@@ -34,20 +34,11 @@ public class HollowClient implements ClientModInitializer {
 		ItemTintSources.ID_MAPPER.put(Hollow.id("jeb"), Jeb.MAP_CODEC);
 
         // region Block Entity Renderers
-        BlockEntityRenderers.register(
-                HollowBlockEntityTypes.GLASS_JAR,
-                GlassJarBlockEntityRenderer::new
-        );
+        BlockEntityRenderers.register(HollowBlockEntityTypes.GLASS_JAR, GlassJarBlockEntityRenderer::new);
 
-        BlockEntityRenderers.register(
-                HollowBlockEntityTypes.ECHOING_POT,
-                EchoingPotBlockEntityRenderer::new
-        );
-
-        BlockEntityRenderers.register(
-                HollowBlockEntityTypes.ECHOING_VASE,
-                EchoingVaseBlockEntityRenderer::new
-        );
-        // endregion
+        BlockEntityRenderers.register(HollowBlockEntityTypes.POT, PotRenderer::new);
+        BlockEntityRenderers.register(HollowBlockEntityTypes.FALLING_POT, FallingPotRenderer::new);
+		BlockEntityRenderers.register(HollowBlockEntityTypes.OBABO, PotRenderer::new);
+		// endregion
     }
 }
