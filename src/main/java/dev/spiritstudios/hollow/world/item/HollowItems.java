@@ -95,7 +95,7 @@ public final class HollowItems {
 		HollowItemIds.MUSIC_DISC_ONLY_YOU,
 		new Item.Properties()
 			.stacksTo(1)
-			.rarity(Rarity.RARE)
+			.rarity(Rarity.UNCOMMON)
 			.jukeboxPlayable(HollowJukeboxSongs.ONLY_YOU)
 	);
 
