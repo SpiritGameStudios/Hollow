@@ -2,7 +2,7 @@ package dev.spiritstudios.hollow.world.level.block;
 
 import com.mojang.datafixers.util.Function4;
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.world.level.block.entity.EchoingVaseBlockEntity;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -54,17 +54,18 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements EntityBlock
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new EchoingVaseBlockEntity(pos, state);
+		return new PotBlockEntity(pos, state);
 	}
 
 	@Override
 	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (world.isClientSide()) return InteractionResult.SUCCESS;
 
-		if (state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER)
+		if (state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER) {
 			pos = pos.below();
+		}
 
-		EchoingVaseBlockEntity blockEntity = (EchoingVaseBlockEntity) world.getBlockEntity(pos);
+		PotBlockEntity blockEntity = (PotBlockEntity) world.getBlockEntity(pos);
 		Objects.requireNonNull(blockEntity).use(player, hand);
 		return InteractionResult.CONSUME;
 	}

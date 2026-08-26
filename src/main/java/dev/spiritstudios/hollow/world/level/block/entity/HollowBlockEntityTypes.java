@@ -2,6 +2,8 @@ package dev.spiritstudios.hollow.world.level.block.entity;
 
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.FallingPotBlockEntity;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,13 +15,17 @@ public final class HollowBlockEntityTypes {
     public static final BlockEntityType<GlassJarBlockEntity> GLASS_JAR = register("glass_jar", GlassJarBlockEntity::new, HollowBlocks.GLASS_JAR);
 	public static final BlockEntityType<FireflyJarBlockEntity> FIREFLY_JAR = register("firefly_jar", FireflyJarBlockEntity::new, HollowBlocks.FIREFLY_JAR);
 
-    public static final BlockEntityType<EchoingVaseBlockEntity> ECHOING_VASE = register(
-            "echoing_vase",
-            EchoingVaseBlockEntity::new,
-            HollowBlocks.ECHOING_VASE, HollowBlocks.OBABO, HollowBlocks.SCREAMING_VASE
+    public static final BlockEntityType<FallingPotBlockEntity> FALLING_POT = register(
+            "falling_pot",
+            FallingPotBlockEntity::new,
+            HollowBlocks.SCREAMING_VASE
     );
 
-    public static final BlockEntityType<EchoingPotBlockEntity> ECHOING_POT = register("echoing_pot", EchoingPotBlockEntity::new, HollowBlocks.ECHOING_POT);
+    public static final BlockEntityType<PotBlockEntity> POT = register(
+		"pot",
+		PotBlockEntity::new,
+		HollowBlocks.ECHOING_POT, HollowBlocks.ECHOING_VASE, HollowBlocks.OBABO
+	);
 
     public static final BlockEntityType<StoneChestBlockEntity> STONE_CHEST = register("stone_chest", StoneChestBlockEntity::new, HollowBlocks.STONE_CHEST);
 

@@ -1,26 +1,26 @@
-package dev.spiritstudios.hollow.client.render.block;
+package dev.spiritstudios.hollow.client.render.block.pot;
 
-import dev.spiritstudios.hollow.world.level.block.entity.EchoingVaseBlockEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.FallingPotBlockEntity;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockModelResolver;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Ease;
-import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.util.Mth;
-import com.mojang.math.Axis;
+import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 import org.jspecify.annotations.Nullable;
 
-public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<EchoingVaseBlockEntity, EchoingVaseRenderState> {
+public class FallingPotRenderer implements BlockEntityRenderer<FallingPotBlockEntity, FallingPotRenderState> {
     public static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
     protected final BlockModelResolver blockModelResolver;
 
@@ -28,7 +28,7 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
 	public static final float FALL_TIME = 1F;
 
 
-	public EchoingVaseBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+	public FallingPotRenderer(BlockEntityRendererProvider.Context context) {
         this.blockModelResolver = context.blockModelResolver();
     }
 
@@ -36,12 +36,12 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
     private static final float fallAngle = Mth.HALF_PI - tiltAngle;
 
     @Override
-    public EchoingVaseRenderState createRenderState() {
-        return new EchoingVaseRenderState();
+    public FallingPotRenderState createRenderState() {
+        return new FallingPotRenderState();
     }
 
     @Override
-    public void extractRenderState(EchoingVaseBlockEntity blockEntity, EchoingVaseRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+    public void extractRenderState(FallingPotBlockEntity blockEntity, FallingPotRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
         state.direction = blockEntity.getDirection();
         DecoratedPotBlockEntity.WobbleStyle wobbleStyle = blockEntity.lastWobbleStyle;
@@ -53,7 +53,7 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
 
         state.fallProgress = blockEntity.fallStartedAtTick == -1 ?
 			0.0F :
-			((float) (blockEntity.getLevel().getGameTime() - blockEntity.fallStartedAtTick) + partialTicks) / EchoingVaseBlockEntity.FALL_DURATION;
+			((float) (blockEntity.getLevel().getGameTime() - blockEntity.fallStartedAtTick) + partialTicks) / FallingPotBlockEntity.FALL_DURATION;
 		state.fallDirection = blockEntity.fallDirection;
 		state.half = blockEntity.getBlockState().getValue(BlockStateProperties.DOUBLE_BLOCK_HALF);
 
@@ -61,7 +61,7 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
     }
 
     @Override
-    public void submit(EchoingVaseRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+    public void submit(FallingPotRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
 
         if (state.fallProgress > 0) {

@@ -1,48 +1,44 @@
 package dev.spiritstudios.hollow.world.level.block;
 
+import com.mojang.math.OctahedralGroup;
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.Hollow;
-import dev.spiritstudios.hollow.world.level.block.entity.EchoingVaseBlockEntity;
-import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.FallingPotBlockEntity;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import com.mojang.math.OctahedralGroup;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -71,7 +67,6 @@ public class ScreamingVaseBlock extends BaseEntityBlock {
 
 	public static final VoxelShape UPPER_SHAPE_EW = Shapes.rotate(UPPER_SHAPE_NS, OctahedralGroup.ROT_90_Y_POS);
 
-
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return state.getValue(HALF) == DoubleBlockHalf.UPPER ?
@@ -81,19 +76,15 @@ public class ScreamingVaseBlock extends BaseEntityBlock {
 
 	@Override
 	protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
-		EchoingVaseBlockEntity blockEntity = (EchoingVaseBlockEntity) level.getBlockEntity(pos);
-		if (blockEntity == null) {
-			Hollow.LOGGER.error("Failed to find BE at {}", state);
-			return;
+		if (level.getBlockEntity(pos) instanceof FallingPotBlockEntity blockEntity) {
+			blockEntity.onEntityCollision(state, level, pos, entity);
 		}
-
-		blockEntity.onEntityCollision(state, level, pos, entity);
 	}
 
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new EchoingVaseBlockEntity(pos, state);
+		return new FallingPotBlockEntity(pos, state);
 	}
 
 	@Override
@@ -103,7 +94,7 @@ public class ScreamingVaseBlock extends BaseEntityBlock {
 		if (state.getValue(HALF) == DoubleBlockHalf.UPPER)
 			pos = pos.below();
 
-		EchoingVaseBlockEntity blockEntity = (EchoingVaseBlockEntity) world.getBlockEntity(pos);
+		PotBlockEntity blockEntity = (PotBlockEntity) world.getBlockEntity(pos);
 		Objects.requireNonNull(blockEntity).use(player, hand);
 		return InteractionResult.CONSUME;
 	}
@@ -117,7 +108,7 @@ public class ScreamingVaseBlock extends BaseEntityBlock {
 
 	@Override
 	public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, HollowBlockEntityTypes.ECHOING_VASE, EchoingVaseBlockEntity::tick);
+		return createTickerHelper(type, HollowBlockEntityTypes.FALLING_POT, FallingPotBlockEntity::tick);
 	}
 
 	@Override
@@ -158,10 +149,7 @@ public class ScreamingVaseBlock extends BaseEntityBlock {
 	public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
 		if (world.isClientSide()) return super.playerWillDestroy(world, pos, state, player);
 
-		if (state.getValue(HALF) == DoubleBlockHalf.LOWER)
-			onBreakLower(world, pos, state, player);
-		else
-			onBreakLower(world, pos.below(), world.getBlockState(pos.below()), player);
+		onBreakLower(world, state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below(), player);
 
 		if (player.isCreative()) onBreakInCreative(world, pos, state, player);
 		else dropResources(state, world, pos, null, player, player.getMainHandItem());
@@ -169,17 +157,17 @@ public class ScreamingVaseBlock extends BaseEntityBlock {
 		return super.playerWillDestroy(world, pos, state, player);
 	}
 
-	public static void onBreakLower(Level world, BlockPos pos, BlockState state, @Nullable Entity causer) {
-		if (world.isClientSide()) return;
-
-		((ServerLevel) world).sendParticles(
+	public static void onBreakLower(Level level, BlockPos pos, @Nullable Entity causer) {
+		if (level instanceof ServerLevel serverLevel) {
+			serverLevel.sendParticles(
 				HollowParticleTypes.SCREAM,
 				pos.getX(), pos.getY(), pos.getZ(),
 				1, 0, 0, 0, 0
-		);
+			);
 
-		world.playSound(null, pos, SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.BLOCKS);
-		world.gameEvent(GameEvent.SCULK_SENSOR_TENDRILS_CLICKING, pos, GameEvent.Context.of(causer));
+			level.playSound(null, pos, SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.BLOCKS);
+			level.gameEvent(GameEvent.SCULK_SENSOR_TENDRILS_CLICKING, pos, GameEvent.Context.of(causer));
+		}
 	}
 
 	@Override

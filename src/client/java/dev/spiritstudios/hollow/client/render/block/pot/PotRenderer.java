@@ -1,6 +1,6 @@
-package dev.spiritstudios.hollow.client.render.block;
+package dev.spiritstudios.hollow.client.render.block.pot;
 
-import dev.spiritstudios.hollow.world.level.block.entity.EchoingPotBlockEntity;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockModelResolver;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
@@ -17,21 +17,21 @@ import com.mojang.math.Axis;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-public class EchoingPotBlockEntityRenderer implements BlockEntityRenderer<EchoingPotBlockEntity, EchoingPotRenderState> {
+public class PotRenderer implements BlockEntityRenderer<PotBlockEntity, PotRenderState> {
     public static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
     protected final BlockModelResolver blockModelResolver;
 
-    public EchoingPotBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    public PotRenderer(BlockEntityRendererProvider.Context context) {
         this.blockModelResolver = context.blockModelResolver();
     }
 
     @Override
-    public EchoingPotRenderState createRenderState() {
-        return new EchoingPotRenderState();
+    public PotRenderState createRenderState() {
+        return new PotRenderState();
     }
 
     @Override
-    public void extractRenderState(EchoingPotBlockEntity blockEntity, EchoingPotRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+    public void extractRenderState(PotBlockEntity blockEntity, PotRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
         state.direction = blockEntity.getDirection();
         DecoratedPotBlockEntity.WobbleStyle wobbleStyle = blockEntity.lastWobbleStyle;
@@ -45,7 +45,7 @@ public class EchoingPotBlockEntityRenderer implements BlockEntityRenderer<Echoin
     }
 
     @Override
-    public void submit(EchoingPotRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+    public void submit(PotRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
         poseStack.mulPose(DecoratedPotRenderer.modelTransformation(state.direction));
         if (state.wobbleProgress >= 0.0F && state.wobbleProgress <= 1.0F) {
