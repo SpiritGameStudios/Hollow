@@ -4,7 +4,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "hollow:block/obabo",
-      "particle": "minecraft:block/chiseled_deepslate"
+		"particle": "minecraft:block/chiseled_deepslate"
 	},
 	"elements": [
 		{

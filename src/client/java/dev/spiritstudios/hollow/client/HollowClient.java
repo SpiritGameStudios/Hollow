@@ -34,20 +34,11 @@ public class HollowClient implements ClientModInitializer {
 		ItemTintSources.ID_MAPPER.put(Hollow.id("jeb"), Jeb.MAP_CODEC);
 
         // region Block Entity Renderers
-        BlockEntityRenderers.register(
-                HollowBlockEntityTypes.GLASS_JAR,
-                GlassJarBlockEntityRenderer::new
-        );
+        BlockEntityRenderers.register(HollowBlockEntityTypes.GLASS_JAR, GlassJarBlockEntityRenderer::new);
 
-        BlockEntityRenderers.register(
-                HollowBlockEntityTypes.POT,
-                PotRenderer::new
-        );
-
-        BlockEntityRenderers.register(
-                HollowBlockEntityTypes.FALLING_POT,
-                FallingPotRenderer::new
-        );
-        // endregion
+        BlockEntityRenderers.register(HollowBlockEntityTypes.POT, PotRenderer::new);
+        BlockEntityRenderers.register(HollowBlockEntityTypes.FALLING_POT, FallingPotRenderer::new);
+		BlockEntityRenderers.register(HollowBlockEntityTypes.OBABO, PotRenderer::new);
+		// endregion
     }
 }

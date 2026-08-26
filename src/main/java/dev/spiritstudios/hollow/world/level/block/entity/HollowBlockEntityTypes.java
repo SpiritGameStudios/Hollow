@@ -3,6 +3,7 @@ package dev.spiritstudios.hollow.world.level.block.entity;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.entity.pot.FallingPotBlockEntity;
+import dev.spiritstudios.hollow.world.level.block.entity.pot.ObaboBlockEntity;
 import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
@@ -24,7 +25,13 @@ public final class HollowBlockEntityTypes {
     public static final BlockEntityType<PotBlockEntity> POT = register(
 		"pot",
 		PotBlockEntity::new,
-		HollowBlocks.ECHOING_POT, HollowBlocks.ECHOING_VASE, HollowBlocks.OBABO
+		HollowBlocks.ECHOING_POT, HollowBlocks.ECHOING_VASE
+	);
+
+	public static final BlockEntityType<ObaboBlockEntity> OBABO = register(
+		"obabo",
+		ObaboBlockEntity::new,
+		HollowBlocks.OBABO
 	);
 
     public static final BlockEntityType<StoneChestBlockEntity> STONE_CHEST = register("stone_chest", StoneChestBlockEntity::new, HollowBlocks.STONE_CHEST);
