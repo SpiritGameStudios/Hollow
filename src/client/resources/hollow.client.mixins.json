@@ -1,11 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "dev.spiritstudios.hollow.mixin.client",
+  "package": "dev.spiritstudios.hollow.client.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+	"overwrites": {
+		"requireAnnotations": true
+	}
 }
