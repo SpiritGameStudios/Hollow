@@ -38,11 +38,15 @@ public class ScreamParticle extends SingleQuadParticle {
     public void extract(QuadParticleRenderState particleTypeRenderState, Camera camera, float partialTickTime) {
         this.alpha = 1.0F - Mth.clamp((this.age + partialTickTime) / this.lifetime, 0.0F, 1.0F);
 
+		this.y += Mth.EPSILON;
+		this.yo += Mth.EPSILON;
         Quaternionf rotation = new Quaternionf();
-        rotation.rotationX(-1.0472F);
+        rotation.rotationX(-Mth.HALF_PI);
         this.extractRotatedQuad(particleTypeRenderState, camera, rotation, partialTickTime);
-        rotation.rotationYXZ((float) -Math.PI, 1.0472F, 0.0F);
+        rotation.rotationYXZ((float) -Math.PI, Mth.HALF_PI, 0.0F);
         this.extractRotatedQuad(particleTypeRenderState, camera, rotation, partialTickTime);
+		this.y -= Mth.EPSILON;
+		this.yo -= Mth.EPSILON;
     }
 
     @Override

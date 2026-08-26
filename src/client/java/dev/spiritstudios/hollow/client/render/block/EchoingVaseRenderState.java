@@ -15,7 +15,7 @@ public class EchoingVaseRenderState extends BlockEntityRenderState {
 
     public DoubleBlockHalf half = DoubleBlockHalf.UPPER;
 
-    public float fallTime;
+    public float fallProgress;
     public Direction fallDirection = Direction.NORTH;
 
     public BlockModelRenderState model = new BlockModelRenderState();

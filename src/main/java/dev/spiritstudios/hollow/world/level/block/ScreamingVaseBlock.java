@@ -86,7 +86,8 @@ public class ScreamingVaseBlock extends BaseEntityBlock {
 			Hollow.LOGGER.error("Failed to find BE at {}", state);
 			return;
 		}
-		Objects.requireNonNull(blockEntity).onEntityCollision(state, level, pos, entity);
+
+		blockEntity.onEntityCollision(state, level, pos, entity);
 	}
 
 	@Nullable

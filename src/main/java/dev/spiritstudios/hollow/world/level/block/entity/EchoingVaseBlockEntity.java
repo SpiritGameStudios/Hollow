@@ -25,18 +25,17 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.DOUBLE_BLOCK_HALF;
 
 public class EchoingVaseBlockEntity extends BlockEntity {
-	public static int TILT_TIME = 10;
-	public static int FALL_TIME = 20;
+	public static int FALL_DURATION = 20;
 
 	public int activeTime = 0;
 	public long wobbleStartedAtTick;
-	public Entity fallCauser;
-	public int fallTime = 0;
+	public @Nullable Entity fallCauser;
+	public long fallStartedAtTick = -1;
 	public boolean fallen = false;
 	public Direction fallDirection = Direction.NORTH;
 	public DecoratedPotBlockEntity.WobbleStyle lastWobbleStyle;
@@ -46,7 +45,8 @@ public class EchoingVaseBlockEntity extends BlockEntity {
 	}
 
 	public Direction getDirection() {
-		return this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+		return this.getBlockState().getOptionalValue(BlockStateProperties.HORIZONTAL_FACING)
+			.orElseGet(() -> this.getBlockState().getValue(BlockStateProperties.FACING));
 	}
 
 	public void use(Player player, InteractionHand hand) {
@@ -64,40 +64,41 @@ public class EchoingVaseBlockEntity extends BlockEntity {
 		this.level.blockEvent(this.getBlockPos().above(), this.getBlockState().getBlock(), 1, wobbleType.ordinal());
 	}
 
-	public void setFalling(Direction dir, boolean top, Level world, BlockPos pos, @Nullable Entity fallCauser) {
-		this.fallTime = 1;
+	public void setFalling(Direction dir, boolean top, Level level, BlockPos pos, @Nullable Entity fallCauser) {
+		this.fallStartedAtTick = level.getGameTime();
 		this.fallDirection = dir;
 		this.fallCauser = fallCauser;
 		if (top) {
-			BlockEntity be = world.getBlockEntity(pos.above());
+			BlockEntity be = level.getBlockEntity(pos.above());
 			if (be instanceof EchoingVaseBlockEntity echoing) {
-				echoing.setFalling(dir, false, world, pos, fallCauser);
+				echoing.setFalling(dir, false, level, pos, fallCauser);
 			} else {
 				Hollow.LOGGER.error("Missing top block entity for echoing vase at {}", pos.above());
 			}
 		}
 	}
 
-	public static void tick(Level world, BlockPos pos, BlockState state, EchoingVaseBlockEntity entity) {
-		if (entity.fallTime == 0) return;
-		entity.fallTime++;
+	public static void tick(Level level, BlockPos pos, BlockState state, EchoingVaseBlockEntity entity) {
+		if (entity.fallStartedAtTick == -1) return;
 
-		if (entity.fallTime <= EchoingVaseBlockEntity.FALL_TIME || entity.fallen) return;
+		long fallTime = level.getGameTime() - entity.fallStartedAtTick;
 
-		world.playLocalSound(pos, SoundEvents.DECORATED_POT_SHATTER, SoundSource.BLOCKS, 1, 1, true);
+		if (fallTime <= EchoingVaseBlockEntity.FALL_DURATION || entity.fallen) return;
 
-		world.setBlockAndUpdate(pos.above(), Blocks.AIR.defaultBlockState());
-		world.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+		level.playLocalSound(pos, SoundEvents.DECORATED_POT_SHATTER, SoundSource.BLOCKS, 1, 1, true);
 
-		world.addDestroyBlockEffect(pos.relative(entity.fallDirection), state);
-		world.addDestroyBlockEffect(pos.relative(entity.fallDirection, 2), state);
+		level.setBlockAndUpdate(pos.above(), Blocks.AIR.defaultBlockState());
+		level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 
-		ScreamingVaseBlock.onBreakLower(world, pos, state, entity.fallCauser);
+		level.addDestroyBlockEffect(pos.relative(entity.fallDirection), state);
+		level.addDestroyBlockEffect(pos.relative(entity.fallDirection, 2), state);
+
+		ScreamingVaseBlock.onBreakLower(level, pos, state, entity.fallCauser);
 	}
 
 	public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
 		if (!state.is(HollowBlocks.SCREAMING_VASE) ||
-				this.fallTime != 0 ||
+				this.fallStartedAtTick != -1 ||
 				state.getValue(DOUBLE_BLOCK_HALF).equals(DoubleBlockHalf.UPPER) ||
 				!world.getBlockState(pos.above()).is(HollowBlocks.SCREAMING_VASE)
 		) return;
@@ -140,7 +141,7 @@ public class EchoingVaseBlockEntity extends BlockEntity {
 	@Override
 	protected void saveAdditional(ValueOutput output) {
 		output.putInt("ActiveTime", activeTime);
-		if (this.fallDirection != null && this.fallTime > 0) {
+		if (this.fallDirection != null && this.fallStartedAtTick != -1) {
 			output.putInt("FallDir", this.fallDirection.ordinal());
 		}
 
@@ -154,7 +155,7 @@ public class EchoingVaseBlockEntity extends BlockEntity {
 
 		input.getInt("FallDir").ifPresent(fallDir -> {
 			this.fallDirection = Direction.values()[fallDir];
-			if (this.level != null && this.fallTime == 0 && this.getBlockState().getValue(DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
+			if (this.level != null && this.fallStartedAtTick == -1 && this.getBlockState().getValue(DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
 				this.setFalling(this.fallDirection, true, this.level, this.getBlockPos(), null);
 			}
 		});

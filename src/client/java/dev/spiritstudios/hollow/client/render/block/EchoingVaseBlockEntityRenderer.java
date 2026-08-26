@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.block.model.BlockDisplayContext;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Ease;
 import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -23,7 +24,11 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
     public static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
     protected final BlockModelResolver blockModelResolver;
 
-    public EchoingVaseBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+	public static final float TILT_TIME = 0.5F;
+	public static final float FALL_TIME = 1F;
+
+
+	public EchoingVaseBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.blockModelResolver = context.blockModelResolver();
     }
 
@@ -46,7 +51,9 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
             state.wobbleProgress = 0.0F;
         }
 
-        state.fallTime = blockEntity.fallTime + partialTicks;
+        state.fallProgress = blockEntity.fallStartedAtTick == -1 ?
+			0.0F :
+			((float) (blockEntity.getLevel().getGameTime() - blockEntity.fallStartedAtTick) + partialTicks) / EchoingVaseBlockEntity.FALL_DURATION;
 		state.fallDirection = blockEntity.fallDirection;
 		state.half = blockEntity.getBlockState().getValue(BlockStateProperties.DOUBLE_BLOCK_HALF);
 
@@ -57,11 +64,11 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
     public void submit(EchoingVaseRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
 
-        if (state.fallTime > 0) {
+        if (state.fallProgress > 0) {
 			Vector3f fallDir = state.fallDirection.step();
 
-			if (state.fallTime >= EchoingVaseBlockEntity.TILT_TIME) {
-				float pct = Math.min(1, Ease.inQuart((state.fallTime - EchoingVaseBlockEntity.TILT_TIME) / (EchoingVaseBlockEntity.FALL_TIME - EchoingVaseBlockEntity.TILT_TIME)));
+			if (state.fallProgress >= TILT_TIME) {
+				float pct = Math.min(1, Ease.inQuart((state.fallProgress - TILT_TIME) / (FALL_TIME - TILT_TIME)));
 
 				float angle = Math.min(
 						tiltAngle + fallAngle * pct,
@@ -73,8 +80,7 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
 						0.5f + fallDir.x / 2, state.half.equals(DoubleBlockHalf.LOWER) ? 0 : -1, 0.5f + fallDir.z / 2
 				);
 			} else {
-				float pct = state.fallTime / EchoingVaseBlockEntity.TILT_TIME;
-				float angle = tiltAngle * Ease.inOutSine(pct);
+				float angle = tiltAngle * Ease.inOutSine(state.fallProgress / TILT_TIME);
 
 				poseStack.rotateAround(
 						Axis.of(state.fallDirection.getCounterClockWise(net.minecraft.core.Direction.Axis.Y).step()).rotation(angle),
@@ -83,6 +89,14 @@ public class EchoingVaseBlockEntityRenderer implements BlockEntityRenderer<Echoi
 			}
 		}
 
-        poseStack.popPose();
+		state.model.submit(
+			poseStack,
+			submitNodeCollector,
+			state.lightCoords,
+			OverlayTexture.NO_OVERLAY,
+			0x00000000
+		);
+
+		poseStack.popPose();
     }
 }
