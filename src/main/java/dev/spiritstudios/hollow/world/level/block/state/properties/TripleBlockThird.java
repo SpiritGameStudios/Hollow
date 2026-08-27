@@ -6,14 +6,14 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.function.Consumer;
 
+@SuppressWarnings("DuplicateBranchesInSwitch")
 public enum TripleBlockThird implements StringRepresentable {
-	UPPER("upper", -1, -2),
+	UPPER("upper", -2, -1),
 	MIDDLE("middle", -1, 1),
 	LOWER("lower", 1, 2);
 
 	private final String path;
-	private final int relativeY1;
-	private final int relativeY2;
+	private final int relativeY1, relativeY2;
 
 	TripleBlockThird(String path, int relativeY1, int relativeY2) {
 		this.path = path;
@@ -25,16 +25,24 @@ public enum TripleBlockThird implements StringRepresentable {
 		return pos.relative(Direction.Axis.Y, this.relativeY1);
 	}
 
-	public TripleBlockThird getRelativeThird1() {
-		return TripleBlockThird.values()[this.ordinal() - this.relativeY1];
-	}
-
 	public BlockPos getRelativePos2(BlockPos pos) {
 		return pos.relative(Direction.Axis.Y, this.relativeY2);
 	}
 
+	public TripleBlockThird getRelativeThird1() {
+		return switch (this) {
+			case UPPER -> MIDDLE;
+			case MIDDLE -> LOWER;
+			case LOWER -> MIDDLE;
+		};
+	}
+
 	public TripleBlockThird getRelativeThird2() {
-		return TripleBlockThird.values()[this.ordinal() - this.relativeY2];
+		return switch (this) {
+			case UPPER -> LOWER;
+			case MIDDLE -> UPPER;
+			case LOWER -> UPPER;
+		};
 	}
 
 	public void doForBothRelativePositions(BlockPos pos, Consumer<BlockPos> action) {

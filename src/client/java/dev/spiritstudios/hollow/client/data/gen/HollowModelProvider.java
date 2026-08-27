@@ -16,7 +16,6 @@ import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.renderer.item.ClientItem;
@@ -97,7 +96,7 @@ public final class HollowModelProvider extends FabricModelProvider {
 
 
         registerGiantLilyPad(generator);
-        registerCattailStem(generator);
+        registerCattail(generator);
 
         registerPolypore(generator);
         generator.registerSimpleFlatItemModel(HollowBlocks.POLYPORE.asItem());
@@ -108,12 +107,6 @@ public final class HollowModelProvider extends FabricModelProvider {
 				PlantType.NOT_TINTED,
 				TextureMapping.cross(Blocks.FIREFLY_BUSH)
 		);
-
-		generator.createCrossBlockWithDefaultItem(
-                HollowBlocks.CATTAIL,
-                BlockModelGenerators.PlantType.NOT_TINTED,
-                TextureMapping.cross(HollowBlocks.CATTAIL)
-        );
 
         HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed((unwaxed, _) -> generator.createRotatedPillarWithHorizontalVariant(unwaxed, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT));
         HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed(generator::copyModel);
@@ -268,31 +261,13 @@ public final class HollowModelProvider extends FabricModelProvider {
         generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variants));
     }
 
-    public static void registerCattailStem(BlockModelGenerators generator) {
-        Identifier middle = ModelTemplates.CROSS.create(
-                HollowBlocks.CATTAIL_STEM,
-                TextureMapping.cross(HollowBlocks.CATTAIL_STEM),
-                generator.modelOutput
-        );
-
-        Identifier middle2 = ModelTemplates.CROSS.create(
-                ModelLocationUtils.getModelLocation(HollowBlocks.CATTAIL_STEM, "_2"),
-                TextureMapping.cross(TextureMapping.getBlockTexture(HollowBlocks.CATTAIL_STEM, "_2")),
-                generator.modelOutput
-        );
-
-        Identifier bottom = ModelTemplates.CROSS.create(
-                ModelLocationUtils.getModelLocation(HollowBlocks.CATTAIL_STEM, "_bottom"),
-                TextureMapping.cross(TextureMapping.getBlockTexture(HollowBlocks.CATTAIL_STEM, "_bottom")),
-                generator.modelOutput
-        );
-
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.CATTAIL_STEM)
-                .with(createBooleanModelDispatch(
-                        CattailStemBlock.BOTTOM,
-                        plainVariant(bottom),
-                        variants(plainModel(middle), plainModel(middle2))
-                )));
+    public static void registerCattail(BlockModelGenerators generator) {
+        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.CATTAIL)
+			.with(PropertyDispatch.initial(NewCattailBlock.THIRD).generate(third ->
+				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.CATTAIL, "_" + third.getSerializedName()))
+			))
+		);
+		generator.createFlatItemModel(HollowItems.CATTAIL);
     }
 
     private static void registerHollowLog(BlockModelGenerators generator, HollowLogBlock block) {

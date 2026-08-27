@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
-      "model": "hollow:block/cattail"
+    "third=lower": {
+      "model": "hollow:block/cattail_lower"
+    },
+    "third=middle": {
+      "model": "hollow:block/cattail_middle"
+    },
+    "third=upper": {
+      "model": "hollow:block/cattail_upper"
     }
   }
 }

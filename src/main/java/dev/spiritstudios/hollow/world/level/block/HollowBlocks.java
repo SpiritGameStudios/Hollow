@@ -71,9 +71,9 @@ public final class HollowBlocks {
 		ECHOING_POT
 	);
 
-	public static final CattailStemBlock CATTAIL_STEM = register(
-		HollowBlockIds.CATTAIL_STEM,
-		CattailStemBlock::new,
+	public static final NewCattailBlock CATTAIL = register(
+		HollowBlockItemIds.CATTAIL,
+		NewCattailBlock::new,
 		BlockBehaviour.Properties.of()
 			.mapColor(MapColor.WATER)
 			.replaceable()
@@ -82,12 +82,6 @@ public final class HollowBlocks {
 			.sound(SoundType.WET_GRASS)
 			.offsetType(BlockBehaviour.OffsetType.XZ)
 			.pushReaction(PushReaction.DESTROY)
-	);
-
-	public static final CattailBlock CATTAIL = registerCopyOf(
-		HollowBlockItemIds.CATTAIL,
-		CattailBlock::new,
-		CATTAIL_STEM
 	);
 
 	public static final SwitchgrassBlock SWITCHGRASS = register(

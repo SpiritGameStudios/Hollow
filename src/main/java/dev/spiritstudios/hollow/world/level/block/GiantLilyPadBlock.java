@@ -60,7 +60,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 
 	public static boolean isValidPlacementPosition(LevelReader level, BlockPos pos, BlockState state, LilyPadPiece piece) {
 		for (BlockPos blockPos : piece.getAllPositions(pos)) {
-			if (!state.canSurvive(level, blockPos) || !level.isEmptyBlock(pos)) {
+			if (!state.canSurvive(level, blockPos) || !level.isEmptyBlock(blockPos)) {
 				return false;
 			}
 		}

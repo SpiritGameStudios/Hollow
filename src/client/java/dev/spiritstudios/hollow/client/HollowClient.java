@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.client;
 
 import dev.spiritstudios.hollow.Hollow;
+import dev.spiritstudios.hollow.client.color.block.HollowBlockTintSources;
 import dev.spiritstudios.hollow.client.color.item.Jeb;
 import dev.spiritstudios.hollow.client.render.particle.JarFireflyParticle;
 import dev.spiritstudios.hollow.client.render.particle.ScreamParticle;
@@ -30,6 +31,10 @@ public class HollowClient implements ClientModInitializer {
                 List.of(BlockTintSources.constant(BlockColors.LILY_PAD_DEFAULT, BlockColors.LILY_PAD_IN_WORLD)),
                 HollowBlocks.GIANT_LILY_PAD, HollowBlocks.FLOWERING_LILY_PAD
         );
+		BlockColorRegistry.register(
+			List.of(HollowBlockTintSources.cattail()),
+			HollowBlocks.CATTAIL
+		);
 
 		ItemTintSources.ID_MAPPER.put(Hollow.id("jeb"), Jeb.MAP_CODEC);
 

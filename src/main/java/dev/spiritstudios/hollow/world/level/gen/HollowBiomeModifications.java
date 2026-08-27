@@ -33,7 +33,7 @@ public class HollowBiomeModifications {
             BiomeModificationContext.GenerationSettingsContext settings = context.getGenerationSettings();
 
             settings.addFeature(VEGETAL_DECORATION, HollowPlacements.PATCH_GIANT_LILY_PAD);
-            settings.addFeature(VEGETAL_DECORATION, HollowPlacements.CATTAILS);
+            // settings.addFeature(VEGETAL_DECORATION, HollowPlacements.CATTAILS);
         });
 
 

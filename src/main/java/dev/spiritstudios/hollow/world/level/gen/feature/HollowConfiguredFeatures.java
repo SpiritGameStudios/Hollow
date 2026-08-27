@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 
 public final class HollowConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_LILY_PAD = of("giant_lily_pad");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CATTAILS = of("cattails");
+    // public static final ResourceKey<ConfiguredFeature<?, ?>> CATTAILS = of("cattails");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> registerable) {
         registerable.register(
@@ -25,10 +25,10 @@ public final class HollowConfiguredFeatures {
                 new ConfiguredFeature<>(HollowFeatures.GIANT_LILYPAD, new NoneFeatureConfiguration())
         );
 
-        registerable.register(
+/*        registerable.register(
                 CATTAILS,
                 new ConfiguredFeature<>(HollowFeatures.CATTAILS, new NoneFeatureConfiguration())
-        );
+        );*/
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> of(String id) {

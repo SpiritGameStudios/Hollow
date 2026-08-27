@@ -10,7 +10,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 @SuppressWarnings("unused")
 public final class HollowFeatures {
     public static final Feature<NoneFeatureConfiguration> GIANT_LILYPAD = register("giant_lilypad", new GiantLilypadFeature());
-    public static final Feature<NoneFeatureConfiguration> CATTAILS = register("cattails", new CattailFeature());
+//    public static final Feature<NoneFeatureConfiguration> CATTAILS = register("cattails", new CattailFeature());
 
     private static <C extends FeatureConfiguration, F extends Feature<C>> F register(String name, F feature) {
         return Registry.register(BuiltInRegistries.FEATURE, Hollow.id(name), feature);

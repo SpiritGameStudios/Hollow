@@ -5,7 +5,6 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.TreeFeatures;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -28,7 +27,7 @@ public final class HollowPlacements {
     public static void bootstrap(BootstrapContext<PlacedFeature> featureRegisterable) {
         PlacedFeatureHelper helper = new PlacedFeatureHelper(featureRegisterable.lookup(Registries.CONFIGURED_FEATURE), featureRegisterable);
 
-        helper.add(
+/*        helper.add(
                 CATTAILS,
                 HollowConfiguredFeatures.CATTAILS,
                 CountPlacement.of(2),
@@ -36,7 +35,7 @@ public final class HollowPlacements {
                 PlacementUtils.HEIGHTMAP_TOP_SOLID,
                 BiomeFilter.biome(),
                 InSquarePlacement.spread()
-        );
+        );*/
 
 //        helper.add(
 //                PATCH_GRASS_BIRCH,

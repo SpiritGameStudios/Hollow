@@ -10,6 +10,15 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "hollow:cattail",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "third": "lower"
+              }
+            }
+          ],
           "name": "hollow:cattail"
         }
       ],

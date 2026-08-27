@@ -1,7 +1,9 @@
 package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
+import dev.spiritstudios.hollow.world.level.block.NewCattailBlock;
 import dev.spiritstudios.hollow.world.level.block.PolyporeBlock;
+import dev.spiritstudios.hollow.world.level.block.state.properties.TripleBlockThird;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
@@ -31,12 +33,10 @@ public class HollowLootTableProvider extends FabricBlockLootSubProvider {
         this.add(HollowBlocks.STONE_CHEST, this::createNameableBlockEntityTable);
 
 		this.dropSelf(HollowBlocks.SWITCHGRASS);
-        this.dropSelf(HollowBlocks.CATTAIL);
-        this.dropOther(HollowBlocks.CATTAIL_STEM, HollowBlocks.CATTAIL);
+		this.add(HollowBlocks.CATTAIL, block -> this.createSinglePropConditionTable(block, NewCattailBlock.THIRD, TripleBlockThird.LOWER));
 
-        this.dropSelf(HollowBlocks.FLOWERING_LILY_PAD);
+		this.dropSelf(HollowBlocks.FLOWERING_LILY_PAD);
 		this.add(HollowBlocks.GIANT_LILY_PAD, this.createSingleItemTable(Items.LILY_PAD, ConstantValue.exactly(4.0F)));
-
         this.add(
                 HollowBlocks.POLYPORE,
                 block -> LootTable.lootTable().withPool(LootPool.lootPool()

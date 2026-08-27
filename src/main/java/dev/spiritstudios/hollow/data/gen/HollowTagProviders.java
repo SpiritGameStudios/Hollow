@@ -55,6 +55,9 @@ public class HollowTagProviders {
 
 		@Override
 		protected void addTags(HolderLookup.Provider wrapperLookup) {
+			builder(BlockTags.REPLACEABLE)
+				.add(HollowBlockItemIds.CATTAIL);
+
 			builder(HollowBlockItemTags.HOLLOW_LOGS.block())
 				.addAll(toIds(HollowBlockItemIds.HOLLOW_LOG))
 				.addAll(toIds(HollowBlockItemIds.STRIPPED_HOLLOW_LOG));
