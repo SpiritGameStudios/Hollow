@@ -1,4 +1,4 @@
-package dev.spiritstudios.hollow.world.level.block;
+package dev.spiritstudios.hollow.world.level.block.jar;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -19,12 +19,9 @@ import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootTableModifica
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
     @Override
     public void onInitialize() {

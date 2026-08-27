@@ -43,7 +43,6 @@ public class FallingPotRenderer implements BlockEntityRenderer<FallingPotBlockEn
     @Override
     public void extractRenderState(FallingPotBlockEntity blockEntity, FallingPotRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
-        state.direction = blockEntity.getDirection();
         DecoratedPotBlockEntity.WobbleStyle wobbleStyle = blockEntity.lastWobbleStyle;
         if (wobbleStyle != null && blockEntity.getLevel() != null) {
             state.wobbleProgress = ((float) (blockEntity.getLevel().getGameTime() - blockEntity.wobbleStartedAtTick) + partialTicks) / wobbleStyle.duration;

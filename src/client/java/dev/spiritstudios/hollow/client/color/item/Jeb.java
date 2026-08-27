@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.client.color.item;
 
 import com.mojang.serialization.MapCodec;
-import dev.spiritstudios.hollow.world.level.block.FireflyJarBlock;
+import dev.spiritstudios.hollow.world.level.block.jar.FireflyJarBlock;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.multiplayer.ClientLevel;

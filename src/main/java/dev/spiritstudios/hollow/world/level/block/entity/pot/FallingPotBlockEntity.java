@@ -1,9 +1,9 @@
 package dev.spiritstudios.hollow.world.level.block.entity.pot;
 
-import dev.spiritstudios.hollow.Hollow;
+import com.mojang.logging.LogUtils;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
-import dev.spiritstudios.hollow.world.level.block.ScreamingVaseBlock;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
+import dev.spiritstudios.hollow.world.level.block.pot.ScreamingVaseBlock;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,10 +23,13 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
+import org.slf4j.Logger;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.DOUBLE_BLOCK_HALF;
 
 public class FallingPotBlockEntity extends PotBlockEntity {
+	private static final Logger LOGGER = LogUtils.getLogger();
+
 	public static final int FALL_DURATION = SharedConstants.TICKS_PER_SECOND;
 
 	public @Nullable Entity fallCauser;
@@ -67,7 +70,7 @@ public class FallingPotBlockEntity extends PotBlockEntity {
 			if (this.level.getBlockEntity(pos.above()) instanceof FallingPotBlockEntity pot) {
 				pot.startFalling(dir, false, pos, fallCauser);
 			} else {
-				Hollow.LOGGER.error("Missing top block entity for echoing vase at {}", pos.above());
+				LOGGER.error("Missing top block entity for echoing vase at {}", pos.above());
 			}
 		}
 	}

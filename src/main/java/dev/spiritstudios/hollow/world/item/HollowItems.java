@@ -101,7 +101,7 @@ public final class HollowItems {
 
     public static final Item COPPER_HORN = registerItem(
             HollowItemIds.COPPER_HORN,
-            CopperHornItem::new,
+            CopperInstrumentItem::new,
             new Item.Properties()
                     .stacksTo(1)
                     .rarity(Rarity.UNCOMMON)

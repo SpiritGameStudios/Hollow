@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.world.level.block.entity;
 
-import dev.spiritstudios.hollow.Hollow;
+import com.mojang.logging.LogUtils;
 import dev.spiritstudios.hollow.tags.HollowItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -18,8 +18,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import org.slf4j.Logger;
 
 public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
+	private static final Logger LOGGER = LogUtils.getLogger();
+
     private final NonNullList<ItemStack> items = NonNullList.withSize(15, ItemStack.EMPTY);
 
     public GlassJarBlockEntity(BlockPos pos, BlockState state) {
@@ -88,7 +91,7 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
 
 	@Override
 	public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
-		try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), Hollow.LOGGER)) {
+		try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(this.problemPath(), LOGGER)) {
 			TagValueOutput output = TagValueOutput.createWithContext(reporter, registryLookup);
 			ContainerHelper.saveAllItems(output, this.items, true);
 			return output.buildResult();

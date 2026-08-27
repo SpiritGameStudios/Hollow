@@ -40,6 +40,7 @@
 	"block.hollow.waxed_oxidized_copper_pillar": "Waxed Oxidized Copper Pillar",
 	"block.hollow.waxed_weathered_copper_pillar": "Waxed Weathered Copper Pillar",
 	"block.hollow.weathered_copper_pillar": "Weathered Copper Pillar",
+	"block.hollow.obabo": "Obabo",
 	"death.attack.sculk_jaw": "%1$s was ripped to shreds",
 	"death.attack.sculk_jaw.player": "%1$s was ripped to shreds",
 	"gamerule.hollow.copper_bulb_delay": "Delay Copper Bulb trigger",
