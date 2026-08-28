@@ -15,6 +15,7 @@
     "SculkBlockMixin",
     "SculkVeinBlockMixin",
     "SculkVeinGrowCheckerMixin",
+    "SimpleBlockFeatureMixin",
     "SwampHutPieceMixin",
     "TreeGrowerMixin",
     "accessor.ShapedRecipeBuilderAccessor"

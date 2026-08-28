@@ -49,70 +49,70 @@ public final class HollowModelProvider extends FabricModelProvider {
 		.select(Direction.WEST, Y_ROT_270)
 		.select(Direction.NORTH, NOP);
 
-    private static final PropertyDispatch<VariantMutator> NORTH_DEFAULT_ROTATION_OPERATIONS = PropertyDispatch.modify(BlockStateProperties.FACING)
-            .select(Direction.DOWN, X_ROT_90)
-            .select(Direction.UP, X_ROT_270)
-            .select(Direction.NORTH, NOP)
-            .select(Direction.SOUTH, Y_ROT_180)
-            .select(Direction.WEST, Y_ROT_270)
-            .select(Direction.EAST, Y_ROT_90);
+	private static final PropertyDispatch<VariantMutator> NORTH_DEFAULT_ROTATION_OPERATIONS = PropertyDispatch.modify(BlockStateProperties.FACING)
+		.select(Direction.DOWN, X_ROT_90)
+		.select(Direction.UP, X_ROT_270)
+		.select(Direction.NORTH, NOP)
+		.select(Direction.SOUTH, Y_ROT_180)
+		.select(Direction.WEST, Y_ROT_270)
+		.select(Direction.EAST, Y_ROT_90);
 
 	private static final ItemTintSource BLANK_LAYER = ItemModelUtils.constantTint(-1);
 
-    public HollowModelProvider(FabricPackOutput output) {
-        super(output);
-    }
+	public HollowModelProvider(FabricPackOutput output) {
+		super(output);
+	}
 
-    @Override
-    public void generateBlockStateModels(BlockModelGenerators generator) {
-        Consumer<Block> hollowLogGen = block -> {
-            if (!(block instanceof HollowLogBlock log)) throw new IllegalStateException();
-            registerHollowLog(generator, log);
-        };
+	@Override
+	public void generateBlockStateModels(BlockModelGenerators generator) {
+		Consumer<Block> hollowLogGen = block -> {
+			if (!(block instanceof HollowLogBlock log)) throw new IllegalStateException();
+			registerHollowLog(generator, log);
+		};
 
 		HollowBlocks.HOLLOW_LOG.forEach(hollowLogGen);
 		HollowBlocks.STRIPPED_HOLLOW_LOG.forEach(hollowLogGen);
 
-        registerWithRandomHorizontalRotations(generator, HollowBlocks.FLOWERING_LILY_PAD);
+		registerWithRandomHorizontalRotations(generator, HollowBlocks.FLOWERING_LILY_PAD);
 
-        generator.createNonTemplateHorizontalBlock(HollowBlocks.ECHOING_POT);
-        registerDoubleTallRotated(HollowBlocks.ECHOING_VASE, generator, false);
-        registerDoubleTallRotated(HollowBlocks.SCREAMING_VASE, generator, true);
+		generator.createNonTemplateHorizontalBlock(HollowBlocks.ECHOING_POT);
+		registerDoubleTallRotated(HollowBlocks.ECHOING_VASE, generator, false);
+		registerDoubleTallRotated(HollowBlocks.SCREAMING_VASE, generator, true);
 
 		generator.createNonTemplateHorizontalBlock(HollowBlocks.OBABO);
 
-        registerSculkJaw(generator);
+		registerSculkJaw(generator);
 
-        registerStoneChest(HollowBlocks.STONE_CHEST, generator);
-        generator.registerSimpleItemModel(
-                HollowBlocks.STONE_CHEST.asItem(),
-                ModelLocationUtils.getModelLocation(HollowBlocks.STONE_CHEST)
-        );
+		registerStoneChest(HollowBlocks.STONE_CHEST, generator);
+		generator.registerSimpleItemModel(
+			HollowItems.STONE_CHEST,
+			ModelLocationUtils.getModelLocation(HollowBlocks.STONE_CHEST)
+		);
 
-        registerStoneChest(HollowBlocks.STONE_CHEST_LID, generator);
-        generator.registerSimpleItemModel(
-                HollowBlocks.STONE_CHEST_LID.asItem(),
-                ModelLocationUtils.getModelLocation(HollowBlocks.STONE_CHEST_LID)
-        );
+		registerStoneChest(HollowBlocks.STONE_CHEST_LID, generator);
+		generator.registerSimpleItemModel(
+			HollowItems.STONE_CHEST_LID,
+			ModelLocationUtils.getModelLocation(HollowBlocks.STONE_CHEST_LID)
+		);
 
 
-        registerGiantLilyPad(generator);
-        registerCattail(generator);
+		registerGiantLilyPad(generator);
+		registerCattail(generator);
 
-        registerPolypore(generator);
-        generator.registerSimpleFlatItemModel(HollowBlocks.POLYPORE.asItem());
+		registerPolypore(generator);
+		generator.registerSimpleFlatItemModel(HollowItems.POLYPORE);
 
 		generator.registerSimpleItemModel(HollowItems.SWITCHGRASS, generator.createFlatItemModelWithBlockTexture(HollowItems.SWITCHGRASS, Blocks.FIREFLY_BUSH));
 		generator.createCrossBlock(
-				HollowBlocks.SWITCHGRASS,
-				PlantType.NOT_TINTED,
-				TextureMapping.cross(Blocks.FIREFLY_BUSH)
+			HollowBlocks.SWITCHGRASS,
+			PlantType.NOT_TINTED,
+			TextureMapping.cross(Blocks.FIREFLY_BUSH)
 		);
 
-        HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed((unwaxed, _) -> generator.createRotatedPillarWithHorizontalVariant(unwaxed, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT));
-        HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed(generator::copyModel);
+		HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed((unwaxed, _) -> generator.createRotatedPillarWithHorizontalVariant(unwaxed, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT));
+		HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed(generator::copyModel);
 
-		generator.registerSimpleFlatItemModel(HollowBlocks.GLASS_JAR.asItem());
+		generator.registerSimpleFlatItemModel(HollowItems.GLASS_JAR);
 		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.GLASS_JAR)
 			.with(createBooleanModelDispatch(
 				BaseJarBlock.HANGING,
@@ -128,11 +128,11 @@ public final class HollowModelProvider extends FabricModelProvider {
 				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.GLASS_JAR))
 			))
 		);
-    }
+	}
 
-    @Override
-    public void generateItemModels(ItemModelGenerators generators) {
-        generators.generateFlatItem(HollowItems.MUSIC_DISC_POSTMORTEM, ModelTemplates.FLAT_ITEM);
+	@Override
+	public void generateItemModels(ItemModelGenerators generators) {
+		generators.generateFlatItem(HollowItems.MUSIC_DISC_POSTMORTEM, ModelTemplates.FLAT_ITEM);
 		generators.generateFlatItem(HollowItems.MUSIC_DISC_ONLY_YOU, ModelTemplates.FLAT_ITEM);
 
 		Identifier model = generators.generateLayeredItem(
@@ -143,109 +143,104 @@ public final class HollowModelProvider extends FabricModelProvider {
 
 		generators.itemModelOutput.accept(HollowItems.FIREFLY_JAR, ItemModelUtils.tintedModel(model, BLANK_LAYER, new Jeb()));
 
-//        generator.registerSpawnEgg(
-//                HollowItems.FIREFLY_SPAWN_EGG,
-//                0x102F4E, 0xCAAF94
-//        );
+		generators.generateBooleanDispatch(
+			HollowItems.COPPER_HORN,
+			ItemModelUtils.isUsingItem(),
+			ItemModelUtils.plainModel(BuiltInRegistries.ITEM.getKey(HollowItems.COPPER_HORN).withPrefix("item/tooting_")),
+			ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(HollowItems.COPPER_HORN))
+		);
 
-        generators.generateBooleanDispatch(
-                HollowItems.COPPER_HORN,
-                ItemModelUtils.isUsingItem(),
-                ItemModelUtils.plainModel(BuiltInRegistries.ITEM.getKey(HollowItems.COPPER_HORN).withPrefix("item/tooting_")),
-                ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(HollowItems.COPPER_HORN))
-        );
-
-        generators.itemModelOutput.accept(
-                HollowItems.FLOWERING_LILY_PAD,
-                ItemModelUtils.tintedModel(
-                        generators.generateLayeredItem(
-                                HollowItems.FLOWERING_LILY_PAD,
-                                TextureMapping.getBlockTexture(Blocks.LILY_PAD),
-                                new Material(HollowBlockItemIds.FLOWERING_LILY_PAD.item().identifier().withPrefix("block/notreallyablockbutitneedstobeintheblockatlas/"))
-                        ),
-                        ItemModelUtils.constantTint(BlockColors.LILY_PAD_DEFAULT), ItemModelUtils.constantTint(-1)
-                )
-        );
+		generators.itemModelOutput.accept(
+			HollowItems.FLOWERING_LILY_PAD,
+			ItemModelUtils.tintedModel(
+				generators.generateLayeredItem(
+					HollowItems.FLOWERING_LILY_PAD,
+					TextureMapping.getBlockTexture(Blocks.LILY_PAD),
+					new Material(HollowBlockItemIds.FLOWERING_LILY_PAD.item().identifier().withPrefix("block/notreallyablockbutitneedstobeintheblockatlas/"))
+				),
+				ItemModelUtils.constantTint(BlockColors.LILY_PAD_DEFAULT), ItemModelUtils.constantTint(-1)
+			)
+		);
 
 		generators.itemModelOutput.accept(
 			HollowItems.OBABO,
 			ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(HollowBlocks.OBABO)),
 			new ClientItem.Properties(true, true, 1.0F)
 		);
-    }
+	}
 
-    // region Helpers
-    public void registerSculkJaw(BlockModelGenerators generator) {
-        MultiVariant inactive = plainVariant(ModelTemplates.CUBE_TOP.create(
-                HollowBlocks.SCULK_JAW,
-                new TextureMapping()
-                        .put(TextureSlot.TOP, TextureMapping.getBlockTexture(HollowBlocks.SCULK_JAW))
-                        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.SCULK)),
-                generator.modelOutput
-        ));
+	// region Helpers
+	public void registerSculkJaw(BlockModelGenerators generator) {
+		MultiVariant inactive = plainVariant(ModelTemplates.CUBE_TOP.create(
+			HollowBlocks.SCULK_JAW,
+			new TextureMapping()
+				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(HollowBlocks.SCULK_JAW))
+				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.SCULK)),
+			generator.modelOutput
+		));
 
-        MultiVariant active = plainVariant(ModelTemplates.CUBE_TOP.create(
-                ModelLocationUtils.getModelLocation(HollowBlocks.SCULK_JAW, "_active"),
-                new TextureMapping()
-                        .put(TextureSlot.TOP, TextureMapping.getBlockTexture(HollowBlocks.SCULK_JAW, "_active"))
-                        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.SCULK)),
-                generator.modelOutput
-        ));
+		MultiVariant active = plainVariant(ModelTemplates.CUBE_TOP.create(
+			ModelLocationUtils.getModelLocation(HollowBlocks.SCULK_JAW, "_active"),
+			new TextureMapping()
+				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(HollowBlocks.SCULK_JAW, "_active"))
+				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.SCULK)),
+			generator.modelOutput
+		));
 
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.SCULK_JAW)
-                .with(createBooleanModelDispatch(
-                        SculkJawBlock.ACTIVE,
-                        active, inactive
-                )));
-    }
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.SCULK_JAW)
+			.with(createBooleanModelDispatch(
+				SculkJawBlock.ACTIVE,
+				active, inactive
+			)));
+	}
 
-    public void registerDoubleTallRotated(Block block, BlockModelGenerators generator, boolean up) {
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
-                .with(PropertyDispatch.initial(VerticalDoubleBlock.HALF)
-                        .select(DoubleBlockHalf.LOWER, plainVariant(ModelLocationUtils.getModelLocation(block)))
-                        .select(DoubleBlockHalf.UPPER, plainVariant(ModelLocationUtils.getModelLocation(block, "_upper")))
-                )
-                .with(up ? NORTH_DEFAULT_ROTATION_OPERATIONS : ROTATION_HORIZONTAL_FACING));
-    }
+	public void registerDoubleTallRotated(Block block, BlockModelGenerators generator, boolean up) {
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+			.with(PropertyDispatch.initial(VerticalDoubleBlock.HALF)
+				.select(DoubleBlockHalf.LOWER, plainVariant(ModelLocationUtils.getModelLocation(block)))
+				.select(DoubleBlockHalf.UPPER, plainVariant(ModelLocationUtils.getModelLocation(block, "_upper")))
+			)
+			.with(up ? NORTH_DEFAULT_ROTATION_OPERATIONS : ROTATION_HORIZONTAL_FACING));
+	}
 
-    public static void registerPolypore(BlockModelGenerators generator) {
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.POLYPORE)
-                .with(PropertyDispatch.initial(PolyporeBlock.POLYPORE_AMOUNT)
-                        .select(
-                                1,
-                                plainVariant(id("block/one_polypore"))
-                        )
-                        .select(
-                                2,
-                                plainVariant(id("block/two_polypore"))
-                        )
-                        .select(
-                                3,
-                                plainVariant(id("block/three_polypore"))
-                        )
-                ).with(ROTATION_HORIZONTAL_FACING));
-    }
+	public static void registerPolypore(BlockModelGenerators generator) {
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.POLYPORE)
+			.with(PropertyDispatch.initial(PolyporeBlock.POLYPORE_AMOUNT)
+				.select(
+					1,
+					plainVariant(id("block/one_polypore"))
+				)
+				.select(
+					2,
+					plainVariant(id("block/two_polypore"))
+				)
+				.select(
+					3,
+					plainVariant(id("block/three_polypore"))
+				)
+			).with(ROTATION_HORIZONTAL_FACING));
+	}
 
-    public void registerStoneChest(Block block, BlockModelGenerators generator) {
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
-                .with(PropertyDispatch.initial(StoneChestBlock.CHEST_TYPE)
-                        .select(
-                                ChestType.SINGLE,
-                                plainVariant(ModelLocationUtils.getModelLocation(block))
-                        )
-                        .select(
-                                ChestType.LEFT,
-                                plainVariant(ModelLocationUtils.getModelLocation(block, "_left"))
-                        )
-                        .select(
-                                ChestType.RIGHT,
-                                plainVariant(ModelLocationUtils.getModelLocation(block, "_right"))
-                        )
-                ).with(ROTATION_HORIZONTAL_FACING));
-    }
+	public void registerStoneChest(Block block, BlockModelGenerators generator) {
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+			.with(PropertyDispatch.initial(StoneChestBlock.CHEST_TYPE)
+				.select(
+					ChestType.SINGLE,
+					plainVariant(ModelLocationUtils.getModelLocation(block))
+				)
+				.select(
+					ChestType.LEFT,
+					plainVariant(ModelLocationUtils.getModelLocation(block, "_left"))
+				)
+				.select(
+					ChestType.RIGHT,
+					plainVariant(ModelLocationUtils.getModelLocation(block, "_right"))
+				)
+			).with(ROTATION_HORIZONTAL_FACING));
+	}
 
-    private void registerWithRandomHorizontalRotations(BlockModelGenerators generator, Block block) {
-        Variant normal = plainModel(ModelLocationUtils.getModelLocation(block));
+	private void registerWithRandomHorizontalRotations(BlockModelGenerators generator, Block block) {
+		Variant normal = plainModel(ModelLocationUtils.getModelLocation(block));
 		Variant mirrored = plainModel(ModelLocationUtils.getModelLocation(block, "_mirrored"));
 
 		MultiVariant variants = variants(
@@ -259,105 +254,106 @@ public final class HollowModelProvider extends FabricModelProvider {
 			mirrored.with(Y_ROT_270)
 		);
 
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variants));
-    }
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variants));
+	}
 
-    public static void registerCattail(BlockModelGenerators generator) {
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.CATTAIL)
+	public static void registerCattail(BlockModelGenerators generator) {
+		generator.registerSimpleFlatItemModel(HollowItems.CATTAIL);
+
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.CATTAIL)
 			.with(PropertyDispatch.initial(CattailBlock.THIRD).generate(third ->
 				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.CATTAIL, "_" + third.getSerializedName()))
 			))
 		);
-		generator.createFlatItemModel(HollowItems.CATTAIL);
-    }
+	}
 
-    private static void registerHollowLog(BlockModelGenerators generator, HollowLogBlock block) {
-        Identifier hollowLog = HollowTexturedModels.HOLLOW_LOG.create(block, generator.modelOutput);
-        Identifier hollowLogHorizontal = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL.create(block, generator.modelOutput);
-        Identifier hollowLogHorizontalMoss = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL_MOSS.create(block, generator.modelOutput);
-        Identifier hollowLogHorizontalPaleMoss = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL_PALE_MOSS.create(block, generator.modelOutput);
-        Identifier hollowLogHorizontalSnow = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL_SNOW.create(block, generator.modelOutput);
+	private static void registerHollowLog(BlockModelGenerators generator, HollowLogBlock block) {
+		Identifier hollowLog = HollowTexturedModels.HOLLOW_LOG.create(block, generator.modelOutput);
+		Identifier hollowLogHorizontal = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL.create(block, generator.modelOutput);
+		Identifier hollowLogHorizontalMoss = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL_MOSS.create(block, generator.modelOutput);
+		Identifier hollowLogHorizontalPaleMoss = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL_PALE_MOSS.create(block, generator.modelOutput);
+		Identifier hollowLogHorizontalSnow = HollowTexturedModels.HOLLOW_LOG_HORIZONTAL_SNOW.create(block, generator.modelOutput);
 
-        generator.blockStateOutput.accept(createAxisRotatedBlockStateWithLayer(block, hollowLog, hollowLogHorizontal, hollowLogHorizontalMoss, hollowLogHorizontalPaleMoss, hollowLogHorizontalSnow));
-    }
+		generator.blockStateOutput.accept(createAxisRotatedBlockStateWithLayer(block, hollowLog, hollowLogHorizontal, hollowLogHorizontalMoss, hollowLogHorizontalPaleMoss, hollowLogHorizontalSnow));
+	}
 
-    private static void registerGiantLilyPad(BlockModelGenerators generator) {
-        MultiVariant[] modelIds = new MultiVariant[4];
-        for (int i = 0; i < 4; i++) {
-            modelIds[i] = plainVariant(id("block/giant_lily_pad_" + i));
-        }
+	private static void registerGiantLilyPad(BlockModelGenerators generator) {
+		MultiVariant[] modelIds = new MultiVariant[4];
+		for (int i = 0; i < 4; i++) {
+			modelIds[i] = plainVariant(id("block/giant_lily_pad_" + i));
+		}
 
-        Map<LilyPadPiece, MultiVariant> north = ImmutableMap.of(
-                LilyPadPiece.NORTH_WEST, modelIds[1],
-                LilyPadPiece.NORTH_EAST, modelIds[0],
-                LilyPadPiece.SOUTH_EAST, modelIds[3],
-                LilyPadPiece.SOUTH_WEST, modelIds[2]
-        );
+		Map<LilyPadPiece, MultiVariant> north = ImmutableMap.of(
+			LilyPadPiece.NORTH_WEST, modelIds[1],
+			LilyPadPiece.NORTH_EAST, modelIds[0],
+			LilyPadPiece.SOUTH_EAST, modelIds[3],
+			LilyPadPiece.SOUTH_WEST, modelIds[2]
+		);
 
-        Map<LilyPadPiece, MultiVariant> south = ImmutableMap.of(
-                LilyPadPiece.NORTH_WEST, modelIds[3],
-                LilyPadPiece.NORTH_EAST, modelIds[2],
-                LilyPadPiece.SOUTH_EAST, modelIds[1],
-                LilyPadPiece.SOUTH_WEST, modelIds[0]
-        );
+		Map<LilyPadPiece, MultiVariant> south = ImmutableMap.of(
+			LilyPadPiece.NORTH_WEST, modelIds[3],
+			LilyPadPiece.NORTH_EAST, modelIds[2],
+			LilyPadPiece.SOUTH_EAST, modelIds[1],
+			LilyPadPiece.SOUTH_WEST, modelIds[0]
+		);
 
-        Map<LilyPadPiece, MultiVariant> east = ImmutableMap.of(
-                LilyPadPiece.NORTH_WEST, modelIds[2],
-                LilyPadPiece.NORTH_EAST, modelIds[1],
-                LilyPadPiece.SOUTH_EAST, modelIds[0],
-                LilyPadPiece.SOUTH_WEST, modelIds[3]
-        );
+		Map<LilyPadPiece, MultiVariant> east = ImmutableMap.of(
+			LilyPadPiece.NORTH_WEST, modelIds[2],
+			LilyPadPiece.NORTH_EAST, modelIds[1],
+			LilyPadPiece.SOUTH_EAST, modelIds[0],
+			LilyPadPiece.SOUTH_WEST, modelIds[3]
+		);
 
-        Map<LilyPadPiece, MultiVariant> west = ImmutableMap.of(
-                LilyPadPiece.NORTH_WEST, modelIds[0],
-                LilyPadPiece.NORTH_EAST, modelIds[3],
-                LilyPadPiece.SOUTH_EAST, modelIds[2],
-                LilyPadPiece.SOUTH_WEST, modelIds[1]
-        );
+		Map<LilyPadPiece, MultiVariant> west = ImmutableMap.of(
+			LilyPadPiece.NORTH_WEST, modelIds[0],
+			LilyPadPiece.NORTH_EAST, modelIds[3],
+			LilyPadPiece.SOUTH_EAST, modelIds[2],
+			LilyPadPiece.SOUTH_WEST, modelIds[1]
+		);
 
-        generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.GIANT_LILY_PAD)
-                .with(PropertyDispatch.initial(GiantLilyPadBlock.FACING, GiantLilyPadBlock.PIECE).generate(
-                        (direction, piece) -> (switch (direction) {
-                            case NORTH -> north.get(piece);
-							case SOUTH -> south.get(piece);
-							case EAST -> east.get(piece);
-							case WEST -> west.get(piece);
-							default -> throw new IllegalStateException();
-						}).with(facingNorthDefault(direction))
-                )));
-    }
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.GIANT_LILY_PAD)
+			.with(PropertyDispatch.initial(GiantLilyPadBlock.FACING, GiantLilyPadBlock.PIECE).generate(
+				(direction, piece) -> (switch (direction) {
+					case NORTH -> north.get(piece);
+					case SOUTH -> south.get(piece);
+					case EAST -> east.get(piece);
+					case WEST -> west.get(piece);
+					default -> throw new IllegalStateException();
+				}).with(facingNorthDefault(direction))
+			)));
+	}
 
-    private static BlockModelDefinitionGenerator createAxisRotatedBlockStateWithLayer(Block block, Identifier verticalModelId, Identifier horizontalModelId, Identifier horizontalMossModelId, Identifier horizontalPaleMossModelId, Identifier horizontalSnowModelId) {
-        return MultiVariantGenerator.dispatch(block)
-                .with(PropertyDispatch.initial(BlockStateProperties.AXIS, HollowLogBlock.LAYER)
-                        .generate((axis, layer) -> switch (axis) {
-                            case Y -> plainVariant(verticalModelId);
-                            case X, Z -> plainVariant(switch (layer) {
-                                case NONE -> horizontalModelId;
-                                case MOSS -> horizontalMossModelId;
-                                case PALE_MOSS -> horizontalPaleMossModelId;
-                                case SNOW -> horizontalSnowModelId;
-                            }).with(axisNorthDefault(axis));
-                        }));
-    }
+	private static BlockModelDefinitionGenerator createAxisRotatedBlockStateWithLayer(Block block, Identifier verticalModelId, Identifier horizontalModelId, Identifier horizontalMossModelId, Identifier horizontalPaleMossModelId, Identifier horizontalSnowModelId) {
+		return MultiVariantGenerator.dispatch(block)
+			.with(PropertyDispatch.initial(BlockStateProperties.AXIS, HollowLogBlock.LAYER)
+				.generate((axis, layer) -> switch (axis) {
+					case Y -> plainVariant(verticalModelId);
+					case X, Z -> plainVariant(switch (layer) {
+						case NONE -> horizontalModelId;
+						case MOSS -> horizontalMossModelId;
+						case PALE_MOSS -> horizontalPaleMossModelId;
+						case SNOW -> horizontalSnowModelId;
+					}).with(axisNorthDefault(axis));
+				}));
+	}
 
-    private static VariantMutator axisNorthDefault(Direction.Axis axis) {
-        return switch (axis) {
-            case Y -> NOP;
-            case Z -> X_ROT_90;
-            case X -> X_ROT_90.then(Y_ROT_90);
-        };
-    }
+	private static VariantMutator axisNorthDefault(Direction.Axis axis) {
+		return switch (axis) {
+			case Y -> NOP;
+			case Z -> X_ROT_90;
+			case X -> X_ROT_90.then(Y_ROT_90);
+		};
+	}
 
-    private static VariantMutator facingNorthDefault(Direction direction) {
-        return switch (direction) {
-            case Direction.DOWN -> X_ROT_90;
-            case Direction.UP -> X_ROT_270;
-            case Direction.NORTH -> NOP;
-            case Direction.SOUTH -> Y_ROT_180;
-            case Direction.WEST -> Y_ROT_270;
-            case Direction.EAST -> Y_ROT_90;
-        };
-    }
-    // endregion
+	private static VariantMutator facingNorthDefault(Direction direction) {
+		return switch (direction) {
+			case Direction.DOWN -> X_ROT_90;
+			case Direction.UP -> X_ROT_270;
+			case Direction.NORTH -> NOP;
+			case Direction.SOUTH -> Y_ROT_180;
+			case Direction.WEST -> Y_ROT_270;
+			case Direction.EAST -> Y_ROT_90;
+		};
+	}
+	// endregion
 }

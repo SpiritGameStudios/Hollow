@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "hollow:block/cattail"
+    "model": "hollow:item/cattail"
   }
 }

@@ -3,8 +3,8 @@
 	"credit": "Made by axialeaa using Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "hollow:block/bulrush",
-		"texture": "hollow:block/bulrush"
+		"particle": "hollow:block/cattail",
+		"texture": "hollow:block/cattail"
 	},
 	"elements": [
 		{

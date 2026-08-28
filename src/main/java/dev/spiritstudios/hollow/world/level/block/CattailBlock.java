@@ -124,10 +124,31 @@ public class CattailBlock extends VegetationBlock implements SimpleWaterloggedBl
 			state;
 	}
 
-	public static void placeAt(LevelAccessor level, BlockState state, BlockPos pos, @Block.UpdateFlags int updateFlags) {
-		level.setBlock(pos, state.setValue(THIRD, TripleBlockThird.LOWER), updateFlags);
-		level.setBlock(pos.above(), state.setValue(THIRD, TripleBlockThird.MIDDLE), updateFlags);
-		level.setBlock(pos.above(2), state.setValue(THIRD, TripleBlockThird.UPPER), updateFlags);
+	public static boolean placeAt(LevelAccessor level, BlockState state, BlockPos pos, @Block.UpdateFlags int updateFlags) {
+		BlockPos middlePos = pos.above();
+		BlockPos upperPos = pos.above(2);
+
+		boolean result = true;
+
+		result &= level.setBlock(
+			pos,
+			copyWaterloggedFrom(level, pos, state.setValue(THIRD, TripleBlockThird.LOWER)),
+			updateFlags
+		);
+
+		result &= level.setBlock(
+			middlePos,
+			copyWaterloggedFrom(level, middlePos, state.setValue(THIRD, TripleBlockThird.MIDDLE)),
+			updateFlags
+		);
+
+		result &= level.setBlock(
+			upperPos,
+			copyWaterloggedFrom(level, upperPos, state.setValue(THIRD, TripleBlockThird.UPPER)),
+			updateFlags
+		);
+
+		return result;
 	}
 
 	@Override
