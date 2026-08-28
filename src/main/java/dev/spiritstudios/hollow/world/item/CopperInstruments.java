@@ -6,16 +6,16 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 
 public final class CopperInstruments {
-	public static final ResourceKey<CopperInstrument> GREAT_SKY_FALLING = ofKey("great_sky_falling");
-	public static final ResourceKey<CopperInstrument> OLD_HYMN_RESTING = ofKey("old_hymn_resting");
-	public static final ResourceKey<CopperInstrument> PURE_WATER_DESIRE = ofKey("pure_water_desire");
-	public static final ResourceKey<CopperInstrument> HUMBLE_FIRE_MEMORY = ofKey("humble_fire_memory");
-	public static final ResourceKey<CopperInstrument> DRY_URGE_ANGER = ofKey("dry_urge_anger");
-	public static final ResourceKey<CopperInstrument> CLEAR_TEMPER_JOURNEY = ofKey("clear_temper_journey");
-	public static final ResourceKey<CopperInstrument> FRESH_NEST_THOUGHT = ofKey("fresh_nest_thought");
-	public static final ResourceKey<CopperInstrument> SECRET_LAKE_TEAR = ofKey("secret_lake_tear");
-	public static final ResourceKey<CopperInstrument> FEARLESS_RIVER_GIFT = ofKey("fearless_river_gift");
-	public static final ResourceKey<CopperInstrument> SWEET_MOON_LOVE = ofKey("sweet_moon_love");
+	public static final ResourceKey<CopperInstrument> GREAT_SKY_FALLING = create("great_sky_falling");
+	public static final ResourceKey<CopperInstrument> OLD_HYMN_RESTING = create("old_hymn_resting");
+	public static final ResourceKey<CopperInstrument> PURE_WATER_DESIRE = create("pure_water_desire");
+	public static final ResourceKey<CopperInstrument> HUMBLE_FIRE_MEMORY = create("humble_fire_memory");
+	public static final ResourceKey<CopperInstrument> DRY_URGE_ANGER = create("dry_urge_anger");
+	public static final ResourceKey<CopperInstrument> CLEAR_TEMPER_JOURNEY = create("clear_temper_journey");
+	public static final ResourceKey<CopperInstrument> FRESH_NEST_THOUGHT = create("fresh_nest_thought");
+	public static final ResourceKey<CopperInstrument> SECRET_LAKE_TEAR = create("secret_lake_tear");
+	public static final ResourceKey<CopperInstrument> FEARLESS_RIVER_GIFT = create("fearless_river_gift");
+	public static final ResourceKey<CopperInstrument> SWEET_MOON_LOVE = create("sweet_moon_love");
 
 	public static void bootstrap(BootstrapContext<CopperInstrument> registerable) {
 		register(registerable, GREAT_SKY_FALLING, "great", "sky", "falling", 4.0F, 256F);
@@ -34,7 +34,7 @@ public final class CopperInstruments {
 		registry.register(key, CopperInstrument.of(Hollow.MODID, call, melody, bass, useDuration, range));
 	}
 
-	private static ResourceKey<CopperInstrument> ofKey(String id) {
+	private static ResourceKey<CopperInstrument> create(String id) {
 		return ResourceKey.create(HollowRegistries.COPPER_INSTRUMENT, Hollow.id(id));
 	}
 }

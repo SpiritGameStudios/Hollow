@@ -264,7 +264,7 @@ public final class HollowModelProvider extends FabricModelProvider {
 
     public static void registerCattail(BlockModelGenerators generator) {
         generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.CATTAIL)
-			.with(PropertyDispatch.initial(NewCattailBlock.THIRD).generate(third ->
+			.with(PropertyDispatch.initial(CattailBlock.THIRD).generate(third ->
 				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.CATTAIL, "_" + third.getSerializedName()))
 			))
 		);

@@ -77,9 +77,9 @@ public final class HollowBlocks {
 		ECHOING_POT
 	);
 
-	public static final NewCattailBlock CATTAIL = register(
+	public static final CattailBlock CATTAIL = register(
 		HollowBlockItemIds.CATTAIL,
-		NewCattailBlock::new,
+		CattailBlock::new,
 		BlockBehaviour.Properties.of()
 			.mapColor(MapColor.WATER)
 			.replaceable()

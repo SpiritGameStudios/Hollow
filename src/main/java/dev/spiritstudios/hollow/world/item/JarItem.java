@@ -27,17 +27,18 @@ public class JarItem extends BlockItem {
         Level level = context.getLevel();
 		Player player = context.getPlayer();
 
-		if (!level.getBlockState(blockPos).is(Blocks.FIREFLY_BUSH) || player == null) {
+		if (level.getBlockState(blockPos).is(Blocks.FIREFLY_BUSH) && player != null) {
+			level.setBlockAndUpdate(blockPos, HollowBlocks.SWITCHGRASS.defaultBlockState());
+			level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+
+			level.playSound(null, blockPos, HollowSoundEvents.JAR_USE_FIREFLIES, SoundSource.PLAYERS, 1.0F, Mth.randomBetween(level.getRandom(), 0.8F, 1.0F));
+
+			return InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(
+				context.getItemInHand(), player,
+				new ItemStack(HollowItems.FIREFLY_JAR)
+			));
+		} else {
 			return super.useOn(context);
 		}
-
-		level.setBlockAndUpdate(blockPos, HollowBlocks.SWITCHGRASS.defaultBlockState());
-		level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
-		level.playSound(null, blockPos, HollowSoundEvents.JAR_USE_FIREFLIES, SoundSource.PLAYERS, 1.0F, Mth.randomBetween(level.getRandom(), 0.8F, 1.0F));
-
-	    return InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(
-                context.getItemInHand(), player,
-                new ItemStack(HollowItems.FIREFLY_JAR)
-        ));
     }
 }

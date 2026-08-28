@@ -9,24 +9,34 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.jspecify.annotations.Nullable;
 
-public class NewCattailBlock extends VegetationBlock implements LiquidBlockContainer {
+public class CattailBlock extends VegetationBlock implements SimpleWaterloggedBlock {
 	public static final MapCodec<DoublePlantBlock> CODEC = simpleCodec(DoublePlantBlock::new);
+
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final EnumProperty<TripleBlockThird> THIRD = EnumProperty.create("third", TripleBlockThird.class);
 
-	public NewCattailBlock(BlockBehaviour.Properties properties) {
+	public CattailBlock(BlockBehaviour.Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(THIRD, TripleBlockThird.LOWER));
+		this.registerDefaultState(
+			this.defaultBlockState()
+				.setValue(THIRD, TripleBlockThird.LOWER)
+				.setValue(WATERLOGGED, false)
+		);
 	}
 
 	@Override
@@ -38,12 +48,12 @@ public class NewCattailBlock extends VegetationBlock implements LiquidBlockConta
 	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
 		TripleBlockThird third = state.getValue(THIRD);
 
-		boolean isLower = third == TripleBlockThird.LOWER;
-		boolean vertical = directionToNeighbour.getAxis().isVertical();
-
-		if (isLower) {
+		if (state.getValue(WATERLOGGED)) {
 			ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
+
+		boolean isLower = third == TripleBlockThird.LOWER;
+		boolean vertical = directionToNeighbour.getAxis().isVertical();
 
 		if (vertical && (isLower == (directionToNeighbour == Direction.UP) || third == TripleBlockThird.MIDDLE)) {
 			if (!neighbourState.is(this) || neighbourState.getValue(THIRD) == third) {
@@ -61,27 +71,57 @@ public class NewCattailBlock extends VegetationBlock implements LiquidBlockConta
 		Level level = context.getLevel();
 
 		BlockPos pos = context.getClickedPos();
+		BlockPos middlePos = pos.above();
 		BlockPos upperPos = pos.above(2);
 
-		BlockState blockState = level.getBlockState(upperPos);
+		BlockState middleState = level.getBlockState(middlePos);
+		BlockState upperState = level.getBlockState(upperPos);
 
-		return level.getFluidState(pos).isSourceOfType(Fluids.WATER) && level.isInWorldBounds(upperPos) && blockState.canBeReplaced(context) ? super.getStateForPlacement(context) : null;
+		return level.isInWorldBounds(upperPos) &&
+			!level.isWaterAt(upperPos) &&
+			upperState.canBeReplaced(context) &&
+			middleState.canBeReplaced(context) ?
+			this.defaultBlockState().setValue(WATERLOGGED, true) :
+			null;
 	}
 
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity by, ItemStack itemStack) {
-		level.setBlockAndUpdate(pos.above(), state.setValue(THIRD, TripleBlockThird.MIDDLE));
-		level.setBlockAndUpdate(pos.above(2), state.setValue(THIRD, TripleBlockThird.UPPER));
+		level.setBlockAndUpdate(
+			pos.above(),
+			copyWaterloggedFrom(level, pos.above(), state.setValue(THIRD, TripleBlockThird.MIDDLE))
+		);
+
+		level.setBlockAndUpdate(
+			pos.above(2),
+			copyWaterloggedFrom(level, pos.above(2), state.setValue(THIRD, TripleBlockThird.UPPER))
+		);
 	}
 
 	@Override
 	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		BlockState blockState = level.getBlockState(pos.below());
 		return switch (state.getValue(THIRD)) {
-			case UPPER -> blockState.is(this) && level.getBlockState(pos.below(2)).is(this);
-			case MIDDLE -> blockState.is(this);
-			case LOWER -> super.canSurvive(state, level, pos);
+			case UPPER -> {
+				BlockState middleState = level.getBlockState(pos.below());
+				BlockState lowerState = level.getBlockState(pos.below(2));
+
+				yield middleState.is(this) &&
+					lowerState.is(this) &&
+					!level.isWaterAt(pos);
+			}
+			case MIDDLE -> {
+				BlockState lowerState = level.getBlockState(pos.below());
+
+				yield lowerState.is(this);
+			}
+			case LOWER -> super.canSurvive(state, level, pos) && level.isWaterAt(pos);
 		};
+	}
+
+	public static BlockState copyWaterloggedFrom(LevelReader level, BlockPos pos, BlockState state) {
+		return state.hasProperty(BlockStateProperties.WATERLOGGED) ?
+			state.setValue(BlockStateProperties.WATERLOGGED, level.isWaterAt(pos)) :
+			state;
 	}
 
 	public static void placeAt(LevelAccessor level, BlockState state, BlockPos pos, @Block.UpdateFlags int updateFlags) {
@@ -91,18 +131,8 @@ public class NewCattailBlock extends VegetationBlock implements LiquidBlockConta
 	}
 
 	@Override
-	public boolean canPlaceLiquid(@Nullable LivingEntity user, BlockGetter level, BlockPos pos, BlockState state, Fluid type) {
-		return false;
-	}
-
-	@Override
-	public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
-		return false;
-	}
-
-	@Override
 	protected FluidState getFluidState(BlockState state) {
-		return state.getValue(THIRD) == TripleBlockThird.LOWER ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Override
@@ -131,7 +161,9 @@ public class NewCattailBlock extends VegetationBlock implements LiquidBlockConta
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(THIRD);
+		builder
+			.add(THIRD)
+			.add(WATERLOGGED);
 	}
 
 	@Override

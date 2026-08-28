@@ -1,6 +1,6 @@
 package dev.spiritstudios.hollow.client.color.block;
 
-import dev.spiritstudios.hollow.world.level.block.NewCattailBlock;
+import dev.spiritstudios.hollow.world.level.block.CattailBlock;
 import dev.spiritstudios.hollow.world.level.block.state.properties.TripleBlockThird;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.renderer.BiomeColors;
@@ -25,7 +25,7 @@ public final class HollowBlockTintSources {
 			@Override
 			public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
 				BlockPos blockPos = pos;
-				TripleBlockThird third = state.getValue(NewCattailBlock.THIRD);
+				TripleBlockThird third = state.getValue(CattailBlock.THIRD);
 
 				if (third != TripleBlockThird.LOWER)
 					blockPos = pos.below(third == TripleBlockThird.UPPER ? 2 : 1);
@@ -35,7 +35,7 @@ public final class HollowBlockTintSources {
 
 			@Override
 			public Set<Property<?>> relevantProperties() {
-				return Set.of(NewCattailBlock.THIRD);
+				return Set.of(CattailBlock.THIRD);
 			}
 		};
 	}

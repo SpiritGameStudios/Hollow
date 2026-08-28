@@ -49,8 +49,9 @@ public abstract class BaseJarBlock extends BaseEntityBlock implements SimpleWate
 
 	@Override
 	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
-		if (state.getValue(WATERLOGGED))
+		if (state.getValue(WATERLOGGED)) {
 			ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+		}
 
 		return state.canSurvive(level, pos) ? super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random) : Blocks.AIR.defaultBlockState();
 	}
