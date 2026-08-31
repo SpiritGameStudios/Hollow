@@ -207,7 +207,7 @@ public final class HollowBlocks {
 	}
 
 	public static void init() {
-		FlammableBlockRegistry.getDefaultInstance().add(HollowBlockItemTags.HOLLOW_LOGS.block(), 5, 5);
+		FlammableBlockRegistry.getDefaultInstance().add(HollowBlockItemTags.HOLLOW_LOGS.block(), 5, 5); // todo: fix crimson and warped stems being in this
 
 		OxidizableBlocksRegistry.registerWeatheringCopperBlocks(COPPER_PILLAR);
 		LogCollection.zipApply(HOLLOW_LOG, STRIPPED_HOLLOW_LOG, StrippableBlockRegistry::registerCopyState);

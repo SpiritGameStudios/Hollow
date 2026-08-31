@@ -2,6 +2,7 @@ package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.references.HollowBlockIds;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
+import dev.spiritstudios.hollow.references.HollowEntityTypeIds;
 import dev.spiritstudios.hollow.references.HollowItemIds;
 import dev.spiritstudios.hollow.tags.*;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
@@ -10,6 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -87,6 +89,9 @@ public class HollowTagProviders {
 			builder(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block())
 				.add(BlockItemIds.LILY_PAD, HollowBlockItemIds.FLOWERING_LILY_PAD);
 
+			builder(BlockTags.INSIDE_STEP_SOUND_BLOCKS)
+				.add(HollowBlockItemIds.FLOWERING_LILY_PAD.block(), HollowBlockIds.GIANT_LILY_PAD);
+
 			builder(BlockTags.FROG_PREFER_JUMP_TO)
 				.add(HollowBlockItemIds.FLOWERING_LILY_PAD.block(), HollowBlockIds.GIANT_LILY_PAD);
 		}
@@ -118,6 +123,22 @@ public class HollowTagProviders {
 				.forceAddTag(ConventionalItemTags.COOKIE_FOODS)
 				.forceAddTag(ConventionalItemTags.MUSIC_DISCS); // will add more
 
+			builder(HollowItemTags.FURNACE_BOATS).add(
+				HollowItemIds.ACACIA_FURNACE_BOAT,
+				HollowItemIds.BAMBOO_FURNACE_RAFT,
+				HollowItemIds.BIRCH_FURNACE_BOAT,
+				HollowItemIds.CHERRY_FURNACE_BOAT,
+				HollowItemIds.DARK_OAK_FURNACE_BOAT,
+				HollowItemIds.JUNGLE_FURNACE_BOAT,
+				HollowItemIds.MANGROVE_FURNACE_BOAT,
+				HollowItemIds.OAK_FURNACE_BOAT,
+				HollowItemIds.PALE_OAK_FURNACE_BOAT,
+				HollowItemIds.SPRUCE_FURNACE_BOAT
+			);
+
+			builder(ItemTags.BOATS)
+				.addTag(HollowItemTags.FURNACE_BOATS);
+
 			copy(HollowBlockItemTags.HOLLOW_LOGS);
 			copy(HollowBlockItemTags.FORMS_GIANT_LILY_PAD);
 			copy(BlockItemTags.BEE_FOOD);
@@ -139,6 +160,18 @@ public class HollowTagProviders {
 				.add(EntityTypeIds.WARDEN);
 			tag(HollowEntityTypeTags.CAN_CLIMB_HOLLOW_LOGS)
 				.add(EntityTypeIds.PLAYER);
+			tag(ConventionalEntityTypeTags.BOATS).addAll(List.of(
+				HollowEntityTypeIds.ACACIA_FURNACE_BOAT,
+				HollowEntityTypeIds.BAMBOO_FURNACE_RAFT,
+				HollowEntityTypeIds.BIRCH_FURNACE_BOAT,
+				HollowEntityTypeIds.CHERRY_FURNACE_BOAT,
+				HollowEntityTypeIds.DARK_OAK_FURNACE_BOAT,
+				HollowEntityTypeIds.JUNGLE_FURNACE_BOAT,
+				HollowEntityTypeIds.MANGROVE_FURNACE_BOAT,
+				HollowEntityTypeIds.OAK_FURNACE_BOAT,
+				HollowEntityTypeIds.PALE_OAK_FURNACE_BOAT,
+				HollowEntityTypeIds.SPRUCE_FURNACE_BOAT
+			));
 		}
 	}
 

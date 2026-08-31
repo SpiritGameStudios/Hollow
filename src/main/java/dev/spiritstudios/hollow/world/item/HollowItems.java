@@ -3,6 +3,8 @@ package dev.spiritstudios.hollow.world.item;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.references.HollowItemIds;
+import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
+import dev.spiritstudios.hollow.world.entity.vehicle.AbstractFurnaceBoat;
 import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.LogCollection;
@@ -111,6 +113,20 @@ public final class HollowItems {
                     )
     );
 
+	public static final Item ACACIA_FURNACE_BOAT = registerBoatItem(HollowItemIds.ACACIA_FURNACE_BOAT, HollowEntityTypes.ACACIA_FURNACE_BOAT);
+	public static final Item BAMBOO_FURNACE_RAFT = registerBoatItem(HollowItemIds.BAMBOO_FURNACE_RAFT, HollowEntityTypes.BAMBOO_FURNACE_RAFT);
+	public static final Item BIRCH_FURNACE_BOAT = registerBoatItem(HollowItemIds.BIRCH_FURNACE_BOAT, HollowEntityTypes.BIRCH_FURNACE_BOAT);
+	public static final Item CHERRY_FURNACE_BOAT = registerBoatItem(HollowItemIds.CHERRY_FURNACE_BOAT, HollowEntityTypes.CHERRY_FURNACE_BOAT);
+	public static final Item DARK_OAK_FURNACE_BOAT = registerBoatItem(HollowItemIds.DARK_OAK_FURNACE_BOAT, HollowEntityTypes.DARK_OAK_FURNACE_BOAT);
+	public static final Item JUNGLE_FURNACE_BOAT = registerBoatItem(HollowItemIds.JUNGLE_FURNACE_BOAT, HollowEntityTypes.JUNGLE_FURNACE_BOAT);
+	public static final Item MANGROVE_FURNACE_BOAT = registerBoatItem(HollowItemIds.MANGROVE_FURNACE_BOAT, HollowEntityTypes.MANGROVE_FURNACE_BOAT);
+	public static final Item OAK_FURNACE_BOAT = registerBoatItem(HollowItemIds.OAK_FURNACE_BOAT, HollowEntityTypes.OAK_FURNACE_BOAT);
+	public static final Item PALE_OAK_FURNACE_BOAT = registerBoatItem(HollowItemIds.PALE_OAK_FURNACE_BOAT, HollowEntityTypes.PALE_OAK_FURNACE_BOAT);
+	public static final Item SPRUCE_FURNACE_BOAT = registerBoatItem(HollowItemIds.SPRUCE_FURNACE_BOAT, HollowEntityTypes.SPRUCE_FURNACE_BOAT);
+
+	private static Item registerBoatItem(ResourceKey<Item> id, EntityType<? extends AbstractFurnaceBoat> entityType) {
+		return registerItem(id, p -> new BoatItem(entityType, p), new Item.Properties().stacksTo(1));
+	}
 
     private static Item registerItem(final ResourceKey<Item> id, final Function<Item.Properties, Item> itemFactory, final Item.Properties properties) {
         Item item = itemFactory.apply(properties.setId(id));

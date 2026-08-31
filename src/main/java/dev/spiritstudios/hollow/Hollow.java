@@ -5,6 +5,7 @@ import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
+import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
 import dev.spiritstudios.hollow.world.item.HollowCreativeModeTab;
 import dev.spiritstudios.hollow.world.item.HollowItems;
 import dev.spiritstudios.hollow.world.level.HollowGameRules;
@@ -31,6 +32,7 @@ public final class Hollow implements ModInitializer {
         HollowBlocks.init();
 		HollowDataComponents.init();
         HollowItems.init();
+		HollowEntityTypes.init();
 
         HollowFeatures.init();
         HollowTreeDecoratorTypes.init();
