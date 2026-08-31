@@ -26,6 +26,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -109,8 +110,18 @@ public final class HollowModelProvider extends FabricModelProvider {
 			TextureMapping.cross(Blocks.FIREFLY_BUSH)
 		);
 
-		HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed((unwaxed, _) -> generator.createRotatedPillarWithHorizontalVariant(unwaxed, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT));
-		HollowBlocks.COPPER_PILLAR.zipUnwaxedWaxed(generator::copyModel);
+		WeatheringCopper.WeatherState.forEach(state -> {
+			Block unwaxed = HollowBlocks.COPPER_PILLAR.weathering().pick(state);
+			Block waxed = HollowBlocks.COPPER_PILLAR.waxed().pick(state);
+
+			MultiVariant verticalVariant = plainVariant(TexturedModel.COLUMN_ALT.create(unwaxed, generator.modelOutput));
+			MultiVariant horizontalVariant = plainVariant(TexturedModel.COLUMN_HORIZONTAL_ALT.create(unwaxed, generator.modelOutput));
+
+			generator.blockStateOutput.accept(createRotatedPillarWithHorizontalVariant(unwaxed, verticalVariant, horizontalVariant));
+			generator.blockStateOutput.accept(createRotatedPillarWithHorizontalVariant(waxed, verticalVariant, horizontalVariant));
+
+			generator.itemModelOutput.copy(unwaxed.asItem(), waxed.asItem());
+		});
 
 		generator.registerSimpleFlatItemModel(HollowItems.GLASS_JAR);
 		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.GLASS_JAR)
