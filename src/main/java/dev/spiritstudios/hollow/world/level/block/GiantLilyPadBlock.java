@@ -54,7 +54,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
 		if (state.getValue(PIECE) == LilyPadPiece.NORTH_WEST) {
-			placePadBlocks(level, pos, state, LilyPadPiece.NORTH_WEST, false);
+			placeAt(level, pos, state, LilyPadPiece.NORTH_WEST, false);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		return true;
 	}
 
-	public static void placePadBlocks(LevelWriter level, BlockPos pos, BlockState state, LilyPadPiece piece, boolean includeNorthWest) {
+	public static void placeAt(LevelWriter level, BlockPos pos, BlockState state, LilyPadPiece piece, boolean includeNorthWest) {
 		BlockPos northWest = piece.getNorthWest(pos);
 
 		if (includeNorthWest) {
@@ -93,15 +93,15 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		BlockState blockState = getBaseState(context.getHorizontalDirection());
 
 		for (LilyPadPiece piece : LilyPadPiece.values()) {
-			label1:
+			placeAllPieces:
 			for (int i = 0; i < 4; i++) {
 				for (BlockPos blockPos : piece.getAllPositions(clickedPos)) {
 					if (!blockPos.equals(clickedPos) && !level.getBlockState(blockPos).is(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block())) {
-						continue label1;
+						continue placeAllPieces;
 					}
 				}
 
-				placePadBlocks(level, clickedPos, blockState, piece, true);
+				placeAt(level, clickedPos, blockState, piece, true);
 
 				return true;
 			}
@@ -111,12 +111,12 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 	}
 
 	@Override
-	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
-		super.affectNeighborsAfterRemoval(state, world, pos, moved);
+	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean moved) {
+		super.affectNeighborsAfterRemoval(state, level, pos, moved);
 
 		for (BlockPos blockPos : state.getValue(PIECE).getAllPositions(pos)) {
-			if (!blockPos.equals(pos) && world.getBlockState(blockPos).is(this)) {
-				world.destroyBlock(blockPos, false);
+			if (!blockPos.equals(pos) && level.getBlockState(blockPos).is(this)) {
+				level.destroyBlock(blockPos, false);
 			}
 		}
 	}
@@ -127,7 +127,7 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 	}
 
 	@Override
-	protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return switch (state.getValue(PIECE)) {
 			case NORTH_WEST -> NORTH_WEST_SHAPE;
 			case NORTH_EAST -> NORTH_EAST_SHAPE;

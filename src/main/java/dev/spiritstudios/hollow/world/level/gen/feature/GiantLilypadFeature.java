@@ -26,7 +26,7 @@ public class GiantLilypadFeature extends Feature<NoneFeatureConfiguration> {
 		BlockState blockState = GiantLilyPadBlock.getBaseState(Direction.Plane.HORIZONTAL.getRandomDirection(random));
 
 		if (GiantLilyPadBlock.isValidPlacementPosition(level, pos, blockState, LilyPadPiece.NORTH_WEST)) {
-			GiantLilyPadBlock.placePadBlocks(level, pos, blockState, LilyPadPiece.NORTH_WEST, true);
+			GiantLilyPadBlock.placeAt(level, pos, blockState, LilyPadPiece.NORTH_WEST, true);
 			return true;
 		}
 

@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hollow:item/cattail"
+    "layer0": "hollow:item/cattail",
+    "layer1": "hollow:item/cattail_overlay"
   }
 }

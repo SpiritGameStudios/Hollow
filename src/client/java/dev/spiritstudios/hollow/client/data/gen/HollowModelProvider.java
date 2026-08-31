@@ -142,6 +142,7 @@ public final class HollowModelProvider extends FabricModelProvider {
 		);
 
 		generators.itemModelOutput.accept(HollowItems.FIREFLY_JAR, ItemModelUtils.tintedModel(model, BLANK_LAYER, new Jeb()));
+		generators.generateItemWithTintedOverlay(HollowItems.CATTAIL, ItemModelUtils.constantTint(0xFF6DAF3B));
 
 		generators.generateBooleanDispatch(
 			HollowItems.COPPER_HORN,
@@ -258,11 +259,10 @@ public final class HollowModelProvider extends FabricModelProvider {
 	}
 
 	public static void registerCattail(BlockModelGenerators generator) {
-		generator.registerSimpleFlatItemModel(HollowItems.CATTAIL);
-
-		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.CATTAIL)
+		Block block = HollowBlocks.CATTAIL;
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
 			.with(PropertyDispatch.initial(CattailBlock.THIRD).generate(third ->
-				plainVariant(ModelLocationUtils.getModelLocation(HollowBlocks.CATTAIL, "_" + third.getSerializedName()))
+				plainVariant(ModelLocationUtils.getModelLocation(block, "_" + third.getSerializedName()))
 			))
 		);
 	}
