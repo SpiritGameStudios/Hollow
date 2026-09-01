@@ -8,13 +8,53 @@
           "data": {
             "Name": "minecraft:lily_pad"
           },
-          "weight": 19
+          "weight": 910
         },
         {
           "data": {
             "Name": "hollow:flowering_lily_pad"
           },
-          "weight": 1
+          "weight": 50
+        },
+        {
+          "data": {
+            "Name": "hollow:giant_lily_pad",
+            "Properties": {
+              "facing": "north",
+              "piece": "north_west"
+            }
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "Name": "hollow:giant_lily_pad",
+            "Properties": {
+              "facing": "south",
+              "piece": "north_west"
+            }
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "Name": "hollow:giant_lily_pad",
+            "Properties": {
+              "facing": "west",
+              "piece": "north_west"
+            }
+          },
+          "weight": 10
+        },
+        {
+          "data": {
+            "Name": "hollow:giant_lily_pad",
+            "Properties": {
+              "facing": "east",
+              "piece": "north_west"
+            }
+          },
+          "weight": 10
         }
       ]
     }

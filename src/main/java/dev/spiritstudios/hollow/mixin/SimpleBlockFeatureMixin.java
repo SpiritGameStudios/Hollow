@@ -3,6 +3,7 @@ package dev.spiritstudios.hollow.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.spiritstudios.hollow.world.level.block.CattailBlock;
+import dev.spiritstudios.hollow.world.level.block.GiantLilyPadBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,6 +17,13 @@ public class SimpleBlockFeatureMixin {
 	private boolean placeTripleTall(WorldGenLevel instance, BlockPos blockPos, BlockState blockState, int i, Operation<Boolean> original) {
 		if (blockState.getBlock() instanceof CattailBlock) {
 			return CattailBlock.placeAt(instance, blockState, blockPos, i, true);
+		} else if (blockState.getBlock() instanceof GiantLilyPadBlock) {
+			if (GiantLilyPadBlock.isValidPlacementPosition(instance, blockPos, blockState)) {
+				GiantLilyPadBlock.placeAt(instance, blockPos, blockState, i, true);
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return original.call(instance, blockPos, blockState, i);
 		}

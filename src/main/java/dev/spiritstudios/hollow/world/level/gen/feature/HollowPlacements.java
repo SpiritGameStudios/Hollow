@@ -20,10 +20,6 @@ import java.util.List;
 public final class HollowPlacements {
 	public static final ResourceKey<PlacedFeature> PATCH_CATTAIL = of("patch_cattail");
 
-	public static final ResourceKey<PlacedFeature> PATCH_GIANT_LILY_PAD = of("patch_giant_lily_pad");
-//    public static final ResourceKey<PlacedFeature> PATCH_GRASS_BIRCH = of("patch_grass_birch");
-//    public static final ResourceKey<PlacedFeature> PATCH_TALL_GRASS_BIRCH = of("patch_tall_grass_birch");
-
 	public static final ResourceKey<PlacedFeature> HUGE_BROWN_MUSHROOM_SWAMP = of("huge_brown_mushroom_swamp");
 	public static final ResourceKey<PlacedFeature> HUGE_RED_MUSHROOM_SWAMP = of("huge_red_mushroom_swamp");
 
@@ -41,8 +37,8 @@ public final class HollowPlacements {
 		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(-1, 0, 0), Fluids.WATER, Fluids.FLOWING_WATER))
 	);
 
-	public static void bootstrap(BootstrapContext<PlacedFeature> featureRegisterable) {
-		PlacedFeatureHelper helper = new PlacedFeatureHelper(featureRegisterable.lookup(Registries.CONFIGURED_FEATURE), featureRegisterable);
+	public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+		PlacedFeatureHelper helper = new PlacedFeatureHelper(context.lookup(Registries.CONFIGURED_FEATURE), context);
 
 //        helper.add(
 //                PATCH_GRASS_BIRCH,
@@ -93,17 +89,6 @@ public final class HollowPlacements {
 				BlockPredicate.matchesBlocks(Blocks.WATER),
 				NEAR_COAST
 			))
-		);
-
-		helper.add(
-			PATCH_GIANT_LILY_PAD,
-			HollowConfiguredFeatures.GIANT_LILY_PAD,
-			HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-			BiomeFilter.biome(),
-			InSquarePlacement.spread(),
-			CountPlacement.of(10),
-			RandomOffsetPlacement.ofTriangle(7, 3),
-			BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
 		);
 	}
 

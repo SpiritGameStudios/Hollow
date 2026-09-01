@@ -32,7 +32,6 @@ public class HollowBiomeModifications {
 		BiomeModifications.create(Hollow.id("swamps")).add(ModificationPhase.ADDITIONS, swamps, context -> {
 			BiomeModificationContext.GenerationSettingsContext settings = context.getGenerationSettings();
 
-			settings.addFeature(VEGETAL_DECORATION, HollowPlacements.PATCH_GIANT_LILY_PAD);
 			settings.addFeature(VEGETAL_DECORATION, HollowPlacements.PATCH_CATTAIL);
 		});
 

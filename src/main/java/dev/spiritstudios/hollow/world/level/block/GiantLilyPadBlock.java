@@ -1,5 +1,7 @@
 package dev.spiritstudios.hollow.world.level.block;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.LoadingCache;
 import com.mojang.math.OctahedralGroup;
 import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
 import dev.spiritstudios.hollow.world.level.block.state.properties.LilyPadPiece;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.LilyPadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -48,18 +51,18 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		BlockPos pos = ctx.getClickedPos();
 		BlockState state = this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection());
 
-		return isValidPlacementPosition(level, pos, state, LilyPadPiece.NORTH_WEST) ? state : null;
+		return isValidPlacementPosition(level, pos, state) ? state : null;
 	}
 
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
 		if (state.getValue(PIECE) == LilyPadPiece.NORTH_WEST) {
-			placeAt(level, pos, state, LilyPadPiece.NORTH_WEST, false);
+			placeAt(level, pos, state, UPDATE_ALL_IMMEDIATE, false);
 		}
 	}
 
-	public static boolean isValidPlacementPosition(LevelReader level, BlockPos pos, BlockState state, LilyPadPiece piece) {
-		for (BlockPos blockPos : piece.getAllPositions(pos)) {
+	public static boolean isValidPlacementPosition(LevelReader level, BlockPos pos, BlockState state) {
+		for (BlockPos blockPos : state.getValue(PIECE).getAllPositions(pos)) {
 			if (!state.canSurvive(level, blockPos) || !level.isEmptyBlock(blockPos)) {
 				return false;
 			}
@@ -68,40 +71,42 @@ public class GiantLilyPadBlock extends LilyPadBlock {
 		return true;
 	}
 
-	public static void placeAt(LevelWriter level, BlockPos pos, BlockState state, LilyPadPiece piece, boolean includeNorthWest) {
-		BlockPos northWest = piece.getNorthWest(pos);
+	public static void placeAt(LevelWriter level, BlockPos pos, BlockState state, int updateFlags, boolean includeNorthWest) {
+		BlockPos northWest = state.getValue(PIECE).getNorthWest(pos);
 
 		if (includeNorthWest) {
-			level.setBlock(northWest, state, UPDATE_ALL_IMMEDIATE);
+			level.setBlock(northWest, state.setValue(PIECE, LilyPadPiece.NORTH_WEST), updateFlags);
 		}
 
-		level.setBlock(northWest.east(), state.setValue(PIECE, LilyPadPiece.NORTH_EAST), UPDATE_ALL_IMMEDIATE);
-		level.setBlock(northWest.south(), state.setValue(PIECE, LilyPadPiece.SOUTH_WEST), UPDATE_ALL_IMMEDIATE);
-		level.setBlock(northWest.south().east(), state.setValue(PIECE, LilyPadPiece.SOUTH_EAST), UPDATE_ALL_IMMEDIATE);
+		level.setBlock(northWest.east(), state.setValue(PIECE, LilyPadPiece.NORTH_EAST), updateFlags);
+		level.setBlock(northWest.south(), state.setValue(PIECE, LilyPadPiece.SOUTH_WEST), updateFlags);
+		level.setBlock(northWest.south().east(), state.setValue(PIECE, LilyPadPiece.SOUTH_EAST), updateFlags);
 	}
 
-	public static BlockState getBaseState(Direction facing) {
-		return HollowBlocks.GIANT_LILY_PAD.defaultBlockState().setValue(FACING, facing);
-	}
 
-	public static boolean tryForm(BlockPlaceContext context, BlockState placementState) {
-		if (!placementState.is(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block()) || context.isSecondaryUseActive())
+	// I wanted to use BlockPattern here, but I couldn't get it working, I've copied some of it's caching machinery instead
+	// TODO: Use BlockPattern
+	public boolean tryForm(BlockPlaceContext context, BlockState placementState) {
+		if (!placementState.is(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block()) || context.isSecondaryUseActive()) {
 			return false;
+		}
 
 		Level level = context.getLevel();
 		BlockPos clickedPos = context.getClickedPos();
-		BlockState blockState = getBaseState(context.getHorizontalDirection());
+		BlockState blockState = this.defaultBlockState() .setValue(FACING, context.getHorizontalDirection());
+
+		LoadingCache<BlockPos, BlockInWorld> cache = CacheBuilder.newBuilder().build(new BlockCacheLoader(level, true));
 
 		for (LilyPadPiece piece : LilyPadPiece.values()) {
 			placeAllPieces:
 			for (int i = 0; i < 4; i++) {
 				for (BlockPos blockPos : piece.getAllPositions(clickedPos)) {
-					if (!blockPos.equals(clickedPos) && !level.getBlockState(blockPos).is(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block())) {
+					if (!blockPos.equals(clickedPos) && !cache.getUnchecked(blockPos).getState().is(HollowBlockItemTags.FORMS_GIANT_LILY_PAD.block())) {
 						continue placeAllPieces;
 					}
 				}
 
-				placeAt(level, clickedPos, blockState, piece, true);
+				placeAt(level, clickedPos, blockState.setValue(PIECE, piece), UPDATE_ALL_IMMEDIATE, true);
 
 				return true;
 			}

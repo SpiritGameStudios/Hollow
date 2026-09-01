@@ -11,7 +11,6 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -19,16 +18,10 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 
 public final class HollowConfiguredFeatures {
-	public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_LILY_PAD = of("giant_lily_pad");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CATTAIL = of("cattail");
 
-	public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> registerable) {
-		registerable.register(
-			GIANT_LILY_PAD,
-			new ConfiguredFeature<>(HollowFeatures.GIANT_LILYPAD, new NoneFeatureConfiguration())
-		);
-
-		registerable.register(
+	public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+		context.register(
 			CATTAIL,
 			new ConfiguredFeature<>(
 				Feature.SIMPLE_BLOCK,

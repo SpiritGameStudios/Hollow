@@ -2,6 +2,7 @@ package dev.spiritstudios.hollow.data.gen;
 
 import com.google.common.collect.ImmutableList;
 import dev.spiritstudios.hollow.Hollow;
+import dev.spiritstudios.hollow.world.level.block.GiantLilyPadBlock;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.PolyporeBlock;
 import dev.spiritstudios.hollow.world.level.gen.tree.decorator.BigBranchTreeDecorator;
@@ -109,15 +110,25 @@ public class HollowConfiguredFeatureProvider extends FabricDynamicRegistryProvid
                 )
         );
 
-        entries.add(
+		WeightedList.Builder<BlockState> waterlilyStates = WeightedList.<BlockState>builder()
+			.add(Blocks.LILY_PAD.defaultBlockState(), 910)
+			.add(HollowBlocks.FLOWERING_LILY_PAD.defaultBlockState(), 50);
+
+		var giantDirections = GiantLilyPadBlock.FACING.getPossibleValues();
+
+		for (Direction value : giantDirections) {
+			waterlilyStates.add(
+				HollowBlocks.GIANT_LILY_PAD.defaultBlockState().setValue(GiantLilyPadBlock.FACING, value),
+				40 / giantDirections.size()
+			);
+		}
+
+		entries.add(
                 VegetationFeatures.WATERLILY,
                 new ConfiguredFeature<>(
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
-                                new WeightedStateProvider(WeightedList.<BlockState>builder()
-                                        .add(Blocks.LILY_PAD.defaultBlockState(), 19)
-                                        .add(HollowBlocks.FLOWERING_LILY_PAD.defaultBlockState(), 1)
-                                        .build())
+                                new WeightedStateProvider(waterlilyStates.build())
                         )
                 )
         );
