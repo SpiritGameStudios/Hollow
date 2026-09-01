@@ -64,6 +64,12 @@ public final class HollowSoundsProvider extends FabricSoundsProvider {
 						.sound(ofFile("item/jar/fill_firefly3"))
 		);
 
+		exporter.add(
+				HollowSoundEvents.FURNACE_BOAT_LOOP,
+				SoundTypeBuilder.of(HollowSoundEvents.FURNACE_BOAT_LOOP)
+						.sound(ofFile("entity/furnace_boat/chug"))
+		);
+
 		// region Copper Horn
 		addCopperHornCall(exporter, HollowSoundEvents.ITEM_COPPER_HORN_CALL_GREAT, "great");
 		addCopperHornCall(exporter, HollowSoundEvents.ITEM_COPPER_HORN_CALL_OLD, "old");

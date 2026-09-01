@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hollow:item/jungle_furnace_boat"
+  }
+}

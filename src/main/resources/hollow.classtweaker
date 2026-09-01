@@ -1,2 +1,6 @@
 classTweaker v2 official
 extendable method net/minecraft/client/particle/FireflyParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDDDDLnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+accessible method net/minecraft/client/model/object/boat/BoatModel addCommonParts (Lnet/minecraft/client/model/geom/builders/PartDefinition;)V
+accessible method net/minecraft/client/model/object/boat/RaftModel addCommonParts (Lnet/minecraft/client/model/geom/builders/PartDefinition;)V
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat inputUp Z
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat status Lnet/minecraft/world/entity/vehicle/boat/AbstractBoat$Status;

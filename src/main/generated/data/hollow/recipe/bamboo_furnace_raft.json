@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "furnace_boat",
+  "ingredients": [
+    "minecraft:furnace",
+    "minecraft:bamboo_raft"
+  ],
+  "result": {
+    "id": "hollow:bamboo_furnace_raft"
+  }
+}

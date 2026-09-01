@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "furnace_boat",
+  "ingredients": [
+    "minecraft:furnace",
+    "minecraft:dark_oak_boat"
+  ],
+  "result": {
+    "id": "hollow:dark_oak_furnace_boat"
+  }
+}

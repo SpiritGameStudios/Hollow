@@ -146,6 +146,17 @@ public final class HollowModelProvider extends FabricModelProvider {
 		generators.generateFlatItem(HollowItems.MUSIC_DISC_POSTMORTEM, ModelTemplates.FLAT_ITEM);
 		generators.generateFlatItem(HollowItems.MUSIC_DISC_ONLY_YOU, ModelTemplates.FLAT_ITEM);
 
+		generators.generateFlatItem(HollowItems.ACACIA_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.BAMBOO_FURNACE_RAFT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.BIRCH_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.CHERRY_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.DARK_OAK_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.JUNGLE_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.MANGROVE_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.OAK_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.PALE_OAK_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.SPRUCE_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+
 		Identifier model = generators.generateLayeredItem(
 			HollowItems.FIREFLY_JAR,
 			TextureMapping.getItemTexture(HollowItems.GLASS_JAR),

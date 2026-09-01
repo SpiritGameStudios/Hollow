@@ -63,6 +63,17 @@ public final class HollowCreativeModeTab {
 				output.accept(HollowItems.ECHOING_POT);
 				output.accept(HollowItems.SCULK_JAW);
 
+				output.accept(HollowItems.OAK_FURNACE_BOAT);
+				output.accept(HollowItems.SPRUCE_FURNACE_BOAT);
+				output.accept(HollowItems.BIRCH_FURNACE_BOAT);
+				output.accept(HollowItems.JUNGLE_FURNACE_BOAT);
+				output.accept(HollowItems.ACACIA_FURNACE_BOAT);
+				output.accept(HollowItems.DARK_OAK_FURNACE_BOAT);
+				output.accept(HollowItems.MANGROVE_FURNACE_BOAT);
+				output.accept(HollowItems.CHERRY_FURNACE_BOAT);
+				output.accept(HollowItems.PALE_OAK_FURNACE_BOAT);
+				output.accept(HollowItems.BAMBOO_FURNACE_RAFT);
+
 				parameters.holders()
 					.lookup(HollowRegistries.COPPER_INSTRUMENT)
 					.map(wrapper -> wrapper.listElements().map(entry -> {
@@ -108,6 +119,17 @@ public final class HollowCreativeModeTab {
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> {
 			entries.insertAfter(Items.MUSIC_DISC_WARD, HollowItems.MUSIC_DISC_POSTMORTEM, HollowItems.MUSIC_DISC_ONLY_YOU);
 
+			entries.insertAfter(Items.OAK_CHEST_BOAT, HollowItems.OAK_FURNACE_BOAT);
+			entries.insertAfter(Items.SPRUCE_CHEST_BOAT, HollowItems.SPRUCE_FURNACE_BOAT);
+			entries.insertAfter(Items.BIRCH_CHEST_BOAT, HollowItems.BIRCH_FURNACE_BOAT);
+			entries.insertAfter(Items.JUNGLE_CHEST_BOAT, HollowItems.JUNGLE_FURNACE_BOAT);
+			entries.insertAfter(Items.ACACIA_CHEST_BOAT, HollowItems.ACACIA_FURNACE_BOAT);
+			entries.insertAfter(Items.DARK_OAK_CHEST_BOAT, HollowItems.DARK_OAK_FURNACE_BOAT);
+			entries.insertAfter(Items.MANGROVE_CHEST_BOAT, HollowItems.MANGROVE_FURNACE_BOAT);
+			entries.insertAfter(Items.CHERRY_CHEST_BOAT, HollowItems.CHERRY_FURNACE_BOAT);
+			entries.insertAfter(Items.PALE_OAK_CHEST_BOAT, HollowItems.PALE_OAK_FURNACE_BOAT);
+			entries.insertAfter(Items.BAMBOO_CHEST_RAFT, HollowItems.BAMBOO_FURNACE_RAFT);
+
 			entries.getContext().holders()
 				.lookup(HollowRegistries.COPPER_INSTRUMENT)
 				.map(wrapper -> wrapper.listElements().map(entry -> {
@@ -119,6 +141,14 @@ public final class HollowCreativeModeTab {
 					Items.GOAT_HORN,
 					items
 				));
+		});
+
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
+			entries.insertAfter(Items.OAK_CHEST_BOAT, HollowItems.OAK_FURNACE_BOAT);
+			entries.insertAfter(Items.BAMBOO_CHEST_RAFT, HollowItems.BAMBOO_FURNACE_RAFT);
+
+			entries.insertAfter(Items.COPPER_CHEST.waxed().unaffected(), HollowItems.STONE_CHEST, HollowItems.STONE_CHEST_LID);
+			entries.insertAfter(Items.DECORATED_POT, HollowItems.ECHOING_POT, HollowItems.GLASS_JAR, HollowItems.FIREFLY_JAR);
 		});
 	}
 }

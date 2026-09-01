@@ -23,14 +23,18 @@ import net.minecraft.world.phys.Vec3;
 
 public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	private static final EntityDataAccessor<Boolean> DATA_ID_FUEL = SynchedEntityData.defineId(AbstractFurnaceBoat.class, EntityDataSerializers.BOOLEAN);
+
 	private static final String FUEL_KEY = "Fuel";
+	private static final String CAN_PROPEL_KEY = "can_propel";
 
-	private static final int FUEL_TICKS_PER_ITEM = TickUtils.ticksFromMins(3);
-	private static final int MAX_FUEL_TICKS = TickUtils.ticksFromMinsAndSecs(26, 40);
+	private static final int FUEL_TICKS_PER_ITEM = TickUtils.ticksFromMins(2);
+	private static final int MAX_FUEL_TICKS = TickUtils.ticksFromMins(30);
 
-	private static final double ADDITIONAL_SPEED = 0.05;
+	private static final double PROPULSION_SPEED = 0.04;
+	private static final Vec3 SMOKE_PARTICLE_POS = new Vec3(0.0, 1.1, -0.5);
 
 	private int fuel = 0;
+	private boolean canPropel = false;
 
 	public AbstractFurnaceBoat(EntityType<? extends AbstractFurnaceBoat> type, Level level, Supplier<Item> dropItem) {
 		super(type, level, dropItem);
@@ -43,25 +47,45 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
-		if (!this.level().isClientSide()) {
-			if (this.fuel > 0)
+	public void baseTick() {
+		super.baseTick();
+		Level level = this.level();
+
+		if (!level.isClientSide()) {
+			if (this.fuel > 0) {
 				this.fuel--;
+			}
 
 			this.setHasFuel(this.fuel > 0);
 		}
 
 		if (this.hasFuel()) {
-			this.getDeltaMovement().add(
-				Mth.sin(Math.toRadians(-this.getYRot())) * ADDITIONAL_SPEED,
-				0.0,
-				Mth.cos(Math.toRadians(this.getYRot())) * ADDITIONAL_SPEED
-			);
+			Vec3 particlePos = this.position().add(SMOKE_PARTICLE_POS.yRot(-this.getYRot() * Mth.DEG_TO_RAD));
 
 			if (this.random.nextInt(4) == 0) {
-				this.level().addParticle(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 0.8, this.getZ(), 0.0, 0.0, 0.0);
+				level.addParticle(ParticleTypes.LARGE_SMOKE, particlePos.x, particlePos.y, particlePos.z, 0.0, 0.0, 0.0);
 			}
+
+			this.tickPropulsion();
+		}
+
+		if (!this.hasFuel() || this.status != Status.IN_WATER) {
+			this.canPropel = false;
+		}
+	}
+
+	private void tickPropulsion() { // todo: fix players stopping movement when dismounting
+		if (this.status == Status.IN_WATER && (this.inputUp || this.getFirstPassenger() != null && !(this.getFirstPassenger() instanceof Player))) {
+			this.canPropel = true;
+		}
+
+		if (this.canPropel) {
+			float radians = this.getYRot() * Mth.DEG_TO_RAD;
+			this.setDeltaMovement(this.getDeltaMovement().add(
+				Mth.sin(-radians) * PROPULSION_SPEED,
+				0.0,
+				Mth.cos(radians) * PROPULSION_SPEED
+			));
 		}
 	}
 
@@ -77,7 +101,18 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 
 	@Override
 	public InteractionResult interact(Player player, InteractionHand hand, Vec3 location) {
+		InteractionResult superInteraction = super.interact(player, hand, location);
+
+		if (superInteraction != InteractionResult.PASS) {
+			return superInteraction;
+		}
+
+		if (this.canAddPassenger(player) && !player.isSecondaryUseActive()) {
+			return InteractionResult.PASS;
+		}
+
 		ItemStack itemStack = player.getItemInHand(hand);
+
 		if (this.addFuel(itemStack)) {
 			itemStack.consume(1, player);
 		}
@@ -86,32 +121,39 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	}
 
 	public boolean addFuel(ItemStack itemStack) {
-		if (!itemStack.is(ItemTags.FURNACE_MINECART_FUEL) || this.fuel + FUEL_TICKS_PER_ITEM > MAX_FUEL_TICKS) {
-			return false;
+		if (itemStack.is(ItemTags.FURNACE_MINECART_FUEL) && this.fuel + FUEL_TICKS_PER_ITEM <= MAX_FUEL_TICKS) {
+			this.fuel += FUEL_TICKS_PER_ITEM;
+			return true;
 		}
 
-		this.fuel += FUEL_TICKS_PER_ITEM;
-
-		return true;
+		return false;
 	}
 
 	@Override
 	protected void addAdditionalSaveData(ValueOutput output) {
 		super.addAdditionalSaveData(output);
+
 		output.putShort(FUEL_KEY, (short) this.fuel);
+		output.putBoolean(CAN_PROPEL_KEY, this.canPropel);
 	}
 
 	@Override
 	protected void readAdditionalSaveData(ValueInput input) {
 		super.readAdditionalSaveData(input);
+
 		this.fuel = input.getShortOr(FUEL_KEY, (short) 0);
+		this.canPropel = input.getBooleanOr(CAN_PROPEL_KEY, false);
 	}
 
-	protected boolean hasFuel() {
+	public boolean hasFuel() {
 		return this.entityData.get(DATA_ID_FUEL);
 	}
 
 	protected void setHasFuel(boolean fuel) {
 		this.entityData.set(DATA_ID_FUEL, fuel);
+	}
+
+	public boolean isPropelled() {
+		return this.hasFuel() && this.canPropel;
 	}
 }

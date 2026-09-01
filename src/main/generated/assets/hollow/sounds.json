@@ -41,6 +41,12 @@
     ],
     "subtitle": "subtitles.hollow.block.stone_chest.extract"
   },
+  "entity.furnace_boat.loop": {
+    "sounds": [
+      "hollow:entity/furnace_boat/chug"
+    ],
+    "subtitle": "subtitles.hollow.entity.furnace_boat.loop"
+  },
   "item.copper_horn.bass.anger": {
     "sounds": [
       "hollow:item/copper_horn/bass/anger"

@@ -23,6 +23,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Instruments;
@@ -30,6 +31,7 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.InstrumentComponent;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
@@ -88,7 +90,26 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
                         .pattern(" G ")
                         .unlockedBy(getHasName(HollowBlocks.POLYPORE), has(HollowBlocks.POLYPORE))
                         .save(this.output);
+
+				furnaceBoat(HollowItems.ACACIA_FURNACE_BOAT, Items.ACACIA_BOAT);
+				furnaceBoat(HollowItems.BAMBOO_FURNACE_RAFT, Items.BAMBOO_RAFT);
+				furnaceBoat(HollowItems.BIRCH_FURNACE_BOAT, Items.BIRCH_BOAT);
+				furnaceBoat(HollowItems.CHERRY_FURNACE_BOAT, Items.CHERRY_BOAT);
+				furnaceBoat(HollowItems.DARK_OAK_FURNACE_BOAT, Items.DARK_OAK_BOAT);
+				furnaceBoat(HollowItems.MANGROVE_FURNACE_BOAT, Items.MANGROVE_BOAT);
+				furnaceBoat(HollowItems.OAK_FURNACE_BOAT, Items.OAK_BOAT);
+				furnaceBoat(HollowItems.PALE_OAK_FURNACE_BOAT, Items.PALE_OAK_BOAT);
+				furnaceBoat(HollowItems.SPRUCE_FURNACE_BOAT, Items.SPRUCE_BOAT);
             }
+
+			private void furnaceBoat(ItemLike furnaceBoat, ItemLike boat) {
+				this.shapeless(RecipeCategory.TRANSPORTATION, furnaceBoat)
+					.requires(Blocks.FURNACE)
+					.requires(boat)
+					.group("furnace_boat")
+					.unlockedBy("has_boat", this.has(ItemTags.BOATS))
+					.save(this.output);
+			}
 
             private void createHollowLogRecipe(LogCollection<Block> blocks, LogCollection<Block> ingredients) {
 				LogCollection.zipApply(blocks, ingredients, (block, ingredient) -> {
