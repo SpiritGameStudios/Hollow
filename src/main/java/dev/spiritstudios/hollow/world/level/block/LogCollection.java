@@ -15,6 +15,20 @@ import java.util.function.Function;
 
 public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T darkOak, T mangrove, T cherry, T paleOak,
                                T crimson, T warped) {
+	public static final LogCollection<Boolean> IS_NETHER = new LogCollection<>(
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		true,
+		true
+	);
+
 	public static final LogCollection<Block> LOGS = new LogCollection<>(
 		Blocks.OAK_LOG,
 		Blocks.SPRUCE_LOG,

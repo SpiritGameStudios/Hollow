@@ -2,7 +2,6 @@ package dev.spiritstudios.hollow.world.level.block;
 
 import dev.spiritstudios.hollow.references.HollowBlockIds;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
-import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
 import dev.spiritstudios.hollow.world.level.block.jar.FireflyJarBlock;
 import dev.spiritstudios.hollow.world.level.block.jar.GlassJarBlock;
 import dev.spiritstudios.hollow.world.level.block.pot.EchoingPotBlock;
@@ -207,9 +206,22 @@ public final class HollowBlocks {
 	}
 
 	public static void init() {
-		FlammableBlockRegistry.getDefaultInstance().add(HollowBlockItemTags.HOLLOW_LOGS.block(), 5, 5); // todo: fix crimson and warped stems being in this
+		LogCollection.zipApply(
+			HOLLOW_LOG, LogCollection.IS_NETHER,
+			(block, isNether) -> {
+				if (!isNether) FlammableBlockRegistry.getDefaultInstance().add(block, 5, 5);
+			}
+		);
+
+		LogCollection.zipApply(
+			STRIPPED_HOLLOW_LOG, LogCollection.IS_NETHER,
+			(block, isNether) -> {
+				if (!isNether) FlammableBlockRegistry.getDefaultInstance().add(block, 5, 5);
+			}
+		);
+
+		LogCollection.zipApply(HOLLOW_LOG, STRIPPED_HOLLOW_LOG, StrippableBlockRegistry::registerCopyState);
 
 		OxidizableBlocksRegistry.registerWeatheringCopperBlocks(COPPER_PILLAR);
-		LogCollection.zipApply(HOLLOW_LOG, STRIPPED_HOLLOW_LOG, StrippableBlockRegistry::registerCopyState);
 	}
 }
