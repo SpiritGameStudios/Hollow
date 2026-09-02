@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow.client.model.object.boat;
 
+import dev.spiritstudios.hollow.world.entity.vehicle.AbstractFurnaceBoat;
 import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -25,6 +26,10 @@ public class FurnaceBoatModel extends EntityModel<BoatRenderState> {
 		this.litFurnace = root.getChild(LIT_FURNACE_NAME);
 	}
 
+	public static void extractFuelRenderState(AbstractFurnaceBoat entity, BoatRenderState state, float partialTicks) {
+		state.setData(FurnaceBoatModel.HAS_FUEL, entity.hasFuel());
+	}
+
 	@Override
 	public void setupAnim(BoatRenderState state) {
 		super.setupAnim(state);
@@ -35,8 +40,7 @@ public class FurnaceBoatModel extends EntityModel<BoatRenderState> {
 
 			this.litFurnace.xRot = 0.01F * Mth.triangleWave(state.ageInTicks, 2.6F);
 			this.litFurnace.yRot = -Mth.HALF_PI + 0.01F * Mth.sin(state.ageInTicks * Mth.PI * 0.7);
-		}
-		else {
+		} else {
 			this.furnace.visible = true;
 			this.litFurnace.visible = false;
 		}

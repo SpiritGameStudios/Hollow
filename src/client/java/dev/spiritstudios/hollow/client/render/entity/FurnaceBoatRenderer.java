@@ -14,7 +14,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 
 public class FurnaceBoatRenderer extends BoatRenderer {
-	private static final Identifier FURNACE_TEXTURE = Hollow.id("textures/entity/furnace_boat.png");
+	public static final Identifier FURNACE_TEXTURE = Hollow.id("textures/entity/furnace_boat.png");
 
 	private final FurnaceBoatModel furnaceModel;
 
@@ -30,19 +30,12 @@ public class FurnaceBoatRenderer extends BoatRenderer {
 	@Override
 	public void extractRenderState(AbstractBoat entity, BoatRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
-
-		if (entity instanceof AbstractFurnaceBoat furnaceBoat) {
-			state.setData(FurnaceBoatModel.HAS_FUEL, furnaceBoat.hasFuel());
-		}
-	}
-
-	protected void submitFurnaceModel(BoatRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector) {
-		submitNodeCollector.submitModel(this.furnaceModel, state, poseStack, FURNACE_TEXTURE, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+		if (entity instanceof AbstractFurnaceBoat furnaceBoat) FurnaceBoatModel.extractFuelRenderState(furnaceBoat, state, partialTicks);
 	}
 
 	@Override
 	protected void submitTypeAdditions(BoatRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords) {
 		super.submitTypeAdditions(state, poseStack, submitNodeCollector, lightCoords);
-		this.submitFurnaceModel(state, poseStack, submitNodeCollector);
+		submitNodeCollector.submitModel(this.furnaceModel, state, poseStack, FURNACE_TEXTURE, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
 	}
 }
