@@ -15,10 +15,22 @@ public final class MovingEntitySoundInstance<T extends Entity> extends AbstractT
     private final float maxPitch;
     private final float minVolume;
     private final float maxVolume;
+	private final float maxLerpSpeed;
 
-    private final MovingPredicate<T> movingPredicate;
+	private final MovingPredicate<T> movingPredicate;
 
-    public MovingEntitySoundInstance(T entity, SoundEvent soundEvent, SoundSource soundSource, PitchInterpolationType pitchInterpolationType, float minPitch, float maxPitch, float minVolume, float maxVolume, MovingPredicate<T> movingPredicate) {
+	public MovingEntitySoundInstance(
+		T entity,
+		SoundEvent soundEvent,
+		SoundSource soundSource,
+		PitchInterpolationType pitchInterpolationType,
+		float minPitch,
+		float maxPitch,
+		float minVolume,
+		float maxVolume,
+		float maxLerpSpeed,
+		MovingPredicate<T> movingPredicate
+	) {
 		super(soundEvent, soundSource, SoundInstance.createUnseededRandom());
         this.entity = entity;
         this.pitchInterpolationType = pitchInterpolationType;
@@ -27,6 +39,7 @@ public final class MovingEntitySoundInstance<T extends Entity> extends AbstractT
 		this.maxPitch = maxPitch;
 		this.minVolume = minVolume;
 		this.maxVolume = maxVolume;
+		this.maxLerpSpeed = maxLerpSpeed;
 
 		this.movingPredicate = movingPredicate;
 
@@ -49,7 +62,7 @@ public final class MovingEntitySoundInstance<T extends Entity> extends AbstractT
 
 		if (this.movingPredicate.test(velocity, this.entity)) {
             this.pitch = this.pitchInterpolationType.getPitch(this, velocity);
-            this.volume = Mth.lerp(Mth.clamp(velocity, this.minVolume, this.maxVolume), this.minVolume, this.maxVolume);
+            this.volume = Mth.lerp(Math.min(velocity / this.maxLerpSpeed, 1.0F), this.minVolume, this.maxVolume);
         }
 		else {
             this.pitch = 0.0F;
@@ -67,6 +80,10 @@ public final class MovingEntitySoundInstance<T extends Entity> extends AbstractT
 
 	float getMaxPitch() {
 		return this.maxPitch;
+	}
+
+	float getMaxLerpSpeed() {
+		return this.maxLerpSpeed;
 	}
 
 	@Override

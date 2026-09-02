@@ -13,6 +13,7 @@ public class MovingEntitySoundInstanceBuilder<T extends Entity> {
 	private float maxPitch = 1.0F;
 	private float minVolume = 0.0F;
 	private float maxVolume = 1.0F;
+	private float maxLerpSpeed = 0.0F;
 	private MovingPredicate<T> movingPredicate = (_, _) -> true;
 
 	public MovingEntitySoundInstanceBuilder<T> soundEvent(SoundEvent soundEvent) {
@@ -33,6 +34,11 @@ public class MovingEntitySoundInstanceBuilder<T extends Entity> {
 	public MovingEntitySoundInstanceBuilder<T> pitchRange(float min, float max) {
 		this.minPitch = min;
 		this.maxPitch = max;
+		return this;
+	}
+
+	public MovingEntitySoundInstanceBuilder<T> maxLerpSpeed(float speed) {
+		this.maxLerpSpeed = speed;
 		return this;
 	}
 
@@ -61,6 +67,7 @@ public class MovingEntitySoundInstanceBuilder<T extends Entity> {
 			this.maxPitch,
 			this.minVolume,
 			this.maxVolume,
+			this.maxLerpSpeed,
 			this.movingPredicate
 		);
 	}

@@ -1,6 +1,7 @@
 package dev.spiritstudios.hollow.client.render.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.spiritstudios.hollow.client.model.geom.HollowModelLayers;
 import dev.spiritstudios.hollow.client.model.object.boat.FurnaceBoatModel;
 import dev.spiritstudios.hollow.world.entity.vehicle.AbstractFurnaceBoat;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -14,13 +15,9 @@ import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 public class FurnaceRaftRenderer extends RaftRenderer  {
 	private final FurnaceBoatModel furnaceModel;
 
-	public FurnaceRaftRenderer(
-		EntityRendererProvider.Context context,
-		ModelLayerLocation modelId,
-		ModelLayerLocation furnaceModelId
-	) {
+	public FurnaceRaftRenderer(EntityRendererProvider.Context context, ModelLayerLocation modelId) {
 		super(context, modelId);
-		this.furnaceModel = new FurnaceBoatModel(context.bakeLayer(furnaceModelId));
+		this.furnaceModel = new FurnaceBoatModel(context.bakeLayer(HollowModelLayers.FURNACE_RAFT));
 	}
 
 	@Override

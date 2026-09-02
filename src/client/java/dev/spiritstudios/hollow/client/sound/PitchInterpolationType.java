@@ -8,7 +8,7 @@ public enum PitchInterpolationType {
 
 	float getPitch(MovingEntitySoundInstance<?> soundInstance, float velocity) {
 		float delta = switch (this) {
-			case VELOCITY -> Mth.clamp(velocity, soundInstance.getMinPitch(), soundInstance.getMaxPitch());
+			case VELOCITY -> Math.min(velocity / soundInstance.getMaxLerpSpeed(), 1.0F);
 			case RANDOM -> soundInstance.getRandom().nextFloat();
 		};
 

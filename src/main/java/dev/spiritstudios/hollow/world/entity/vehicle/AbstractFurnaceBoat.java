@@ -2,7 +2,6 @@ package dev.spiritstudios.hollow.world.entity.vehicle;
 
 import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
 import dev.spiritstudios.hollow.util.TickUtils;
-import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -33,7 +32,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	private static final int FUEL_TICKS_PER_ITEM = TickUtils.ticksFromMins(2);
 	private static final int MAX_FUEL_TICKS = TickUtils.ticksFromMins(30);
 
-	private static final double PROPULSION_SPEED = 0.04;
+	public static final double PROPULSION_SPEED = 0.04;
 	private static final Vec3 SMOKE_PARTICLE_POS = new Vec3(0.0, 1.1, -0.5);
 
 	private int fuel = 0;

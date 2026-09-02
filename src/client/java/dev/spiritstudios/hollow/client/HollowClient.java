@@ -38,7 +38,8 @@ public class HollowClient implements ClientModInitializer {
 		.soundEvent(HollowSoundEvents.FURNACE_BOAT_LOOP)
 		.soundSource(SoundSource.NEUTRAL)
 		.movingPredicate((_, furnaceBoat) -> furnaceBoat.hasFuel())
-		.pitchRange(1.0F, 1.0F)
+		.pitchRange(1.0F, 2.0F)
+		.maxLerpSpeed((float) AbstractFurnaceBoat.PROPULSION_SPEED)
 		.volume(1.0F);
 
     @Override
@@ -73,15 +74,15 @@ public class HollowClient implements ClientModInitializer {
 
 		HollowModelLayers.init();
 
-		EntityRenderers.register(HollowEntityTypes.ACACIA_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.ACACIA_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.BAMBOO_FURNACE_RAFT, context -> new FurnaceRaftRenderer(context, ModelLayers.BAMBOO_RAFT, HollowModelLayers.FURNACE_RAFT));
-		EntityRenderers.register(HollowEntityTypes.BIRCH_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.BIRCH_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.CHERRY_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.CHERRY_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.DARK_OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.DARK_OAK_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.JUNGLE_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.JUNGLE_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.MANGROVE_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.MANGROVE_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.OAK_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.PALE_OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.PALE_OAK_BOAT, HollowModelLayers.FURNACE_BOAT));
-		EntityRenderers.register(HollowEntityTypes.SPRUCE_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.SPRUCE_BOAT, HollowModelLayers.FURNACE_BOAT));
+		EntityRenderers.register(HollowEntityTypes.ACACIA_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.ACACIA_BOAT));
+		EntityRenderers.register(HollowEntityTypes.BAMBOO_FURNACE_RAFT, context -> new FurnaceRaftRenderer(context, ModelLayers.BAMBOO_RAFT));
+		EntityRenderers.register(HollowEntityTypes.BIRCH_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.BIRCH_BOAT));
+		EntityRenderers.register(HollowEntityTypes.CHERRY_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.CHERRY_BOAT));
+		EntityRenderers.register(HollowEntityTypes.DARK_OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.DARK_OAK_BOAT));
+		EntityRenderers.register(HollowEntityTypes.JUNGLE_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.JUNGLE_BOAT));
+		EntityRenderers.register(HollowEntityTypes.MANGROVE_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.MANGROVE_BOAT));
+		EntityRenderers.register(HollowEntityTypes.OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.OAK_BOAT));
+		EntityRenderers.register(HollowEntityTypes.PALE_OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.PALE_OAK_BOAT));
+		EntityRenderers.register(HollowEntityTypes.SPRUCE_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.SPRUCE_BOAT));
     }
 }
