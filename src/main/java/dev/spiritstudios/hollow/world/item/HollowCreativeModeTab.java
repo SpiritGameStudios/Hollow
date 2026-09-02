@@ -42,7 +42,7 @@ public final class HollowCreativeModeTab {
 
 	private static void registerHollowTab() {
 		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Hollow.id("hollow_tab"), FabricCreativeModeTab.builder()
-			.icon(HollowItems.HOLLOW_LOG.oak()::getDefaultInstance)
+			.icon(HollowItems.HOLLOW_LOG.birch()::getDefaultInstance)
 			.title(Component.translatable("item_group.hollow.hollow"))
 			.displayItems((parameters, output) -> {
 				output.acceptAll(asStacks(HollowItems.HOLLOW_LOG));
