@@ -4,7 +4,6 @@
 	"package": "dev.spiritstudios.hollow.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"AbstractBoatRendererMixin",
 		"event.ClientPacketListenerMixin"
 	],
 	"injectors": {
