@@ -1,5 +1,6 @@
 package dev.spiritstudios.hollow;
 
+import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
@@ -44,6 +45,7 @@ public final class Hollow implements ModInitializer {
 		HollowLootTableModifications.init();
 
 		HollowGameRules.init();
+		HollowCriteriaTriggers.init();
 
 		HollowParticleTypes.init();
 		HollowCreativeModeTab.init();

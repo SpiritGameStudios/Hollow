@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "fuel_furnace_boat": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:entity_type": "#hollow:furnace_boat"
+            }
+          }
+        ]
+      },
+      "trigger": "hollow:player_fueled_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollow.adventure.fuel_furnace_boat.description"
+    },
+    "icon": {
+      "id": "hollow:oak_furnace_boat"
+    },
+    "title": {
+      "translate": "advancements.hollow.adventure.fuel_furnace_boat.title"
+    }
+  },
+  "requirements": [
+    [
+      "fuel_furnace_boat"
+    ]
+  ]
+}

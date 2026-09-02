@@ -20,7 +20,7 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(HollowModelProvider::new);
         pack.addProvider(HollowSoundsProvider::new);
 
-        pack.addProvider(HollowLootTableProvider::new);
+        pack.addProvider(HollowBlockLootProvider::new);
         pack.addProvider(HollowRecipeProvider::new);
 		pack.addProvider(HollowAdvancementProvider::new);
 

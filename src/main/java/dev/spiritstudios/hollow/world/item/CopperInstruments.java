@@ -17,17 +17,17 @@ public final class CopperInstruments {
 	public static final ResourceKey<CopperInstrument> FEARLESS_RIVER_GIFT = create("fearless_river_gift");
 	public static final ResourceKey<CopperInstrument> SWEET_MOON_LOVE = create("sweet_moon_love");
 
-	public static void bootstrap(BootstrapContext<CopperInstrument> registerable) {
-		register(registerable, GREAT_SKY_FALLING, "great", "sky", "falling", 4.0F, 256F);
-		register(registerable, OLD_HYMN_RESTING, "old", "hymn", "resting", 4.0F, 256F);
-		register(registerable, PURE_WATER_DESIRE, "pure", "water", "desire", 4.0F, 256F);
-		register(registerable, HUMBLE_FIRE_MEMORY, "humble", "fire", "memory", 4.0F, 256F);
-		register(registerable, DRY_URGE_ANGER, "dry", "urge", "anger", 4.0F, 256F);
-		register(registerable, CLEAR_TEMPER_JOURNEY, "clear", "temper", "journey", 4.0F, 256F);
-		register(registerable, FRESH_NEST_THOUGHT, "fresh", "nest", "thought", 4.0F, 256F);
-		register(registerable, SECRET_LAKE_TEAR, "secret", "lake", "tear", 4.0F, 256F);
-		register(registerable, FEARLESS_RIVER_GIFT, "fearless", "river", "gift", 4.0F, 256F);
-		register(registerable, SWEET_MOON_LOVE, "sweet", "moon", "love", 4.0F, 256F);
+	public static void bootstrap(BootstrapContext<CopperInstrument> context) {
+		register(context, GREAT_SKY_FALLING, "great", "sky", "falling", 4.0F, 256F);
+		register(context, OLD_HYMN_RESTING, "old", "hymn", "resting", 4.0F, 256F);
+		register(context, PURE_WATER_DESIRE, "pure", "water", "desire", 4.0F, 256F);
+		register(context, HUMBLE_FIRE_MEMORY, "humble", "fire", "memory", 4.0F, 256F);
+		register(context, DRY_URGE_ANGER, "dry", "urge", "anger", 4.0F, 256F);
+		register(context, CLEAR_TEMPER_JOURNEY, "clear", "temper", "journey", 4.0F, 256F);
+		register(context, FRESH_NEST_THOUGHT, "fresh", "nest", "thought", 4.0F, 256F);
+		register(context, SECRET_LAKE_TEAR, "secret", "lake", "tear", 4.0F, 256F);
+		register(context, FEARLESS_RIVER_GIFT, "fearless", "river", "gift", 4.0F, 256F);
+		register(context, SWEET_MOON_LOVE, "sweet", "moon", "love", 4.0F, 256F);
 	}
 
 	private static void register(BootstrapContext<CopperInstrument> registry, ResourceKey<CopperInstrument> key, String call, String melody, String bass, float useDuration, float range) {

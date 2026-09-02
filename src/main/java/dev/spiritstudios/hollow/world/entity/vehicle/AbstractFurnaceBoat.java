@@ -1,12 +1,13 @@
 package dev.spiritstudios.hollow.world.entity.vehicle;
 
-import java.util.function.Supplier;
-
+import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
 import dev.spiritstudios.hollow.util.TickUtils;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -20,6 +21,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.function.Supplier;
 
 public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	private static final EntityDataAccessor<Boolean> DATA_ID_FUEL = SynchedEntityData.defineId(AbstractFurnaceBoat.class, EntityDataSerializers.BOOLEAN);
@@ -114,6 +117,10 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		ItemStack itemStack = player.getItemInHand(hand);
 
 		if (this.addFuel(itemStack)) {
+			if (player instanceof ServerPlayer serverPlayer) {
+				HollowCriteriaTriggers.PLAYER_FUELED_ENTITY.trigger(serverPlayer, itemStack, this);
+			}
+
 			itemStack.consume(1, player);
 		}
 

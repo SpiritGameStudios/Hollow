@@ -17,8 +17,8 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class HollowLootTableProvider extends FabricBlockLootSubProvider {
-    public HollowLootTableProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+public class HollowBlockLootProvider extends FabricBlockLootSubProvider {
+    public HollowBlockLootProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, registryLookup);
     }
 

@@ -158,20 +158,23 @@ public class HollowTagProviders {
 		protected void addTags(HolderLookup.Provider wrapperLookup) {
 			tag(HollowEntityTypeTags.IMMUNE_TO_SCULK_JAW)
 				.add(EntityTypeIds.WARDEN);
+
 			tag(HollowEntityTypeTags.CAN_CLIMB_HOLLOW_LOGS)
 				.add(EntityTypeIds.PLAYER);
-			tag(ConventionalEntityTypeTags.BOATS).addAll(List.of(
-				HollowEntityTypeIds.ACACIA_FURNACE_BOAT,
-				HollowEntityTypeIds.BAMBOO_FURNACE_RAFT,
-				HollowEntityTypeIds.BIRCH_FURNACE_BOAT,
-				HollowEntityTypeIds.CHERRY_FURNACE_BOAT,
-				HollowEntityTypeIds.DARK_OAK_FURNACE_BOAT,
-				HollowEntityTypeIds.JUNGLE_FURNACE_BOAT,
-				HollowEntityTypeIds.MANGROVE_FURNACE_BOAT,
-				HollowEntityTypeIds.OAK_FURNACE_BOAT,
-				HollowEntityTypeIds.PALE_OAK_FURNACE_BOAT,
-				HollowEntityTypeIds.SPRUCE_FURNACE_BOAT
-			));
+
+			tag(HollowEntityTypeTags.FURNACE_BOAT)
+				.add(HollowEntityTypeIds.ACACIA_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.BAMBOO_FURNACE_RAFT)
+				.add(HollowEntityTypeIds.BIRCH_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.CHERRY_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.DARK_OAK_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.JUNGLE_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.MANGROVE_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.OAK_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.PALE_OAK_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.SPRUCE_FURNACE_BOAT);
+
+			tag(ConventionalEntityTypeTags.BOATS).addTag(HollowEntityTypeTags.FURNACE_BOAT);
 		}
 	}
 
