@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -34,19 +35,13 @@ public class ObaboBlock extends EchoingPotBlock {
 		return CODEC;
 	}
 
-	protected static <E extends BlockEntity, A extends BlockEntity> @Nullable BlockEntityTicker<A> createTickerHelper(
-		final BlockEntityType<A> actual, final BlockEntityType<E> expected, final @Nullable BlockEntityTicker<? super E> ticker
-	) {
-		return expected == actual ? (BlockEntityTicker<A>) ticker : null;
-	}
-
 	@Override
 	public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
-		return createTickerHelper(type, HollowBlockEntityTypes.OBABO, ObaboBlockEntity::tick);
+		return BaseEntityBlock.createTickerHelper(type, HollowBlockEntityTypes.OBABO, ObaboBlockEntity::tick);
 	}
 
 	@Override
-	public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new ObaboBlockEntity(pos, state);
 	}
 }

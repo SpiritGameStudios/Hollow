@@ -39,7 +39,7 @@ public class HollowClient implements ClientModInitializer {
 		.soundSource(SoundSource.NEUTRAL)
 		.movingPredicate((_, furnaceBoat) -> furnaceBoat.hasFuel())
 		.pitchRange(1.0F, 2.0F)
-		.maxLerpSpeed((float) AbstractFurnaceBoat.PROPULSION_SPEED)
+		.maxLerpSpeed(0.4F)
 		.volume(1.0F);
 
     @Override

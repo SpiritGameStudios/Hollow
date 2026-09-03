@@ -64,6 +64,9 @@ public class HollowTagProviders {
 				.addAll(toIds(HollowBlockItemIds.HOLLOW_LOG))
 				.addAll(toIds(HollowBlockItemIds.STRIPPED_HOLLOW_LOG));
 
+			builder(HollowBlockItemTags.GLASS_JARS.block())
+				.add(HollowBlockItemIds.GLASS_JAR, HollowBlockItemIds.FIREFLY_JAR);
+
 			builder(BlockTags.MINEABLE_WITH_AXE)
 				.addTag(HollowBlockItemTags.HOLLOW_LOGS.block());
 
@@ -119,9 +122,30 @@ public class HollowTagProviders {
 			builder(ConventionalItemTags.MUSIC_DISCS)
 				.add(HollowItemIds.MUSIC_DISC_POSTMORTEM, HollowItemIds.MUSIC_DISC_ONLY_YOU);
 
-			builder(HollowItemTags.CAN_PUT_IN_JAR)
-				.forceAddTag(ConventionalItemTags.COOKIE_FOODS)
-				.forceAddTag(ConventionalItemTags.MUSIC_DISCS); // will add more
+			builder(HollowItemTags.PUT_IN_JAR_OVERRIDE)
+				.forceAddTag(ConventionalItemTags.CROPS)
+				.addTag(HollowBlockItemTags.GLASS_JARS.item())
+				.removeTag(ConventionalItemTags.CACTUS_CROPS)
+				.addAll(List.of(
+					HollowBlockItemIds.FLOWERING_LILY_PAD.item(),
+					BlockItemIds.REDSTONE_DUST.item(),
+					BlockItemIds.TRIPWIRE.item(),
+					BlockItemIds.POWDER_SNOW.item(),
+					BlockItemIds.SWEET_BERRY_CROP.item(),
+					BlockItemIds.GLOW_BERRY_CROP.item(),
+					BlockItemIds.TORCHFLOWER_CROP.item(),
+					BlockItemIds.PITCHER_PLANT.item(),
+					BlockItemIds.RESIN_CLUMP.item(),
+					BlockItemIds.LEAF_LITTER.item(),
+					BlockItemIds.VINE.item(),
+					BlockItemIds.LILY_PAD.item(),
+					BlockItemIds.GLOW_LICHEN.item(),
+					BlockItemIds.SCULK_VEIN.item()
+				));
+
+			builder(HollowItemTags.CANNOT_PUT_IN_JAR)
+				.forceAddTag(ConventionalItemTags.SHIELD_TOOLS)
+				.forceAddTag(ItemTags.BUNDLES);
 
 			builder(HollowItemTags.FURNACE_BOATS).add(
 				HollowItemIds.ACACIA_FURNACE_BOAT,
@@ -140,6 +164,7 @@ public class HollowTagProviders {
 				.addTag(HollowItemTags.FURNACE_BOATS);
 
 			copy(HollowBlockItemTags.HOLLOW_LOGS);
+			copy(HollowBlockItemTags.GLASS_JARS);
 			copy(HollowBlockItemTags.FORMS_GIANT_LILY_PAD);
 			copy(BlockItemTags.BEE_FOOD);
 		}

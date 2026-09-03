@@ -58,7 +58,7 @@ public final class MovingEntitySoundInstance<T extends Entity> extends AbstractT
         }
 
 		this.updatePosition();
-		float velocity = (float) this.entity.getDeltaMovement().horizontalDistance();
+		float velocity = (float) this.entity.getKnownSpeed().horizontalDistance();
 
 		if (this.movingPredicate.test(velocity, this.entity)) {
             this.pitch = this.pitchInterpolationType.getPitch(this, velocity);

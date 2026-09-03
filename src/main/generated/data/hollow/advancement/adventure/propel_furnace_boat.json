@@ -1,0 +1,24 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "propel_furnace_boat": {
+      "trigger": "hollow:player_propel_furnace_boat"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollow.adventure.propel_furnace_boat.description"
+    },
+    "icon": {
+      "id": "hollow:oak_furnace_boat"
+    },
+    "title": {
+      "translate": "advancements.hollow.adventure.propel_furnace_boat.title"
+    }
+  },
+  "requirements": [
+    [
+      "propel_furnace_boat"
+    ]
+  ]
+}

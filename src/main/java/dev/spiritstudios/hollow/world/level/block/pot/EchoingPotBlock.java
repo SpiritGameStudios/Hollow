@@ -34,10 +34,7 @@ public class EchoingPotBlock extends BaseEntityBlock {
 
 	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	public static final VoxelShape SHAPE = Shapes.or(
-		Block.box(1, 0, 1, 15, 14, 15),
-		Block.box(4, 14, 4, 12, 16, 12)
-	);
+	public static final VoxelShape SHAPE = Shapes.or(column(14, 0, 14), column(8, 14, 16));
 
 	public EchoingPotBlock(Properties settings) {
 		super(settings);

@@ -1,17 +1,21 @@
 package dev.spiritstudios.hollow.world.level.block.entity;
 
 import com.mojang.logging.LogUtils;
+import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
+import dev.spiritstudios.hollow.tags.HollowBlockItemTags;
 import dev.spiritstudios.hollow.tags.HollowItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +35,7 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
 
     public boolean tryUse(Player player, InteractionHand hand) {
 		ItemStack itemInHand = player.getItemInHand(hand);
-		return itemInHand.isEmpty() ? this.tryTakeItem(player, hand) : this.tryInsertItem(itemInHand);
+		return itemInHand.isEmpty() ? this.tryTakeItem(player, hand) : this.tryInsertItem(player, itemInHand);
     }
 
 	@Override
@@ -59,9 +63,22 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
 		return false;
 	}
 
-	private boolean tryInsertItem(ItemStack itemInHand) {
-		if (!itemInHand.is(HollowItemTags.CAN_PUT_IN_JAR))
+	private static boolean canInsertItem(ItemStack stack) {
+		if (stack.is(HollowItemTags.CANNOT_PUT_IN_JAR)) {
 			return false;
+		}
+
+		if (stack.is(HollowItemTags.PUT_IN_JAR_OVERRIDE)) {
+			return true;
+		}
+
+		return !(stack.getItem() instanceof BlockItem);
+	}
+
+	private boolean tryInsertItem(Player player, ItemStack itemInHand) {
+		if (!canInsertItem(itemInHand)) {
+			return false;
+		}
 
 		int slot = -1;
 
@@ -73,7 +90,12 @@ public class GlassJarBlockEntity extends NoMenuContainerBlockEntity {
 		}
 
 		if (slot != -1) {
+			if (player instanceof ServerPlayer serverPlayer && itemInHand.is(HollowBlockItemTags.GLASS_JARS.item())) {
+				HollowCriteriaTriggers.PLAYER_INSERT_JAR_IN_JAR.trigger(serverPlayer);
+			}
+
 			this.setItem(slot, itemInHand.split(1));
+
 			return true;
 		}
 

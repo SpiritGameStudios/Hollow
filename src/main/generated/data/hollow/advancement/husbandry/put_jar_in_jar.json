@@ -1,0 +1,24 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "jar_in_jar": {
+      "trigger": "hollow:player_insert_jar_in_jar"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollow.husbandry.put_jar_in_jar.description"
+    },
+    "icon": {
+      "id": "hollow:glass_jar"
+    },
+    "title": {
+      "translate": "advancements.hollow.husbandry.put_jar_in_jar.title"
+    }
+  },
+  "requirements": [
+    [
+      "jar_in_jar"
+    ]
+  ]
+}

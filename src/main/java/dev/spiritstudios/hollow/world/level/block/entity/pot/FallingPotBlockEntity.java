@@ -62,6 +62,8 @@ public class FallingPotBlockEntity extends PotBlockEntity {
 	}
 
 	public void startFalling(Direction dir, boolean top, BlockPos pos, @Nullable Entity fallCauser) {
+		assert this.level != null;
+
 		this.fallStartedAtTick = this.level.getGameTime();
 		this.fallDirection = dir;
 		this.fallCauser = fallCauser;
@@ -127,7 +129,7 @@ public class FallingPotBlockEntity extends PotBlockEntity {
 
 	@Override
 	protected void saveAdditional(ValueOutput output) {
-		if (this.fallDirection != null && this.fallStartedAtTick != -1) {
+		if (this.fallStartedAtTick != -1) {
 			output.putInt("FallDir", this.fallDirection.ordinal());
 		}
 

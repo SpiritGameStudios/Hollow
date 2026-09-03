@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.world.level.block.entity.FireflyJarBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -48,5 +49,15 @@ public class FireflyJarBlock extends BaseJarBlock {
 	@Override
 	public @Nullable BlockEntity newBlockEntity(BlockPos worldPosition, BlockState blockState) {
 		return new FireflyJarBlockEntity(worldPosition, blockState);
+	}
+
+	@Override
+	protected boolean hasAnalogOutputSignal(BlockState state) {
+		return true;
+	}
+
+	@Override
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
+		return 15;
 	}
 }

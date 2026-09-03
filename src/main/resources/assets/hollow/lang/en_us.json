@@ -1,8 +1,10 @@
 {
+	"advancements.hollow.adventure.propel_furnace_boat.description": "Set off on a fuel-powered boat ride",
+	"advancements.hollow.adventure.propel_furnace_boat.title": "Look Ma, no hands!",
 	"advancements.hollow.adventure.get_hurt_by_sculk_jaw.description": "Get ensnared by a Sculk Jaw",
 	"advancements.hollow.adventure.get_hurt_by_sculk_jaw.title": "Oof Ouch, My Bones",
-	"advancements.hollow.adventure.fuel_furnace_boat.title": "Push off with your feet, then press go!",
-	"advancements.hollow.adventure.fuel_furnace_boat.description": "Fuel a Furnace Boat",
+	"advancements.hollow.husbandry.put_jar_in_jar.description": "Put a jar inside another jar",
+	"advancements.hollow.husbandry.put_jar_in_jar.title": "Jar-in-Jar",
 	"block.hollow.cattail": "Cattail",
 	"block.hollow.copper_pillar": "Copper Pillar",
 	"block.hollow.echoing_pot": "Echoing Pot",

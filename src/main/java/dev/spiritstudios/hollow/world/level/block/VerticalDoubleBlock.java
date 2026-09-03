@@ -1,14 +1,12 @@
 package dev.spiritstudios.hollow.world.level.block;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -21,14 +19,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public abstract class VerticalDoubleBlock extends Block {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-	public VerticalDoubleBlock(Properties settings) {
-		super(settings);
-		registerDefaultState(defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER));
+	public VerticalDoubleBlock(Properties properties) {
+		super(properties);
+		this.registerDefaultState(this.getStateDefinition().any()
+			.setValue(HALF, DoubleBlockHalf.LOWER)
+		);
 	}
 
 	@Override
@@ -37,38 +37,41 @@ public abstract class VerticalDoubleBlock extends Block {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-		BlockPos pos = ctx.getClickedPos();
-		Level world = ctx.getLevel();
+	public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		Level level = ctx.getLevel();
+		BlockPos above = ctx.getClickedPos().above();
+		BlockState aboveState = level.getBlockState(above);
 
-		return pos.getY() < world.getMaxY() - 1 && world.getBlockState(pos.above()).canBeReplaced(ctx) ?
-				defaultBlockState()
-						.setValue(BlockStateProperties.HORIZONTAL_FACING, ctx.getHorizontalDirection().getOpposite()): null;
+		return level.isInWorldBounds(above) && aboveState.canBeReplaced(ctx) ? this.defaultBlockState() : null;
 	}
 
 	@Override
-	public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-		world.setBlock(pos.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), Block.UPDATE_ALL);
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity by, ItemStack itemStack) {
+		level.setBlockAndUpdate(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER));
 	}
 
 	@Override
-	protected boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
-			BlockState lower = world.getBlockState(pos.below());
+			BlockState lower = level.getBlockState(pos.below());
 			return lower.is(this) && lower.getValue(HALF) == DoubleBlockHalf.LOWER;
 		}
 
-		return super.canSurvive(state, world, pos);
+		return super.canSurvive(state, level, pos);
 	}
 
 	@Override
-	public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-		if (world.isClientSide()) return super.playerWillDestroy(world, pos, state, player);
+	public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+		if (!level.isClientSide()) {
+			if (player.isCreative()) {
+				this.onBreakInCreative(level, pos, state, player);
+			}
+			else {
+				dropResources(state, level, pos, null, player, player.getMainHandItem());
+			}
+		}
 
-		if (player.isCreative()) onBreakInCreative(world, pos, state, player);
-		else dropResources(state, world, pos, null, player, player.getMainHandItem());
-
-		return super.playerWillDestroy(world, pos, state, player);
+		return super.playerWillDestroy(level, pos, state, player);
 	}
 
 	@Override
@@ -91,18 +94,15 @@ public abstract class VerticalDoubleBlock extends Block {
 				: Blocks.AIR.defaultBlockState();
 	}
 
-	protected static void onBreakInCreative(Level world, BlockPos pos, BlockState state, Player player) {
-		DoubleBlockHalf half = state.getValue(HALF);
-		if (half == DoubleBlockHalf.LOWER) return;
+	protected void onBreakInCreative(Level level, BlockPos pos, BlockState state, Player player) {
+		if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+			BlockPos lowerPos = pos.below();
+			BlockState lower = level.getBlockState(lowerPos);
 
-		BlockPos lowerPos = pos.below();
-		BlockState lower = world.getBlockState(lowerPos);
-
-		if (!lower.is(state.getBlock()) || lower.getValue(HALF) != DoubleBlockHalf.LOWER)
-			return;
-
-		BlockState lowerFluid = lower.getFluidState().is(Fluids.WATER) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
-		world.setBlock(lowerPos, lowerFluid, Block.UPDATE_ALL | Block.UPDATE_SUPPRESS_DROPS);
-		world.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, lowerPos, Block.getId(lower));
+			if (lower.is(this) && lower.getValue(HALF) == DoubleBlockHalf.LOWER) {
+				level.removeBlock(lowerPos, false);
+				level.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, lowerPos, getId(lower));
+			}
+		}
 	}
 }

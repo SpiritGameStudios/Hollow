@@ -1,0 +1,23 @@
+{
+  "fabric:remove": [
+    "#c:crops/cactus"
+  ],
+  "values": [
+    "#c:crops",
+    "#hollow:glass_jars",
+    "hollow:flowering_lily_pad",
+    "minecraft:redstone",
+    "minecraft:string",
+    "minecraft:powder_snow_bucket",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:torchflower_seeds",
+    "minecraft:pitcher_plant",
+    "minecraft:resin_clump",
+    "minecraft:leaf_litter",
+    "minecraft:vine",
+    "minecraft:lily_pad",
+    "minecraft:glow_lichen",
+    "minecraft:sculk_vein"
+  ]
+}
