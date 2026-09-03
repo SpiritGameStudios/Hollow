@@ -72,7 +72,7 @@ public final class HollowItems {
 
     public static final Item GLASS_JAR = registerBlock(HollowBlockItemIds.GLASS_JAR, HollowBlocks.GLASS_JAR, JarItem::new);
 
-    public static final Item FIREFLY_JAR = registerBlock(HollowBlockItemIds.FIREFLY_JAR, HollowBlocks.FIREFLY_JAR);
+    public static final Item FIREFLY_JAR = registerBlock(HollowBlockItemIds.FIREFLY_JAR, HollowBlocks.FIREFLY_JAR, BlockItem::new, new Item.Properties().stacksTo(1));
 
     public static final Item STONE_CHEST = registerBlock(HollowBlockItemIds.STONE_CHEST, HollowBlocks.STONE_CHEST);
 
@@ -167,6 +167,6 @@ public final class HollowItems {
         CompostableRegistry.INSTANCE.add(POLYPORE, 0.65F);
         CompostableRegistry.INSTANCE.add(CATTAIL, 0.65F);
         CompostableRegistry.INSTANCE.add(FLOWERING_LILY_PAD, 0.75F);
-        // CompostableRegistry.INSTANCE.add(GIANT_LILY_PAD, 0.85F);
+		CompostableRegistry.INSTANCE.add(SWITCHGRASS, 0.3F);
     }
 }

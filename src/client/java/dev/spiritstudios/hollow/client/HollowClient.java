@@ -29,18 +29,17 @@ import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.sounds.SoundSource;
 
 import java.util.List;
 
 public class HollowClient implements ClientModInitializer {
 	private static final MovingEntitySoundInstanceBuilder<AbstractFurnaceBoat> FURNACE_BOAT_LOOPER = MovingEntitySoundInstance.<AbstractFurnaceBoat>builder()
 		.soundEvent(HollowSoundEvents.FURNACE_BOAT_LOOP)
-		.soundSource(SoundSource.NEUTRAL)
-		.movingPredicate((_, furnaceBoat) -> furnaceBoat.hasFuel())
+		.canPlaySound((_, furnaceBoat) -> furnaceBoat.hasFuel())
+		.canInterpolateSoundParameters((_, furnaceBoat) -> furnaceBoat.isPropelled())
 		.pitchRange(1.0F, 2.0F)
-		.maxLerpSpeed(0.4F)
-		.volume(1.0F);
+		.volumeRange(0.5F, 2.0F)
+		.maxParameterInterpolationSpeed(0.4F);
 
     @Override
     public void onInitializeClient() {

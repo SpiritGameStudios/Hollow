@@ -3,45 +3,45 @@ package dev.spiritstudios.hollow.client.sound;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 
 public final class MovingEntitySoundInstance<T extends Entity> extends AbstractTickableSoundInstance {
     final T entity;
-    private final PitchInterpolationType pitchInterpolationType;
+    private final SoundParameterInterpolationType soundParameterInterpolationType;
     private final float minPitch;
     private final float maxPitch;
     private final float minVolume;
     private final float maxVolume;
-	private final float maxLerpSpeed;
+	private final float maxParameterInterpolationSpeed;
 
-	private final MovingPredicate<T> movingPredicate;
+	private final MovingEntityPredicate<T> canPlaySound, canInterpolateParameters;
 
 	public MovingEntitySoundInstance(
 		T entity,
 		SoundEvent soundEvent,
-		SoundSource soundSource,
-		PitchInterpolationType pitchInterpolationType,
+		SoundParameterInterpolationType soundParameterInterpolationType,
 		float minPitch,
 		float maxPitch,
 		float minVolume,
 		float maxVolume,
-		float maxLerpSpeed,
-		MovingPredicate<T> movingPredicate
+		float maxParameterInterpolationSpeed,
+		MovingEntityPredicate<T> canPlaySound,
+		MovingEntityPredicate<T> canInterpolateParameters
 	) {
-		super(soundEvent, soundSource, SoundInstance.createUnseededRandom());
+		super(soundEvent, entity.getSoundSource(), SoundInstance.createUnseededRandom());
         this.entity = entity;
-        this.pitchInterpolationType = pitchInterpolationType;
+        this.soundParameterInterpolationType = soundParameterInterpolationType;
 
         this.minPitch = minPitch;
 		this.maxPitch = maxPitch;
 		this.minVolume = minVolume;
 		this.maxVolume = maxVolume;
-		this.maxLerpSpeed = maxLerpSpeed;
+		this.maxParameterInterpolationSpeed = maxParameterInterpolationSpeed;
 
-		this.movingPredicate = movingPredicate;
+		this.canPlaySound = canPlaySound;
+		this.canInterpolateParameters = canInterpolateParameters;
 
 		this.looping = true;
 		this.delay = 0;
@@ -58,32 +58,36 @@ public final class MovingEntitySoundInstance<T extends Entity> extends AbstractT
         }
 
 		this.updatePosition();
-		float velocity = (float) this.entity.getKnownSpeed().horizontalDistance();
+		float velocity = this.getVelocity();
 
-		if (this.movingPredicate.test(velocity, this.entity)) {
-            this.pitch = this.pitchInterpolationType.getPitch(this, velocity);
-            this.volume = Mth.lerp(Math.min(velocity / this.maxLerpSpeed, 1.0F), this.minVolume, this.maxVolume);
-        }
+		if (this.canPlaySound.test(velocity, this.entity)) {
+			// In the case that the interpolation type is set to "random", we want different numbers for each parameter.
+			float pitchDelta = this.soundParameterInterpolationType.getDeltaValue(this, velocity);
+			float volumeDelta = this.soundParameterInterpolationType.getDeltaValue(this, velocity);
+
+			this.pitch = Mth.lerp(pitchDelta, this.minPitch, this.maxPitch);
+			this.volume = Mth.lerp(volumeDelta, this.minVolume, this.maxVolume);
+		}
 		else {
-            this.pitch = 0.0F;
-            this.volume = 0.0F;
-        }
+			this.pitch = 0.0F;
+			this.volume = 0.0F;
+		}
     }
 
 	RandomSource getRandom() {
 		return this.random;
 	}
 
-	float getMinPitch() {
-		return this.minPitch;
+	float getMaxParameterInterpolationSpeed() {
+		return this.maxParameterInterpolationSpeed;
 	}
 
-	float getMaxPitch() {
-		return this.maxPitch;
+	private float getVelocity() {
+		return (float) this.entity.getKnownSpeed().horizontalDistance();
 	}
 
-	float getMaxLerpSpeed() {
-		return this.maxLerpSpeed;
+	boolean canInterpolateParameters() {
+		return this.canInterpolateParameters.test(this.getVelocity(), this.entity);
 	}
 
 	@Override

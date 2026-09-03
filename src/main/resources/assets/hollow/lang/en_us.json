@@ -1,8 +1,8 @@
 {
-	"advancements.hollow.adventure.propel_furnace_boat.description": "Set off on a fuel-powered boat ride",
-	"advancements.hollow.adventure.propel_furnace_boat.title": "Look Ma, no hands!",
 	"advancements.hollow.adventure.get_hurt_by_sculk_jaw.description": "Get ensnared by a Sculk Jaw",
 	"advancements.hollow.adventure.get_hurt_by_sculk_jaw.title": "Oof Ouch, My Bones",
+	"advancements.hollow.adventure.propel_furnace_boat.description": "Set off on a fuel-powered boat ride",
+	"advancements.hollow.adventure.propel_furnace_boat.title": "Look Ma, no hands!",
 	"advancements.hollow.husbandry.put_jar_in_jar.description": "Put a jar inside another jar",
 	"advancements.hollow.husbandry.put_jar_in_jar.title": "Jar-in-Jar",
 	"block.hollow.cattail": "Cattail",
@@ -93,6 +93,7 @@
 	"music.game.wildflower": "lynndova - Wildflower",
 	"subtitles.hollow.block.sculk_jaw.bite": "Sculk Jaw bites",
 	"subtitles.hollow.block.stone_chest.extract": "Stone Chest opens",
+	"subtitles.hollow.entity.furnace_boat.loop": "Boat with Furnace grumbles",
 	"subtitles.hollow.item.copper_horn.bass.anger": "Anger",
 	"subtitles.hollow.item.copper_horn.bass.desire": "Desire",
 	"subtitles.hollow.item.copper_horn.bass.falling": "Falling",
@@ -123,7 +124,11 @@
 	"subtitles.hollow.item.copper_horn.melody.temper": "Temper",
 	"subtitles.hollow.item.copper_horn.melody.urge": "Urge",
 	"subtitles.hollow.item.copper_horn.melody.water": "Water",
-	"tag.item.hollow.can_put_in_jar": "Can put in jar",
+	"subtitles.hollow.item.jar.use.fireflies": "Jar fills",
+	"tag.item.hollow.cannot_put_in_jar": "Cannot put in jar",
 	"tag.item.hollow.forms_giant_lily_pad": "Forms giant lily pad",
-	"tag.item.hollow.hollow_logs": "Hollow Logs"
+	"tag.item.hollow.furnace_boats": "Furnace Boats",
+	"tag.item.hollow.glass_jars": "Glass Jars",
+	"tag.item.hollow.hollow_logs": "Hollow Logs",
+	"tag.item.hollow.put_in_jar_override": "Put in jar override"
 }

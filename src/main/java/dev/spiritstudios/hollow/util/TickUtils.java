@@ -5,15 +5,19 @@ import net.minecraft.SharedConstants;
 public final class TickUtils {
 	private TickUtils() {}
 
-	public static int ticksFromMinsAndSecs(int mins, int secs) {
-		return ticksFromMins(mins) + ticksFromSecs(secs);
+	public static int from(int hrs, int mins, int secs) {
+		return fromHrs(hrs) + fromMins(mins) + fromSecs(secs);
 	}
 
-	public static int ticksFromMins(int mins) {
+	public static int fromHrs(int hrs) {
+		return fromMins(hrs);
+	}
+
+	public static int fromMins(int mins) {
 		return SharedConstants.TICKS_PER_MINUTE * mins;
 	}
 
-	public static int ticksFromSecs(int secs) {
+	public static int fromSecs(int secs) {
 		return SharedConstants.TICKS_PER_SECOND * secs;
 	}
 }

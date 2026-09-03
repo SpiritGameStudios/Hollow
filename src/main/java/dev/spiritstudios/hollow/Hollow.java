@@ -2,8 +2,10 @@ package dev.spiritstudios.hollow;
 
 import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
+import dev.spiritstudios.hollow.core.dispenser.HollowDispenserBehaviours;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
+import dev.spiritstudios.hollow.network.ServerboundPropelFurnaceBoatPayload;
 import dev.spiritstudios.hollow.references.HollowBlockItemIds;
 import dev.spiritstudios.hollow.sounds.HollowSoundEvents;
 import dev.spiritstudios.hollow.world.entity.HollowEntityTypes;
@@ -19,8 +21,13 @@ import dev.spiritstudios.hollow.world.level.gen.tree.foliage.HollowFoliagePlacer
 import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootFunctionTypes;
 import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootTableModifications;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.DispenserBlock;
 
 public final class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
@@ -49,6 +56,11 @@ public final class Hollow implements ModInitializer {
 
 		HollowParticleTypes.init();
 		HollowCreativeModeTab.init();
+
+		HollowDispenserBehaviours.init();
+
+		PayloadTypeRegistry.serverboundPlay().register(ServerboundPropelFurnaceBoatPayload.TYPE, ServerboundPropelFurnaceBoatPayload.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(ServerboundPropelFurnaceBoatPayload.TYPE, new ServerboundPropelFurnaceBoatPayload.Receiver());
 
 		addAliases();
     }

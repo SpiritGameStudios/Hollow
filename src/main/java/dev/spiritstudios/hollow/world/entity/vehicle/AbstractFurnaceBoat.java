@@ -2,25 +2,28 @@ package dev.spiritstudios.hollow.world.entity.vehicle;
 
 import com.mojang.logging.LogUtils;
 import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
+import dev.spiritstudios.hollow.network.ServerboundPropelFurnaceBoatPayload;
 import dev.spiritstudios.hollow.util.TickUtils;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
@@ -35,11 +38,12 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 
 	private static final String FUEL_KEY = "Fuel";
 
-	private static final int FUEL_TICKS_PER_ITEM = TickUtils.ticksFromMins(2);
-	private static final int MAX_FUEL_TICKS = TickUtils.ticksFromMins(30);
+	private static final int FUEL_TICKS_PER_ITEM = TickUtils.fromMins(3);
+	private static final int MAX_FUEL_TICKS = TickUtils.fromHrs(1);
 
 	public static final double PROPULSION_SPEED = 0.04;
-	private static final double INIT_PROPEL_SPEED_REQUIREMENT_SQR = 0.01;
+	public static final double PROPULSION_SPEED_SLOW = 0.02;
+
 	private static final Vec3 SMOKE_PARTICLE_POS = new Vec3(0.0, 1.1, -0.5);
 
 	private int fuel = 0;
@@ -78,7 +82,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 			}
 
 			if (this.random.nextFloat() < 0.1F && !this.isSilent()) {
-				level.playLocalSound(animPos.x, animPos.y, animPos.z, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+				level.playLocalSound(animPos.x, animPos.y, animPos.z, SoundEvents.FURNACE_FIRE_CRACKLE, this.getSoundSource(), 1.0F, 1.0F, false);
 			}
 
 			this.tickPropulsion();
@@ -89,30 +93,32 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		}
 
 		if (!this.hasFuel() || this.status != Status.IN_WATER) {
-			this.setIsPropelled(false);
+			this.sendIsPropelled(false);
 		}
 	}
 
 	@Override
-	protected void removePassenger(Entity passenger) {
-		this.setIsPropelled(false);
-		super.removePassenger(passenger);
+	public boolean isClientAuthoritative() {
+		return super.isClientAuthoritative() && !this.isPropelled();
 	}
 
 	private void tickPropulsion() {
-		if (this.status == Status.IN_WATER && this.getDeltaMovement().lengthSqr() > INIT_PROPEL_SPEED_REQUIREMENT_SQR) {
-			this.setIsPropelled(true);
+		if (this.status == Status.IN_WATER && this.getDeltaMovement().lengthSqr() > Mth.EPSILON) {
+			this.sendIsPropelled(true);
 		}
 
 		if (this.isPropelled()) {
 			float rad = this.getYRot() * Mth.DEG_TO_RAD;
 			this.setDeltaMovement(this.getDeltaMovement().add(
-				Mth.sin(-rad) * PROPULSION_SPEED,
+				Mth.sin(-rad) * this.getPropulsionSpeed(),
 				0.0,
-				Mth.cos(rad) * PROPULSION_SPEED
+				Mth.cos(rad) * this.getPropulsionSpeed()
 			));
-			this.syncPosition = true;
 		}
+	}
+
+	private double getPropulsionSpeed() {
+		return this.fuel <= TickUtils.fromSecs(5) ? PROPULSION_SPEED_SLOW : PROPULSION_SPEED;
 	}
 
 	@Override
@@ -133,38 +139,61 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 			return superInteraction;
 		}
 
-		if (this.canAddPassenger(player) && !player.isSecondaryUseActive()) {
+		ItemStack itemStack = player.getItemInHand(hand);
+
+		if (this.canAddPassenger(player) && !player.isSecondaryUseActive() || !this.addFuel(itemStack)) {
 			return InteractionResult.PASS;
 		}
 
-		ItemStack itemStack = player.getItemInHand(hand);
+		ItemStackTemplate remainderStack = itemStack.getCraftingRemainder();
+		itemStack.consume(1, player);
 
-		if (this.addFuel(itemStack)) {
-			itemStack.consume(1, player);
+		if (remainderStack != null) {
+			ItemStack remainder = remainderStack.create();
+			if (itemStack.isEmpty()) {
+				player.setItemInHand(hand, remainder);
+			}
+			else if (!player.addItem(remainder)) {
+				player.drop(remainder, false);
+			}
 		}
+
+		player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
 
 		return InteractionResult.SUCCESS;
 	}
 
 	public boolean addFuel(ItemStack itemStack) {
-		if (itemStack.is(ItemTags.FURNACE_MINECART_FUEL) && this.fuel + FUEL_TICKS_PER_ITEM <= MAX_FUEL_TICKS) {
-			this.fuel += FUEL_TICKS_PER_ITEM;
-			return true;
+		FuelValues fuelValues = this.level().fuelValues();
+
+		if (!fuelValues.isFuel(itemStack) || this.fuel == MAX_FUEL_TICKS) {
+			return false;
 		}
 
-		return false;
+		float duration = fuelValues.burnDuration(itemStack) * getFuelScaleQuotient(fuelValues);
+		this.fuel = Math.min(MAX_FUEL_TICKS, this.fuel + Mth.floor(duration));
+
+		if (this.fuel > MAX_FUEL_TICKS) {
+			this.fuel = MAX_FUEL_TICKS;
+		}
+
+		return true;
+	}
+
+	private static float getFuelScaleQuotient(FuelValues fuelValues) {
+		return (float) FUEL_TICKS_PER_ITEM / fuelValues.burnDuration(Items.COAL.getDefaultInstance());
 	}
 
 	@Override
 	protected void addAdditionalSaveData(ValueOutput output) {
 		super.addAdditionalSaveData(output);
-		output.putShort(FUEL_KEY, (short) this.fuel);
+		output.putInt(FUEL_KEY, this.fuel);
 	}
 
 	@Override
 	protected void readAdditionalSaveData(ValueInput input) {
 		super.readAdditionalSaveData(input);
-		this.fuel = input.getShortOr(FUEL_KEY, (short) 0);
+		this.fuel = input.getIntOr(FUEL_KEY, 0);
 	}
 
 	public boolean hasFuel() {
@@ -175,12 +204,21 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		return this.entityData.get(DATA_ID_PROPELLED);
 	}
 
-	protected void setHasFuel(boolean fuel) {
-		this.entityData.set(DATA_ID_FUEL, fuel, true);
+	public void setHasFuel(boolean fuel) {
+		this.entityData.set(DATA_ID_FUEL, fuel);
 	}
 
-	protected void setIsPropelled(boolean propelled) {
-		this.entityData.set(DATA_ID_PROPELLED, propelled, true);
+	public void setIsPropelled(boolean propelled) {
+		this.entityData.set(DATA_ID_PROPELLED, propelled);
+	}
+
+	private void sendIsPropelled(boolean propelled) {
+		if (this.isPropelled() == !propelled) {
+			if (this.level().isClientSide()) {
+				ClientPlayNetworking.send(new ServerboundPropelFurnaceBoatPayload(this.uuid, propelled));
+			}
+			else this.setIsPropelled(propelled);
+		}
 	}
 
 	public boolean isPoweredByFurnace() {
