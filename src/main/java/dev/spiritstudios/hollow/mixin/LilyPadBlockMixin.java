@@ -12,22 +12,37 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.LilyPadBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Implements;
+import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 
-@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
 @Mixin(value = LilyPadBlock.class, priority = 1500)
-public abstract class LilyPadBlockMixin implements BonemealableBlock {
-    @WrapMethod(method = "isValidBonemealTarget")
+@Implements(@Interface(iface = BonemealableBlock.class, prefix = "hollow$"))
+public abstract class LilyPadBlockMixin {
+	public boolean hollow$isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+		return false;
+	}
+
+	public boolean hollow$isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+		return false;
+	}
+
+	public void hollow$performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {}
+
+	@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
+	@WrapMethod(method = "isValidBonemealTarget")
     private boolean wrapIsValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, Operation<Boolean> original) {
         return original.call(level, pos, state) || state.is(Blocks.LILY_PAD);
     }
 
-    @WrapMethod(method = "isBonemealSuccess")
+	@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
+	@WrapMethod(method = "isBonemealSuccess")
     private boolean wrapIsBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, Operation<Boolean> original) {
         return true;
     }
 
-    @WrapMethod(method = "performBonemeal")
+	@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
+	@WrapMethod(method = "performBonemeal")
     private void wrapPerformBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, Operation<Void> original) {
 		level.setBlockAndUpdate(pos, HollowBlocks.FLOWERING_LILY_PAD.defaultBlockState());
 		original.call(level, random, pos, state);

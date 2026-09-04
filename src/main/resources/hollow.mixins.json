@@ -10,7 +10,6 @@
 		"CopperBulbBlockMixin",
 		"EntityMixin",
 		"FireflyBushBlockMixin",
-		"LilyPadBlockIntrinsicMixin",
 		"LilyPadBlockMixin",
 		"LivingEntityMixin",
 		"PlaceOnWaterBlockItemMixin",
