@@ -12,6 +12,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Ease;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -103,17 +104,23 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	}
 
 	private void tickPropulsion() {
-		if (this.status == Status.IN_WATER && this.getDeltaMovement().lengthSqr() > Mth.EPSILON) {
+		if (this.status == Status.IN_WATER && this.getDeltaMovement().horizontalDistanceSqr() > Mth.EPSILON) {
 			this.sendIsPropelled(true);
 		}
 
 		if (this.isPropelled()) {
 			float rad = this.getYRot() * Mth.DEG_TO_RAD;
-			this.setDeltaMovement(this.getDeltaMovement().add(
-				Mth.sin(-rad) * this.getPropulsionSpeed(),
+
+			float propulsionSpeedDelta = this.fuel <= TickUtils.fromSecs(5) ? (float) this.fuel / TickUtils.fromSecs(5) : 1.0F;
+			propulsionSpeedDelta = Ease.outQuad(propulsionSpeedDelta);
+
+			Vec3 speed = this.getDeltaMovement().add(
+				Mth.sin(-rad) * PROPULSION_SPEED,
 				0.0,
-				Mth.cos(rad) * this.getPropulsionSpeed()
-			));
+				Mth.cos(rad) * PROPULSION_SPEED
+			);
+
+			this.setDeltaMovement(speed.multiply(propulsionSpeedDelta, 1.0, propulsionSpeedDelta));
 		}
 	}
 
@@ -205,11 +212,11 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	}
 
 	public void setHasFuel(boolean fuel) {
-		this.entityData.set(DATA_ID_FUEL, fuel);
+		this.entityData.set(DATA_ID_FUEL, fuel, true);
 	}
 
 	public void setIsPropelled(boolean propelled) {
-		this.entityData.set(DATA_ID_PROPELLED, propelled);
+		this.entityData.set(DATA_ID_PROPELLED, propelled, true);
 	}
 
 	private void sendIsPropelled(boolean propelled) {
@@ -217,7 +224,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 			if (this.level().isClientSide()) {
 				ClientPlayNetworking.send(new ServerboundPropelFurnaceBoatPayload(this.uuid, propelled));
 			}
-			else this.setIsPropelled(propelled);
+			this.setIsPropelled(propelled);
 		}
 	}
 
