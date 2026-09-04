@@ -23,11 +23,8 @@ import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootTableModifica
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.DispenserBlock;
 
 public final class Hollow implements ModInitializer {
     public static final String MODID = "hollow";
@@ -59,7 +56,7 @@ public final class Hollow implements ModInitializer {
 
 		HollowDispenserBehaviours.init();
 
-		PayloadTypeRegistry.serverboundPlay().register(ServerboundPropelFurnaceBoatPayload.TYPE, ServerboundPropelFurnaceBoatPayload.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(ServerboundPropelFurnaceBoatPayload.TYPE, ServerboundPropelFurnaceBoatPayload.STREAM_CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(ServerboundPropelFurnaceBoatPayload.TYPE, new ServerboundPropelFurnaceBoatPayload.Receiver());
 
 		addAliases();
