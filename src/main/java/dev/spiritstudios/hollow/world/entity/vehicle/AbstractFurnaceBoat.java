@@ -93,7 +93,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		}
 
 		if (!this.hasFuel() || this.status != Status.IN_WATER) {
-			this.sendIsPropelled(false);
+			this.setIsPropelled(false);
 		}
 	}
 
@@ -104,7 +104,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 
 	private void tickPropulsion() {
 		if (this.status == Status.IN_WATER && this.getDeltaMovement().lengthSqr() > Mth.EPSILON) {
-			this.sendIsPropelled(true);
+			this.setIsPropelled(true);
 		}
 
 		if (this.isPropelled()) {
@@ -212,12 +212,12 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		this.entityData.set(DATA_ID_PROPELLED, propelled);
 	}
 
-	private void sendIsPropelled(boolean propelled) {
-		if (this.isPropelled() == !propelled) {
-			if (this.level().isClientSide()) {
-				ClientPlayNetworking.send(new ServerboundPropelFurnaceBoatPayload(this.uuid, propelled));
-			}
-			else this.setIsPropelled(propelled);
+	@Override
+	public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
+		super.onSyncedDataUpdated(accessor);
+
+		if (accessor == DATA_ID_PROPELLED && this.level().isClientSide()) {
+			ClientPlayNetworking.send(new ServerboundPropelFurnaceBoatPayload(this.getId(), this.isPropelled()));
 		}
 	}
 
