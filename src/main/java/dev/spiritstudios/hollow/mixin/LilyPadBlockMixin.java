@@ -12,22 +12,26 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.LilyPadBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
+import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(value = LilyPadBlock.class, priority = 1500)
-@Implements(@Interface(iface = BonemealableBlock.class, prefix = "hollow$"))
-public abstract class LilyPadBlockMixin {
-	public boolean hollow$isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+@Mixin(LilyPadBlock.class)
+public class LilyPadBlockMixin implements BonemealableBlock {
+	@Intrinsic
+	@Override
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return false;
 	}
 
-	public boolean hollow$isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+	@Intrinsic
+	@Override
+	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
 		return false;
 	}
 
-	public void hollow$performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {}
+	@Intrinsic
+	@Override
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {}
 
 	@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
 	@WrapMethod(method = "isValidBonemealTarget")
