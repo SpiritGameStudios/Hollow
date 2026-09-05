@@ -172,7 +172,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	public boolean addFuel(ItemStack itemStack) {
 		FuelValues fuelValues = this.level().fuelValues();
 
-		if (!fuelValues.isFuel(itemStack) || this.fuel == MAX_FUEL_TICKS) {
+		if (!fuelValues.isFuel(itemStack) || this.fuel >= MAX_FUEL_TICKS) {
 			return false;
 		}
 

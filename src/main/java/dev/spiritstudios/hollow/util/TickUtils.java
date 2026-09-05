@@ -10,7 +10,7 @@ public final class TickUtils {
 	}
 
 	public static int fromHrs(int hrs) {
-		return fromMins(hrs);
+		return fromMins(hrs * 60);
 	}
 
 	public static int fromMins(int mins) {

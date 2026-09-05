@@ -9,6 +9,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
@@ -99,9 +100,20 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     }
 
 	public static boolean isClimbableHollowLog(BlockState state, Entity entity) {
-		return state.getBlock() instanceof HollowLogBlock &&
-			state.getValue(AXIS) == Direction.Axis.Y &&
-			entity.is(HollowEntityTypeTags.CAN_CLIMB_HOLLOW_LOGS);
+		if (!entity.is(HollowEntityTypeTags.CAN_CLIMB_HOLLOW_LOGS) || !isVerticalLog(state))
+			return false;
+
+		Level level = entity.level();
+		BlockPos blockPos = entity.blockPosition();
+
+		BlockState aboveState = level.getBlockState(blockPos.above());
+		BlockState belowState = level.getBlockState(blockPos.below());
+
+		return isVerticalLog(aboveState) || isVerticalLog(belowState);
+	}
+
+	public static boolean isVerticalLog(BlockState state) {
+		return state.getBlock() instanceof HollowLogBlock && state.getValue(AXIS) == Direction.Axis.Y;
 	}
 
     public enum Layer implements StringRepresentable {
