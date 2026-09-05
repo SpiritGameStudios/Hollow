@@ -41,9 +41,9 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 
 	private static final int FUEL_TICKS_PER_ITEM = TickUtils.fromMins(3);
 	private static final int MAX_FUEL_TICKS = TickUtils.fromHrs(1);
+	private static final int SPUTTER_OUT_TICKS = TickUtils.fromSecs(5);
 
-	public static final double PROPULSION_SPEED = 0.04;
-	public static final double PROPULSION_SPEED_SLOW = 0.02;
+	public static final float PROPULSION_SPEED = 0.04F;
 
 	private static final Vec3 SMOKE_PARTICLE_POS = new Vec3(0.0, 1.1, -0.5);
 
@@ -104,28 +104,27 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	}
 
 	private void tickPropulsion() {
-		if (this.status == Status.IN_WATER && this.getDeltaMovement().horizontalDistanceSqr() > Mth.EPSILON) {
+		Vec3 velocity = this.getDeltaMovement();
+
+		if (this.status == Status.IN_WATER && velocity.horizontalDistanceSqr() > Mth.EPSILON) {
 			this.setIsPropelled(true);
 		}
 
 		if (this.isPropelled()) {
 			float rad = this.getYRot() * Mth.DEG_TO_RAD;
+			double propulsionSpeed = this.getPropulsionSpeed();
 
-			float propulsionSpeedDelta = this.fuel <= TickUtils.fromSecs(5) ? (float) this.fuel / TickUtils.fromSecs(5) : 1.0F;
-			propulsionSpeedDelta = Ease.outQuad(propulsionSpeedDelta);
-
-			Vec3 speed = this.getDeltaMovement().add(
-				Mth.sin(-rad) * PROPULSION_SPEED,
-				0.0,
-				Mth.cos(rad) * PROPULSION_SPEED
-			);
-
-			this.setDeltaMovement(speed.multiply(propulsionSpeedDelta, 1.0, propulsionSpeedDelta));
+			this.setDeltaMovement(new Vec3(
+				velocity.x + Mth.sin(-rad) * propulsionSpeed,
+				velocity.y,
+				velocity.z + Mth.cos(rad) * propulsionSpeed
+			));
 		}
 	}
 
-	private double getPropulsionSpeed() {
-		return this.fuel <= TickUtils.fromSecs(5) ? PROPULSION_SPEED_SLOW : PROPULSION_SPEED;
+	private float getPropulsionSpeed() {
+		float delta = (float) this.fuel / SPUTTER_OUT_TICKS;
+		return PROPULSION_SPEED * Ease.outQuad(Mth.clamp(delta, 0.0F, 1.0F));
 	}
 
 	@Override
