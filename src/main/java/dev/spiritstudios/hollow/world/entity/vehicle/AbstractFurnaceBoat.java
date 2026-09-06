@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import java.util.function.Supplier;
 
 public abstract class AbstractFurnaceBoat extends AbstractBoat {
-	private static final Logger LOGGER = LogUtils.getLogger();
 	private static final EntityDataAccessor<Boolean> DATA_ID_FUEL = SynchedEntityData.defineId(AbstractFurnaceBoat.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> DATA_ID_PROPELLED = SynchedEntityData.defineId(AbstractFurnaceBoat.class, EntityDataSerializers.BOOLEAN);
 
