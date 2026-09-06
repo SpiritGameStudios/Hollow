@@ -2,8 +2,8 @@ package dev.spiritstudios.hollow.client.render.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import dev.spiritstudios.hollow.world.level.block.jar.BaseJarBlock;
 import dev.spiritstudios.hollow.world.level.block.entity.GlassJarBlockEntity;
+import dev.spiritstudios.hollow.world.level.block.jar.BaseJarBlock;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;

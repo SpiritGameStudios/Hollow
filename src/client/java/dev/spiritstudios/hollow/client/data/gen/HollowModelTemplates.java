@@ -7,9 +7,7 @@ import net.minecraft.client.data.models.model.TextureSlot;
 import java.util.Optional;
 
 import static dev.spiritstudios.hollow.client.data.gen.HollowTextureSlots.OVERLAY;
-import static net.minecraft.client.data.models.model.TextureSlot.END;
-import static net.minecraft.client.data.models.model.TextureSlot.INSIDE;
-import static net.minecraft.client.data.models.model.TextureSlot.SIDE;
+import static net.minecraft.client.data.models.model.TextureSlot.*;
 
 public final class HollowModelTemplates {
 	public static final ModelTemplate HOLLOW_LOG = block("hollow_log", SIDE, INSIDE, END);

@@ -2,9 +2,9 @@ package dev.spiritstudios.hollow.world.level.storage.loot;
 
 import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.Hollow;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 
 public final class HollowLootFunctionTypes {
 	public static final MapCodec<SetCopperInstrumentFunction> SET_COPPER_INSTRUMENT = register("set_copper_instrument", SetCopperInstrumentFunction.CODEC);

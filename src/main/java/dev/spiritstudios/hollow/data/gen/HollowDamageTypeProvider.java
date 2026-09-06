@@ -3,9 +3,9 @@ package dev.spiritstudios.hollow.data.gen;
 import dev.spiritstudios.hollow.Hollow;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.damagesource.DamageType;
 
 import java.util.concurrent.CompletableFuture;
 

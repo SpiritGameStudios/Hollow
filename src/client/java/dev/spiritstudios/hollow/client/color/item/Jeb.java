@@ -13,7 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class Jeb implements ItemTintSource {
 	public static final MapCodec<Jeb> MAP_CODEC = MapCodec.unit(new Jeb());

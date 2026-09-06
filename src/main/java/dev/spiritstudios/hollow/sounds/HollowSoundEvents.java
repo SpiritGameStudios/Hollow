@@ -1,11 +1,11 @@
 package dev.spiritstudios.hollow.sounds;
 
 import dev.spiritstudios.hollow.Hollow;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.Registry;
 import net.minecraft.core.Holder;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 
 public final class HollowSoundEvents {
     public static final Holder.Reference<SoundEvent> MUSIC_DISC_POSTMORTEM = registerForHolder("music_disc.postmortem");

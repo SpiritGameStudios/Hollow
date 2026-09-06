@@ -1,7 +1,7 @@
 package dev.spiritstudios.hollow.client.data.gen;
 
-import dev.spiritstudios.hollow.data.gen.*;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
+import dev.spiritstudios.hollow.data.gen.*;
 import dev.spiritstudios.hollow.world.entity.HollowDamageTypes;
 import dev.spiritstudios.hollow.world.item.CopperInstruments;
 import dev.spiritstudios.hollow.world.item.HollowJukeboxSongs;

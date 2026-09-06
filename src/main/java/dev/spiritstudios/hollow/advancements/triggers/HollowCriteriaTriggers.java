@@ -1,7 +1,8 @@
 package dev.spiritstudios.hollow.advancements.triggers;
 
 import dev.spiritstudios.hollow.Hollow;
-import net.minecraft.advancements.triggers.*;
+import net.minecraft.advancements.triggers.CriterionTrigger;
+import net.minecraft.advancements.triggers.PlayerTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 

@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.entity.vehicle;
 
-import com.mojang.logging.LogUtils;
 import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
 import dev.spiritstudios.hollow.network.ServerboundPropelFurnaceBoatPayload;
 import dev.spiritstudios.hollow.util.TickUtils;
@@ -28,7 +27,6 @@ import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
-import org.slf4j.Logger;
 
 import java.util.function.Supplier;
 

@@ -2,9 +2,9 @@ package dev.spiritstudios.hollow.world.level.storage.loot;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
+import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
