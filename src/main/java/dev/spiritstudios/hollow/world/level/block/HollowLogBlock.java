@@ -100,8 +100,9 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     }
 
 	public static boolean isClimbableHollowLog(BlockState state, Entity entity) {
-		if (!entity.is(HollowEntityTypeTags.CAN_CLIMB_HOLLOW_LOGS) || !isVerticalLog(state))
+		if (!entity.is(HollowEntityTypeTags.CAN_CLIMB_HOLLOW_LOGS) || !isVerticalLog(state)) {
 			return false;
+		}
 
 		Level level = entity.level();
 		BlockPos blockPos = entity.blockPosition();

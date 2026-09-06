@@ -10,8 +10,8 @@ import net.minecraft.world.damagesource.DamageType;
 public final class HollowDamageTypes {
     public static final ResourceKey<DamageType> SCULK_JAW = ResourceKey.create(Registries.DAMAGE_TYPE, Hollow.id("sculk_jaw"));
 
-    public static void bootstrap(BootstrapContext<DamageType> registerable) {
-        registerable.register(
+    public static void bootstrap(BootstrapContext<DamageType> context) {
+        context.register(
                 SCULK_JAW,
                 new DamageType(
                         "sculk_jaw",
