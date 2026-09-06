@@ -45,7 +45,6 @@
         "Name": "hollow:hollow_birch_log",
         "Properties": {
           "axis": "y",
-          "layer": "none",
           "waterlogged": "false"
         }
       }

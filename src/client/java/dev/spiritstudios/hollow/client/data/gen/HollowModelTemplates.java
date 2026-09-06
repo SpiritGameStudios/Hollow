@@ -6,16 +6,12 @@ import net.minecraft.client.data.models.model.TextureSlot;
 
 import java.util.Optional;
 
-import static dev.spiritstudios.hollow.client.data.gen.HollowTextureSlots.OVERLAY;
 import static net.minecraft.client.data.models.model.TextureSlot.*;
 
 public final class HollowModelTemplates {
 	public static final ModelTemplate HOLLOW_LOG = block("hollow_log", SIDE, INSIDE, END);
 	public static final ModelTemplate HOLLOW_LOG_HORIZONTAL = block("hollow_log_horizontal", "_horizontal", SIDE, INSIDE, END);
-
-	public static final ModelTemplate HOLLOW_LOG_HORIZONTAL_MOSS = hollowLogHorizontalOverlay("moss");
-	public static final ModelTemplate HOLLOW_LOG_HORIZONTAL_PALE_MOSS = hollowLogHorizontalOverlay("pale_moss");
-	public static final ModelTemplate HOLLOW_LOG_HORIZONTAL_SNOW = hollowLogHorizontalOverlay("snow");
+	public static final ModelTemplate HOLLOW_LOG_LAYER = block("template_hollow_log_layer", TEXTURE);
 
 	private static ModelTemplate make(TextureSlot... requiredTextureKeys) {
 		return new ModelTemplate(Optional.empty(), Optional.empty(), requiredTextureKeys);
@@ -31,9 +27,5 @@ public final class HollowModelTemplates {
 
 	private static ModelTemplate block(String parent, String variant, TextureSlot... requiredTextureKeys) {
 		return new ModelTemplate(Optional.of(Hollow.id("block/" + parent)), Optional.of(variant), requiredTextureKeys);
-	}
-
-	private static ModelTemplate hollowLogHorizontalOverlay(String overlay) {
-		return block("hollow_log_horizontal_layer", "_horizontal_" + overlay, SIDE, INSIDE, END, OVERLAY);
 	}
 }

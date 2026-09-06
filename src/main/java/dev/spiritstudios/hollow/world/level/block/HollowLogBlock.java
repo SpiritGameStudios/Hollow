@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -37,7 +36,6 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     );
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final EnumProperty<Layer> LAYER = EnumProperty.create("layer", Layer.class);
 
     public final Block log;
     public final boolean isStripped;
@@ -50,13 +48,12 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
                 this.defaultBlockState()
                         .setValue(AXIS, Direction.Axis.Y)
                         .setValue(WATERLOGGED, false)
-                        .setValue(LAYER, Layer.NONE)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.AXIS, WATERLOGGED, LAYER);
+        builder.add(AXIS, WATERLOGGED);
     }
 
     @Override
@@ -71,11 +68,9 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        BlockState above = ctx.getLevel().getBlockState(ctx.getClickedPos().above());
-        return this.defaultBlockState()
-                .setValue(BlockStateProperties.AXIS, ctx.getClickedFace().getAxis())
-                .setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).is(Fluids.WATER))
-                .setValue(LAYER, Layer.get(above));
+		return this.defaultBlockState()
+                .setValue(AXIS, ctx.getClickedFace().getAxis())
+                .setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).is(Fluids.WATER));
     }
 
     @Override
@@ -89,9 +84,7 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
             ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return directionToNeighbour == Direction.UP ?
-                state.setValue(LAYER, Layer.get(neighbourState)) :
-                super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
+        return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
     }
 
     @Override
@@ -107,10 +100,11 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
 		Level level = entity.level();
 		BlockPos blockPos = entity.blockPosition();
 
-		BlockState aboveState = level.getBlockState(blockPos.above());
-		BlockState belowState = level.getBlockState(blockPos.below());
+		return isVerticalLog(level, blockPos.above()) || isVerticalLog(level, blockPos.below());
+	}
 
-		return isVerticalLog(aboveState) || isVerticalLog(belowState);
+	public static boolean isVerticalLog(Level level, BlockPos pos) {
+		return isVerticalLog(level.getBlockState(pos));
 	}
 
 	public static boolean isVerticalLog(BlockState state) {

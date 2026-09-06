@@ -5,7 +5,6 @@
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
 		"AbstractBoatMixin",
-		"AttachedToLogsDecoratorMixin",
 		"BlockItemMixin",
 		"CopperBulbBlockMixin",
 		"EntityMixin",

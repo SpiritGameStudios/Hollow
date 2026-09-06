@@ -18,6 +18,7 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
         pack.addProvider(HollowModelProvider::new);
+		pack.addProvider(HollowFusionBlockModelModifierProvider::new);
         pack.addProvider(HollowSoundsProvider::new);
 
         pack.addProvider(HollowBlockLootProvider::new);

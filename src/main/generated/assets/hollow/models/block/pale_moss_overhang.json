@@ -1,0 +1,6 @@
+{
+  "parent": "hollow:block/template_hollow_log_layer",
+  "textures": {
+    "texture": "hollow:block/pale_moss_overhang"
+  }
+}

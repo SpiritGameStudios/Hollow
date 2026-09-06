@@ -49,7 +49,6 @@
         "Name": "hollow:hollow_jungle_log",
         "Properties": {
           "axis": "y",
-          "layer": "none",
           "waterlogged": "false"
         }
       }

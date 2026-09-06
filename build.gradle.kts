@@ -80,6 +80,11 @@ repositories {
         content { includeGroupAndSubgroups("dev.spiritstudios") }
     }
 
+	maven("https://api.modrinth.com/maven") {
+		name = "Modrinth"
+		content { includeGroupAndSubgroups("maven.modrinth") }
+	}
+
     mavenCentral()
 }
 
@@ -88,6 +93,7 @@ dependencies {
 
     implementation(libs.fabric.loader)
     implementation(libs.fabric.api)
+	implementation(libs.fusion)
 }
 
 tasks.processResources {
