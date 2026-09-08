@@ -3,9 +3,7 @@ package dev.spiritstudios.hollow.world.level.block;
 import dev.spiritstudios.hollow.tags.HollowEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -13,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -110,38 +107,4 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
 	public static boolean isVerticalLog(BlockState state) {
 		return state.getBlock() instanceof HollowLogBlock && state.getValue(AXIS) == Direction.Axis.Y;
 	}
-
-    public enum Layer implements StringRepresentable {
-        NONE("none"),
-        MOSS("moss"),
-        PALE_MOSS("pale_moss"),
-        SNOW("snow");
-
-        private final String name;
-
-        Layer(String name) {
-            this.name = name;
-        }
-
-        public static Layer get(BlockState aboveState) {
-            if (aboveState.is(Blocks.MOSS_BLOCK) || aboveState.is(Blocks.MOSS_CARPET)) {
-                return MOSS;
-            }
-
-            if (aboveState.is(Blocks.PALE_MOSS_BLOCK) || aboveState.is(Blocks.PALE_MOSS_CARPET)) {
-                return PALE_MOSS;
-            }
-
-            if (aboveState.is(BlockTags.SNOW)) {
-                return SNOW;
-            }
-
-            return NONE;
-        }
-
-        @Override
-        public String getSerializedName() {
-            return name;
-        }
-    }
 }

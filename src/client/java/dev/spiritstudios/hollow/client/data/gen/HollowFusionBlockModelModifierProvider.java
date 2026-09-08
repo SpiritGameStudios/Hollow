@@ -4,7 +4,9 @@ import com.supermartijn642.fusion.api.model.predicates.blockstate.DefaultBlockSt
 import com.supermartijn642.fusion.api.provider.FusionBlockModelModifierProvider;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
+import dev.spiritstudios.hollow.world.level.block.HollowLogBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -20,10 +22,14 @@ public class HollowFusionBlockModelModifierProvider extends FusionBlockModelModi
 	protected void generate() {
 		ModifierBuilder builder = this.modifier(Hollow.id("hollow_log_layers"));
 
-		HollowBlocks.HOLLOW_LOG.forEach(builder::target);
-		HollowBlocks.STRIPPED_HOLLOW_LOG.forEach(builder::target);
+		HollowBlocks.HOLLOW_LOG.forEach(block -> addTarget(builder, block));
+		HollowBlocks.STRIPPED_HOLLOW_LOG.forEach(block -> addTarget(builder, block));
 
 		builder.appendModelSeries(MOSS_OVERHANG, PALE_MOSS_OVERHANG);
+	}
+
+	private static void addTarget(ModifierBuilder builder, Block block) {
+		builder.target(block, HollowLogBlock.AXIS, Direction.Axis.X, Direction.Axis.Z);
 	}
 
 	private static ModelEntry overhangModelEntry(String name, Block... blocks) {

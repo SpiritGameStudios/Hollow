@@ -34,27 +34,203 @@
     ]
   ],
   "targets": [
-    "hollow:hollow_acacia_log",
-    "hollow:hollow_birch_log",
-    "hollow:hollow_cherry_log",
-    "hollow:hollow_crimson_stem",
-    "hollow:hollow_dark_oak_log",
-    "hollow:hollow_jungle_log",
-    "hollow:hollow_mangrove_log",
-    "hollow:hollow_oak_log",
-    "hollow:hollow_pale_oak_log",
-    "hollow:hollow_spruce_log",
-    "hollow:hollow_warped_stem",
-    "hollow:stripped_hollow_acacia_log",
-    "hollow:stripped_hollow_birch_log",
-    "hollow:stripped_hollow_cherry_log",
-    "hollow:stripped_hollow_crimson_stem",
-    "hollow:stripped_hollow_dark_oak_log",
-    "hollow:stripped_hollow_jungle_log",
-    "hollow:stripped_hollow_mangrove_log",
-    "hollow:stripped_hollow_oak_log",
-    "hollow:stripped_hollow_pale_oak_log",
-    "hollow:stripped_hollow_spruce_log",
-    "hollow:stripped_hollow_warped_stem"
+    {
+      "block": "hollow:hollow_acacia_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_birch_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_cherry_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_crimson_stem",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_dark_oak_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_jungle_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_mangrove_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_oak_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_pale_oak_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_spruce_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:hollow_warped_stem",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_acacia_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_birch_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_cherry_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_crimson_stem",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_dark_oak_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_jungle_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_mangrove_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_oak_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_pale_oak_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_spruce_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_warped_stem",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    }
   ]
 }
