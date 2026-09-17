@@ -116,6 +116,15 @@
       }
     },
     {
+      "block": "hollow:hollow_poplar_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
       "block": "hollow:hollow_spruce_log",
       "properties": {
         "axis": [
@@ -207,6 +216,15 @@
     },
     {
       "block": "hollow:stripped_hollow_pale_oak_log",
+      "properties": {
+        "axis": [
+          "x",
+          "z"
+        ]
+      }
+    },
+    {
+      "block": "hollow:stripped_hollow_poplar_log",
       "properties": {
         "axis": [
           "x",

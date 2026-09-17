@@ -26,5 +26,6 @@ public final class HollowDispenserBehaviours {
 		registerBoat(HollowItems.OAK_FURNACE_BOAT, HollowEntityTypes.OAK_FURNACE_BOAT);
 		registerBoat(HollowItems.PALE_OAK_FURNACE_BOAT, HollowEntityTypes.PALE_OAK_FURNACE_BOAT);
 		registerBoat(HollowItems.SPRUCE_FURNACE_BOAT, HollowEntityTypes.SPRUCE_FURNACE_BOAT);
+		registerBoat(HollowItems.POPLAR_FURNACE_BOAT, HollowEntityTypes.POPLAR_FURNACE_BOAT);
 	}
 }

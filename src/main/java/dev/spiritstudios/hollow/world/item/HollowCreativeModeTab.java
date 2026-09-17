@@ -75,6 +75,7 @@ public final class HollowCreativeModeTab {
 				output.accept(HollowItems.MANGROVE_FURNACE_BOAT);
 				output.accept(HollowItems.CHERRY_FURNACE_BOAT);
 				output.accept(HollowItems.PALE_OAK_FURNACE_BOAT);
+				output.accept(HollowItems.POPLAR_FURNACE_BOAT);
 				output.accept(HollowItems.BAMBOO_FURNACE_RAFT);
 
 				parameters.holders()
@@ -131,6 +132,8 @@ public final class HollowCreativeModeTab {
 			entries.insertAfter(Items.MANGROVE_CHEST_BOAT, HollowItems.MANGROVE_FURNACE_BOAT);
 			entries.insertAfter(Items.CHERRY_CHEST_BOAT, HollowItems.CHERRY_FURNACE_BOAT);
 			entries.insertAfter(Items.PALE_OAK_CHEST_BOAT, HollowItems.PALE_OAK_FURNACE_BOAT);
+			entries.insertAfter(Items.POPLAR_CHEST_BOAT, HollowItems.POPLAR_FURNACE_BOAT);
+
 			entries.insertAfter(Items.BAMBOO_CHEST_RAFT, HollowItems.BAMBOO_FURNACE_RAFT);
 
 			entries.getContext().holders()

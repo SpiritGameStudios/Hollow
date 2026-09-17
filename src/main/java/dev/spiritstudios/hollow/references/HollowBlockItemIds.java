@@ -22,6 +22,7 @@ public final class HollowBlockItemIds {
 		create("hollow_mangrove_log"),
 		create("hollow_cherry_log"),
 		create("hollow_pale_oak_log"),
+		create("hollow_poplar_log"),
 		create("hollow_crimson_stem"),
 		create("hollow_warped_stem")
 	);
@@ -36,6 +37,7 @@ public final class HollowBlockItemIds {
 		create("stripped_hollow_mangrove_log"),
 		create("stripped_hollow_cherry_log"),
 		create("stripped_hollow_pale_oak_log"),
+		create("stripped_hollow_poplar_log"),
 		create("stripped_hollow_crimson_stem"),
 		create("stripped_hollow_warped_stem")
 	);

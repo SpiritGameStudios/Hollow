@@ -16,6 +16,7 @@ public final class HollowEntityTypeIds {
 	public static final ResourceKey<EntityType<?>> OAK_FURNACE_BOAT = create("oak_furnace_boat");
 	public static final ResourceKey<EntityType<?>> PALE_OAK_FURNACE_BOAT = create("pale_oak_furnace_boat");
 	public static final ResourceKey<EntityType<?>> SPRUCE_FURNACE_BOAT = create("spruce_furnace_boat");
+	public static final ResourceKey<EntityType<?>> POPLAR_FURNACE_BOAT = create("poplar_furnace_boat");
 
 	private static ResourceKey<EntityType<?>> create(String name) {
 		return ResourceKey.create(Registries.ENTITY_TYPE, Hollow.id(name));

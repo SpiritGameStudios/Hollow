@@ -142,6 +142,7 @@ public final class HollowItems {
 	public static final Item OAK_FURNACE_BOAT = registerBoatItem(HollowItemIds.OAK_FURNACE_BOAT, HollowEntityTypes.OAK_FURNACE_BOAT);
 	public static final Item PALE_OAK_FURNACE_BOAT = registerBoatItem(HollowItemIds.PALE_OAK_FURNACE_BOAT, HollowEntityTypes.PALE_OAK_FURNACE_BOAT);
 	public static final Item SPRUCE_FURNACE_BOAT = registerBoatItem(HollowItemIds.SPRUCE_FURNACE_BOAT, HollowEntityTypes.SPRUCE_FURNACE_BOAT);
+	public static final Item POPLAR_FURNACE_BOAT = registerBoatItem(HollowItemIds.POPLAR_FURNACE_BOAT, HollowEntityTypes.POPLAR_FURNACE_BOAT);
 
 	private static Item registerBoatItem(ResourceKey<Item> id, EntityType<? extends AbstractFurnaceBoat> entityType) {
 		return registerItem(id, p -> new BoatItem(entityType, p), new Item.Properties().stacksTo(1));

@@ -83,5 +83,6 @@ public class HollowClient implements ClientModInitializer {
 		EntityRenderers.register(HollowEntityTypes.OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.OAK_BOAT));
 		EntityRenderers.register(HollowEntityTypes.PALE_OAK_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.PALE_OAK_BOAT));
 		EntityRenderers.register(HollowEntityTypes.SPRUCE_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.SPRUCE_BOAT));
-    }
+		EntityRenderers.register(HollowEntityTypes.POPLAR_FURNACE_BOAT, context -> new FurnaceBoatRenderer(context, ModelLayers.POPLAR_BOAT));
+	}
 }

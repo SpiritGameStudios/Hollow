@@ -121,6 +121,7 @@ public final class HollowModelProvider extends FabricModelProvider {
 		generators.generateFlatItem(HollowItems.OAK_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
 		generators.generateFlatItem(HollowItems.PALE_OAK_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
 		generators.generateFlatItem(HollowItems.SPRUCE_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
+		generators.generateFlatItem(HollowItems.POPLAR_FURNACE_BOAT, ModelTemplates.FLAT_ITEM);
 
 		Identifier model = generators.generateLayeredItem(
 			HollowItems.FIREFLY_JAR,

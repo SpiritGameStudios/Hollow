@@ -56,6 +56,11 @@ public final class HollowEntityTypes {
 		HollowEntityTypeIds.SPRUCE_FURNACE_BOAT,
 		() -> HollowItems.SPRUCE_FURNACE_BOAT
 	);
+	public static final EntityType<AbstractFurnaceBoat> POPLAR_FURNACE_BOAT = registerFurnaceBoat(
+		HollowEntityTypeIds.POPLAR_FURNACE_BOAT,
+		() -> HollowItems.POPLAR_FURNACE_BOAT
+	);
+
 
 	private static EntityType<AbstractFurnaceBoat> registerFurnaceBoat(ResourceKey<EntityType<?>> id, Supplier<Item> dropItem) {
 		EntityType.EntityFactory<AbstractFurnaceBoat> factory = (entityType, level) -> {

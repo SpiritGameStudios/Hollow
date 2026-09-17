@@ -102,7 +102,8 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
 				furnaceBoat(HollowItems.OAK_FURNACE_BOAT, Items.OAK_BOAT);
 				furnaceBoat(HollowItems.PALE_OAK_FURNACE_BOAT, Items.PALE_OAK_BOAT);
 				furnaceBoat(HollowItems.SPRUCE_FURNACE_BOAT, Items.SPRUCE_BOAT);
-            }
+				furnaceBoat(HollowItems.POPLAR_FURNACE_BOAT, Items.POPLAR_BOAT);
+			}
 
 			private void furnaceBoat(ItemLike furnaceBoat, ItemLike boat) {
 				this.shapeless(RecipeCategory.TRANSPORTATION, furnaceBoat)

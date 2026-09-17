@@ -14,8 +14,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T darkOak, T mangrove, T cherry, T paleOak,
-                               T crimson, T warped) {
+                               T poplar, T crimson, T warped) {
 	public static final LogCollection<Boolean> IS_NETHER = new LogCollection<>(
+		false,
 		false,
 		false,
 		false,
@@ -39,6 +40,7 @@ public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T d
 		Blocks.MANGROVE_LOG,
 		Blocks.CHERRY_LOG,
 		Blocks.PALE_OAK_LOG,
+		Blocks.POPLAR_LOG,
 		Blocks.CRIMSON_STEM,
 		Blocks.WARPED_STEM
 	);
@@ -53,6 +55,7 @@ public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T d
 		Blocks.STRIPPED_MANGROVE_LOG,
 		Blocks.STRIPPED_CHERRY_LOG,
 		Blocks.STRIPPED_PALE_OAK_LOG,
+		Blocks.STRIPPED_POPLAR_LOG,
 		Blocks.STRIPPED_CRIMSON_STEM,
 		Blocks.STRIPPED_WARPED_STEM
 	);
@@ -90,6 +93,7 @@ public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T d
 			operation.apply(first.mangrove, second.mangrove),
 			operation.apply(first.cherry, second.cherry),
 			operation.apply(first.paleOak, second.paleOak),
+			operation.apply(first.poplar, second.poplar),
 			operation.apply(first.crimson, second.crimson),
 			operation.apply(first.warped, second.warped)
 		);
@@ -105,6 +109,7 @@ public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T d
 		operation.accept(first.mangrove, second.mangrove);
 		operation.accept(first.cherry, second.cherry);
 		operation.accept(first.paleOak, second.paleOak);
+		operation.accept(first.poplar, second.poplar);
 		operation.accept(first.crimson, second.crimson);
 		operation.accept(first.warped, second.warped);
 	}
@@ -120,6 +125,7 @@ public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T d
 			mapper.apply(mangrove),
 			mapper.apply(cherry),
 			mapper.apply(paleOak),
+			mapper.apply(poplar),
 			mapper.apply(crimson),
 			mapper.apply(warped)
 		);
@@ -135,12 +141,13 @@ public record LogCollection<T>(T oak, T spruce, T birch, T jungle, T acacia, T d
 		consumer.accept(mangrove);
 		consumer.accept(cherry);
 		consumer.accept(paleOak);
+		consumer.accept(poplar);
 		consumer.accept(crimson);
 		consumer.accept(warped);
 	}
 
 	public List<T> toList() {
-		ImmutableList.Builder<T> list = ImmutableList.builderWithExpectedSize(11);
+		ImmutableList.Builder<T> list = ImmutableList.builderWithExpectedSize(12);
 		this.forEach(list::add);
 		return list.build();
 	}

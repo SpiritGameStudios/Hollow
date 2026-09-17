@@ -193,7 +193,8 @@ public class HollowTagProviders {
 				.add(HollowEntityTypeIds.MANGROVE_FURNACE_BOAT)
 				.add(HollowEntityTypeIds.OAK_FURNACE_BOAT)
 				.add(HollowEntityTypeIds.PALE_OAK_FURNACE_BOAT)
-				.add(HollowEntityTypeIds.SPRUCE_FURNACE_BOAT);
+				.add(HollowEntityTypeIds.SPRUCE_FURNACE_BOAT)
+				.add(HollowEntityTypeIds.POPLAR_FURNACE_BOAT);
 
 			tag(ConventionalEntityTypeTags.BOATS).addTag(HollowEntityTypeTags.FURNACE_BOAT);
 		}
