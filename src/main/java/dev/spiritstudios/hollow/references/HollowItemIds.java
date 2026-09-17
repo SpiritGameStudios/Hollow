@@ -23,6 +23,7 @@ public final class HollowItemIds {
 	public static final ResourceKey<Item> OAK_FURNACE_BOAT = create("oak_furnace_boat");
 	public static final ResourceKey<Item> PALE_OAK_FURNACE_BOAT = create("pale_oak_furnace_boat");
 	public static final ResourceKey<Item> SPRUCE_FURNACE_BOAT = create("spruce_furnace_boat");
+	public static final ResourceKey<Item> POPLAR_FURNACE_BOAT = create("poplar_furnace_boat");
 
     private static ResourceKey<Item> create(final String name) {
         return ResourceKey.create(Registries.ITEM, Hollow.id(name));

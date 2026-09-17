@@ -84,15 +84,6 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD))
                         .save(this.output);
 
-                shaped(RecipeCategory.BUILDING_BLOCKS, HollowBlocks.GLASS_JAR, 4)
-                        .define('P', HollowBlocks.POLYPORE)
-                        .define('G', ConventionalItemTags.GLASS_BLOCKS)
-                        .pattern(" P ")
-                        .pattern("G G")
-                        .pattern(" G ")
-                        .unlockedBy(getHasName(HollowBlocks.POLYPORE), has(HollowBlocks.POLYPORE))
-                        .save(this.output);
-
 				furnaceBoat(HollowItems.ACACIA_FURNACE_BOAT, Items.ACACIA_BOAT);
 				furnaceBoat(HollowItems.BAMBOO_FURNACE_RAFT, Items.BAMBOO_RAFT);
 				furnaceBoat(HollowItems.BIRCH_FURNACE_BOAT, Items.BIRCH_BOAT);
@@ -102,7 +93,8 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
 				furnaceBoat(HollowItems.OAK_FURNACE_BOAT, Items.OAK_BOAT);
 				furnaceBoat(HollowItems.PALE_OAK_FURNACE_BOAT, Items.PALE_OAK_BOAT);
 				furnaceBoat(HollowItems.SPRUCE_FURNACE_BOAT, Items.SPRUCE_BOAT);
-            }
+				furnaceBoat(HollowItems.POPLAR_FURNACE_BOAT, Items.POPLAR_BOAT);
+			}
 
 			private void furnaceBoat(ItemLike furnaceBoat, ItemLike boat) {
 				this.shapeless(RecipeCategory.TRANSPORTATION, furnaceBoat)

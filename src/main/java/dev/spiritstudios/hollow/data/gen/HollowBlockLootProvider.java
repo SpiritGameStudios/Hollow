@@ -1,20 +1,12 @@
 package dev.spiritstudios.hollow.data.gen;
 
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
-import dev.spiritstudios.hollow.world.level.block.PolyporeBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
-import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class HollowBlockLootProvider extends FabricBlockLootSubProvider {
@@ -35,17 +27,6 @@ public class HollowBlockLootProvider extends FabricBlockLootSubProvider {
 
 		this.dropSelf(HollowBlocks.FLOWERING_LILY_PAD);
 		this.add(HollowBlocks.GIANT_LILY_PAD, this.createSingleItemTable(Items.LILY_PAD, ContextIntProviders.exactly(4)));
-        this.add(HollowBlocks.POLYPORE, block -> LootTable.lootTable().withPool(LootPool.lootPool()
-			.setRolls(ContextIntProviders.exactly(1))
-			.add(this.applyExplosionDecay(HollowBlocks.POLYPORE, LootItem.lootTableItem(block).apply(
-				List.of(2, 3),
-				polypore -> SetItemCountFunction.setCount(ContextIntProviders.exactly(polypore)).when(MatchBlock.blockMatches(
-					this.blocks,
-					block,
-					StatePropertiesPredicate.Builder.properties().hasProperty(PolyporeBlock.POLYPORE_AMOUNT, polypore)
-				))
-			)))
-		));
 
 		this.add(HollowBlocks.FIREFLY_JAR, this::createNameableBlockEntityTable);
         this.add(HollowBlocks.GLASS_JAR, this::createNameableBlockEntityTable);

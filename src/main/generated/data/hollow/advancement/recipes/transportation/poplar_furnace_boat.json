@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_polypore": {
+    "has_boat": {
       "conditions": {
         "items": [
           {
-            "items": "hollow:polypore"
+            "items": "#minecraft:boats"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "hollow:glass_jar"
+        "recipes": "hollow:poplar_furnace_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_polypore"
+      "has_boat"
     ]
   ],
   "rewards": {
     "recipes": [
-      "hollow:glass_jar"
+      "hollow:poplar_furnace_boat"
     ]
   }
 }

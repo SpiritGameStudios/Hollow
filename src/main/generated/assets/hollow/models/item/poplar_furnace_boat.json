@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hollow:item/polypore"
+    "layer0": "hollow:item/poplar_furnace_boat"
   }
 }
