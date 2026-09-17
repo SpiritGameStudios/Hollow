@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:copper_horn_hollow_great_sky_falling"
+        "recipes": "hollow:copper_horn_hollow_great_sky_falling"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

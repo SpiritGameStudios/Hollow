@@ -15,10 +15,11 @@ import net.minecraft.advancements.predicates.TagPredicate;
 import net.minecraft.advancements.triggers.EntityHurtPlayerTrigger;
 import net.minecraft.advancements.triggers.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.damagesource.DamageType;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -31,7 +32,8 @@ public class HollowAdvancementProvider extends FabricAdvancementProvider {
 
 	@Override
 	public void generateAdvancement(HolderLookup.Provider registries, Consumer<AdvancementHolder> consumer) {
-		HolderLookup<EntityType<?>> entityTypes = registries.lookupOrThrow(Registries.ENTITY_TYPE);
+		HolderLookup<DamageType> damageTypes = registries.lookupOrThrow(Registries.DAMAGE_TYPE);
+		HolderSet.Named<DamageType> isSculkJaw = damageTypes.getOrThrow(HollowDamageTypeTags.IS_SCULK_JAW);
 
 		AdvancementHolder adventureRoot = createPlaceholder(Identifier.withDefaultNamespace("adventure/root"));
 		AdvancementHolder husbandryRoot = createPlaceholder(Identifier.withDefaultNamespace("husbandry/root"));
@@ -41,7 +43,7 @@ public class HollowAdvancementProvider extends FabricAdvancementProvider {
 				"get_hurt_by_sculk_jaw",
 				EntityHurtPlayerTrigger.TriggerInstance.entityHurtPlayer(
 					DamagePredicate.Builder.damageInstance()
-						.type(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(HollowDamageTypeTags.IS_SCULK_JAW)))
+						.type(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(isSculkJaw)))
 				)
 			)
 			.parent(adventureRoot)
@@ -49,7 +51,6 @@ public class HollowAdvancementProvider extends FabricAdvancementProvider {
 				HollowItems.SCULK_JAW,
 				Component.translatable("advancements.hollow.adventure.get_hurt_by_sculk_jaw.title"),
 				Component.translatable("advancements.hollow.adventure.get_hurt_by_sculk_jaw.description"),
-				null,
 				AdvancementType.TASK,
 				true,
 				true,
@@ -67,7 +68,6 @@ public class HollowAdvancementProvider extends FabricAdvancementProvider {
 				HollowItems.OAK_FURNACE_BOAT,
 				Component.translatable("advancements.hollow.adventure.propel_furnace_boat.title"),
 				Component.translatable("advancements.hollow.adventure.propel_furnace_boat.description"),
-				null,
 				AdvancementType.TASK,
 				true,
 				true,
@@ -85,7 +85,6 @@ public class HollowAdvancementProvider extends FabricAdvancementProvider {
 				HollowItems.GLASS_JAR,
 				Component.translatable("advancements.hollow.husbandry.put_jar_in_jar.title"),
 				Component.translatable("advancements.hollow.husbandry.put_jar_in_jar.description"),
-				null,
 				AdvancementType.TASK,
 				true,
 				true,

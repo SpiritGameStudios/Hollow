@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:stripped_hollow_crimson_stem"
+        "recipes": "hollow:stripped_hollow_crimson_stem"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,17 +1,18 @@
 package dev.spiritstudios.hollow.world.level.gen.feature;
 
 import dev.spiritstudios.hollow.Hollow;
+import net.minecraft.core.CompositeDirection;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.material.Fluids;
 
@@ -24,21 +25,18 @@ public final class HollowPlacements {
 	public static final ResourceKey<PlacedFeature> HUGE_RED_MUSHROOM_SWAMP = of("huge_red_mushroom_swamp");
 
 	// Basically checks if there is a non water block in any of the adjacent 8 blocks
-	private static final BlockPredicate NEAR_COAST = BlockPredicate.anyOf(
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(1, 0, 1), Fluids.WATER, Fluids.FLOWING_WATER)),
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(-1, 0, 1), Fluids.WATER, Fluids.FLOWING_WATER)),
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(0, 0, 1), Fluids.WATER, Fluids.FLOWING_WATER)),
+	private static final BlockPredicate NEAR_COAST = Util.make(() -> {
+		BlockPredicate[] predicates = new BlockPredicate[8];
 
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(1, 0, -1), Fluids.WATER, Fluids.FLOWING_WATER)),
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(-1, 0, -1), Fluids.WATER, Fluids.FLOWING_WATER)),
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(0, 0, -1), Fluids.WATER, Fluids.FLOWING_WATER)),
+		for (CompositeDirection.Direction8 direction : CompositeDirection.Direction8.values()) {
+			predicates[direction.ordinal()] = BlockPredicate.not(BlockPredicate.matchesFluids(direction, Fluids.WATER, Fluids.FLOWING_WATER));
+		}
 
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(1, 0, 0), Fluids.WATER, Fluids.FLOWING_WATER)),
-		BlockPredicate.not(BlockPredicate.matchesFluids(new Vec3i(-1, 0, 0), Fluids.WATER, Fluids.FLOWING_WATER))
-	);
+		return BlockPredicate.anyOf(predicates);
+	});
 
 	public static void bootstrap(BootstrapContext<PlacedFeature> context) {
-		PlacedFeatureHelper helper = new PlacedFeatureHelper(context.lookup(Registries.CONFIGURED_FEATURE), context);
+		PlacedFeatureHelper helper = new PlacedFeatureHelper(context.lookup(Registries.FEATURE), context);
 
 //        helper.add(
 //                PATCH_GRASS_BIRCH,
@@ -84,7 +82,7 @@ public final class HollowPlacements {
 			CountPlacement.of(96),
 			HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
 			BiomeFilter.biome(),
-			RandomOffsetPlacement.ofTriangle(3, 3),
+			OffsetPlacement.ofTriangle(3, 3),
 			BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
 				BlockPredicate.matchesBlocks(Blocks.WATER),
 				NEAR_COAST
@@ -96,9 +94,9 @@ public final class HollowPlacements {
 		return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(Hollow.MODID, id));
 	}
 
-	private record PlacedFeatureHelper(HolderGetter<ConfiguredFeature<?, ?>> lookup,
+	private record PlacedFeatureHelper(HolderGetter<Feature> lookup,
 	                                   BootstrapContext<PlacedFeature> featureRegisterable) {
-		public void add(ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> configuredKey, PlacementModifier... modifiers) {
+		public void add(ResourceKey<PlacedFeature> key, ResourceKey<Feature> configuredKey, PlacementModifier... modifiers) {
 			featureRegisterable.register(
 				key,
 				new PlacedFeature(

@@ -8,7 +8,7 @@
             "tags": [
               {
                 "expected": true,
-                "id": "hollow:is_sculk_jaw"
+                "id": "#hollow:is_sculk_jaw"
               }
             ]
           }

@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -18,9 +19,11 @@ public class BigBranchTreeDecorator extends TreeDecorator {
             BlockStateProvider.CODEC.fieldOf("provider").forGetter(decorator -> decorator.stateProvider),
             Codec.floatRange(0.0F, 1.0F).fieldOf("probability").forGetter(decorator -> decorator.probability)
     ).apply(instance, BigBranchTreeDecorator::new));
-    public final BlockStateProvider stateProvider;
+
+    public final Holder<BlockStateProvider> stateProvider;
     public final float probability;
-    public BigBranchTreeDecorator(BlockStateProvider stateProvider, float probability) {
+
+    public BigBranchTreeDecorator(Holder<BlockStateProvider> stateProvider, float probability) {
         this.stateProvider = stateProvider;
         this.probability = probability;
     }
@@ -45,7 +48,7 @@ public class BigBranchTreeDecorator extends TreeDecorator {
 
             if (!context.isAir(branch)) continue;
 
-            BlockState state = stateProvider.getState(context.level(), random, branch);
+            BlockState state = stateProvider.value().getState(context.level(), random, branch);
             state = state.trySetValue(BlockStateProperties.AXIS, direction.getAxis());
 
             context.setBlock(branch, state);

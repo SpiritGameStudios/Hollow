@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block.jar;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.entity.GlassJarBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,8 +18,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class GlassJarBlock extends BaseJarBlock {
-    public static final MapCodec<GlassJarBlock> CODEC = simpleCodec(GlassJarBlock::new);
-
     public GlassJarBlock(BlockBehaviour.Properties settings) {
         super(settings);
     }
@@ -40,11 +37,6 @@ public class GlassJarBlock extends BaseJarBlock {
 
 		return super.useItemOn(itemStack, state, level, pos, player, hand, hitResult);
 	}
-
-    @Override
-    protected MapCodec<GlassJarBlock> codec() {
-        return CODEC;
-    }
 
 	@Override
 	protected boolean hasAnalogOutputSignal(BlockState state) {

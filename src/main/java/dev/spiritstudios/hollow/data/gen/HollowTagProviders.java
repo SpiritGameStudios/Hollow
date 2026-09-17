@@ -168,10 +168,6 @@ public class HollowTagProviders {
 			copy(HollowBlockItemTags.FORMS_GIANT_LILY_PAD);
 			copy(BlockItemTags.BEE_FOOD);
 		}
-
-		private void copy(BlockItemTagId tag) {
-			copy(tag.block(), tag.item());
-		}
 	}
 
 	private static class EntityTypeTagProvider extends FabricTagsProvider.EntityTypeTagsProvider {

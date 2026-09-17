@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:hollow_warped_stem"
+        "recipes": "hollow:hollow_warped_stem"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

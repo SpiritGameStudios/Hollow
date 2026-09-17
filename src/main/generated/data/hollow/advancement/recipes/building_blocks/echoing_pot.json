@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:echoing_pot"
+        "recipes": "hollow:echoing_pot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

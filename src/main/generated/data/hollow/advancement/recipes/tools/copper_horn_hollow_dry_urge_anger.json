@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:copper_horn_hollow_dry_urge_anger"
+        "recipes": "hollow:copper_horn_hollow_dry_urge_anger"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

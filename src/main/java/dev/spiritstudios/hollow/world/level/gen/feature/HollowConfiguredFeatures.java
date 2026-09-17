@@ -3,42 +3,38 @@ package dev.spiritstudios.hollow.world.level.gen.feature;
 import dev.spiritstudios.hollow.Hollow;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.gen.tree.foliage.BlobWithHangingFoliagePlacer;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 
 public final class HollowConfiguredFeatures {
-	public static final ResourceKey<ConfiguredFeature<?, ?>> CATTAIL = of("cattail");
+	public static final ResourceKey<Feature> CATTAIL = of("cattail");
 
-	public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+	public static void bootstrap(BootstrapContext<Feature> context) {
 		context.register(
 			CATTAIL,
-			new ConfiguredFeature<>(
-				Feature.SIMPLE_BLOCK,
-				new SimpleBlockConfiguration(BlockStateProvider.simple(HollowBlocks.CATTAIL))
-			)
+			new SimpleBlockFeature(BlockStateProvider.holderOf(HollowBlocks.CATTAIL))
 		);
 	}
 
-	public static ResourceKey<ConfiguredFeature<?, ?>> of(String id) {
-		return ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.fromNamespaceAndPath(Hollow.MODID, id));
+	public static ResourceKey<Feature> of(String id) {
+		return ResourceKey.create(Registries.FEATURE, Hollow.id(id));
 	}
 
-	public static TreeConfiguration.TreeConfigurationBuilder hangingLeavestreeBuilder(Block log, Block leaves, BlockStateProvider belowTrunkProvider, int baseHeight, int firstRandomHeight, int secondRandomHeight, int radius, float hangingLeavesChance, float hangingLeavesExtensionChance) {
-		return new TreeConfiguration.TreeConfigurationBuilder(
-			BlockStateProvider.simple(log),
+	public static TreeFeature.Builder hangingLeavestreeBuilder(Block log, Block leaves, Holder<BlockStateProvider> belowTrunkProvider, int baseHeight, int firstRandomHeight, int secondRandomHeight, int radius, float hangingLeavesChance, float hangingLeavesExtensionChance) {
+		return new TreeFeature.Builder(
+			BlockStateProvider.of(log),
 			new StraightTrunkPlacer(baseHeight, firstRandomHeight, secondRandomHeight),
-			BlockStateProvider.simple(leaves),
+			BlockStateProvider.of(leaves),
 			new BlobWithHangingFoliagePlacer(ConstantInt.of(radius), ConstantInt.of(0), 3, hangingLeavesChance, hangingLeavesExtensionChance),
 			new TwoLayersFeatureSize(1, 0, 1),
 			belowTrunkProvider

@@ -86,7 +86,7 @@ public abstract class BaseJarBlock extends BaseEntityBlock implements SimpleWate
 		if (level instanceof ServerLevel serverLevel) {
 			BlockPos pos = blockHit.getBlockPos();
 
-			if (projectile.mayInteract(serverLevel, pos) && projectile.mayBreak(serverLevel))
+			if (projectile.mayInteract(serverLevel, pos) && projectile.mayBreak(serverLevel, pos))
 				level.destroyBlock(pos, false, projectile);
 		}
 	}

@@ -15,7 +15,6 @@ import dev.spiritstudios.hollow.world.level.HollowGameRules;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.world.level.gen.HollowBiomeModifications;
-import dev.spiritstudios.hollow.world.level.gen.feature.HollowFeatures;
 import dev.spiritstudios.hollow.world.level.gen.tree.decorator.HollowTreeDecoratorTypes;
 import dev.spiritstudios.hollow.world.level.gen.tree.foliage.HollowFoliagePlacerTypes;
 import dev.spiritstudios.hollow.world.level.storage.loot.HollowLootFunctionTypes;
@@ -39,7 +38,6 @@ public final class Hollow implements ModInitializer {
         HollowItems.init();
 		HollowEntityTypes.init();
 
-        HollowFeatures.init();
         HollowTreeDecoratorTypes.init();
         HollowBlockEntityTypes.init();
         HollowFoliagePlacerTypes.init();

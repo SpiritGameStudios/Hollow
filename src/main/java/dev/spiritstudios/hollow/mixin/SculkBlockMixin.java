@@ -20,13 +20,13 @@ public abstract class SculkBlockMixin {
         return random.nextFloat() < 0.35F ? HollowBlocks.SCULK_JAW.defaultBlockState() : original.call(instance);
     }
 
-    @WrapOperation(method = "canPlaceGrowth", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z", ordinal = 1))
+    @WrapOperation(method = "canPlaceGrowth", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"))
     private static boolean shouldNotDecay(BlockState instance, Object o, Operation<Boolean> original) {
         return original.call(instance, HollowBlocks.SCULK_JAW) || original.call(instance, o);
     }
 
-    @WrapOperation(method = "attemptUseCharge", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/LevelAccessor;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"))
-    private boolean spread(LevelAccessor instance, BlockPos pos, BlockState state, int i, Operation<Boolean> original) {
-       return original.call(instance, state.is(HollowBlocks.SCULK_JAW) ? pos.below() : pos, state, i);
+    @WrapOperation(method = "attemptUseCharge", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/LevelAccessor;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))
+    private boolean spread(LevelAccessor instance, BlockPos pos, BlockState state, Operation<Boolean> original) {
+       return original.call(instance, state.is(HollowBlocks.SCULK_JAW) ? pos.below() : pos, state);
     }
 }

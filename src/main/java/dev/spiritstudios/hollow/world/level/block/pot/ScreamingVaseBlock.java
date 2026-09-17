@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block.pot;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.world.level.block.VerticalDoubleBlock;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
@@ -38,8 +37,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
 public class ScreamingVaseBlock extends VerticalDoubleBlock implements TickingEntityBlock<FallingPotBlockEntity> {
-	public static final MapCodec<ScreamingVaseBlock> CODEC = simpleCodec(ScreamingVaseBlock::new);
-
 	public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
@@ -131,11 +128,6 @@ public class ScreamingVaseBlock extends VerticalDoubleBlock implements TickingEn
 			level.playSound(null, pos, SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.BLOCKS);
 			level.gameEvent(GameEvent.SHRIEK, pos, GameEvent.Context.of(causer));
 		}
-	}
-
-	@Override
-	protected MapCodec<ScreamingVaseBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

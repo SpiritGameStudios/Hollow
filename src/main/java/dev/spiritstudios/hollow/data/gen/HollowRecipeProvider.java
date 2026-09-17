@@ -14,14 +14,15 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.recipe.v1.ingredient.DefaultCustomIngredients;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -31,6 +32,7 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.InstrumentComponent;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -43,9 +45,9 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
 
-    @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider wrapperLookup, RecipeOutput output) {
-        return new RecipeProvider(wrapperLookup, output) {
+	@Override
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+        return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
 				createHollowLogRecipe(HollowBlocks.HOLLOW_LOG, LogCollection.LOGS);
@@ -124,8 +126,8 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
             }
 
             public void createCopperHornRecipe(ResourceKey<Instrument> goat, ResourceKey<CopperInstrument> copper) {
-                HolderGetter<Instrument> instruments = wrapperLookup.lookupOrThrow(Registries.INSTRUMENT);
-                HolderGetter<CopperInstrument> copperInstruments = wrapperLookup.lookupOrThrow(HollowRegistries.COPPER_INSTRUMENT);
+                HolderGetter<Instrument> instruments = registries.lookupOrThrow(Registries.INSTRUMENT);
+                HolderGetter<CopperInstrument> copperInstruments = registries.lookupOrThrow(HollowRegistries.COPPER_INSTRUMENT);
 
 
                 ShapedRecipeBuilderAccessor.create(
@@ -164,10 +166,5 @@ public class HollowRecipeProvider extends FabricRecipeProvider {
             }
 
         };
-    }
-
-    @Override
-    public String getName() {
-        return "Recipes";
     }
 }

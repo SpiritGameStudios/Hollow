@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.state.properties.TripleBlockThird;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +21,6 @@ import net.minecraft.world.level.material.Fluids;
 import org.jspecify.annotations.Nullable;
 
 public class CattailBlock extends TripleBlock implements SimpleWaterloggedBlock, BonemealableBlock {
-	public static final MapCodec<CattailBlock> CODEC = simpleCodec(CattailBlock::new);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public CattailBlock(Properties properties) {
@@ -30,11 +28,6 @@ public class CattailBlock extends TripleBlock implements SimpleWaterloggedBlock,
 		this.registerDefaultState(this.defaultBlockState()
 			.setValue(WATERLOGGED, false)
 		);
-	}
-
-	@Override
-	public MapCodec<? extends CattailBlock> codec() {
-		return CODEC;
 	}
 
 	@Override
@@ -86,17 +79,17 @@ public class CattailBlock extends TripleBlock implements SimpleWaterloggedBlock,
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source) {
 		return true;
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
 		popResource(level, pos, new ItemStack(this));
 	}
 }

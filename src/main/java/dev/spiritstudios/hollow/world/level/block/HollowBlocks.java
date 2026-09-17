@@ -8,9 +8,9 @@ import dev.spiritstudios.hollow.world.level.block.pot.EchoingPotBlock;
 import dev.spiritstudios.hollow.world.level.block.pot.EchoingVaseBlock;
 import dev.spiritstudios.hollow.world.level.block.pot.ObaboBlock;
 import dev.spiritstudios.hollow.world.level.block.pot.ScreamingVaseBlock;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.references.BlockItemId;
@@ -48,7 +48,7 @@ public final class HollowBlocks {
 			.mapColor(MapColor.DEEPSLATE)
 			.strength(3.0F, 6.0F)
 			.sound(SoundType.DECORATED_POT)
-			.pushReaction(PushReaction.DESTROY)
+			.pushReaction(PushReaction.POPPED)
 			.noOcclusion()
 	);
 
@@ -65,7 +65,7 @@ public final class HollowBlocks {
 			.mapColor(MapColor.DEEPSLATE)
 			.strength(3.0F, 6.0F)
 			.sound(SoundType.DECORATED_POT)
-			.pushReaction(PushReaction.DESTROY)
+			.pushReaction(PushReaction.POPPED)
 			.randomTicks()
 			.noOcclusion()
 	);
@@ -86,7 +86,7 @@ public final class HollowBlocks {
 			.instabreak()
 			.sound(SoundType.WET_GRASS)
 			.offsetType(BlockBehaviour.OffsetType.XZ)
-			.pushReaction(PushReaction.DESTROY)
+			.pushReaction(PushReaction.POPPED)
 	);
 
 	public static final SwitchgrassBlock SWITCHGRASS = register(
@@ -117,7 +117,7 @@ public final class HollowBlocks {
 			.noCollision()
 			.instabreak()
 			.sound(SoundType.GRASS)
-			.pushReaction(PushReaction.DESTROY)
+			.pushReaction(PushReaction.POPPED)
 			.isRedstoneConductor(Blocks::never)
 	);
 
@@ -140,7 +140,7 @@ public final class HollowBlocks {
 			.strength(0.2F)
 			.sound(SoundType.GLASS)
 			.noOcclusion()
-			.pushReaction(PushReaction.DESTROY)
+			.pushReaction(PushReaction.POPPED)
 	);
 
 	public static final FireflyJarBlock FIREFLY_JAR = register(
@@ -171,17 +171,7 @@ public final class HollowBlocks {
 		HollowBlocks::register,
 		(_, properties) -> new RotatedPillarBlock(properties),
 		OxidizablePillarBlock::new,
-		w -> BlockBehaviour.Properties.of()
-			.mapColor(switch (w) {
-				case UNAFFECTED -> MapColor.COLOR_ORANGE;
-				case EXPOSED -> MapColor.TERRACOTTA_LIGHT_GRAY;
-				case WEATHERED -> MapColor.WARPED_STEM;
-				case OXIDIZED -> MapColor.WARPED_NYLIUM;
-			})
-			.requiresCorrectToolForDrops()
-			.strength(3.0F, 6.0F)
-			.lightLevel(_ -> 15)
-			.sound(SoundType.COPPER)
+		state -> BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK.weathering().pick(state)).lightLevel(_ -> 15)
 	);
 
 	private static <T extends Block> T register(final ResourceKey<Block> id, final Function<BlockBehaviour.Properties, T> factory, final BlockBehaviour.Properties properties) {
@@ -220,8 +210,7 @@ public final class HollowBlocks {
 			}
 		);
 
-		LogCollection.zipApply(HOLLOW_LOG, STRIPPED_HOLLOW_LOG, StrippableBlockRegistry::registerCopyState);
-
+		LogCollection.zipApply(HOLLOW_LOG, STRIPPED_HOLLOW_LOG, BlockTransformerHelper::registerStripping);
 		OxidizableBlocksRegistry.registerWeatheringCopperBlocks(COPPER_PILLAR);
 	}
 }

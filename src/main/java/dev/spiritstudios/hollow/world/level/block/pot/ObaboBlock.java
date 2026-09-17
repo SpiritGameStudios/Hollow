@@ -1,7 +1,6 @@
 package dev.spiritstudios.hollow.world.level.block.pot;
 
 import com.mojang.datafixers.util.Function4;
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.entity.HollowBlockEntityTypes;
 import dev.spiritstudios.hollow.world.level.block.entity.pot.ObaboBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -19,8 +18,7 @@ import java.util.regex.Pattern;
 
 public class ObaboBlock extends EchoingPotBlock {
 	public static final Pattern DIRE_CURSE = Pattern.compile("[oO0](?:[^0-9a-zA-Z]*|\\s)*[bB](?:[^0-9a-zA-Z]*|\\s)*[aA](?:[^0-9a-zA-Z]*|\\s)[bB](?:[^0-9a-zA-Z]*|\\s)*[oO0]");
-	public static final MapCodec<ObaboBlock> CODEC = simpleCodec(ObaboBlock::new);
-	public static Function4<BlockState, Level, BlockPos, RandomSource, Boolean> cb = null;
+	@Nullable public static Function4<BlockState, Level, BlockPos, RandomSource, Boolean> cb = null;
 
 	public static void invokeCurse(ServerPlayer player) {
 //			player.damage(player.getDamageSources().create(HollowDamageTypes.DIRE_CURSE), 100);
@@ -28,11 +26,6 @@ public class ObaboBlock extends EchoingPotBlock {
 
 	public ObaboBlock(Properties settings) {
 		super(settings);
-	}
-
-	@Override
-	protected MapCodec<ObaboBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

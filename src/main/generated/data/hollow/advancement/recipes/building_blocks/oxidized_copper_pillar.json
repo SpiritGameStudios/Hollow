@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:oxidized_copper_pillar"
+        "recipes": "hollow:oxidized_copper_pillar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

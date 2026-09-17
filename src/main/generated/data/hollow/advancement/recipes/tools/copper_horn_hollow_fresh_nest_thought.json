@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:copper_horn_hollow_fresh_nest_thought"
+        "recipes": "hollow:copper_horn_hollow_fresh_nest_thought"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

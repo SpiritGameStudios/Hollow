@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:exposed_copper_pillar"
+        "recipes": "hollow:exposed_copper_pillar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

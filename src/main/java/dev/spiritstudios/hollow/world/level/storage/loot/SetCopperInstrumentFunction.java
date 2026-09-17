@@ -5,12 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.core.component.HollowDataComponents;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
-import java.util.List;
+import java.util.Optional;
 
 public class SetCopperInstrumentFunction extends LootItemConditionalFunction {
 	public static final MapCodec<SetCopperInstrumentFunction> CODEC = RecordCodecBuilder.mapCodec(
@@ -18,7 +19,7 @@ public class SetCopperInstrumentFunction extends LootItemConditionalFunction {
 					.apply(instance, SetCopperInstrumentFunction::new)
 	);
 
-	private SetCopperInstrumentFunction(List<LootItemCondition> conditions) {
+	private SetCopperInstrumentFunction(Optional<Holder<LootItemCondition>> conditions) {
 		super(conditions);
 	}
 

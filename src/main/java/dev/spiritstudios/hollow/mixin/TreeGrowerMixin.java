@@ -6,7 +6,7 @@ import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.TreeGrower;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +19,7 @@ public abstract class TreeGrowerMixin {
     private String name;
 
     @WrapMethod(method = "getConfiguredFeature")
-    protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getSmallTreeFeature(RandomSource random, boolean hasFlowers, Operation<ResourceKey<ConfiguredFeature<?, ?>>> original) {
+    protected @Nullable ResourceKey<Feature> getSmallTreeFeature(RandomSource random, boolean hasFlowers, Operation<ResourceKey<Feature>> original) {
         return this.name.equals("birch") ? TreeFeatures.BIRCH_BEES_0002 : original.call(random, hasFlowers);
     }
 }

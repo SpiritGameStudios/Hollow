@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:copper_horn_hollow_pure_water_desire"
+        "recipes": "hollow:copper_horn_hollow_pure_water_desire"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

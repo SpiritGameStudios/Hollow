@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block.pot;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,8 +29,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class EchoingPotBlock extends BaseEntityBlock {
-	public static final MapCodec<EchoingPotBlock> CODEC = simpleCodec(EchoingPotBlock::new);
-
 	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public static final VoxelShape SHAPE = Shapes.or(column(14, 0, 14), column(8, 14, 16));
@@ -81,10 +78,5 @@ public class EchoingPotBlock extends BaseEntityBlock {
 		} else {
 			return InteractionResult.PASS;
 		}
-	}
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
 	}
 }

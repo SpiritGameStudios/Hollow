@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Blocks;
@@ -27,13 +28,13 @@ public class BranchTreeDecorator extends TreeDecorator {
             Codec.INT.fieldOf("max_amount").forGetter(decorator -> decorator.maxAmount)
     ).apply(instance, BranchTreeDecorator::new));
 
-    public BranchTreeDecorator(BlockStateProvider stateProvider, float probability, int maxAmount) {
+    public BranchTreeDecorator(Holder<BlockStateProvider> stateProvider, float probability, int maxAmount) {
         this.stateProvider = stateProvider;
         this.probability = probability;
         this.maxAmount = maxAmount;
     }
 
-    private final BlockStateProvider stateProvider;
+    private final Holder<BlockStateProvider> stateProvider;
     private final float probability;
     private final int maxAmount;
 
@@ -64,7 +65,7 @@ public class BranchTreeDecorator extends TreeDecorator {
 
             if (!context.isAir(branch)) continue;
 
-            BlockState state = stateProvider.getState(context.level(), random, branch);
+            BlockState state = stateProvider.value().getState(context.level(), random, branch);
             state = state.trySetValue(BlockStateProperties.AXIS, direction.getAxis());
             context.setBlock(branch, state);
             branches.add(branch.getY());

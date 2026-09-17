@@ -11,8 +11,8 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,21 +34,18 @@ public class HollowBlockLootProvider extends FabricBlockLootSubProvider {
 		this.add(HollowBlocks.CATTAIL, this::createShearsOrSilkTouchOnlyDrop);
 
 		this.dropSelf(HollowBlocks.FLOWERING_LILY_PAD);
-		this.add(HollowBlocks.GIANT_LILY_PAD, this.createSingleItemTable(Items.LILY_PAD, ConstantValue.exactly(4.0F)));
-        this.add(
-                HollowBlocks.POLYPORE,
-                block -> LootTable.lootTable().withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .add(this.applyExplosionDecay(HollowBlocks.POLYPORE, LootItem.lootTableItem(block).apply(
-                                List.of(2, 3),
-                                polypore ->
-                                        SetItemCountFunction.setCount(ConstantValue.exactly(polypore))
-                                                .when(
-                                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PolyporeBlock.POLYPORE_AMOUNT, polypore))
-                                                )
-                        ))))
-        );
+		this.add(HollowBlocks.GIANT_LILY_PAD, this.createSingleItemTable(Items.LILY_PAD, ContextIntProviders.exactly(4)));
+        this.add(HollowBlocks.POLYPORE, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+			.setRolls(ContextIntProviders.exactly(1))
+			.add(this.applyExplosionDecay(HollowBlocks.POLYPORE, LootItem.lootTableItem(block).apply(
+				List.of(2, 3),
+				polypore -> SetItemCountFunction.setCount(ContextIntProviders.exactly(polypore)).when(MatchBlock.blockMatches(
+					this.blocks,
+					block,
+					StatePropertiesPredicate.Builder.properties().hasProperty(PolyporeBlock.POLYPORE_AMOUNT, polypore)
+				))
+			)))
+		));
 
 		this.add(HollowBlocks.FIREFLY_JAR, this::createNameableBlockEntityTable);
         this.add(HollowBlocks.GLASS_JAR, this::createNameableBlockEntityTable);

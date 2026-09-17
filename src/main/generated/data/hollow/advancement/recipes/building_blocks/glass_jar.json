@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:glass_jar"
+        "recipes": "hollow:glass_jar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

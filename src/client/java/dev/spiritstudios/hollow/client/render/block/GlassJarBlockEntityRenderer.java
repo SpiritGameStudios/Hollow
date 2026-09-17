@@ -72,8 +72,8 @@ public class GlassJarBlockEntityRenderer implements BlockEntityRenderer<GlassJar
 				poseStack.translate(0.0F, BaseJarBlock.HANGING_SHAPE_Y_DIFF, 0.0F);
 			}
 
-			poseStack.mulPose(Axis.YP.rotationDegrees(deg = (deg + 90) % 360));
-			poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+			poseStack.rotateDegrees(Axis.YP, deg = (deg + 90) % 360);
+			poseStack.rotateDegrees(Axis.XP, 90.0F);
 
 			poseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
 			itemState.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);

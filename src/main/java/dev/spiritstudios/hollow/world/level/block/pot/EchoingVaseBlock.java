@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block.pot;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.VerticalDoubleBlock;
 import dev.spiritstudios.hollow.world.level.block.entity.pot.PotBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -28,7 +27,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class EchoingVaseBlock extends VerticalDoubleBlock implements EntityBlock {
-	public static final MapCodec<EchoingVaseBlock> CODEC = simpleCodec(EchoingVaseBlock::new);
 	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public EchoingVaseBlock(Properties settings) {
@@ -85,10 +83,5 @@ public class EchoingVaseBlock extends VerticalDoubleBlock implements EntityBlock
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder.add(FACING));
-	}
-
-	@Override
-	protected MapCodec<? extends EchoingVaseBlock> codec() {
-		return CODEC;
 	}
 }

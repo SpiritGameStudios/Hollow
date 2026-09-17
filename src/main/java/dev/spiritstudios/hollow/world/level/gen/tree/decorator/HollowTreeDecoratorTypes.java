@@ -10,7 +10,6 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 public final class HollowTreeDecoratorTypes {
     public static final TreeDecoratorType<BranchTreeDecorator> BRANCH = register("branch", BranchTreeDecorator.CODEC);
     public static final TreeDecoratorType<BigBranchTreeDecorator> BIG_BRANCH = register("big_branch", BigBranchTreeDecorator.CODEC);
-    public static final TreeDecoratorType<PolyporeTreeDecorator> POLYPORE = register("polypore", PolyporeTreeDecorator.CODEC);
 
     private static <P extends TreeDecorator> TreeDecoratorType<P> register(String name, MapCodec<P> codec) {
         return Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE, Hollow.id(name), new TreeDecoratorType<>(codec));

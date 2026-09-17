@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block.jar;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.core.particles.HollowParticleTypes;
 import dev.spiritstudios.hollow.world.level.block.entity.FireflyJarBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -16,7 +15,6 @@ import org.jspecify.annotations.Nullable;
 
 public class FireflyJarBlock extends BaseJarBlock {
 	public static final String JEB_NAME = "jeb_";
-	public static final MapCodec<FireflyJarBlock> CODEC = simpleCodec(FireflyJarBlock::new);
 
     public FireflyJarBlock(BlockBehaviour.Properties settings) {
         super(settings);
@@ -39,11 +37,6 @@ public class FireflyJarBlock extends BaseJarBlock {
 
 		double isJeb = hasJebName(level, pos) ? 1.0 : 0.0;
 		level.addParticle(HollowParticleTypes.JAR_FIREFLY, pos.getX() + x, pos.getY() + y, pos.getZ() + z, isJeb, 0.0, 0.0);
-	}
-
-	@Override
-	protected MapCodec<FireflyJarBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

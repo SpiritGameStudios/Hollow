@@ -17,7 +17,7 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class HollowPlacedFeatureProvider extends FabricDynamicRegistryProvider {
 
         // region Replacements
         PlacedFeatureDatagenHelper helper = new PlacedFeatureDatagenHelper(
-                registries.lookupOrThrow(Registries.CONFIGURED_FEATURE),
+                registries.lookupOrThrow(Registries.FEATURE),
                 entries
         );
 
@@ -74,9 +74,9 @@ public class HollowPlacedFeatureProvider extends FabricDynamicRegistryProvider {
         // endregion
     }
 
-    private record PlacedFeatureDatagenHelper(HolderGetter<ConfiguredFeature<?, ?>> lookup,
+    private record PlacedFeatureDatagenHelper(HolderGetter<Feature> lookup,
                                               Entries entries) {
-        public void add(ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> configuredKey, PlacementModifier... modifiers) {
+        public void add(ResourceKey<PlacedFeature> key, ResourceKey<Feature> configuredKey, PlacementModifier... modifiers) {
             entries.add(
                     key,
                     new PlacedFeature(

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:dark_oak_furnace_boat"
+        "recipes": "hollow:dark_oak_furnace_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

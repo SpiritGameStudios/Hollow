@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:bamboo_furnace_raft"
+        "recipes": "hollow:bamboo_furnace_raft"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

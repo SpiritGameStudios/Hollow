@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:acacia_furnace_boat"
+        "recipes": "hollow:acacia_furnace_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

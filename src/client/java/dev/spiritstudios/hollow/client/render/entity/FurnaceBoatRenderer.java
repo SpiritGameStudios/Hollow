@@ -33,6 +33,6 @@ public class FurnaceBoatRenderer extends BoatRenderer {
 	@Override
 	protected void submitTypeAdditions(BoatRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords) {
 		super.submitTypeAdditions(state, poseStack, submitNodeCollector, lightCoords);
-		submitNodeCollector.submitModel(this.furnaceModel, state, poseStack, FURNACE_TEXTURE, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+		submitNodeCollector.submitModel(this.furnaceModel, state, poseStack, FURNACE_TEXTURE, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
 	}
 }

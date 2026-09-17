@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.world.level.block.entity.StoneChestBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -39,8 +38,6 @@ public class StoneChestBlock extends BaseEntityBlock implements SimpleWaterlogge
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<ChestType> CHEST_TYPE = BlockStateProperties.CHEST_TYPE;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
-    public static final MapCodec<StoneChestBlock> CODEC = simpleCodec(StoneChestBlock::new);
 
     public static final VoxelShape SHAPE_SINGLE = Shapes.or(
             box(1, 1, 1, 15, 16, 15),
@@ -177,10 +174,5 @@ public class StoneChestBlock extends BaseEntityBlock implements SimpleWaterlogge
     @Override
     protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
         Containers.updateNeighboursAfterDestroy(state, world, pos);
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 }

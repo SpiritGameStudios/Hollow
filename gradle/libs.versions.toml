@@ -2,12 +2,12 @@
 fabric_loom = "1.17-SNAPSHOT"
 modpublish = "2.1.1"
 
-minecraft = "26.2"
+minecraft = "26.3"
 
-fabric_loader = "0.19.3"
-fabric_api = "0.154.2+26.2"
+fabric_loader = "0.19.5"
+fabric_api = "0.160.6+26.3"
 
-fusion = "1.3.15-fabric-mc26.2"
+fusion = "1.3.15-fabric-mc26.3"
 
 [plugins]
 fabric_loom = { id = "net.fabricmc.fabric-loom", version.ref = "fabric_loom" }

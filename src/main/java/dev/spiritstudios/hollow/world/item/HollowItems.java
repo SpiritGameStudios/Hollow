@@ -8,7 +8,6 @@ import dev.spiritstudios.hollow.world.entity.vehicle.AbstractFurnaceBoat;
 import dev.spiritstudios.hollow.world.item.component.CopperInstrumentComponent;
 import dev.spiritstudios.hollow.world.level.block.HollowBlocks;
 import dev.spiritstudios.hollow.world.level.block.LogCollection;
-import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.references.BlockItemId;
@@ -17,6 +16,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -56,17 +56,36 @@ public final class HollowItems {
     );
 
     public static final Item FLOWERING_LILY_PAD = registerBlock(
-            HollowBlockItemIds.FLOWERING_LILY_PAD,
-            HollowBlocks.FLOWERING_LILY_PAD,
-            PlaceOnWaterBlockItem::new
+		HollowBlockItemIds.FLOWERING_LILY_PAD,
+		HollowBlocks.FLOWERING_LILY_PAD,
+		PlaceOnWaterBlockItem::new,
+		new Item.Properties()
+			.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
     );
 
-	public static final Item SWITCHGRASS = registerBlock(HollowBlockItemIds.SWITCHGRASS, HollowBlocks.SWITCHGRASS);
+	public static final Item SWITCHGRASS = registerBlock(
+		HollowBlockItemIds.SWITCHGRASS,
+		HollowBlocks.SWITCHGRASS,
+		BlockItem::new,
+		new Item.Properties()
+			.compostable(ContextIntProviders.COMPOSTABLE_LOW)
+	);
 
-    public static final Item CATTAIL = registerBlock(HollowBlockItemIds.CATTAIL, HollowBlocks.CATTAIL);
+    public static final Item CATTAIL = registerBlock(
+		HollowBlockItemIds.CATTAIL,
+		HollowBlocks.CATTAIL,
+		BlockItem::new,
+		new Item.Properties()
+			.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
+	);
 
-    public static final Item POLYPORE = registerBlock(HollowBlockItemIds.POLYPORE, HollowBlocks.POLYPORE);
-
+    public static final Item POLYPORE = registerBlock(
+		HollowBlockItemIds.POLYPORE,
+		HollowBlocks.POLYPORE,
+		BlockItem::new,
+		new Item.Properties()
+			.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
+	);
 
     public static final Item SCULK_JAW = registerBlock(HollowBlockItemIds.SCULK_JAW, HollowBlocks.SCULK_JAW);
 
@@ -164,9 +183,6 @@ public final class HollowItems {
     }
 
     public static void init() {
-        CompostableRegistry.INSTANCE.add(POLYPORE, 0.65F);
-        CompostableRegistry.INSTANCE.add(CATTAIL, 0.65F);
-        CompostableRegistry.INSTANCE.add(FLOWERING_LILY_PAD, 0.75F);
-		CompostableRegistry.INSTANCE.add(SWITCHGRASS, 0.3F);
+		// NO-OP
     }
 }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:weathered_copper_pillar"
+        "recipes": "hollow:weathered_copper_pillar"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

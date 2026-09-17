@@ -6,11 +6,11 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 public class HollowLootTableModifications {
     public static void init() {
-        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, _) -> {
             if (!source.isBuiltin()) return;
 
             if (key == BuiltInLootTables.ANCIENT_CITY) tableBuilder.withPool(LootPool.lootPool()
@@ -22,7 +22,7 @@ public class HollowLootTableModifications {
 				.when(LootItemRandomChanceCondition.randomChance(0.1F)));
 
             if (key == BuiltInLootTables.PILLAGER_OUTPOST) tableBuilder.withPool(LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(0.0F, 1.0F))
+                    .setRolls(ContextIntProviders.between(0, 1))
                     .add(LootItem.lootTableItem(HollowItems.COPPER_HORN))
                     .apply(SetCopperInstrumentFunction.builder()));
         });

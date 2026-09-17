@@ -4,30 +4,40 @@ import dev.spiritstudios.hollow.advancements.triggers.HollowCriteriaTriggers;
 import dev.spiritstudios.hollow.network.ServerboundPropelFurnaceBoatPayload;
 import dev.spiritstudios.hollow.util.TickUtils;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Ease;
 import net.minecraft.util.Mth;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoveSimulationType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CookingFuel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public abstract class AbstractFurnaceBoat extends AbstractBoat {
@@ -67,6 +77,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		if (!level.isClientSide()) {
 			if (this.fuel > 0) {
 				this.fuel--;
+				this.needsSync = true;
 			}
 
 			this.setHasFuel(this.fuel > 0);
@@ -98,6 +109,11 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 	@Override
 	public boolean isClientAuthoritative() {
 		return super.isClientAuthoritative() && !this.isPropelled();
+	}
+
+	@Override
+	public MoveSimulationType getMoveSimulationType() {
+		return MoveSimulationType.AUTHORITATIVE_SIDE_AND_SERVER;
 	}
 
 	private void tickPropulsion() {
@@ -144,7 +160,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 
 		ItemStack itemStack = player.getItemInHand(hand);
 
-		if (this.canAddPassenger(player) && !player.isSecondaryUseActive() || !this.addFuel(itemStack)) {
+		if (this.canAddPassenger(player) && !player.isSecondaryUseActive() || !this.addFuel(this.level(), player, itemStack)) {
 			return InteractionResult.PASS;
 		}
 
@@ -157,7 +173,7 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 				player.setItemInHand(hand, remainder);
 			}
 			else if (!player.addItem(remainder)) {
-				player.drop(remainder, false);
+				player.drop(remainder, false, Prediction.PREDICTED);
 			}
 		}
 
@@ -166,25 +182,36 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		return InteractionResult.SUCCESS;
 	}
 
-	public boolean addFuel(ItemStack itemStack) {
-		FuelValues fuelValues = this.level().fuelValues();
-
-		if (!fuelValues.isFuel(itemStack) || this.fuel >= MAX_FUEL_TICKS) {
+	public boolean addFuel(Level level, Player player, ItemStack itemStack) {
+		if (!itemStack.has(DataComponents.COOKING_FUEL) || this.fuel >= MAX_FUEL_TICKS) {
 			return false;
 		}
 
-		float duration = fuelValues.burnDuration(itemStack) * getFuelScaleQuotient(fuelValues);
+		float duration = 300;
 		this.fuel = Math.min(MAX_FUEL_TICKS, this.fuel + Mth.floor(duration));
-
-		if (this.fuel > MAX_FUEL_TICKS) {
-			this.fuel = MAX_FUEL_TICKS;
-		}
+		this.needsSync = true;
 
 		return true;
 	}
 
-	private static float getFuelScaleQuotient(FuelValues fuelValues) {
-		return (float) FUEL_TICKS_PER_ITEM / fuelValues.burnDuration(Items.COAL.getDefaultInstance());
+	private int getBurnDuration(ServerLevel level, Player player, ItemStack fuelItem) {
+		LootContext lootContext = new LootContext.Builder(
+			new LootParams.Builder(level)
+				.withParameter(LootContextParams.TARGET_ENTITY, this)
+				.withParameter(LootContextParams.INTERACTING_ENTITY, player)
+				.withParameter(LootContextParams.TOOL, fuelItem)
+				.create(LootContextParamSets.ENTITY_INTERACT)
+			)
+			.create(Optional.empty());
+
+		return ResolvableInt.getFromItem(fuelItem, DataComponents.COOKING_FUEL, CookingFuel::burnTime, lootContext, 0);
+	}
+
+	private float getFuelScaleQuotient(ServerLevel level, Player player) {
+		ItemStack coal = Items.COAL.getDefaultInstance();
+		CookingFuel cookingFuel = coal.get(DataComponents.COOKING_FUEL);
+
+		return cookingFuel == null ? 1.0F : (float) FUEL_TICKS_PER_ITEM / this.getBurnDuration(level, player, coal);
 	}
 
 	@Override

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:copper_horn_hollow_humble_fire_memory"
+        "recipes": "hollow:copper_horn_hollow_humble_fire_memory"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

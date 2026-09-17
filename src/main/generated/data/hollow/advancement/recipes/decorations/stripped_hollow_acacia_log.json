@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:stripped_hollow_acacia_log"
+        "recipes": "hollow:stripped_hollow_acacia_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -9,6 +9,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.LilyPadBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,36 +20,36 @@ import org.spongepowered.asm.mixin.Mixin;
 public class LilyPadBlockMixin implements BonemealableBlock {
 	@Intrinsic
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source) {
 		return false;
 	}
 
 	@Intrinsic
 	@Override
-	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
 		return false;
 	}
 
 	@Intrinsic
 	@Override
-	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {}
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {}
 
 	@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
 	@WrapMethod(method = "isValidBonemealTarget")
-    private boolean wrapIsValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, Operation<Boolean> original) {
-        return original.call(level, pos, state) || state.is(Blocks.LILY_PAD);
+    private boolean wrapIsValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source, Operation<Boolean> original) {
+        return original.call(level, pos, state, source) || state.is(Blocks.LILY_PAD);
     }
 
 	@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
 	@WrapMethod(method = "isBonemealSuccess")
-    private boolean wrapIsBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, Operation<Boolean> original) {
+    private boolean wrapIsBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source, Operation<Boolean> original) {
         return true;
     }
 
 	@SuppressWarnings({ "MixinAnnotationTarget", "UnresolvedMixinReference" })
 	@WrapMethod(method = "performBonemeal")
-    private void wrapPerformBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, Operation<Void> original) {
+    private void wrapPerformBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source, Operation<Void> original) {
 		level.setBlockAndUpdate(pos, HollowBlocks.FLOWERING_LILY_PAD.defaultBlockState());
-		original.call(level, random, pos, state);
+		original.call(level, random, pos, state, source);
     }
 }

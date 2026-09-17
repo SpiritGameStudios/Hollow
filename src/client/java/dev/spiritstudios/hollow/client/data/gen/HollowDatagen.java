@@ -38,7 +38,7 @@ public class HollowDatagen implements DataGeneratorEntrypoint {
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
         registryBuilder
-                .add(Registries.CONFIGURED_FEATURE, HollowConfiguredFeatures::bootstrap)
+                .add(Registries.FEATURE, HollowConfiguredFeatures::bootstrap)
                 .add(Registries.PLACED_FEATURE, HollowPlacements::bootstrap)
                 .add(Registries.DAMAGE_TYPE, HollowDamageTypes::bootstrap)
                 .add(Registries.JUKEBOX_SONG, HollowJukeboxSongs::bootstrap)

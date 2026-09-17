@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
@@ -37,14 +37,14 @@ public class BlobWithHangingFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void createFoliage(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int treeHeight, FoliageAttachment foliageAttachment, int foliageHeight, int leafRadius, int offset) {
+    protected void createFoliage(WorldGenLevel level, FoliageSetter foliageSetter, RandomSource random, TreeFeature feature, int treeHeight, FoliageAttachment foliageAttachment, int foliageHeight, int leafRadius, int offset) {
         BlockPos adjustedPos = foliageAttachment.pos().above(offset);
 
         for (int i = offset - foliageHeight; i <= offset; i++) {
             this.placeLeavesRowWithHangingLeavesBelow(
-                    level, foliageSetter, random, config,
+                    level, foliageSetter, random, feature,
                     adjustedPos,
-                    Math.max(leafRadius + foliageAttachment.radiusOffset() - 1 - i / 2, 0), i,
+                    Math.max(leafRadius + foliageAttachment.radiusOffsetXZ() - 1 - i / 2, 0), i,
                     foliageAttachment.doubleTrunk(),
                     hangingLeavesChance, hangingLeavesExtensionChance
             );
@@ -52,7 +52,7 @@ public class BlobWithHangingFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+    public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature config) {
         return this.height;
     }
 

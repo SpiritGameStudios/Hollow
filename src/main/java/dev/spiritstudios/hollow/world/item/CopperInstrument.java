@@ -5,13 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.spiritstudios.hollow.core.registry.HollowRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.codec.RegistryCodecs;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.ExtraCodecs;
 
@@ -54,7 +54,7 @@ public record CopperInstrument(
 			CopperInstrument::new
 	);
 
-	public static final Codec<Holder<CopperInstrument>> CODEC = RegistryFileCodec.create(
+	public static final Codec<Holder<CopperInstrument>> CODEC = RegistryCodecs.holder(
 			HollowRegistries.COPPER_INSTRUMENT,
 			DIRECT_CODEC
 	);

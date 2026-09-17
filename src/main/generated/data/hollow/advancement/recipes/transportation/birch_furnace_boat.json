@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:birch_furnace_boat"
+        "recipes": "hollow:birch_furnace_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

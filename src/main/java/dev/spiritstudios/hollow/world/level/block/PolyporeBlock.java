@@ -1,6 +1,5 @@
 package dev.spiritstudios.hollow.world.level.block;
 
-import com.mojang.serialization.MapCodec;
 import dev.spiritstudios.hollow.tags.HollowBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,6 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Map;
 
@@ -28,7 +29,6 @@ public class PolyporeBlock extends VegetationBlock implements BonemealableBlock 
     public static final IntegerProperty POLYPORE_AMOUNT = IntegerProperty.create("amount", 1, 3);
 
     public static final Map<Direction, VoxelShape> SHAPES_BY_DIRECTION = Shapes.rotateHorizontal(box(1, 1, 8, 15, 15, 16));
-    public static final MapCodec<PolyporeBlock> CODEC = simpleCodec(PolyporeBlock::new);
 
     public PolyporeBlock(Properties settings) {
         super(settings);
@@ -49,7 +49,7 @@ public class PolyporeBlock extends VegetationBlock implements BonemealableBlock 
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState blockState = ctx.getLevel().getBlockState(ctx.getClickedPos());
         if (blockState.is(this)) return blockState.cycle(POLYPORE_AMOUNT);
 
@@ -69,17 +69,17 @@ public class PolyporeBlock extends VegetationBlock implements BonemealableBlock 
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, BonemealSource source) {
         return true;
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
         if (state.getValue(POLYPORE_AMOUNT) < 3)
             world.setBlock(pos, state.cycle(POLYPORE_AMOUNT), Block.UPDATE_CLIENTS);
         else popResource(world, pos, new ItemStack(this));
@@ -98,10 +98,5 @@ public class PolyporeBlock extends VegetationBlock implements BonemealableBlock 
 
         return blockState.isFaceSturdy(world, blockPos, direction) &&
                 blockState.is(HollowBlockTags.POLYPORE_PLACEABLE_ON);
-    }
-
-    @Override
-    protected MapCodec<? extends VegetationBlock> codec() {
-        return CODEC;
     }
 }

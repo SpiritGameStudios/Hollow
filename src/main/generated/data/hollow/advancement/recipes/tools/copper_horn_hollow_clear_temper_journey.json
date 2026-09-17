@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hollow:copper_horn_hollow_clear_temper_journey"
+        "recipes": "hollow:copper_horn_hollow_clear_temper_journey"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
