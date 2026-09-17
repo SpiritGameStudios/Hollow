@@ -111,11 +111,6 @@ public abstract class AbstractFurnaceBoat extends AbstractBoat {
 		return super.isClientAuthoritative() && !this.isPropelled();
 	}
 
-	@Override
-	public MoveSimulationType getMoveSimulationType() {
-		return MoveSimulationType.AUTHORITATIVE_SIDE_AND_SERVER;
-	}
-
 	private void tickPropulsion() {
 		Vec3 velocity = this.getDeltaMovement();
 
