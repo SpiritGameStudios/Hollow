@@ -79,14 +79,6 @@ public final class HollowItems {
 			.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
 	);
 
-    public static final Item POLYPORE = registerBlock(
-		HollowBlockItemIds.POLYPORE,
-		HollowBlocks.POLYPORE,
-		BlockItem::new,
-		new Item.Properties()
-			.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
-	);
-
     public static final Item SCULK_JAW = registerBlock(HollowBlockItemIds.SCULK_JAW, HollowBlocks.SCULK_JAW);
 
     public static final Item GLASS_JAR = registerBlock(HollowBlockItemIds.GLASS_JAR, HollowBlocks.GLASS_JAR, JarItem::new);

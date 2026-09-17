@@ -109,18 +109,6 @@ public final class HollowBlocks {
 		BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD)
 	);
 
-	public static final PolyporeBlock POLYPORE = register(
-		HollowBlockItemIds.POLYPORE,
-		PolyporeBlock::new,
-		BlockBehaviour.Properties.of()
-			.mapColor(MapColor.WOOD)
-			.noCollision()
-			.instabreak()
-			.sound(SoundType.GRASS)
-			.pushReaction(PushReaction.POPPED)
-			.isRedstoneConductor(Blocks::never)
-	);
-
 	public static final SculkJawBlock SCULK_JAW = register(
 		HollowBlockItemIds.SCULK_JAW,
 		SculkJawBlock::new,

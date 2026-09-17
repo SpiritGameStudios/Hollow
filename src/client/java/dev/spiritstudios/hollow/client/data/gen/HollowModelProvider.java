@@ -78,7 +78,6 @@ public final class HollowModelProvider extends FabricModelProvider {
 		registerWithRandomHorizontalRotations(generators, HollowBlocks.FLOWERING_LILY_PAD);
 		registerGiantLilyPad(generators);
 		registerCattail(generators);
-		registerPolypore(generators);
 
 		generators.registerSimpleItemModel(HollowItems.SWITCHGRASS, generators.createFlatItemModelWithBlockTexture(HollowItems.SWITCHGRASS, Blocks.FIREFLY_BUSH));
 		generators.createCrossBlock(
@@ -200,17 +199,6 @@ public final class HollowModelProvider extends FabricModelProvider {
 				.select(DoubleBlockHalf.UPPER, plainVariant(ModelLocationUtils.getModelLocation(block, "_upper")))
 			)
 			.with(up ? NORTH_DEFAULT_ROTATION_OPERATIONS : ROTATION_HORIZONTAL_FACING));
-	}
-
-	public static void registerPolypore(BlockModelGenerators generators) {
-		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(HollowBlocks.POLYPORE)
-			.with(PropertyDispatch.initial(PolyporeBlock.POLYPORE_AMOUNT)
-				.select(1, plainVariant(Hollow.id("block/one_polypore")))
-				.select(2, plainVariant(Hollow.id("block/two_polypore")))
-				.select(3, plainVariant(Hollow.id("block/three_polypore")))
-			).with(ROTATION_HORIZONTAL_FACING));
-
-		generators.registerSimpleFlatItemModel(HollowItems.POLYPORE);
 	}
 
 	public static void registerStoneChest(Block block, BlockModelGenerators generators) {

@@ -56,7 +56,6 @@ public final class HollowCreativeModeTab {
 
 				output.accept(HollowItems.FLOWERING_LILY_PAD);
 				output.accept(HollowItems.CATTAIL);
-				output.accept(HollowItems.POLYPORE);
 				output.accept(HollowItems.SWITCHGRASS);
 				output.accept(HollowItems.GLASS_JAR);
 				output.accept(HollowItems.FIREFLY_JAR);
@@ -114,7 +113,6 @@ public final class HollowCreativeModeTab {
 			insertHollowLogs(HollowBlocks.HOLLOW_LOG, output);
 
 			output.insertAfter(Items.LILY_PAD, HollowItems.FLOWERING_LILY_PAD, HollowItems.CATTAIL);
-			output.insertAfter(Items.BROWN_MUSHROOM, HollowItems.POLYPORE);
 			output.insertBefore(Items.FIREFLY_BUSH, HollowItems.SWITCHGRASS);
 
 			output.insertAfter(Items.SCULK_CATALYST, HollowItems.SCULK_JAW);
